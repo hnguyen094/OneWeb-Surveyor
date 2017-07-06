@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi\\circle.png",
+        "source": "C:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\src\\main\\res\\mipmap-xxxhdpi\\circle.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi\\ic_launcher.png",
+        "source": "C:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi\\ic_launcher_round.png",
+        "source": "C:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    }
+]

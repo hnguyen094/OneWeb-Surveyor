@@ -1,0 +1,136 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:2:1-41:12
+	package
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:3:5-43
+		INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:5:5-65
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:5:22-62
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:6:5-81
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:6:22-78
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:7:5-71
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:7:22-68
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:8:5-79
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:8:22-76
+uses-feature#android.hardware.camera.autofocus
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:10:5-69
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:10:19-67
+uses-feature#android.hardware.camera.front
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:11:5-65
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:11:19-63
+uses-feature#android.hardware.camera.front.autofocus
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:12:5-75
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:12:19-73
+uses-feature#android.hardware.location.gps
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:13:5-66
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:13:19-63
+uses-feature#android.hardware.sensor.gyroscope
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:15:5-17:35
+	android:required
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:17:9-32
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:16:9-57
+uses-feature#android.hardware.camera
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:18:5-20:35
+	android:required
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:20:9-32
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:19:9-47
+application
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:23:5-39:19
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\hnguyen\.android\build-cache\815c7d080921a182ddb271d017b95fa9f7af19c1\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\hnguyen\.android\build-cache\6cebd0ad423d62fdf741b685b525bc79b39f5711\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\hnguyen\.android\build-cache\fe6cf02c873a9e21e704ab76eb2a8b9124ee2152\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\hnguyen\.android\build-cache\8bec7895c7da674e2378de6b2b23d29f76272208\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\hnguyen\.android\build-cache\8447e4bcdf659dedc637491105520be4d1991b1a\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hnguyen\.android\build-cache\2ceb5da09c77dcbefa0ee9ed15a6f8725b873c18\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\hnguyen\.android\build-cache\72945e3bc6b2ee50705650c4948e278073a3fd23\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\hnguyen\.android\build-cache\6fd9991ea96cbd2764755d0da2afb8546e7a6445\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hnguyen\.android\build-cache\b6da6dadb52f0b2f21e0f47100cb0a0f57992dfc\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\hnguyen\.android\build-cache\ec8ad14f82b1ed1ec39e6af962c3134642a8571d\output\AndroidManifest.xml:9:5-20
+	android:label
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:26:9-41
+	android:supportsRtl
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:28:9-35
+	android:roundIcon
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:27:9-54
+	android:allowBackup
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:24:9-35
+	android:icon
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:25:9-43
+	android:theme
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:29:9-40
+activity#com.example.hnguyen.surveyor.CameraActivity
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:30:9-38:20
+	android:screenOrientation
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:32:13-50
+	android:label
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:31:13-45
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:30:19-49
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:34:13-37:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:35:17-69
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:35:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:36:17-77
+	android:name
+		ADDED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml:36:27-74
+uses-sdk
+INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\hnguyen\.android\build-cache\815c7d080921a182ddb271d017b95fa9f7af19c1\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\hnguyen\.android\build-cache\6cebd0ad423d62fdf741b685b525bc79b39f5711\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\hnguyen\.android\build-cache\fe6cf02c873a9e21e704ab76eb2a8b9124ee2152\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\hnguyen\.android\build-cache\8bec7895c7da674e2378de6b2b23d29f76272208\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\hnguyen\.android\build-cache\8447e4bcdf659dedc637491105520be4d1991b1a\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hnguyen\.android\build-cache\2ceb5da09c77dcbefa0ee9ed15a6f8725b873c18\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\hnguyen\.android\build-cache\72945e3bc6b2ee50705650c4948e278073a3fd23\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\hnguyen\.android\build-cache\6fd9991ea96cbd2764755d0da2afb8546e7a6445\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hnguyen\.android\build-cache\b6da6dadb52f0b2f21e0f47100cb0a0f57992dfc\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\hnguyen\.android\build-cache\ec8ad14f82b1ed1ec39e6af962c3134642a8571d\output\AndroidManifest.xml:5:5-7:41
+MERGED from [Surveyor:openCVLib320:unspecified] C:\Users\hnguyen\AndroidStudioProjects\Surveyor\openCVLib320\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\hnguyen\.android\build-cache\815c7d080921a182ddb271d017b95fa9f7af19c1\output\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hnguyen\AndroidStudioProjects\Surveyor\app\src\main\AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\hnguyen\.android\build-cache\815c7d080921a182ddb271d017b95fa9f7af19c1\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\hnguyen\.android\build-cache\6cebd0ad423d62fdf741b685b525bc79b39f5711\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\hnguyen\.android\build-cache\fe6cf02c873a9e21e704ab76eb2a8b9124ee2152\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\hnguyen\.android\build-cache\8bec7895c7da674e2378de6b2b23d29f76272208\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\hnguyen\.android\build-cache\8447e4bcdf659dedc637491105520be4d1991b1a\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hnguyen\.android\build-cache\2ceb5da09c77dcbefa0ee9ed15a6f8725b873c18\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\hnguyen\.android\build-cache\72945e3bc6b2ee50705650c4948e278073a3fd23\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\hnguyen\.android\build-cache\6fd9991ea96cbd2764755d0da2afb8546e7a6445\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hnguyen\.android\build-cache\b6da6dadb52f0b2f21e0f47100cb0a0f57992dfc\output\AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\hnguyen\.android\build-cache\815c7d080921a182ddb271d017b95fa9f7af19c1\output\AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\hnguyen\.android\build-cache\815c7d080921a182ddb271d017b95fa9f7af19c1\output\AndroidManifest.xml:26:9-47

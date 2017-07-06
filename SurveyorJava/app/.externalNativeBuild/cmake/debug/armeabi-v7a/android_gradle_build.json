@@ -1,0 +1,46 @@
+
+{
+	"buildFiles" : [ "C:/Users/hnguyen/AndroidStudioProjects/Surveyor/app/CMakeLists.txt" ],
+	"cleanCommands" : 
+	[
+		"C:\\Users\\hnguyen\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\.externalNativeBuild\\cmake\\debug\\armeabi-v7a --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"lib_opencv-Debug-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "lib_opencv",
+			"buildType" : "debug",
+			"output" : "C:/Users/hnguyen/AndroidStudioProjects/Surveyor/app/src/main/jniLibs/armeabi-v7a/libopencv_java3.so",
+			"toolchain" : "2888916113"
+		},
+		"native-lib-Debug-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "native-lib",
+			"buildCommand" : "C:\\Users\\hnguyen\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\.externalNativeBuild\\cmake\\debug\\armeabi-v7a --target native-lib",
+			"buildType" : "debug",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=C:/Users/hnguyen/AppData/Local/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64 --sysroot=C:/Users/hnguyen/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dnative_lib_EXPORTS -IC:\\Users\\hnguyen\\OpenCV-android-sdk\\sdk\\native\\jni\\include -isystem C:\\Users\\hnguyen\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\hnguyen\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\include -isystem C:\\Users\\hnguyen\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/hnguyen/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=15 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -frtti -fexceptions -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"src" : "C:/Users/hnguyen/AndroidStudioProjects/Surveyor/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "C:/Users/hnguyen/AndroidStudioProjects/Surveyor/app/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				}
+			],
+			"output" : "C:/Users/hnguyen/AndroidStudioProjects/Surveyor/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so",
+			"toolchain" : "2888916113"
+		}
+	},
+	"toolchains" : 
+	{
+		"2888916113" : 
+		{
+			"cCompilerExecutable" : "C:/Users/hnguyen/AppData/Local/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "C:/Users/hnguyen/AppData/Local/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
+}

@@ -1,0 +1,4 @@
+#Mon Jul 03 17:06:32 PDT 2017
+base.0=C\:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_2
+renamed.0=classes.dex
+file.0=C\:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_2\\classes.dex

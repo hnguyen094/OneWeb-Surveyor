@@ -1,0 +1,7 @@
+#Wed Jul 05 11:38:24 PDT 2017
+base.0=C\:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_ccea21705c688eb874ac8b2322e5662badb22681
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=C\:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_e5f7deb45231bfb176f91fb8f8cbb2b37812ed5c\\classes.dex
+base.1=C\:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_e5f7deb45231bfb176f91fb8f8cbb2b37812ed5c
+file.0=C\:\\Users\\hnguyen\\AndroidStudioProjects\\Surveyor\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_ccea21705c688eb874ac8b2322e5662badb22681\\classes.dex
