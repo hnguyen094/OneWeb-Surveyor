@@ -6,6 +6,7 @@ Contains multiple projects (approaches to the problem).
 =====
 This is the native android implementation of this project.
 Currently, it has
+
 | Features | Has |
 | ------- |:----:|
 | User Interface | No |
@@ -13,9 +14,11 @@ Currently, it has
 | Rotational Sensor | Yes |
 | Stitching | No |
 | Data | No |
+
 ## SurveyorNS
 =====
 This is the NativeScript implementation of this project. Hopefully, this means that there will be cross-platform support with iOS.
+
 Features | Has
 --- | ---
 User Interface | No
