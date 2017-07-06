@@ -7,22 +7,22 @@ Contains multiple projects (approaches to the problem).
 This is the native android implementation of this project.
 Currently, it has
 
-| Features | Has |
-| ------- |:----:|
-| User Interface | No |
-| Live Camera | Yes |
-| Rotational Sensor | Yes |
-| Stitching | No |
-| Data | No |
+| Features | Android | iOS | 
+| ------- |:----:|:---:|
+| User Interface | No | N/A |
+| Live Camera | Yes | N/A |
+| Rotational Sensor | Yes | N/A |
+| Stitching | No | N/A |
+| Data | No | N/A |
 
 ## SurveyorNS
 =====
 This is the NativeScript implementation of this project. Hopefully, this means that there will be cross-platform support with iOS.
 
-Features | Has
---- | ---
-User Interface | No
-Live Camera | No
-Rotation Sensor | No
-Stitching | No
-Data | No
+Features | Has | iOS
+--- | --- | ---
+User Interface | No | No
+Live Camera | No | No
+Rotation Sensor | No | No
+Stitching | No | No
+Data | No | No
