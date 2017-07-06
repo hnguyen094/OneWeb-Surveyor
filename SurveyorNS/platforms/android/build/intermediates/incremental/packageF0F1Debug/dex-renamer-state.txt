@@ -1,4 +1,4 @@
-#Wed Jul 05 16:10:58 PDT 2017
-base.0=C\:\\Users\\hnguyen\\HelloWorld\\platforms\\android\\build\\intermediates\\transforms\\dex\\F0F1\\debug\\folders\\1000\\1f\\main
+#Thu Jul 06 11:56:06 PDT 2017
+base.0=C\:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS\\platforms\\android\\build\\intermediates\\transforms\\dex\\F0F1\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
-file.0=C\:\\Users\\hnguyen\\HelloWorld\\platforms\\android\\build\\intermediates\\transforms\\dex\\F0F1\\debug\\folders\\1000\\1f\\main\\classes.dex
+file.0=C\:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS\\platforms\\android\\build\\intermediates\\transforms\\dex\\F0F1\\debug\\folders\\1000\\1f\\main\\classes.dex

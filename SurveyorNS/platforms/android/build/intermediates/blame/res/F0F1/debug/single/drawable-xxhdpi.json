@@ -1,11 +1,23 @@
 [
     {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xxhdpi\\icon.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xxhdpi\\icon.png"
+    },
+    {
         "merged": "C:\\Users\\hnguyen\\HelloWorld\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xxhdpi\\logo.png",
         "source": "C:\\Users\\hnguyen\\HelloWorld\\platforms\\android\\src\\main\\res\\drawable-xxhdpi\\logo.png"
     },
     {
         "merged": "C:\\Users\\hnguyen\\HelloWorld\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xxhdpi\\background.png",
         "source": "C:\\Users\\hnguyen\\HelloWorld\\platforms\\android\\src\\main\\res\\drawable-xxhdpi\\background.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xxhdpi\\background.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xxhdpi\\background.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xxhdpi\\logo.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xxhdpi\\logo.png"
     },
     {
         "merged": "C:\\Users\\hnguyen\\HelloWorld\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xxhdpi\\icon.png",

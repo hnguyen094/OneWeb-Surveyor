@@ -1,0 +1,95 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "nativescript-na-camera",
+        "scope": null,
+        "escapedName": "nativescript-na-camera",
+        "name": "nativescript-na-camera",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS"
+    ]
+  ],
+  "_from": "nativescript-na-camera@latest",
+  "_id": "nativescript-na-camera@1.2.0",
+  "_inCache": true,
+  "_location": "/nativescript-na-camera",
+  "_nodeVersion": "6.5.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/nativescript-na-camera-1.2.0.tgz_1479732917888_0.04560276283882558"
+  },
+  "_npmUser": {
+    "name": "nordlingart",
+    "email": "nordlingfilip@gmail.com"
+  },
+  "_npmVersion": "3.10.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "nativescript-na-camera",
+    "scope": null,
+    "escapedName": "nativescript-na-camera",
+    "name": "nativescript-na-camera",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nativescript-na-camera/-/nativescript-na-camera-1.2.0.tgz",
+  "_shasum": "274fb704c9108c22727f169fff30492d626c0360",
+  "_shrinkwrap": null,
+  "_spec": "nativescript-na-camera",
+  "_where": "C:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS",
+  "author": {
+    "name": "Filip Nordling",
+    "email": "nordlingfilip@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/nordlingart/nativescript-na-camera/issues"
+  },
+  "dependencies": {},
+  "description": "A NativeScript camera plugin",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "274fb704c9108c22727f169fff30492d626c0360",
+    "tarball": "https://registry.npmjs.org/nativescript-na-camera/-/nativescript-na-camera-1.2.0.tgz"
+  },
+  "gitHead": "c7e662a2781c74949c9c941c62077cf66b97b000",
+  "homepage": "https://github.com/nordlingart/nativescript-na-camera#readme",
+  "keywords": [
+    "NativeScript",
+    "Nordling Art",
+    "Camera"
+  ],
+  "main": "camera.js",
+  "maintainers": [
+    {
+      "name": "nordlingart",
+      "email": "nordlingfilip@gmail.com"
+    }
+  ],
+  "name": "nativescript-na-camera",
+  "nativescript": {
+    "platforms": {
+      "ios": "1.7.0"
+    },
+    "tns-ios": {
+      "version": "2.3.0"
+    }
+  },
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nordlingart/nativescript-na-camera.git"
+  },
+  "scripts": {},
+  "version": "1.2.0"
+}
