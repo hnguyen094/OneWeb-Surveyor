@@ -14,12 +14,13 @@ Currently, it has
 | Stitching | No |
 | Data | No	|
 
-| Tables        | Are           |
+| Features        | Has           |
 | ------------- |:-------------:|
-| col 3 is      | right-aligned |
-| col 2 is      | centered      |
-| zebra stripes | are neat      |
-
+| User Interface      | No |
+| Live Camera      | Yes |
+| Rotational Sensor      | Yes      |
+| Stitching | No |
+| Data | No |
 ## SurveyorNS
 =====
 This is the NativeScript implementation of this project. Hopefully, this means that there will be cross-platform support with iOS.
