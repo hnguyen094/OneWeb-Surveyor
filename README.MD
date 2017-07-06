@@ -15,7 +15,7 @@ Currently, it has
 | Data | No	|
 
 | Features | Has |
-| ---------- |:----------:|
+| ------- |:----:|
 | User Interface | No |
 | Live Camera | Yes |
 | Rotational Sensor | Yes |
