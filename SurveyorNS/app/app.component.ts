@@ -23,6 +23,7 @@ export class AppComponent {
   public pitch: any;
   constructor() {
     camera.requestPermissions();
+    
     accelerometer.startAccelerometerUpdates(function(data) {
         this.roll = Math.atan2(data.y, data.z) * 180/Math.PI;
         this.pitch = Math.atan2(-data.x, Math.sqrt(data.y*data.y + data.z*data.z)) * 180/Math.PI;
