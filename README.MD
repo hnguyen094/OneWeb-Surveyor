@@ -2,7 +2,7 @@ Surveys site for OneWeb's User Terminal (UT) products.
 
 Contains multiple projects (approaches to the problem).
 
-## SurveyorJava
+## **SurveyorJava**
 =====
 This is the native android implementation of this project.
 Currently, it has
@@ -15,7 +15,7 @@ Currently, it has
 | Stitching | No | N/A |
 | Data | No | N/A |
 
-## SurveyorNS
+## **SurveyorNS**
 =====
 This is the NativeScript implementation of this project. Hopefully, this means that there will be cross-platform support with iOS.
 
