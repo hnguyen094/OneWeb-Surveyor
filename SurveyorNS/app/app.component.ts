@@ -8,7 +8,7 @@ import * as app from "application";
 // More here: https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Decorators.md
 @Component({
   selector: "my-app",
-  template: `
+  template: ` <!-- don't forget the ticks; it's important. They're for ES2015 template literals -->
   <ActionBar title="{N} Camera Example"></ActionBar>
   <StackLayout horizontalAlignment="center" verticalAlignment="center">
       <Image [src]="picture" width="200" height="200"></Image>
@@ -16,7 +16,6 @@ import * as app from "application";
   </StackLayout>
   `
 })
-
 
 export class AppComponent {
   public picture: any;
