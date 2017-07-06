@@ -16,10 +16,10 @@ Currently, it has
 ## SurveyorNS
 =====
 This is the NativeScript implementation of this project. Hopefully, this means that there will be cross-platform support with iOS.
-| Features | Has |
-| ------- |:----:|
-| User Interface | No |
-| Live Camera | No |
-| Rotational Sensor | No |
-| Stitching | No |
-| Data | No |
+Features | Has
+--- | ---
+User Interface | No
+Live Camera | No
+Rotation Sensor | No
+Stitching | No
+Data | No
