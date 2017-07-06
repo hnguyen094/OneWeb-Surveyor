@@ -14,11 +14,11 @@ Currently, it has
 | Stitching | No |
 | Data | No	|
 
-| Features        | Has           |
-| ------------- |:-------------:|
-| User Interface      | No |
-| Live Camera      | Yes |
-| Rotational Sensor      | Yes      |
+| Features | Has |
+| ---------- |:----------:|
+| User Interface | No |
+| Live Camera | Yes |
+| Rotational Sensor | Yes |
 | Stitching | No |
 | Data | No |
 ## SurveyorNS
