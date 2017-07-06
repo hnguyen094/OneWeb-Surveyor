@@ -19,7 +19,7 @@ Currently, it has
 =====
 This is the NativeScript implementation of this project. Hopefully, this means that there will be cross-platform support with iOS.
 
-Features | Has | iOS
+Features | Android | iOS
 --- | --- | ---
 User Interface | No | No
 Live Camera | No | No
