@@ -2,8 +2,10 @@ import { Component } from "@angular/core";
 import * as camera from "nativescript-camera";
 import * as accelerometer from "nativescript-accelerometer";
 import { Image } from "ui/image";
-import * as application from "application";
+import * as app from "application";
 
+// the @ represents a decorator that tells how this component/thing on the screen will look.
+// More here: https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Decorators.md
 @Component({
   selector: "my-app",
   template: `
@@ -14,6 +16,8 @@ import * as application from "application";
   </StackLayout>
   `
 })
+
+
 export class AppComponent {
   public picture: any;
   public roll: any;
