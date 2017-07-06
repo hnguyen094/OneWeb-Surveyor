@@ -7,7 +7,7 @@ Contains multiple projects (approaches to the problem).
 This is the native android implementation of this project.
 Currently, it has
 |Features 			| Has	|
-| -----------------	|:-----:|
+| -----------------	| -----:|
 | User Interface 	| No	|
 | Live Camera 		| Yes	|
 | Rotation Sensor 	| Yes	|
