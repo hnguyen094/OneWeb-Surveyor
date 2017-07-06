@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Surveyor</string>
+    <string name="captureButtonText">Capture1</string>
+    <string name="stitchButtonText">Capture2andStitch</string>
+</resources>
