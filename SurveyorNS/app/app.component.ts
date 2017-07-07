@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import * as camera from "nativescript-camera";
+import * as cameraPreview from "nativescript-cameraPreview";
 import * as accelerometer from "nativescript-accelerometer";
 import { Image } from "ui/image";
 import * as app from "application";
@@ -9,9 +10,10 @@ import * as app from "application";
 @Component({
   selector: "my-app",
   template: ` <!-- don't forget the ticks; it's important. They're for ES2015 template literals -->
+   <!--     Make sure they're <...></> and not just <.../>     -->
   <ActionBar title="{N} Camera Example"></ActionBar>
   <StackLayout horizontalAlignment="center" verticalAlignment="center">
-      <Image [src]="picture" width="200" height="200"></Image>
+      <Image [src]="picture" width="200" height="200"></Image> <!--http://nsimage.brosteins.com/-->
       <Button text="Capture" (tap)="takePicture()" class="btn btn-primary"></Button>
   </StackLayout>
   `
@@ -23,7 +25,7 @@ export class AppComponent {
   public pitch: any;
   constructor() {
     camera.requestPermissions();
-    
+
     accelerometer.startAccelerometerUpdates(function(data) {
         this.roll = Math.atan2(data.y, data.z) * 180/Math.PI;
         this.pitch = Math.atan2(-data.x, Math.sqrt(data.y*data.y + data.z*data.z)) * 180/Math.PI;
