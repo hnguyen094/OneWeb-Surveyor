@@ -26,6 +26,9 @@
 	<uses-feature
 			android:name="android.hardware.sensor.gyroscope"
 			android:required="true" />
+  <uses-feature
+			android:name="android.hardware.sensor.accelerometer"
+			android:required="true" />
 	<uses-feature
 			android:name="android.hardware.camera"
 			android:required="true" />

@@ -60,9 +60,12 @@ C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\a
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-angular\zone-js\dist\zone-nativescript.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-camera\nativescript-camera-common.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-camera\nativescript-camera.js
+C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-camera-copy\nativescript-camera-common.js
+C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-camera-copy\nativescript-camera.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-intl\index.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-intl\nativescript-intl-common.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-intl\nativescript-intl.js
+C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-rotation-vector\index.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\bundle-entry-points.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\application\application-common.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\application\application.js
