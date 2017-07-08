@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import * as camera from "nativescript-camera";
 import * as cameraPreview from "nativescript-cameraPreview";
+
 import * as accelerometer from "nativescript-accelerometer";
 import { Image } from "ui/image";
 import * as app from "application";
