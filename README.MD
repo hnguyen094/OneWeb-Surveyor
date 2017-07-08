@@ -23,6 +23,6 @@ Features | Android | iOS
 --- | --- | ---
 User Interface | No | No
 Live Camera | No | No
-Rotation Sensor | No | No
+Rotation Sensor | Yes | No
 Stitching | No | No
 Data | No | No
