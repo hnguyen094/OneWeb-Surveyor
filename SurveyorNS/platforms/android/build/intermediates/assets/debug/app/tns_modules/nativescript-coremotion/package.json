@@ -1,0 +1,96 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "nativescript-coremotion@^0.1.7",
+        "scope": null,
+        "escapedName": "nativescript-coremotion",
+        "name": "nativescript-coremotion",
+        "rawSpec": "^0.1.7",
+        "spec": ">=0.1.7 <0.2.0",
+        "type": "range"
+      },
+      "C:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS"
+    ]
+  ],
+  "_from": "nativescript-coremotion@>=0.1.7 <0.2.0",
+  "_id": "nativescript-coremotion@0.1.7",
+  "_inCache": true,
+  "_location": "/nativescript-coremotion",
+  "_nodeVersion": "4.4.1",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/nativescript-coremotion-0.1.7.tgz_1474854997049_0.7977749141864479"
+  },
+  "_npmUser": {
+    "name": "stephenfeather",
+    "email": "stephen@featherdirect.com"
+  },
+  "_npmVersion": "3.10.8",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "nativescript-coremotion@^0.1.7",
+    "scope": null,
+    "escapedName": "nativescript-coremotion",
+    "name": "nativescript-coremotion",
+    "rawSpec": "^0.1.7",
+    "spec": ">=0.1.7 <0.2.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nativescript-coremotion/-/nativescript-coremotion-0.1.7.tgz",
+  "_shasum": "1f0b73753d24d688bc700670e3e440e2d755cab0",
+  "_shrinkwrap": null,
+  "_spec": "nativescript-coremotion@^0.1.7",
+  "_where": "C:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS",
+  "author": {
+    "name": "Stephen Feather"
+  },
+  "bugs": {
+    "url": "https://github.com/stephenfeather/nativescript-coremotion/issues"
+  },
+  "dependencies": {},
+  "description": "iOS Core Motion plugin for NativeScript",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "1f0b73753d24d688bc700670e3e440e2d755cab0",
+    "tarball": "https://registry.npmjs.org/nativescript-coremotion/-/nativescript-coremotion-0.1.7.tgz"
+  },
+  "gitHead": "91c71295c3d9edac134e4ff6834e665db438818d",
+  "homepage": "https://github.com/stephenfeather/nativescript-coremotion#readme",
+  "keywords": [
+    "accelerometer",
+    "gyroscope",
+    "magnetometer",
+    "nativescript",
+    "ios",
+    "coremotion"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "stephenfeather",
+      "email": "stephen@featherdirect.com"
+    }
+  ],
+  "name": "nativescript-coremotion",
+  "nativescript": {
+    "platforms": {
+      "ios": "2.3.0"
+    }
+  },
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/stephenfeather/nativescript-coremotion.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.1.7"
+}

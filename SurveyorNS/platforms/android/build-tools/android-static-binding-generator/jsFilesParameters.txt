@@ -1,7 +1,6 @@
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\app.component.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\app.module.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\main.js
-C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-accelerometer\index.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-angular\animations.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-angular\collection-facade.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-angular\directives.js
@@ -60,8 +59,6 @@ C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\a
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-angular\zone-js\dist\zone-nativescript.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-camera\nativescript-camera-common.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-camera\nativescript-camera.js
-C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-camera-copy\nativescript-camera-common.js
-C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-camera-copy\nativescript-camera.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-intl\index.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-intl\nativescript-intl-common.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-intl\nativescript-intl.js

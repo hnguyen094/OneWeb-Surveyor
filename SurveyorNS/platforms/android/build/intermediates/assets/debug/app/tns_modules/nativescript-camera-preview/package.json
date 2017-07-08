@@ -1,0 +1,12 @@
+{
+  "name": "nativescript-camera-preview",
+  "version": "1.0.2",
+  "description": "Plugin to implement the camera preview. Attempt to implement into a plugin from here: https://github.com/NickIliev/NativeScript-cameraApp-poc",
+  "main": "camera-preview-common.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Nick Iliev <nikolay.iliev@telerik.com>",
+  "license": "MIT"
+}
