@@ -22,6 +22,7 @@
     "nativescript-angular": "~3.0.0",
     "nativescript-camera": "^3.0.0",
     "nativescript-na-camera": "^1.2.0",
+    "nativescript-cameraPreview": "^3.0.0",
     "nativescript-theme-core": "~1.0.2",
     "reflect-metadata": "~0.1.8",
     "rxjs": "~5.3.0",
