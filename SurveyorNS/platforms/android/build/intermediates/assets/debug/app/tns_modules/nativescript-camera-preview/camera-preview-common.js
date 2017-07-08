@@ -7,10 +7,7 @@ var STATE_WAITING_NON_PRECAPTURE = 3;
 var STATE_PICTURE_TAKEN = 4;
 var mState = STATE_PREVIEW;
 
-var cameraPreview = {
-  onLoaded: function(args) {
-    page = args.object;
-  }
-};
-
-exports = cameraPreview;
+function onLoaded(args) {
+  page = args.object;
+}
+exports.onLoaded = onLoaded;

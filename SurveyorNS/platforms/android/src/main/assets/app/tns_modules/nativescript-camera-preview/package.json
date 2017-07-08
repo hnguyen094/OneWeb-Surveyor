@@ -1,6 +1,6 @@
 {
   "name": "nativescript-camera-preview",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Plugin to implement the camera preview. Attempt to implement into a plugin from here: https://github.com/NickIliev/NativeScript-cameraApp-poc",
   "main": "camera-preview-common.js",
   "scripts": {

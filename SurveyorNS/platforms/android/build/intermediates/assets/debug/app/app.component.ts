@@ -14,22 +14,20 @@ import * as app from "application";
   <ActionBar title="{N} Surveyor Camera"></ActionBar>
   <StackLayout horizontalAlignment="center" verticalAlignment="center">
       <Image [src]="picture" width="200" height="200"></Image> <!--http://nsimage.brosteins.com/-->
-      <Button text="Capture" (tap)="takePicture()" class="btn btn-primary"></Button>
-      <Placeholder creatingView="onCreatingView()" id="placeholder-view"></Placeholder>
+      <Button text="Capture" (tap)="onCreatingView()" class="btn btn-primary"></Button>
+      <Placeholder creatingView = "onCreatingView" id="placeholder-view"></Placeholder>
   </StackLayout>
   `
 })
 
 export class AppComponent {
   public picture: any;
-  public roll: any;
-  public pitch: any;
   constructor() {
     camera.requestPermissions();
 
     rotVector.startRotUpdates(function(data) {
-        console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
-    }.bind(this));
+        //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+    });
     this.picture = "~/images/apple.jpg";
   }
   public takePicture() {
@@ -37,7 +35,8 @@ export class AppComponent {
             this.picture = picture;
         });
     }
-  public onCreateView() {
-    cameraPreview.onCreateView();
+  public onCreatingView(args) {
+    console.dir(cameraPreview);
+    cameraPreview.onCreatingView(args);
   }
 }

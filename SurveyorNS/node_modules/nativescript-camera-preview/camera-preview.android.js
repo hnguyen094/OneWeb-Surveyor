@@ -1,6 +1,5 @@
-var cameraPreview = require("./cameraPreview-common");
-global.moduleMerge(cameraPreview, exports);
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var mCameraId;
 var mCaptureSession;
 var mCameraDevice;
@@ -15,22 +14,18 @@ var mImageReader;
 var mCaptureCallback;
 var mFile;
 
-//TODO: Comments
-
-private function lockFocus() { //TODO: could be error with private/scope
+function lockFocus() { //TODO: could be error with private/scope
   mState = STATE_WAITING_LOCK;
   mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);
 }
-
-private function runPrecaptureSequence() {
+function runPrecaptureSequence() {
     // This is how to tell the camera to trigger.
     mPreviewRequestBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER, android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER_START);
     // Tell #mCaptureCallback to wait for the precapture sequence to be set.
     mState = STATE_WAITING_PRECAPTURE;
     mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);
 }
-
-private function captureStillPicture() {
+function captureStillPicture() {
     // This is the CaptureRequest.Builder that we use to take a picture.
     var captureBuilder = mCameraDevice.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_STILL_CAPTURE);
     captureBuilder.addTarget(mImageReader.getSurface());
@@ -49,8 +44,7 @@ private function captureStillPicture() {
     mCaptureSession.stopRepeating();
     mCaptureSession.capture(captureBuilder.build(), CaptureCallback, null);
 }
-
-private function createCameraPreviewSession() {
+function createCameraPreviewSession() {
     console.log("createCameraPreviewSession");
 
     if (!mSurfaceTexture || !mCameraDevice) {
@@ -73,13 +67,12 @@ private function createCameraPreviewSession() {
     surfaceList.add(surface);
     mCameraDevice.createCaptureSession(surfaceList, new MyCameraCaptureSessionStateCallback(), null);
 }
-
-cameraPreview.onTakeShot = function(args) {
+function onTakeShot(args) {
   console.log("onTakeShot");
   lockFocus();
 }
-
-cameraPreview.onCreatingView = function(args) {
+exports.onTakeShot = onTakeShot;
+function onCreatingView(args) {
   var appContext = app.android.context;
   var cameraManager = appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
   var cameras = cameraManager.getCameraIdList();
@@ -146,9 +139,7 @@ cameraPreview.onCreatingView = function(args) {
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
   args.view = mTextureView;
 }
-
-module.exports = cameraPreview;
-
+exports.onCreatingView = onCreatingView;
 // from Java ; public static abstract class
 var MyCameraCaptureSessionStateCallback = android.hardware.camera2.CameraCaptureSession.StateCallback.extend({
     onConfigured: function(cameraCaptureSession) {
