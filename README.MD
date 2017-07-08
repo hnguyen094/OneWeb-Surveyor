@@ -1,13 +1,13 @@
-Surveys site for OneWeb's User Terminal (UT) products. 
+Surveys site for OneWeb's User Terminal (UT) products.
 
 Contains multiple projects (approaches to the problem).
 
 ## **SurveyorJava**
 =====
-This is the native android implementation of this project.
+This is the native Android implementation of this project.
 Currently, it has
 
-| Features | Android | iOS | 
+| Features | Android | iOS |
 | ------- |:----:|:---:|
 | User Interface | No | N/A |
 | Live Camera | Yes | N/A |
@@ -23,6 +23,6 @@ Features | Android | iOS
 --- | --- | ---
 User Interface | No | No
 Live Camera | No | No
-Rotation Sensor | Yes | No
+Rotation Sensor | Yes | Yes
 Stitching | No | No
 Data | No | No
