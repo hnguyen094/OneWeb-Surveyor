@@ -13,4 +13,4 @@ var cameraPreview = {
   }
 };
 
-modules.exports = cameraPreview;
+exports = cameraPreview;

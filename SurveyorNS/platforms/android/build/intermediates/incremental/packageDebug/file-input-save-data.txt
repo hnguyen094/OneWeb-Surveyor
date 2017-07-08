@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Jul 08 00:11:22 PDT 2017
+#Sat Jul 08 00:40:38 PDT 2017
 2185.file=C\:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS\\platforms\\android\\build\\intermediates\\assets\\debug\\app\\tns_modules\\tns-core-modules\\ui\\core\\view\\view-common.js
 1425.base=C\:\\Users\\hnguyen\\ut-site-surveyor\\SurveyorNS\\platforms\\android\\build\\intermediates\\assets\\debug
 2716.set=ASSET

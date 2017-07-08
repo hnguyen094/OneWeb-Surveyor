@@ -15,6 +15,7 @@ import * as app from "application";
   <StackLayout horizontalAlignment="center" verticalAlignment="center">
       <Image [src]="picture" width="200" height="200"></Image> <!--http://nsimage.brosteins.com/-->
       <Button text="Capture" (tap)="takePicture()" class="btn btn-primary"></Button>
+      <Placeholder creatingView="onCreatingView()" id="placeholder-view"></Placeholder>
   </StackLayout>
   `
 })
@@ -27,7 +28,7 @@ export class AppComponent {
     camera.requestPermissions();
 
     rotVector.startRotUpdates(function(data) {
-        console.log("x: " + data.x + "y: " + data.y + "z: " + data.z);
+        console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
     }.bind(this));
     this.picture = "~/images/apple.jpg";
   }
@@ -36,4 +37,7 @@ export class AppComponent {
             this.picture = picture;
         });
     }
+  public onCreateView() {
+    cameraPreview.onCreateView();
+  }
 }
