@@ -9,7 +9,9 @@ import * as app from "application";
 // More here: https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Decorators.md
 @Component({
   selector: "my-app",
-  template: ` <!-- don't forget the ticks; it's important. They're for ES2015 template literals -->
+  templateUrl: "./interface.html"
+/*
+  ` <!-- don't forget the ticks; it's important. They're for ES2015 template literals -->
    <!--     Make sure they're <...></> and not just <.../>     -->
   <ActionBar title="{N} Surveyor Camera"></ActionBar>
   <StackLayout horizontalAlignment="center" verticalAlignment="center">
@@ -17,7 +19,7 @@ import * as app from "application";
       <Button text="Capture" (tap)="onCreatingView()" class="btn btn-primary"></Button>
       <Placeholder creatingView = "onCreatingView" id="placeholder-view"></Placeholder>
   </StackLayout>
-  `
+  ` */
 })
 
 export class AppComponent {
@@ -36,7 +38,13 @@ export class AppComponent {
             this.picture = picture;
         });
     }
+  public onLoaded(args) {
+    cameraPreview.onLoaded(args.object);
+  }
   public onCreatingView(args) {
     cameraPreview.onCreatingView(args);
+  }
+  public onTakeShot(args) {
+    cameraPreview.onTakeShot(args);
   }
 }

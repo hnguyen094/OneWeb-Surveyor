@@ -12,6 +12,6 @@ var mState = STATE_PREVIEW;
 
 var app = require('application');
 function onLoaded(args) {
-  page = args.object;
+  page = args;
 }
 exports.onLoaded = onLoaded;
