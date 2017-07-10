@@ -13,7 +13,7 @@ import * as rotVector from "./nativescript-rotation-vector/index"
 export function onLoaded(args: EventData) {
   cameraPreview.onLoaded(args);
   rotVector.startRotUpdates(function(data) {
-      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
   });
 }
 export function onCreatingView(args: EventData) {

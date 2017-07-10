@@ -1,6 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded" navigatingTo="navigatingTo" class="page">
     <Page.actionBar>
-        <ActionBar title="Surveyor" icon="" class="action-bar">
+        <ActionBar title="{N} Surveyor" icon="" class="action-bar">
           <NavigationButton text="Back" icon="" tap="" />
             <ActionBar.actionItems>
                 <ActionItem icon="" text="Take Shot" tap="onTakeShot" ios.position="left" />
@@ -18,7 +18,7 @@
     core theme, such as p-20, btn, h2, and text-center. You can view a full list of the
     class names available for styling your app at https://docs.nativescript.org/ui/theme.
     -->
-    <StackLayout class="p-20">
+    <StackLayout>
       <!--
         <Label text="Tap the button" class="h1 text-center"/>
         <Button text="TAP" tap="{{ onTap }}" class="btn btn-primary btn-active"/>

@@ -65,7 +65,7 @@ var createCameraPreviewSession = function() {
     var texture = mTextureView.getSurfaceTexture();
 
     // We configure the size of default buffer to be the size of camera preview we want.
-    texture.setDefaultBufferSize(800, 480);
+    // texture.setDefaultBufferSize(800, 480);
 
     // This is the output Surface we need to start preview.
     var surface = new android.view.Surface(texture);

@@ -26,3 +26,16 @@ Live Camera | No | No
 Rotation Sensor | Yes | Yes
 Stitching | No | No
 Data | No | No
+
+## **v2SurveyorNS**
+
+This is the 2nd NativeScript implementation of this project. The last one had structural issues due to a non-standard NativeScript layout.
+Therefore, this version is a cleaner & working version of its predecessor.
+
+Features | Android | iOS
+--- | --- | ---
+User Interface | No | No
+Live Camera | Yes | Yes
+Rotation Sensor | Yes | Yes
+Stitching | No | No
+Data | No | No
