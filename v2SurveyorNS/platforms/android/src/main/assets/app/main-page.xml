@@ -18,12 +18,10 @@
     core theme, such as p-20, btn, h2, and text-center. You can view a full list of the
     class names available for styling your app at https://docs.nativescript.org/ui/theme.
     -->
-    <StackLayout>
-      <!--
-        <Label text="Tap the button" class="h1 text-center"/>
-        <Button text="TAP" tap="{{ onTap }}" class="btn btn-primary btn-active"/>
-        <Label text="{{ message }}" class="h2 text-center" textWrap="true"/>
-      -->
-      <Placeholder creatingView="onCreatingView" id="placeholder-view"/>
-    </StackLayout>
+    <GridLayout>
+      <Placeholder creatingView="onCreatingView" id="placeholder-view" />
+      <AbsoluteLayout>
+        <Button id="capturebtn" text="Capture" tap="onTakeShot()" class="btn btn-primary" top="50%" left="50%"/>
+      </AbsoluteLayout>
+    </GridLayout>
 </Page>

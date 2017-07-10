@@ -8,8 +8,8 @@ import { EventData } from 'data/observable';
 import { Page } from 'ui/page';
 import { HelloWorldModel } from './main-view-model';
 import * as cameraPreview from './nativescript-camera-preview/nativescript-camera-preview';
-import * as rotVector from "./nativescript-rotation-vector/index"
-import * as app from "application"
+import * as rotVector from "./nativescript-rotation-vector/index";
+import * as app from "application";
 
 export function onLoaded(args: EventData) {
   cameraPreview.onLoaded(args);
