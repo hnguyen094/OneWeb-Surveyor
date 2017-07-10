@@ -11,7 +11,6 @@ import * as cameraPreview from './nativescript-camera-preview/nativescript-camer
 import * as rotVector from "./nativescript-rotation-vector/index"
 import * as app from "application"
 
-//TODO: onPause and onResume activities: https://docs.nativescript.org/core-concepts/application-lifecycle
 export function onLoaded(args: EventData) {
   cameraPreview.onLoaded(args);
   rotVector.startRotUpdates(function(data) {
@@ -46,8 +45,9 @@ export function navigatingTo(args: EventData) {
     page.bindingContext = new HelloWorldModel();
 }
 
-app.on(app.launchEvent, function(args) {
-
+//TODO: Camera onResume, when it's lost. FYI: https://docs.nativescript.org/core-concepts/application-lifecycle
+app.on(app.resumeEvent, function(args) {
+  onCreatingView(args);
 });
 app.on(app.suspendEvent, function(args) {
   rotVector.stopRotUpdates();
