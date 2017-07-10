@@ -10,9 +10,11 @@ exports.isAndroid = platform_1.isAndroid;
 var utils_1 = require("../../../utils/utils");
 exports.layout = utils_1.layout;
 var style_properties_1 = require("../../styling/style-properties");
+var dom_node_1 = require("../../../debugger/dom-node");
 var types = require("../../../utils/types");
 var color_1 = require("../../../color");
 exports.Color = color_1.Color;
+var profiling_1 = require("../../../profiling");
 __export(require("../bindable"));
 __export(require("../properties"));
 var styleScopeModule;
@@ -191,11 +193,17 @@ var ViewBase = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    ViewBase.prototype.ensureDomNode = function () {
+        if (!this.domNode) {
+            this.domNode = new dom_node_1.DOMNode(this);
+        }
+    };
     ViewBase.prototype.set = function (name, value) {
         this[name] = bindable_1.WrappedValue.unwrap(value);
     };
     ViewBase.prototype.onLoaded = function () {
         this._isLoaded = true;
+        this._resumeNativeUpdates();
         this._loadEachChild();
         this._emit("loaded");
     };
@@ -206,17 +214,27 @@ var ViewBase = (function (_super) {
         });
     };
     ViewBase.prototype.onUnloaded = function () {
+        this._suspendNativeUpdates();
         this._unloadEachChild();
         this._isLoaded = false;
         this._emit("unloaded");
     };
+    ViewBase.prototype._suspendNativeUpdates = function () {
+        this._suspendNativeUpdatesCount++;
+    };
+    ViewBase.prototype._resumeNativeUpdates = function () {
+        this._suspendNativeUpdatesCount--;
+        if (!this._suspendNativeUpdatesCount) {
+            this.onResumeNativeUpdates();
+        }
+    };
     ViewBase.prototype._batchUpdate = function (callback) {
         try {
-            ++this._batchUpdateScope;
+            this._suspendNativeUpdates();
             return callback();
         }
         finally {
-            --this._batchUpdateScope;
+            this._resumeNativeUpdates();
         }
     };
     ViewBase.prototype._unloadEachChild = function () {
@@ -418,6 +436,9 @@ var ViewBase = (function (_super) {
         view.parent = this;
         this._addViewCore(view, atIndex);
         view._parentChanged(null);
+        if (this.domNode) {
+            this.domNode.onChildAdded(view);
+        }
     };
     ViewBase.prototype._setStyleScope = function (scope) {
         this._styleScope = scope;
@@ -447,6 +468,9 @@ var ViewBase = (function (_super) {
         }
         if (view.parent !== this) {
             throw new Error("View not added to this instance. View: " + view + " CurrentParent: " + view.parent + " ExpectedParent: " + this);
+        }
+        if (this.domNode) {
+            this.domNode.onChildRemoved(view);
         }
         this._removeViewCore(view);
         view.parent = undefined;
@@ -491,16 +515,15 @@ var ViewBase = (function (_super) {
         }
         this._context = context;
         bindable_1.traceNotifyEvent(this, "_onContextChanged");
-        var currentNativeView = this.nativeView;
+        var nativeView;
         if (platform_1.isAndroid) {
-            var nativeView = void 0;
             if (this.recycleNativeView) {
                 nativeView = getNativeView(context, this.typeName);
             }
             if (!nativeView) {
                 nativeView = this.createNativeView();
             }
-            this._androidView = this.nativeView = nativeView;
+            this._androidView = nativeView;
             if (nativeView) {
                 var result = nativeView.defaultPaddings;
                 if (result === undefined) {
@@ -527,25 +550,35 @@ var ViewBase = (function (_super) {
             }
         }
         else {
-            var nativeView = this.createNativeView();
-            if (!currentNativeView && nativeView) {
-                this.nativeView = this._iosView = nativeView;
+            nativeView = this.createNativeView();
+            if (nativeView) {
+                this._iosView = nativeView;
             }
         }
-        this.initNativeView();
+        this.setNativeView(nativeView || this.nativeView);
         if (this.parent) {
             var nativeIndex = this.parent._childIndexToNativeChildIndex(atIndex);
             this._isAddedToNativeVisualTree = this.parent._addViewToNativeVisualTree(this, nativeIndex);
         }
-        if (this.nativeView) {
-            if (currentNativeView !== this.nativeView) {
-                properties_1.initNativeView(this);
-            }
-        }
+        this._resumeNativeUpdates();
         this.eachChild(function (child) {
             child._setupUI(context);
             return true;
         });
+    };
+    ViewBase.prototype.setNativeView = function (value) {
+        if (this.__nativeView === value) {
+            return;
+        }
+        if (this.__nativeView) {
+            this._suspendNativeUpdates();
+        }
+        this.__nativeView = this.nativeView = value;
+        if (this.__nativeView) {
+            this._suspendedUpdates = undefined;
+            this.initNativeView();
+            this._resumeNativeUpdates();
+        }
     };
     ViewBase.prototype._tearDownUI = function (force) {
         if (!this._context) {
@@ -570,11 +603,16 @@ var ViewBase = (function (_super) {
             }
         }
         this.disposeNativeView();
+        this._suspendNativeUpdates();
         if (platform_1.isAndroid) {
-            this.nativeView = null;
+            this.setNativeView(null);
             this._androidView = null;
         }
         this._context = null;
+        if (this.domNode) {
+            this.domNode.dispose();
+            this.domNode = undefined;
+        }
         bindable_1.traceNotifyEvent(this, "_onContextChanged");
         bindable_1.traceNotifyEvent(this, "_tearDownUI");
     };
@@ -616,6 +654,7 @@ var ViewBase = (function (_super) {
         this._applyInlineStyle(style);
     };
     ViewBase.prototype._parentChanged = function (oldParent) {
+        var newParent = this.parent;
         if (oldParent) {
             properties_1.clearInheritedProperties(this);
             if (this.bindingContextBoundToParentBindingContextChanged) {
@@ -623,10 +662,12 @@ var ViewBase = (function (_super) {
             }
         }
         else if (this.shouldAddHandlerToParentBindingContextChanged) {
-            var parent_4 = this.parent;
-            parent_4.on("bindingContextChange", this.bindingContextChanged, this);
-            this.bindings.get("bindingContext").bind(parent_4.bindingContext);
+            newParent.on("bindingContextChange", this.bindingContextChanged, this);
+            this.bindings.get("bindingContext").bind(newParent.bindingContext);
         }
+    };
+    ViewBase.prototype.onResumeNativeUpdates = function () {
+        properties_1.initNativeView(this);
     };
     ViewBase.prototype._registerAnimation = function (animation) {
         if (this._registeredAnimations === undefined) {
@@ -654,6 +695,45 @@ var ViewBase = (function (_super) {
 }(bindable_1.Observable));
 ViewBase.loadedEvent = "loaded";
 ViewBase.unloadedEvent = "unloaded";
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "onLoaded", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "onUnloaded", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "_applyStyleFromScope", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "_setCssState", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "applyCssState", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "addPseudoClass", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "deletePseudoClass", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "_applyInlineStyle", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "requestLayout", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "_addView", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "_setStyleScope", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "_setupUI", null);
+__decorate([
+    profiling_1.profile
+], ViewBase.prototype, "_tearDownUI", null);
 exports.ViewBase = ViewBase;
 ViewBase.prototype.isCollapsed = false;
 ViewBase.prototype._oldLeft = 0;
@@ -681,7 +761,7 @@ ViewBase.prototype._defaultPaddingRight = 0;
 ViewBase.prototype._defaultPaddingBottom = 0;
 ViewBase.prototype._defaultPaddingLeft = 0;
 ViewBase.prototype._isViewBase = true;
-ViewBase.prototype._batchUpdateScope = 0;
+ViewBase.prototype._suspendNativeUpdatesCount = 3;
 exports.bindingContextProperty = new properties_1.InheritedProperty({ name: "bindingContext" });
 exports.bindingContextProperty.register(ViewBase);
 exports.classNameProperty = new properties_1.Property({

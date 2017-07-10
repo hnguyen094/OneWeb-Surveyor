@@ -63,41 +63,53 @@ function registerOnGlobalContext(name, module) {
         configurable: true
     });
 }
-if (global.__snapshot) {
-    var timer = require("timer");
-    global.setTimeout = timer.setTimeout;
-    global.clearTimeout = timer.clearTimeout;
-    global.setInterval = timer.setInterval;
-    global.clearInterval = timer.clearInterval;
-    var dialogs = require("ui/dialogs");
-    global.alert = dialogs.alert;
-    global.confirm = dialogs.confirm;
-    global.prompt = dialogs.prompt;
-    var xhr = require("xhr");
-    global.XMLHttpRequest = xhr.XMLHttpRequest;
-    global.FormData = xhr.FormData;
-    var fetch = require("fetch");
-    global.fetch = fetch.fetch;
-    global.Headers = fetch.Headers;
-    global.Request = fetch.Request;
-    global.Response = fetch.Response;
+var snapshotGlobals;
+function install() {
+    if (global.__snapshot) {
+        if (!snapshotGlobals) {
+            var timer = require("timer");
+            var dialogs = require("ui/dialogs");
+            var xhr = require("xhr");
+            var fetch = require("fetch");
+            var consoleModule = require("console");
+            snapshotGlobals = snapshotGlobals || {
+                setTimeout: timer.setTimeout,
+                clearTimeout: timer.clearTimeout,
+                setInterval: timer.setInterval,
+                clearInterval: timer.clearInterval,
+                alert: dialogs.alert,
+                confirm: dialogs.confirm,
+                prompt: dialogs.prompt,
+                XMLHttpRequest: xhr.XMLHttpRequest,
+                FormData: xhr.FormData,
+                fetch: fetch.fetch,
+                Headers: fetch.Headers,
+                Request: fetch.Request,
+                Response: fetch.Response,
+                console: new consoleModule.Console()
+            };
+        }
+        Object.assign(global, snapshotGlobals);
+    }
+    else {
+        registerOnGlobalContext("setTimeout", "timer");
+        registerOnGlobalContext("clearTimeout", "timer");
+        registerOnGlobalContext("setInterval", "timer");
+        registerOnGlobalContext("clearInterval", "timer");
+        registerOnGlobalContext("alert", "ui/dialogs");
+        registerOnGlobalContext("confirm", "ui/dialogs");
+        registerOnGlobalContext("prompt", "ui/dialogs");
+        registerOnGlobalContext("XMLHttpRequest", "xhr");
+        registerOnGlobalContext("FormData", "xhr");
+        registerOnGlobalContext("fetch", "fetch");
+        if (global.android) {
+            var consoleModule_1 = require("console");
+            global.console = new consoleModule_1.Console();
+        }
+    }
 }
-else {
-    registerOnGlobalContext("setTimeout", "timer");
-    registerOnGlobalContext("clearTimeout", "timer");
-    registerOnGlobalContext("setInterval", "timer");
-    registerOnGlobalContext("clearInterval", "timer");
-    registerOnGlobalContext("alert", "ui/dialogs");
-    registerOnGlobalContext("confirm", "ui/dialogs");
-    registerOnGlobalContext("prompt", "ui/dialogs");
-    registerOnGlobalContext("XMLHttpRequest", "xhr");
-    registerOnGlobalContext("FormData", "xhr");
-    registerOnGlobalContext("fetch", "fetch");
-}
-if (global.android || global.__snapshot) {
-    var consoleModule = require("console");
-    global.console = new consoleModule.Console();
-}
+exports.install = install;
+install();
 function Deprecated(target, key, descriptor) {
     if (descriptor) {
         var originalMethod = descriptor.value;

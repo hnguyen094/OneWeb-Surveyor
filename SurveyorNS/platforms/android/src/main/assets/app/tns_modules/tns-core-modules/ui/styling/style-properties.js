@@ -6,6 +6,9 @@ var background_1 = require("./background");
 var platform_1 = require("../../platform");
 var style_1 = require("./style");
 var properties_1 = require("../core/properties");
+var utils_2 = require("../../utils/utils");
+var number_utils_1 = require("../../utils/number-utils");
+var matrix_1 = require("../../matrix");
 function equalsCommon(a, b) {
     if (a == "auto") {
         return b == "auto";
@@ -367,95 +370,101 @@ var transformProperty = new properties_1.ShorthandProperty({
     converter: convertToTransform
 });
 transformProperty.register(style_1.Style);
-function transformConverter(value) {
-    if (value.indexOf("none") !== -1) {
-        var operations_1 = {};
-        operations_1[value] = value;
-        return operations_1;
-    }
-    var operations = {};
-    var operator = "";
-    var pos = 0;
-    while (pos < value.length) {
-        if (value[pos] === " " || value[pos] === ",") {
-            pos++;
-        }
-        else if (value[pos] === "(") {
-            var start = pos + 1;
-            while (pos < value.length && value[pos] !== ")") {
-                pos++;
-            }
-            var operand = value.substring(start, pos);
-            operations[operator] = operand.trim();
-            operator = "";
-            pos++;
-        }
-        else {
-            operator += value[pos++];
-        }
-    }
-    return operations;
-}
+var IDENTITY_TRANSFORMATION = {
+    translate: { x: 0, y: 0 },
+    rotate: 0,
+    scale: { x: 1, y: 1 },
+};
+var TRANSFORM_SPLITTER = new RegExp(/\s*(.+?)\((.*?)\)/g);
+var TRANSFORMATIONS = Object.freeze([
+    "rotate",
+    "translate",
+    "translate3d",
+    "translateX",
+    "translateY",
+    "scale",
+    "scale3d",
+    "scaleX",
+    "scaleY",
+]);
+var STYLE_TRANSFORMATION_MAP = Object.freeze({
+    "scale": function (value) { return ({ property: "scale", value: value }); },
+    "scale3d": function (value) { return ({ property: "scale", value: value }); },
+    "scaleX": function (_a) {
+        var x = _a.x;
+        return ({ property: "scale", value: { x: x, y: IDENTITY_TRANSFORMATION.scale.y } });
+    },
+    "scaleY": function (_a) {
+        var y = _a.y;
+        return ({ property: "scale", value: { y: y, x: IDENTITY_TRANSFORMATION.scale.x } });
+    },
+    "translate": function (value) { return ({ property: "translate", value: value }); },
+    "translate3d": function (value) { return ({ property: "translate", value: value }); },
+    "translateX": function (_a) {
+        var x = _a.x;
+        return ({ property: "translate", value: { x: x, y: IDENTITY_TRANSFORMATION.translate.y } });
+    },
+    "translateY": function (_a) {
+        var y = _a.y;
+        return ({ property: "translate", value: { y: y, x: IDENTITY_TRANSFORMATION.translate.x } });
+    },
+    "rotate": function (value) { return ({ property: "rotate", value: value }); },
+});
 function convertToTransform(value) {
-    var newTransform = value === properties_1.unsetValue ? { "none": "none" } : transformConverter(value);
-    var array = [];
-    var values;
-    for (var transform in newTransform) {
-        switch (transform) {
-            case "scaleX":
-                array.push([exports.scaleXProperty, newTransform[transform]]);
-                break;
-            case "scaleY":
-                array.push([exports.scaleYProperty, newTransform[transform]]);
-                break;
-            case "scale":
-            case "scale3d":
-                values = newTransform[transform].split(",");
-                if (values.length >= 2) {
-                    array.push([exports.scaleXProperty, values[0]]);
-                    array.push([exports.scaleYProperty, values[1]]);
-                }
-                else if (values.length === 1) {
-                    array.push([exports.scaleXProperty, values[0]]);
-                    array.push([exports.scaleYProperty, values[0]]);
-                }
-                break;
-            case "translateX":
-                array.push([exports.translateXProperty, newTransform[transform]]);
-                break;
-            case "translateY":
-                array.push([exports.translateYProperty, newTransform[transform]]);
-                break;
-            case "translate":
-            case "translate3d":
-                values = newTransform[transform].split(",");
-                if (values.length >= 2) {
-                    array.push([exports.translateXProperty, values[0]]);
-                    array.push([exports.translateYProperty, values[1]]);
-                }
-                else if (values.length === 1) {
-                    array.push([exports.translateXProperty, values[0]]);
-                    array.push([exports.translateYProperty, values[0]]);
-                }
-                break;
-            case "rotate":
-                var text = newTransform[transform];
-                var val = parseFloat(text);
-                if (text.slice(-3) === "rad") {
-                    val = val * (180.0 / Math.PI);
-                }
-                array.push([exports.rotateProperty, val]);
-                break;
-            case "none":
-                array.push([exports.scaleXProperty, 1]);
-                array.push([exports.scaleYProperty, 1]);
-                array.push([exports.translateXProperty, 0]);
-                array.push([exports.translateYProperty, 0]);
-                array.push([exports.rotateProperty, 0]);
-                break;
+    if (value === properties_1.unsetValue) {
+        value = "none";
+    }
+    var _a = transformConverter(value), translate = _a.translate, rotate = _a.rotate, scale = _a.scale;
+    return [
+        [exports.translateXProperty, translate.x],
+        [exports.translateYProperty, translate.y],
+        [exports.scaleXProperty, scale.x],
+        [exports.scaleYProperty, scale.y],
+        [exports.rotateProperty, rotate],
+    ];
+}
+function transformConverter(text) {
+    var transformations = parseTransformString(text);
+    if (text === "none" || text === "" || !transformations.length) {
+        return IDENTITY_TRANSFORMATION;
+    }
+    var usedTransforms = transformations.map(function (t) { return t.property; });
+    if (!utils_2.hasDuplicates(usedTransforms)) {
+        var fullTransformations_1 = Object.assign({}, IDENTITY_TRANSFORMATION);
+        transformations.forEach(function (transform) {
+            fullTransformations_1[transform.property] = transform.value;
+        });
+        return fullTransformations_1;
+    }
+    var affineMatrix = transformations
+        .map(matrix_1.getTransformMatrix)
+        .reduce(matrix_1.multiplyAffine2d);
+    var cssMatrix = matrix_1.matrixArrayToCssMatrix(affineMatrix);
+    return matrix_1.decompose2DTransformMatrix(cssMatrix);
+}
+exports.transformConverter = transformConverter;
+function parseTransformString(text) {
+    var matches = [];
+    var match;
+    while ((match = TRANSFORM_SPLITTER.exec(text)) !== null) {
+        var property = match[1];
+        var value = convertTransformValue(property, match[2]);
+        if (TRANSFORMATIONS.indexOf(property) !== -1) {
+            matches.push(normalizeTransformation({ property: property, value: value }));
         }
     }
-    return array;
+    return matches;
+}
+function normalizeTransformation(_a) {
+    var property = _a.property, value = _a.value;
+    return STYLE_TRANSFORMATION_MAP[property](value);
+}
+function convertTransformValue(property, stringValue) {
+    var _a = stringValue.split(",").map(parseFloat), x = _a[0], _b = _a[1], y = _b === void 0 ? x : _b;
+    if (property === "rotate") {
+        return stringValue.slice(-3) === "rad" ? number_utils_1.radiansToDegrees(x) : x;
+    }
+    return { x: x, y: y };
 }
 exports.backgroundInternalProperty = new properties_1.CssProperty({
     name: "backgroundInternal",

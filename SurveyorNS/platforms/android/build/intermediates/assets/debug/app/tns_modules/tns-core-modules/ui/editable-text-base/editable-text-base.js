@@ -344,6 +344,20 @@ var EditableTextBase = (function (_super) {
     };
     EditableTextBase.prototype[editable_text_base_common_1.textTransformProperty.setNative] = function (value) {
     };
+    EditableTextBase.prototype[editable_text_base_common_1.maxLengthProperty.setNative] = function (value) {
+        var lengthFilter = new android.text.InputFilter.LengthFilter(+value);
+        var filters = this.nativeView.getFilters();
+        var newFilters = [];
+        for (var i = 0; i < filters.length; i++) {
+            newFilters.push(filters[i]);
+            if (filters[i] instanceof android.text.InputFilter.LengthFilter) {
+                filters[i] = lengthFilter;
+                return;
+            }
+        }
+        newFilters.push(lengthFilter);
+        this.nativeView.setFilters(newFilters);
+    };
     return EditableTextBase;
 }(editable_text_base_common_1.EditableTextBase));
 exports.EditableTextBase = EditableTextBase;

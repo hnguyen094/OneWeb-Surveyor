@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var background_1 = require("../../styling/background");
 var view_common_1 = require("./view-common");
 var style_properties_1 = require("../../styling/style-properties");
+var profiling_1 = require("../../../profiling");
 __export(require("./view-common"));
 var TouchListener;
 var disableUserInteractionListener;
@@ -335,32 +336,17 @@ var View = (function (_super) {
             nativeView.setLayoutParams(lp);
         }
     };
-    View.prototype[style_properties_1.rotateProperty.getDefault] = function () {
-        return org.nativescript.widgets.ViewHelper.getRotate(this.nativeView);
-    };
     View.prototype[style_properties_1.rotateProperty.setNative] = function (value) {
         org.nativescript.widgets.ViewHelper.setRotate(this.nativeView, float(value));
-    };
-    View.prototype[style_properties_1.scaleXProperty.getDefault] = function () {
-        return org.nativescript.widgets.ViewHelper.getScaleX(this.nativeView);
     };
     View.prototype[style_properties_1.scaleXProperty.setNative] = function (value) {
         org.nativescript.widgets.ViewHelper.setScaleX(this.nativeView, float(value));
     };
-    View.prototype[style_properties_1.scaleYProperty.getDefault] = function () {
-        return org.nativescript.widgets.ViewHelper.getScaleY(this.nativeView);
-    };
     View.prototype[style_properties_1.scaleYProperty.setNative] = function (value) {
         org.nativescript.widgets.ViewHelper.setScaleY(this.nativeView, float(value));
     };
-    View.prototype[style_properties_1.translateXProperty.getDefault] = function () {
-        return view_common_1.layout.toDeviceIndependentPixels(org.nativescript.widgets.ViewHelper.getTranslateX(this.nativeView));
-    };
     View.prototype[style_properties_1.translateXProperty.setNative] = function (value) {
         org.nativescript.widgets.ViewHelper.setTranslateX(this.nativeView, view_common_1.layout.toDevicePixels(value));
-    };
-    View.prototype[style_properties_1.translateYProperty.getDefault] = function () {
-        return view_common_1.layout.toDeviceIndependentPixels(org.nativescript.widgets.ViewHelper.getTranslateY(this.nativeView));
     };
     View.prototype[style_properties_1.translateYProperty.setNative] = function (value) {
         org.nativescript.widgets.ViewHelper.setTranslateY(this.nativeView, view_common_1.layout.toDevicePixels(value));
@@ -375,12 +361,7 @@ var View = (function (_super) {
         return this.nativeView.getBackground();
     };
     View.prototype[style_properties_1.backgroundInternalProperty.setNative] = function (value) {
-        if (value instanceof android.graphics.drawable.Drawable) {
-            this.nativeView.setBackground(value);
-        }
-        else {
-            background_1.ad.onBackgroundOrBorderPropertyChanged(this);
-        }
+        this._redrawNativeBackground(value);
     };
     View.prototype[style_properties_1.minWidthProperty.setNative] = function (value) {
         if (this.parent instanceof CustomLayoutView && this.parent.nativeView) {
@@ -398,8 +379,25 @@ var View = (function (_super) {
             this._setMinHeightNative(this.minHeight);
         }
     };
+    View.prototype._redrawNativeBackground = function (value) {
+        if (value instanceof android.graphics.drawable.Drawable) {
+            this.nativeView.setBackground(value);
+        }
+        else {
+            background_1.ad.onBackgroundOrBorderPropertyChanged(this);
+        }
+    };
     return View;
 }(view_common_1.ViewCommon));
+__decorate([
+    profiling_1.profile
+], View.prototype, "onLoaded", null);
+__decorate([
+    profiling_1.profile
+], View.prototype, "onUnloaded", null);
+__decorate([
+    profiling_1.profile
+], View.prototype, "requestLayout", null);
 exports.View = View;
 var CustomLayoutView = (function (_super) {
     __extends(CustomLayoutView, _super);

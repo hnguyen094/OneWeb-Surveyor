@@ -23,6 +23,7 @@ var mState = STATE_PREVIEW;
 
 var app = require('application');
 
+//exports.onLoaded = common.onLoaded;
 var lockFocus = function() { //TODO: could be error with private/scope
   mState = STATE_WAITING_LOCK;
   mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);

@@ -3,6 +3,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var button_common_1 = require("./button-common");
+var profiling_1 = require("../../profiling");
 var gestures_1 = require("../gestures");
 __export(require("./button-common"));
 var ClickListener;
@@ -108,6 +109,9 @@ var Button = (function (_super) {
     };
     return Button;
 }(button_common_1.ButtonBase));
+__decorate([
+    profiling_1.profile
+], Button.prototype, "createNativeView", null);
 __decorate([
     button_common_1.PseudoClassHandler("normal", "highlighted", "pressed", "active")
 ], Button.prototype, "_updateHandler", null);

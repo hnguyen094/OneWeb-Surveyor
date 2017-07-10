@@ -3,6 +3,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var application_common_1 = require("./application-common");
+var profiling_1 = require("../profiling");
 __export(require("./application-common"));
 var ActivityCreated = "activityCreated";
 var ActivityDestroyed = "activityDestroyed";
@@ -137,7 +138,7 @@ global.__onLiveSync = function () {
 };
 function initLifecycleCallbacks() {
     var lifecycleCallbacks = new android.app.Application.ActivityLifecycleCallbacks({
-        onActivityCreated: function (activity, savedInstanceState) {
+        onActivityCreated: profiling_1.profile("onActivityCreated", function (activity, savedInstanceState) {
             var activityInfo = activity.getPackageManager().getActivityInfo(activity.getComponentName(), android.content.pm.PackageManager.GET_META_DATA);
             if (activityInfo.metaData) {
                 var setThemeOnLaunch = activityInfo.metaData.getInt("SET_THEME_ON_LAUNCH", -1);
@@ -160,8 +161,8 @@ function initLifecycleCallbacks() {
                 });
                 rootView_1.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener_1);
             }
-        },
-        onActivityDestroyed: function (activity) {
+        }),
+        onActivityDestroyed: profiling_1.profile("onActivityDestroyed", function (activity) {
             if (activity === androidApp.foregroundActivity) {
                 androidApp.foregroundActivity = undefined;
             }
@@ -170,45 +171,45 @@ function initLifecycleCallbacks() {
             }
             androidApp.notify({ eventName: ActivityDestroyed, object: androidApp, activity: activity });
             gc();
-        },
-        onActivityPaused: function (activity) {
+        }),
+        onActivityPaused: profiling_1.profile("onActivityPaused", function (activity) {
             if (activity.isNativeScriptActivity) {
                 androidApp.paused = true;
                 application_common_1.notify({ eventName: application_common_1.suspendEvent, object: androidApp, android: activity });
             }
             androidApp.notify({ eventName: ActivityPaused, object: androidApp, activity: activity });
-        },
-        onActivityResumed: function (activity) {
+        }),
+        onActivityResumed: profiling_1.profile("onActivityResumed", function (activity) {
             androidApp.foregroundActivity = activity;
             if (activity.isNativeScriptActivity) {
                 application_common_1.notify({ eventName: application_common_1.resumeEvent, object: androidApp, android: activity });
                 androidApp.paused = false;
             }
             androidApp.notify({ eventName: ActivityResumed, object: androidApp, activity: activity });
-        },
-        onActivitySaveInstanceState: function (activity, outState) {
+        }),
+        onActivitySaveInstanceState: profiling_1.profile("onActivityResumed", function (activity, outState) {
             androidApp.notify({ eventName: SaveActivityState, object: androidApp, activity: activity, bundle: outState });
-        },
-        onActivityStarted: function (activity) {
+        }),
+        onActivityStarted: profiling_1.profile("onActivityStarted", function (activity) {
             androidApp.notify({ eventName: ActivityStarted, object: androidApp, activity: activity });
-        },
-        onActivityStopped: function (activity) {
+        }),
+        onActivityStopped: profiling_1.profile("onActivityStopped", function (activity) {
             androidApp.notify({ eventName: ActivityStopped, object: androidApp, activity: activity });
-        }
+        })
     });
     return lifecycleCallbacks;
 }
 var currentOrientation;
 function initComponentCallbacks() {
     var componentCallbacks = new android.content.ComponentCallbacks2({
-        onLowMemory: function () {
+        onLowMemory: profiling_1.profile("onLowMemory", function () {
             gc();
             java.lang.System.gc();
             application_common_1.notify({ eventName: application_common_1.lowMemoryEvent, object: this, android: this });
-        },
-        onTrimMemory: function (level) {
-        },
-        onConfigurationChanged: function (newConfig) {
+        }),
+        onTrimMemory: profiling_1.profile("onTrimMemory", function (level) {
+        }),
+        onConfigurationChanged: profiling_1.profile("onConfigurationChanged", function (newConfig) {
             var newOrientation = newConfig.orientation;
             if (newOrientation === currentOrientation) {
                 return;
@@ -232,7 +233,7 @@ function initComponentCallbacks() {
                 newValue: newValue,
                 object: androidApp
             });
-        }
+        })
     });
     return componentCallbacks;
 }

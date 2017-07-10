@@ -83,6 +83,8 @@ C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\a
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\css\lib\parse\index.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\css-value\index.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\debugger\debugger.js
+C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\debugger\devtools-elements.js
+C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\debugger\dom-node.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\fetch\fetch.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\file-system\file-system-access.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\file-system\file-system.js
@@ -91,10 +93,12 @@ C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\a
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\globals\decorators.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\globals\globals.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\http\http.js
+C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\http\http-request\http-request-common.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\http\http-request\http-request.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\image-asset\image-asset-common.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\image-asset\image-asset.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\image-source\image-source.js
+C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\matrix\matrix.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\platform\platform.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\profiling\profiling.js
 C:\Users\hnguyen\ut-site-surveyor\SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\text\formatted-string.js

@@ -161,12 +161,6 @@ var TabViewItem = (function (_super) {
     TabViewItem.prototype.createNativeView = function () {
         return this.nativeView;
     };
-    TabViewItem.prototype.setNativeView = function (textView) {
-        this.nativeView = textView;
-        if (textView) {
-            tab_view_common_1.initNativeView(this);
-        }
-    };
     TabViewItem.prototype._update = function () {
         var tv = this.nativeView;
         if (tv) {

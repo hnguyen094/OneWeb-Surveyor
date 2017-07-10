@@ -6,6 +6,7 @@ var list_view_common_1 = require("./list-view-common");
 var stack_layout_1 = require("../layouts/stack-layout");
 var proxy_view_container_1 = require("../proxy-view-container");
 var layout_base_1 = require("../layouts/layout-base");
+var profiling_1 = require("../../profiling");
 __export(require("./list-view-common"));
 var ITEMLOADING = list_view_common_1.ListViewBase.itemLoadingEvent;
 var LOADMOREITEMS = list_view_common_1.ListViewBase.loadMoreItemsEvent;
@@ -169,6 +170,9 @@ var ListView = (function (_super) {
     };
     return ListView;
 }(list_view_common_1.ListViewBase));
+__decorate([
+    profiling_1.profile
+], ListView.prototype, "createNativeView", null);
 exports.ListView = ListView;
 var ListViewAdapterClass;
 function ensureListViewAdapterClass() {
@@ -267,6 +271,9 @@ function ensureListViewAdapterClass() {
         };
         return ListViewAdapter;
     }(android.widget.BaseAdapter));
+    __decorate([
+        profiling_1.profile
+    ], ListViewAdapter.prototype, "getView", null);
     ListViewAdapterClass = ListViewAdapter;
 }
 //# sourceMappingURL=list-view.js.map

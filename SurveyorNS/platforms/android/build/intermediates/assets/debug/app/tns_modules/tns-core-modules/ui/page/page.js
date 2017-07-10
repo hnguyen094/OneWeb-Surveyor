@@ -7,6 +7,7 @@ var action_bar_1 = require("../action-bar");
 var grid_layout_1 = require("../layouts/grid-layout");
 var constants_1 = require("./constants");
 var platform_1 = require("../../platform");
+var profiling_1 = require("../../profiling");
 __export(require("./page-common"));
 var SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = 0x00002000;
 var STATUS_BAR_LIGHT_BCKG = -657931;
@@ -190,5 +191,8 @@ var Page = (function (_super) {
     };
     return Page;
 }(page_common_1.PageBase));
+__decorate([
+    profiling_1.profile
+], Page.prototype, "onLoaded", null);
 exports.Page = Page;
 //# sourceMappingURL=page.js.map

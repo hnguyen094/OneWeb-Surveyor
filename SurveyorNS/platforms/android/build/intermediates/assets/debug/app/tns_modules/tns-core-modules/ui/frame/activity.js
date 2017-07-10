@@ -1,6 +1,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var frame_1 = require("./frame");
+var globals = require("../../globals");
 var appModule = require("../../application");
+if (global.__snapshot) {
+    globals.install();
+}
 var NativeScriptActivity = (function (_super) {
     __extends(NativeScriptActivity, _super);
     function NativeScriptActivity() {

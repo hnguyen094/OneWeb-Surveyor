@@ -770,6 +770,8 @@ var ViewCommon = (function (_super) {
     };
     ViewCommon.prototype._setNativeClipToBounds = function () {
     };
+    ViewCommon.prototype._redrawNativeBackground = function (value) {
+    };
     return ViewCommon;
 }(view_base_1.ViewBase));
 exports.ViewCommon = ViewCommon;

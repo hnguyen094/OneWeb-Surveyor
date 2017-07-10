@@ -4,13 +4,17 @@ import * as rotVector from "nativescript-rotation-vector";
 import * as cameraPreview from "./nativescript-camera-preview/nativescript-camera-preview";
 import { Image } from "ui/image";
 import * as app from "application";
+import * as pageModule from "tns-core-modules/ui/page";
+// FrameModule is needed in order to have an option to navigate to the new page.
+import * as frameModule from "tns-core-modules/ui/frame";
 
 // the @ represents a decorator that tells how this component/thing on the screen will look.
 // More here: https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Decorators.md
 @Component({
   selector: "my-app",
-  templateUrl: "./interface.html"
+  templateUrl: "./template.html"
 /*
+  template :
   ` <!-- don't forget the ticks; it's important. They're for ES2015 template literals -->
    <!--     Make sure they're <...></> and not just <.../>     -->
   <ActionBar title="{N} Surveyor Camera"></ActionBar>
@@ -26,8 +30,9 @@ export class AppComponent {
   public picture: any;
   constructor() {
     camera.requestPermissions();
-    //cameraPreview.onLoaded();
-
+    console.log("about to load");
+    cameraPreview.onLoaded(frameModule.topmost().currentPage);
+    console.log("loaded and frame is "  + frameModule.topmost().currentPage);
     rotVector.startRotUpdates(function(data) {
         //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
     });

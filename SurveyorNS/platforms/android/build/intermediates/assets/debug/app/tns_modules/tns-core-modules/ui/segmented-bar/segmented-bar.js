@@ -76,14 +76,10 @@ var SegmentedBarItem = (function (_super) {
     function SegmentedBarItem() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    SegmentedBarItem.prototype.createNativeView = function () {
-        return this.nativeView;
-    };
     SegmentedBarItem.prototype.setupNativeView = function (tabIndex) {
         var titleTextView = this.parent.nativeView.getTabWidget().getChildAt(tabIndex).findViewById(TITLE_TEXT_VIEW_ID);
-        this.nativeView = titleTextView;
+        this.setNativeView(titleTextView);
         if (titleTextView) {
-            segmented_bar_common_1.initNativeView(this);
             if (this.titleDirty) {
                 this._update();
             }

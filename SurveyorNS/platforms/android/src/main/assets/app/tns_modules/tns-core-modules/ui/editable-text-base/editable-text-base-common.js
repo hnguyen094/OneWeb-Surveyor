@@ -32,4 +32,6 @@ exports.autocorrectProperty = new text_base_1.Property({ name: "autocorrect", va
 exports.autocorrectProperty.register(EditableTextBase);
 exports.hintProperty = new text_base_1.Property({ name: "hint", defaultValue: "" });
 exports.hintProperty.register(EditableTextBase);
+exports.maxLengthProperty = new text_base_1.Property({ name: "maxLength", defaultValue: Number.POSITIVE_INFINITY });
+exports.maxLengthProperty.register(EditableTextBase);
 //# sourceMappingURL=editable-text-base-common.js.map

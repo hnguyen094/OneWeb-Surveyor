@@ -9,10 +9,21 @@ import * as app from "application";
 // More here: https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Decorators.md
 @Component({
   selector: "my-app",
-  template: "interface.html"
+  templateUrl: "./interface.html"
+/*
+  ` <!-- don't forget the ticks; it's important. They're for ES2015 template literals -->
+   <!--     Make sure they're <...></> and not just <.../>     -->
+  <ActionBar title="{N} Surveyor Camera"></ActionBar>
+  <StackLayout horizontalAlignment="center" verticalAlignment="center">
+      <Image [src]="picture" width="200" height="200"></Image> <!--http://nsimage.brosteins.com/-->
+      <Button text="Capture" (tap)="onCreatingView()" class="btn btn-primary"></Button>
+      <Placeholder creatingView = "onCreatingView" id="placeholder-view"></Placeholder>
+  </StackLayout>
+  ` */
 })
 
 export class AppComponent {
+  public picture: any;
   constructor() {
     camera.requestPermissions();
     //cameraPreview.onLoaded();
@@ -20,8 +31,20 @@ export class AppComponent {
     rotVector.startRotUpdates(function(data) {
         //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
     });
+    this.picture = "~/images/apple.jpg";
+  }
+  public takePicture() {
+        camera.takePicture().then(picture => {
+            this.picture = picture;
+        });
+    }
+  public onLoaded(args) {
+    cameraPreview.onLoaded(args.object);
   }
   public onCreatingView(args) {
     cameraPreview.onCreatingView(args);
+  }
+  public onTakeShot(args) {
+    cameraPreview.onTakeShot(args);
   }
 }

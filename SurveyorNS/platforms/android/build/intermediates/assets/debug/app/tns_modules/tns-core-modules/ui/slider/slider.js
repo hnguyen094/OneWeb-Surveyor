@@ -84,7 +84,7 @@ var Slider = (function (_super) {
         return 100;
     };
     Slider.prototype[slider_common_1.maxValueProperty.setNative] = function (value) {
-        this.nativeView.setMax(value - this.minValue);
+        this.setNativeValuesSilently(value - this.minValue, value);
     };
     Slider.prototype[slider_common_1.colorProperty.getDefault] = function () {
         return -1;

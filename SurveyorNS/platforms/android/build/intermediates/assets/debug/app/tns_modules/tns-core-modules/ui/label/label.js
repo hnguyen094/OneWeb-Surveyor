@@ -3,6 +3,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var text_base_1 = require("../text-base");
+var profiling_1 = require("../../profiling");
 __export(require("../text-base"));
 var TextView;
 var Label = (function (_super) {
@@ -15,6 +16,9 @@ var Label = (function (_super) {
             return this.style.whiteSpace === "normal";
         },
         set: function (value) {
+            if (typeof value === "string") {
+                value = text_base_1.booleanConverter(value);
+            }
             this.style.whiteSpace = value ? "normal" : "nowrap";
         },
         enumerable: true,
@@ -38,5 +42,8 @@ var Label = (function (_super) {
     };
     return Label;
 }(text_base_1.TextBase));
+__decorate([
+    profiling_1.profile
+], Label.prototype, "createNativeView", null);
 exports.Label = Label;
 //# sourceMappingURL=label.js.map

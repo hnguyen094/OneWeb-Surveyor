@@ -2,7 +2,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var observable_1 = require("../../../data/observable");
 var style_1 = require("../../styling/style");
 exports.Style = style_1.Style;
+var profiling_1 = require("../../../profiling");
 exports.unsetValue = new Object();
+var cssPropertyNames = [];
 var symbolPropertyMap = {};
 var cssSymbolPropertyMap = {};
 var inheritableProperties = new Array();
@@ -26,79 +28,95 @@ var Property = (function () {
     function Property(options) {
         this.enumerable = true;
         this.configurable = true;
-        var name = options.name;
-        this.name = name;
-        var key = Symbol(name + ":propertyKey");
+        var propertyName = options.name;
+        this.name = propertyName;
+        var key = Symbol(propertyName + ":propertyKey");
         this.key = key;
-        var getDefault = Symbol(name + ":getDefault");
+        var getDefault = Symbol(propertyName + ":getDefault");
         this.getDefault = getDefault;
-        var setNative = Symbol(name + ":setNative");
+        var setNative = Symbol(propertyName + ":setNative");
         this.setNative = setNative;
-        var defaultValueKey = Symbol(name + ":nativeDefaultValue");
+        var defaultValueKey = Symbol(propertyName + ":nativeDefaultValue");
         this.defaultValueKey = defaultValueKey;
         var defaultValue = options.defaultValue;
         this.defaultValue = defaultValue;
-        var eventName = name + "Change";
+        var eventName = propertyName + "Change";
         var equalityComparer = options.equalityComparer;
         var affectsLayout = options.affectsLayout;
         var valueChanged = options.valueChanged;
         var valueConverter = options.valueConverter;
-        this.set = function (value) {
-            var reset = value === exports.unsetValue;
-            var unboxedValue;
+        var property = this;
+        this.set = function (boxedValue) {
+            var reset = boxedValue === exports.unsetValue;
+            var value;
             var wrapped;
             if (reset) {
-                unboxedValue = defaultValue;
+                value = defaultValue;
             }
             else {
-                wrapped = value && value.wrapped;
-                unboxedValue = wrapped ? observable_1.WrappedValue.unwrap(value) : value;
-                if (valueConverter && typeof unboxedValue === "string") {
-                    unboxedValue = valueConverter(unboxedValue);
+                wrapped = boxedValue && boxedValue.wrapped;
+                value = wrapped ? observable_1.WrappedValue.unwrap(boxedValue) : boxedValue;
+                if (valueConverter && typeof value === "string") {
+                    value = valueConverter(value);
                 }
             }
-            var currentValue = key in this ? this[key] : defaultValue;
-            var changed = equalityComparer ? !equalityComparer(currentValue, unboxedValue) : currentValue !== unboxedValue;
+            var oldValue = key in this ? this[key] : defaultValue;
+            var changed = equalityComparer ? !equalityComparer(oldValue, value) : oldValue !== value;
             if (wrapped || changed) {
-                var setNativeValue = this.nativeView && this[setNative];
                 if (reset) {
                     delete this[key];
                     if (valueChanged) {
-                        valueChanged(this, currentValue, unboxedValue);
+                        valueChanged(this, oldValue, value);
                     }
-                    if (setNativeValue) {
-                        if (defaultValueKey in this) {
-                            this[setNative](this[defaultValueKey]);
-                            delete this[defaultValueKey];
+                    if (this[setNative]) {
+                        if (this._suspendNativeUpdatesCount) {
+                            if (this._suspendedUpdates) {
+                                this._suspendedUpdates[propertyName] = property;
+                            }
                         }
                         else {
-                            this[setNative](defaultValue);
+                            if (defaultValueKey in this) {
+                                this[setNative](this[defaultValueKey]);
+                                delete this[defaultValueKey];
+                            }
+                            else {
+                                this[setNative](defaultValue);
+                            }
                         }
                     }
                 }
                 else {
-                    this[key] = unboxedValue;
+                    this[key] = value;
                     if (valueChanged) {
-                        valueChanged(this, currentValue, unboxedValue);
+                        valueChanged(this, oldValue, value);
                     }
-                    if (setNativeValue) {
-                        if (!(defaultValueKey in this)) {
-                            this[defaultValueKey] = this[getDefault] ? this[getDefault]() : defaultValue;
+                    if (this[setNative]) {
+                        if (this._suspendNativeUpdatesCount) {
+                            if (this._suspendedUpdates) {
+                                this._suspendedUpdates[propertyName] = property;
+                            }
                         }
-                        this[setNative](unboxedValue);
+                        else {
+                            if (!(defaultValueKey in this)) {
+                                this[defaultValueKey] = this[getDefault] ? this[getDefault]() : defaultValue;
+                            }
+                            this[setNative](value);
+                        }
                     }
                 }
                 if (this.hasListeners(eventName)) {
-                    this.notify({
-                        eventName: eventName,
-                        propertyName: name,
-                        object: this,
-                        value: unboxedValue,
-                        oldValue: currentValue
-                    });
+                    this.notify({ object: this, eventName: eventName, propertyName: propertyName, value: value, oldValue: oldValue });
                 }
                 if (affectsLayout) {
                     this.requestLayout();
+                }
+                if (this.domNode) {
+                    if (reset) {
+                        this.domNode.attributeRemoved(propertyName);
+                    }
+                    else {
+                        this.domNode.attributeModified(propertyName, value);
+                    }
                 }
             }
         };
@@ -106,27 +124,24 @@ var Property = (function () {
             return key in this ? this[key] : defaultValue;
         };
         this.nativeValueChange = function (owner, value) {
-            var currentValue = key in owner ? owner[key] : defaultValue;
-            var changed = equalityComparer ? !equalityComparer(currentValue, value) : currentValue !== value;
+            var oldValue = key in owner ? owner[key] : defaultValue;
+            var changed = equalityComparer ? !equalityComparer(oldValue, value) : oldValue !== value;
             if (changed) {
                 owner[key] = value;
                 if (valueChanged) {
-                    valueChanged(owner, currentValue, value);
+                    valueChanged(owner, oldValue, value);
                 }
                 if (owner.nativeView && !(defaultValueKey in owner)) {
                     owner[defaultValueKey] = owner[getDefault] ? owner[getDefault]() : defaultValue;
                 }
                 if (owner.hasListeners(eventName)) {
-                    owner.notify({
-                        eventName: eventName,
-                        propertyName: name,
-                        object: owner,
-                        value: value,
-                        oldValue: currentValue
-                    });
+                    owner.notify({ object: owner, eventName: eventName, propertyName: propertyName, value: value, oldValue: oldValue });
                 }
                 if (affectsLayout) {
                     owner.requestLayout();
+                }
+                if (owner.domNode) {
+                    owner.domNode.attributeModified(propertyName, value);
                 }
             }
         };
@@ -145,86 +160,103 @@ var Property = (function () {
     return Property;
 }());
 exports.Property = Property;
+Property.prototype.isStyleProperty = false;
 var CoercibleProperty = (function (_super) {
     __extends(CoercibleProperty, _super);
     function CoercibleProperty(options) {
         var _this = _super.call(this, options) || this;
-        var name = options.name;
+        var propertyName = options.name;
         var key = _this.key;
         var getDefault = _this.getDefault;
         var setNative = _this.setNative;
         var defaultValueKey = _this.defaultValueKey;
         var defaultValue = _this.defaultValue;
-        var coerceKey = Symbol(name + ":coerceKey");
-        var eventName = name + "Change";
+        var coerceKey = Symbol(propertyName + ":coerceKey");
+        var eventName = propertyName + "Change";
         var affectsLayout = options.affectsLayout;
         var equalityComparer = options.equalityComparer;
         var valueChanged = options.valueChanged;
         var valueConverter = options.valueConverter;
         var coerceCallback = options.coerceValue;
+        var property = _this;
         _this.coerce = function (target) {
             var originalValue = coerceKey in target ? target[coerceKey] : defaultValue;
-            target[name] = originalValue;
+            target[propertyName] = originalValue;
         };
-        _this.set = function (value) {
-            var reset = value === exports.unsetValue;
-            var unboxedValue;
+        _this.set = function (boxedValue) {
+            var reset = boxedValue === exports.unsetValue;
+            var value;
             var wrapped;
             if (reset) {
-                unboxedValue = defaultValue;
+                value = defaultValue;
                 delete this[coerceKey];
             }
             else {
-                wrapped = value && value.wrapped;
-                unboxedValue = wrapped ? observable_1.WrappedValue.unwrap(value) : value;
-                if (valueConverter && typeof unboxedValue === "string") {
-                    unboxedValue = valueConverter(unboxedValue);
+                wrapped = boxedValue && boxedValue.wrapped;
+                value = wrapped ? observable_1.WrappedValue.unwrap(boxedValue) : boxedValue;
+                if (valueConverter && typeof value === "string") {
+                    value = valueConverter(value);
                 }
-                this[coerceKey] = unboxedValue;
-                unboxedValue = coerceCallback(this, unboxedValue);
+                this[coerceKey] = value;
+                value = coerceCallback(this, value);
             }
-            var currentValue = key in this ? this[key] : defaultValue;
-            var changed = equalityComparer ? !equalityComparer(currentValue, unboxedValue) : currentValue !== unboxedValue;
+            var oldValue = key in this ? this[key] : defaultValue;
+            var changed = equalityComparer ? !equalityComparer(oldValue, value) : oldValue !== value;
             if (wrapped || changed) {
-                var setNativeValue = this.nativeView && this[setNative];
                 if (reset) {
                     delete this[key];
                     if (valueChanged) {
-                        valueChanged(this, currentValue, unboxedValue);
+                        valueChanged(this, oldValue, value);
                     }
-                    if (setNativeValue) {
-                        if (defaultValueKey in this) {
-                            this[setNative](this[defaultValueKey]);
-                            delete this[defaultValueKey];
+                    if (this[setNative]) {
+                        if (this._suspendNativeUpdatesCount) {
+                            if (this._suspendedUpdates) {
+                                this._suspendedUpdates[propertyName] = property;
+                            }
                         }
                         else {
-                            this[setNative](defaultValue);
+                            if (defaultValueKey in this) {
+                                this[setNative](this[defaultValueKey]);
+                                delete this[defaultValueKey];
+                            }
+                            else {
+                                this[setNative](defaultValue);
+                            }
                         }
                     }
                 }
                 else {
-                    this[key] = unboxedValue;
+                    this[key] = value;
                     if (valueChanged) {
-                        valueChanged(this, currentValue, unboxedValue);
+                        valueChanged(this, oldValue, value);
                     }
-                    if (setNativeValue) {
-                        if (!(defaultValueKey in this)) {
-                            this[defaultValueKey] = this[getDefault] ? this[getDefault]() : defaultValue;
+                    if (this[setNative]) {
+                        if (this._suspendNativeUpdatesCount) {
+                            if (this._suspendedUpdates) {
+                                this._suspendedUpdates[propertyName] = property;
+                            }
                         }
-                        this[setNative](unboxedValue);
+                        else {
+                            if (!(defaultValueKey in this)) {
+                                this[defaultValueKey] = this[getDefault] ? this[getDefault]() : defaultValue;
+                            }
+                            this[setNative](value);
+                        }
                     }
                 }
                 if (this.hasListeners(eventName)) {
-                    this.notify({
-                        eventName: eventName,
-                        propertyName: name,
-                        object: this,
-                        value: unboxedValue,
-                        oldValue: currentValue
-                    });
+                    this.notify({ object: this, eventName: eventName, propertyName: propertyName, value: value, oldValue: oldValue });
                 }
                 if (affectsLayout) {
                     this.requestLayout();
+                }
+                if (this.domNode) {
+                    if (reset) {
+                        this.domNode.attributeRemoved(propertyName);
+                    }
+                    else {
+                        this.domNode.attributeModified(propertyName, value);
+                    }
                 }
             }
         };
@@ -295,27 +327,29 @@ var InheritedProperty = (function (_super) {
 exports.InheritedProperty = InheritedProperty;
 var CssProperty = (function () {
     function CssProperty(options) {
-        var name = options.name;
-        this.name = name;
+        var propertyName = options.name;
+        this.name = propertyName;
+        cssPropertyNames.push(options.cssName);
         this.cssName = "css:" + options.cssName;
         this.cssLocalName = options.cssName;
-        var key = Symbol(name + ":propertyKey");
+        var key = Symbol(propertyName + ":propertyKey");
         this.key = key;
-        var sourceKey = Symbol(name + ":valueSourceKey");
+        var sourceKey = Symbol(propertyName + ":valueSourceKey");
         this.sourceKey = sourceKey;
-        var getDefault = Symbol(name + ":getDefault");
+        var getDefault = Symbol(propertyName + ":getDefault");
         this.getDefault = getDefault;
-        var setNative = Symbol(name + ":setNative");
+        var setNative = Symbol(propertyName + ":setNative");
         this.setNative = setNative;
-        var defaultValueKey = Symbol(name + ":nativeDefaultValue");
+        var defaultValueKey = Symbol(propertyName + ":nativeDefaultValue");
         this.defaultValueKey = defaultValueKey;
         var defaultValue = options.defaultValue;
         this.defaultValue = defaultValue;
-        var eventName = name + "Change";
+        var eventName = propertyName + "Change";
         var affectsLayout = options.affectsLayout;
         var equalityComparer = options.equalityComparer;
         var valueChanged = options.valueChanged;
         var valueConverter = options.valueConverter;
+        var property = this;
         function setLocalValue(value) {
             var reset = value === exports.unsetValue;
             if (reset) {
@@ -328,46 +362,53 @@ var CssProperty = (function () {
                     value = valueConverter(value);
                 }
             }
-            var currentValue = key in this ? this[key] : defaultValue;
-            var changed = equalityComparer ? !equalityComparer(currentValue, value) : currentValue !== value;
+            var oldValue = key in this ? this[key] : defaultValue;
+            var changed = equalityComparer ? !equalityComparer(oldValue, value) : oldValue !== value;
             if (changed) {
                 var view = this.view;
-                var setNativeValue = view.nativeView && view[setNative];
                 if (reset) {
                     delete this[key];
                     if (valueChanged) {
-                        valueChanged(this, currentValue, value);
+                        valueChanged(this, oldValue, value);
                     }
-                    if (setNativeValue) {
-                        if (defaultValueKey in this) {
-                            view[setNative](this[defaultValueKey]);
-                            delete this[defaultValueKey];
+                    if (view[setNative]) {
+                        if (view._suspendNativeUpdatesCount) {
+                            if (view._suspendedUpdates) {
+                                view._suspendedUpdates[propertyName] = property;
+                            }
                         }
                         else {
-                            view[setNative](defaultValue);
+                            if (defaultValueKey in this) {
+                                view[setNative](this[defaultValueKey]);
+                                delete this[defaultValueKey];
+                            }
+                            else {
+                                view[setNative](defaultValue);
+                            }
                         }
                     }
                 }
                 else {
                     this[key] = value;
                     if (valueChanged) {
-                        valueChanged(this, currentValue, value);
+                        valueChanged(this, oldValue, value);
                     }
-                    if (setNativeValue) {
-                        if (!(defaultValueKey in this)) {
-                            this[defaultValueKey] = view[getDefault] ? view[getDefault]() : defaultValue;
+                    if (view[setNative]) {
+                        if (view._suspendNativeUpdatesCount) {
+                            if (view._suspendedUpdates) {
+                                view._suspendedUpdates[propertyName] = property;
+                            }
                         }
-                        view[setNative](value);
+                        else {
+                            if (!(defaultValueKey in this)) {
+                                this[defaultValueKey] = view[getDefault] ? view[getDefault]() : defaultValue;
+                            }
+                            view[setNative](value);
+                        }
                     }
                 }
                 if (this.hasListeners(eventName)) {
-                    this.notify({
-                        eventName: eventName,
-                        propertyName: name,
-                        object: this,
-                        value: value,
-                        oldValue: currentValue
-                    });
+                    this.notify({ object: this, eventName: eventName, propertyName: propertyName, value: value, oldValue: oldValue });
                 }
                 if (affectsLayout) {
                     view.requestLayout();
@@ -390,46 +431,53 @@ var CssProperty = (function () {
                 }
                 this[sourceKey] = 2;
             }
-            var currentValue = key in this ? this[key] : defaultValue;
-            var changed = equalityComparer ? !equalityComparer(currentValue, value) : currentValue !== value;
+            var oldValue = key in this ? this[key] : defaultValue;
+            var changed = equalityComparer ? !equalityComparer(oldValue, value) : oldValue !== value;
             if (changed) {
                 var view = this.view;
-                var setNativeValue = view.nativeView && view[setNative];
                 if (reset) {
                     delete this[key];
                     if (valueChanged) {
-                        valueChanged(this, currentValue, value);
+                        valueChanged(this, oldValue, value);
                     }
-                    if (setNativeValue) {
-                        if (defaultValueKey in this) {
-                            view[setNative](this[defaultValueKey]);
-                            delete this[defaultValueKey];
+                    if (view[setNative]) {
+                        if (view._suspendNativeUpdatesCount) {
+                            if (view._suspendedUpdates) {
+                                view._suspendedUpdates[propertyName] = property;
+                            }
                         }
                         else {
-                            view[setNative](defaultValue);
+                            if (defaultValueKey in this) {
+                                view[setNative](this[defaultValueKey]);
+                                delete this[defaultValueKey];
+                            }
+                            else {
+                                view[setNative](defaultValue);
+                            }
                         }
                     }
                 }
                 else {
                     this[key] = value;
                     if (valueChanged) {
-                        valueChanged(this, currentValue, value);
+                        valueChanged(this, oldValue, value);
                     }
-                    if (setNativeValue) {
-                        if (!(defaultValueKey in this)) {
-                            this[defaultValueKey] = view[getDefault] ? view[getDefault]() : defaultValue;
+                    if (view[setNative]) {
+                        if (view._suspendNativeUpdatesCount) {
+                            if (view._suspendedUpdates) {
+                                view._suspendedUpdates[propertyName] = property;
+                            }
                         }
-                        view[setNative](value);
+                        else {
+                            if (!(defaultValueKey in this)) {
+                                this[defaultValueKey] = view[getDefault] ? view[getDefault]() : defaultValue;
+                            }
+                            view[setNative](value);
+                        }
                     }
                 }
                 if (this.hasListeners(eventName)) {
-                    this.notify({
-                        eventName: eventName,
-                        propertyName: name,
-                        object: this,
-                        value: value,
-                        oldValue: currentValue
-                    });
+                    this.notify({ object: this, eventName: eventName, propertyName: propertyName, value: value, oldValue: oldValue });
                 }
                 if (affectsLayout) {
                     view.requestLayout();
@@ -470,12 +518,14 @@ var CssProperty = (function () {
     return CssProperty;
 }());
 exports.CssProperty = CssProperty;
+CssProperty.prototype.isStyleProperty = true;
 var CssAnimationProperty = (function () {
     function CssAnimationProperty(options) {
         this.options = options;
         var valueConverter = options.valueConverter, equalityComparer = options.equalityComparer, valueChanged = options.valueChanged, defaultValue = options.defaultValue;
         var propertyName = options.name;
         this.name = propertyName;
+        cssPropertyNames.push(options.cssName);
         CssAnimationProperty.properties[propertyName] = this;
         if (options.cssName && options.cssName !== propertyName) {
             CssAnimationProperty.properties[options.cssName] = this;
@@ -493,18 +543,20 @@ var CssAnimationProperty = (function () {
         var styleValue = Symbol(propertyName);
         var keyframeValue = Symbol(keyframeName);
         var computedValue = Symbol("computed-value:" + propertyName);
-        this.computedValueKey = computedValue;
+        this.key = computedValue;
         var computedSource = Symbol("computed-source:" + propertyName);
         this.getDefault = Symbol(propertyName + ":getDefault");
+        var getDefault = this.getDefault;
         var setNative = this.setNative = Symbol(propertyName + ":setNative");
         var eventName = propertyName + "Change";
+        var property = this;
         function descriptor(symbol, propertySource, enumerable, configurable, getsComputed) {
             return {
                 enumerable: enumerable, configurable: configurable,
                 get: getsComputed ? function () { return this[computedValue]; } : function () { return this[symbol]; },
-                set: function (value) {
-                    var prev = this[computedValue];
-                    if (value === exports.unsetValue) {
+                set: function (boxedValue) {
+                    var oldValue = this[computedValue];
+                    if (boxedValue === exports.unsetValue) {
                         this[symbol] = exports.unsetValue;
                         if (this[computedSource] === propertySource) {
                             if (this[styleValue] !== exports.unsetValue) {
@@ -517,30 +569,41 @@ var CssAnimationProperty = (function () {
                             }
                             else {
                                 this[computedSource] = 0;
-                                this[computedValue] = defaultValue;
+                                this[computedValue] = defaultValueKey in this ? this[defaultValueKey] : defaultValue;
                             }
                         }
                     }
                     else {
-                        if (valueConverter && typeof value === "string") {
-                            value = valueConverter(value);
+                        if (valueConverter && typeof boxedValue === "string") {
+                            boxedValue = valueConverter(boxedValue);
                         }
-                        this[symbol] = value;
+                        this[symbol] = boxedValue;
                         if (this[computedSource] <= propertySource) {
                             this[computedSource] = propertySource;
-                            this[computedValue] = value;
+                            this[computedValue] = boxedValue;
                         }
                     }
-                    var next = this[computedValue];
-                    if (prev !== next && (!equalityComparer || !equalityComparer(prev, next))) {
+                    var value = this[computedValue];
+                    if (oldValue !== value && (!equalityComparer || !equalityComparer(oldValue, value))) {
                         if (valueChanged) {
-                            valueChanged(this, prev, next);
+                            valueChanged(this, oldValue, value);
                         }
-                        if (this.view.nativeView && this.view[setNative]) {
-                            this.view[setNative](next);
+                        var view = this.view;
+                        if (view[setNative]) {
+                            if (view._suspendNativeUpdatesCount) {
+                                if (view._suspendedUpdates) {
+                                    view._suspendedUpdates[propertyName] = property;
+                                }
+                            }
+                            else {
+                                if (!(defaultValueKey in this)) {
+                                    this[defaultValueKey] = view[getDefault] ? view[getDefault]() : defaultValue;
+                                }
+                                view[setNative](value);
+                            }
                         }
                         if (this.hasListeners(eventName)) {
-                            this.notify({ eventName: eventName, object: this, propertyName: propertyName, value: value, oldValue: prev });
+                            this.notify({ object: this, eventName: eventName, propertyName: propertyName, value: value, oldValue: oldValue });
                         }
                     }
                 }
@@ -553,7 +616,6 @@ var CssAnimationProperty = (function () {
         symbolPropertyMap[computedValue] = this;
         cssSymbolPropertyMap[computedValue] = this;
         this.register = function (cls) {
-            cls.prototype[defaultValueKey] = options.defaultValue;
             cls.prototype[computedValue] = options.defaultValue;
             cls.prototype[computedSource] = 0;
             cls.prototype[cssValue] = exports.unsetValue;
@@ -572,30 +634,32 @@ var CssAnimationProperty = (function () {
         return this.properties[name];
     };
     CssAnimationProperty.prototype.isSet = function (instance) {
-        return instance[this.computedValueKey] !== exports.unsetValue;
+        return instance[this.key] !== exports.unsetValue;
     };
     return CssAnimationProperty;
 }());
 CssAnimationProperty.properties = {};
 exports.CssAnimationProperty = CssAnimationProperty;
+CssAnimationProperty.prototype.isStyleProperty = true;
 var InheritedCssProperty = (function (_super) {
     __extends(InheritedCssProperty, _super);
     function InheritedCssProperty(options) {
         var _this = _super.call(this, options) || this;
-        var name = options.name;
+        var propertyName = options.name;
         var key = _this.key;
         var sourceKey = _this.sourceKey;
         var getDefault = _this.getDefault;
         var setNative = _this.setNative;
         var defaultValueKey = _this.defaultValueKey;
-        var eventName = name + "Change";
+        var eventName = propertyName + "Change";
         var defaultValue = options.defaultValue;
         var affectsLayout = options.affectsLayout;
         var equalityComparer = options.equalityComparer;
         var valueChanged = options.valueChanged;
         var valueConverter = options.valueConverter;
-        var setFunc = function (valueSource) { return function (value) {
-            var reset = value === exports.unsetValue;
+        var property = _this;
+        var setFunc = function (valueSource) { return function (boxedValue) {
+            var reset = boxedValue === exports.unsetValue;
             var currentValueSource = this[sourceKey] || 0;
             if (reset) {
                 if (valueSource === 2 && currentValueSource === 3) {
@@ -608,68 +672,75 @@ var InheritedCssProperty = (function (_super) {
                 }
             }
             var view = this.view;
-            var newValue;
+            var value;
             if (reset) {
                 var parent_2 = view.parent;
                 var style = parent_2 ? parent_2.style : null;
                 if (style && style[sourceKey] > 0) {
-                    newValue = style[name];
+                    value = style[propertyName];
                     this[sourceKey] = 1;
                 }
                 else {
-                    newValue = defaultValue;
+                    value = defaultValue;
                     delete this[sourceKey];
                 }
             }
             else {
                 this[sourceKey] = valueSource;
-                if (valueConverter && typeof value === "string") {
-                    newValue = valueConverter(value);
+                if (valueConverter && typeof boxedValue === "string") {
+                    value = valueConverter(boxedValue);
                 }
                 else {
-                    newValue = value;
+                    value = boxedValue;
                 }
             }
-            var currentValue = key in this ? this[key] : defaultValue;
-            var changed = equalityComparer ? !equalityComparer(currentValue, newValue) : currentValue !== newValue;
+            var oldValue = key in this ? this[key] : defaultValue;
+            var changed = equalityComparer ? !equalityComparer(oldValue, value) : oldValue !== value;
             if (changed) {
                 var view_1 = this.view;
-                var setNativeValue = view_1.nativeView && view_1[setNative];
                 if (reset) {
                     delete this[key];
                     if (valueChanged) {
-                        valueChanged(this, currentValue, newValue);
+                        valueChanged(this, oldValue, value);
                     }
-                    if (setNativeValue) {
-                        if (defaultValueKey in this) {
-                            view_1[setNative](this[defaultValueKey]);
-                            delete this[defaultValueKey];
+                    if (view_1[setNative]) {
+                        if (view_1._suspendNativeUpdatesCount) {
+                            if (view_1._suspendedUpdates) {
+                                view_1._suspendedUpdates[propertyName] = property;
+                            }
                         }
                         else {
-                            view_1[setNative](defaultValue);
+                            if (defaultValueKey in this) {
+                                view_1[setNative](this[defaultValueKey]);
+                                delete this[defaultValueKey];
+                            }
+                            else {
+                                view_1[setNative](defaultValue);
+                            }
                         }
                     }
                 }
                 else {
-                    this[key] = newValue;
+                    this[key] = value;
                     if (valueChanged) {
-                        valueChanged(this, currentValue, newValue);
+                        valueChanged(this, oldValue, value);
                     }
-                    if (setNativeValue) {
-                        if (!(defaultValueKey in this)) {
-                            this[defaultValueKey] = view_1[getDefault] ? view_1[getDefault]() : defaultValue;
+                    if (view_1[setNative]) {
+                        if (view_1._suspendNativeUpdatesCount) {
+                            if (view_1._suspendedUpdates) {
+                                view_1._suspendedUpdates[propertyName] = property;
+                            }
                         }
-                        view_1[setNative](newValue);
+                        else {
+                            if (!(defaultValueKey in this)) {
+                                this[defaultValueKey] = view_1[getDefault] ? view_1[getDefault]() : defaultValue;
+                            }
+                            view_1[setNative](value);
+                        }
                     }
                 }
                 if (this.hasListeners(eventName)) {
-                    this.notify({
-                        eventName: eventName,
-                        propertyName: name,
-                        object: this,
-                        value: newValue,
-                        oldValue: currentValue
-                    });
+                    this.notify({ object: this, eventName: eventName, propertyName: propertyName, value: value, oldValue: oldValue });
                 }
                 if (affectsLayout) {
                     view_1.requestLayout();
@@ -684,7 +755,7 @@ var InheritedCssProperty = (function (_super) {
                     }
                     else {
                         if (childValueSource <= 1) {
-                            setInheritedFunc.call(childStyle, newValue);
+                            setInheritedFunc.call(childStyle, value);
                         }
                     }
                     return true;
@@ -711,21 +782,27 @@ var ShorthandProperty = (function () {
         this.cssLocalName = "" + options.cssName;
         var converter = options.converter;
         function setLocalValue(value) {
+            var _this = this;
             if (this[key] !== value) {
                 this[key] = value;
-                for (var _i = 0, _a = converter(value); _i < _a.length; _i++) {
-                    var _b = _a[_i], p = _b[0], v = _b[1];
-                    this[p.name] = v;
-                }
+                this.view._batchUpdate(function () {
+                    for (var _i = 0, _a = converter(value); _i < _a.length; _i++) {
+                        var _b = _a[_i], p = _b[0], v = _b[1];
+                        _this[p.name] = v;
+                    }
+                });
             }
         }
         function setCssValue(value) {
+            var _this = this;
             if (this[key] !== value) {
                 this[key] = value;
-                for (var _i = 0, _a = converter(value); _i < _a.length; _i++) {
-                    var _b = _a[_i], p = _b[0], v = _b[1];
-                    this[p.cssName] = v;
-                }
+                this.view._batchUpdate(function () {
+                    for (var _i = 0, _a = converter(value); _i < _a.length; _i++) {
+                        var _b = _a[_i], p = _b[0], v = _b[1];
+                        _this[p.cssName] = v;
+                    }
+                });
             }
         }
         this.cssValueDescriptor = {
@@ -780,7 +857,52 @@ function inheritableCssPropertyValuesOn(style) {
     }
     return array;
 }
-function initNativeView(view) {
+exports.initNativeView = profiling_1.profile('"properties".initNativeView', function initNativeView(view) {
+    if (view._suspendedUpdates) {
+        applyPendingNativeSetters(view);
+    }
+    else {
+        applyAllNativeSetters(view);
+    }
+    view._suspendedUpdates = {};
+});
+function applyPendingNativeSetters(view) {
+    var suspendedUpdates = view._suspendedUpdates;
+    for (var propertyName in suspendedUpdates) {
+        var property = suspendedUpdates[propertyName];
+        var setNative = property.setNative;
+        if (view[setNative]) {
+            var getDefault = property.getDefault, isStyleProperty = property.isStyleProperty, defaultValueKey = property.defaultValueKey, defaultValue = property.defaultValue;
+            var value = void 0;
+            if (isStyleProperty) {
+                var style = view.style;
+                if (property.isSet(view.style)) {
+                    if (!(defaultValueKey in style)) {
+                        style[defaultValueKey] = view[getDefault] ? view[getDefault]() : defaultValue;
+                    }
+                    value = view.style[propertyName];
+                }
+                else {
+                    value = style[defaultValueKey];
+                }
+            }
+            else {
+                if (property.isSet(view)) {
+                    if (!(defaultValueKey in view)) {
+                        view[defaultValueKey] = view[getDefault] ? view[getDefault]() : defaultValue;
+                    }
+                    value = view[propertyName];
+                }
+                else {
+                    value = view[defaultValueKey];
+                }
+            }
+            view[setNative](value);
+        }
+    }
+}
+exports.applyPendingNativeSetters = applyPendingNativeSetters;
+function applyAllNativeSetters(view) {
     var symbols = Object.getOwnPropertySymbols(view);
     for (var _i = 0, symbols_2 = symbols; _i < symbols_2.length; _i++) {
         var symbol = symbols_2[_i];
@@ -819,7 +941,7 @@ function initNativeView(view) {
         }
     }
 }
-exports.initNativeView = initNativeView;
+exports.applyAllNativeSetters = applyAllNativeSetters;
 function resetNativeView(view) {
     var symbols = Object.getOwnPropertySymbols(view);
     for (var _i = 0, symbols_4 = symbols; _i < symbols_4.length; _i++) {
@@ -937,4 +1059,32 @@ function makeParser(isValid) {
     };
 }
 exports.makeParser = makeParser;
+function getSetProperties(view) {
+    var result = [];
+    Object.getOwnPropertyNames(view).forEach(function (prop) {
+        result.push([prop, view[prop]]);
+    });
+    var symbols = Object.getOwnPropertySymbols(view);
+    for (var _i = 0, symbols_7 = symbols; _i < symbols_7.length; _i++) {
+        var symbol = symbols_7[_i];
+        var property = symbolPropertyMap[symbol];
+        if (!property) {
+            continue;
+        }
+        var value = view[property.key];
+        result.push([property.name, value]);
+    }
+    return result;
+}
+exports.getSetProperties = getSetProperties;
+function getComputedCssValues(view) {
+    var result = [];
+    var style = view.style;
+    for (var _i = 0, cssPropertyNames_1 = cssPropertyNames; _i < cssPropertyNames_1.length; _i++) {
+        var prop = cssPropertyNames_1[_i];
+        result.push([prop, style[prop]]);
+    }
+    return result;
+}
+exports.getComputedCssValues = getComputedCssValues;
 //# sourceMappingURL=properties.js.map

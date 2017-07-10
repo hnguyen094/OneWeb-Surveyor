@@ -14,6 +14,9 @@ var ButtonBase = (function (_super) {
             return this.style.whiteSpace === "normal";
         },
         set: function (value) {
+            if (typeof value === "string") {
+                value = text_base_1.booleanConverter(value);
+            }
             this.style.whiteSpace = value ? "normal" : "nowrap";
         },
         enumerable: true,

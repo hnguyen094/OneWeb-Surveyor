@@ -3,6 +3,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var content_view_1 = require("../content-view");
+var profiling_1 = require("../../profiling");
 __export(require("../content-view"));
 var ScrollViewBase = (function (_super) {
     __extends(ScrollViewBase, _super);
@@ -78,6 +79,9 @@ var ScrollViewBase = (function (_super) {
     return ScrollViewBase;
 }(content_view_1.ContentView));
 ScrollViewBase.scrollEvent = "scroll";
+__decorate([
+    profiling_1.profile
+], ScrollViewBase.prototype, "onLoaded", null);
 exports.ScrollViewBase = ScrollViewBase;
 var converter = content_view_1.makeParser(content_view_1.makeValidator("horizontal", "vertical"));
 exports.orientationProperty = new content_view_1.Property({
