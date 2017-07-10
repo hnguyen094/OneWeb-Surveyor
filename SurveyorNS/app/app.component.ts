@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import * as camera from "nativescript-camera";
 import * as rotVector from "nativescript-rotation-vector";
-import * as cameraPreview from "nativescript-camera-preview";
+import * as cameraPreview from "./nativescript-camera-preview/nativescript-camera-preview";
 import { Image } from "ui/image";
 import * as app from "application";
 
@@ -37,7 +37,6 @@ export class AppComponent {
         });
     }
   public onCreatingView(args) {
-    console.dir(cameraPreview);
     cameraPreview.onCreatingView(args);
   }
 }

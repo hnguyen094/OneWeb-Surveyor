@@ -14,18 +14,27 @@ var mImageReader;
 var mCaptureCallback;
 var mFile;
 
-function lockFocus() { //TODO: could be error with private/scope
+var STATE_PREVIEW = 0;
+var STATE_WAITING_LOCK = 1;
+var STATE_WAITING_PRECAPTURE = 2;
+var STATE_WAITING_NON_PRECAPTURE = 3;
+var STATE_PICTURE_TAKEN = 4;
+var mState = STATE_PREVIEW;
+
+var app = require('application');
+
+var lockFocus = function() { //TODO: could be error with private/scope
   mState = STATE_WAITING_LOCK;
   mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);
 }
-function runPrecaptureSequence() {
+var runPrecaptureSequence = function() {
     // This is how to tell the camera to trigger.
     mPreviewRequestBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER, android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER_START);
     // Tell #mCaptureCallback to wait for the precapture sequence to be set.
     mState = STATE_WAITING_PRECAPTURE;
     mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);
 }
-function captureStillPicture() {
+var captureStillPicture = function() {
     // This is the CaptureRequest.Builder that we use to take a picture.
     var captureBuilder = mCameraDevice.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_STILL_CAPTURE);
     captureBuilder.addTarget(mImageReader.getSurface());
@@ -44,7 +53,7 @@ function captureStillPicture() {
     mCaptureSession.stopRepeating();
     mCaptureSession.capture(captureBuilder.build(), CaptureCallback, null);
 }
-function createCameraPreviewSession() {
+var createCameraPreviewSession = function() {
     console.log("createCameraPreviewSession");
 
     if (!mSurfaceTexture || !mCameraDevice) {
@@ -67,12 +76,11 @@ function createCameraPreviewSession() {
     surfaceList.add(surface);
     mCameraDevice.createCaptureSession(surfaceList, new MyCameraCaptureSessionStateCallback(), null);
 }
-function onTakeShot(args) {
+exports.onTakeShot = function(args) {
   console.log("onTakeShot");
   lockFocus();
 }
-exports.onTakeShot = onTakeShot;
-function onCreatingView(args) {
+exports.onCreatingView = function(args) {
   var appContext = app.android.context;
   var cameraManager = appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
   var cameras = cameraManager.getCameraIdList();
@@ -139,7 +147,6 @@ function onCreatingView(args) {
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
   args.view = mTextureView;
 }
-exports.onCreatingView = onCreatingView;
 // from Java ; public static abstract class
 var MyCameraCaptureSessionStateCallback = android.hardware.camera2.CameraCaptureSession.StateCallback.extend({
     onConfigured: function(cameraCaptureSession) {

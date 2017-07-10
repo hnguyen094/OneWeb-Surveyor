@@ -14,18 +14,18 @@ var mImageReader;
 var mCaptureCallback;
 var mFile;
 
-private function lockFocus() { //TODO: could be error with private/scope
+var lockFocus = function() { //TODO: could be error with private/scope
   mState = STATE_WAITING_LOCK;
   mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);
 }
-private function runPrecaptureSequence() {
+var runPrecaptureSequence = function() {
     // This is how to tell the camera to trigger.
     mPreviewRequestBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER, android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER_START);
     // Tell #mCaptureCallback to wait for the precapture sequence to be set.
     mState = STATE_WAITING_PRECAPTURE;
     mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);
 }
-private function captureStillPicture() {
+var captureStillPicture = function() {
     // This is the CaptureRequest.Builder that we use to take a picture.
     var captureBuilder = mCameraDevice.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_STILL_CAPTURE);
     captureBuilder.addTarget(mImageReader.getSurface());
@@ -44,7 +44,7 @@ private function captureStillPicture() {
     mCaptureSession.stopRepeating();
     mCaptureSession.capture(captureBuilder.build(), CaptureCallback, null);
 }
-private function createCameraPreviewSession() {
+var createCameraPreviewSession = function() {
     console.log("createCameraPreviewSession");
 
     if (!mSurfaceTexture || !mCameraDevice) {
@@ -138,7 +138,6 @@ exports.onCreatingView = function(args) {
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
   args.view = mTextureView;
 }
-
 // from Java ; public static abstract class
 var MyCameraCaptureSessionStateCallback = android.hardware.camera2.CameraCaptureSession.StateCallback.extend({
     onConfigured: function(cameraCaptureSession) {
