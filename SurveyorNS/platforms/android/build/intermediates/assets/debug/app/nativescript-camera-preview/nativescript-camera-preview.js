@@ -22,8 +22,9 @@ var STATE_PICTURE_TAKEN = 4;
 var mState = STATE_PREVIEW;
 
 var app = require('application');
+var common = require('./nativescript-camera-preview-common');
 
-//exports.onLoaded = common.onLoaded;
+exports.onLoaded = common.onLoaded;
 var lockFocus = function() { //TODO: could be error with private/scope
   mState = STATE_WAITING_LOCK;
   mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);

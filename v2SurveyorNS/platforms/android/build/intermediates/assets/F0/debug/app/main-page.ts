@@ -8,10 +8,20 @@ import { EventData } from 'data/observable';
 import { Page } from 'ui/page';
 import { HelloWorldModel } from './main-view-model';
 import * as cameraPreview from './nativescript-camera-preview/nativescript-camera-preview';
-import * as rotVector from "./nativescript-rotation-vector/index"
+import * as rotVector from "./nativescript-rotation-vector/index";
+import * as app from "application";
 
 export function onLoaded(args: EventData) {
   cameraPreview.onLoaded(args);
+  rotVector.startRotUpdates(function(data) {
+      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+  });
+}
+export function onCreatingView(args: EventData) {
+  cameraPreview.onCreatingView(args);
+}
+export function onTakeShot(args: EventData) {
+  cameraPreview.onTakeShot(args);
 }
 // Event handler for Page "navigatingTo" event attached in main-page.xml
 export function navigatingTo(args: EventData) {
@@ -35,6 +45,13 @@ export function navigatingTo(args: EventData) {
     page.bindingContext = new HelloWorldModel();
 }
 
-rotVector.startRotUpdates(function(data) {
-    console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+//TODO: Camera onResume, when it's lost. FYI: https://docs.nativescript.org/core-concepts/application-lifecycle
+app.on(app.resumeEvent, function(args) {
+  onCreatingView(args);
+});
+app.on(app.suspendEvent, function(args) {
+  rotVector.stopRotUpdates();
+});
+app.on(app.exitEvent, function(args) {
+  rotVector.stopRotUpdates();
 });

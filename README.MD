@@ -2,6 +2,12 @@ Surveys site for OneWeb's User Terminal (UT) products.
 
 Contains multiple projects (approaches to the problem).
 
+## **graphics**
+
+This folder contains all my created graphics with .pdn extentions (paint.NET). 
+
+To edit, download [paint.NET here](getpaint.net "paint.NET download page")
+
 ## **SurveyorJava**
 
 This is the native Android implementation of this project.
