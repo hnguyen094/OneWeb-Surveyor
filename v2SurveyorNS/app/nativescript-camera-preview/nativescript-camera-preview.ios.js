@@ -15,10 +15,10 @@ exports.onTakeShot = function(args) {
   });
 }
 
-exports.onCreatingView = function(args) {
+exports.onCreatingView = function(callback, args) {
   var session = new AVCaptureSession();
   session.sessionPreset = AVCaptureSessionPreset1280x720;
-
+  var wrappedCallback = zonedCallback(callback);
   // Adding capture device
   var device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo);
   var input = AVCaptureDeviceInput.deviceInputWithDeviceError(device, null);

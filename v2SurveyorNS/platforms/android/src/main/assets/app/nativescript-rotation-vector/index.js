@@ -34,13 +34,35 @@ function startRotUpdates(callback, options) {
         }
     }
     if (!rotSensor) {
-        rotSensor = sensorManager.getDefaultSensor(android.hardware.Sensor.TYPE_ROTATION_VECTOR);
+        rotSensor = sensorManager.getDefaultSensor(android.hardware.Sensor.TYPE_GAME_ROTATION_VECTOR);
         if (!rotSensor) {
             throw Error("Could get rotation vector sensor.");
         }
     }
     sensorListener = new android.hardware.SensorEventListener({
         onAccuracyChanged: function (sensor, accuracy) {
+          switch(accuracy) {
+            case android.hardware.SensorManager.SENSOR_STATUS_ACCURACY_LOW: {
+              console.log("low accuracy");
+              break;
+            }
+            case android.hardware.SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM: {
+              console.log("medium accuracy");
+              break;
+            }
+            case android.hardware.SensorManager.SENSOR_STATUS_ACCURACY_HIGH: {
+              console.log("high accuracy");
+              break;
+            }
+            case android.hardware.SensorManager.SENSOR_STATUS_ACCURACY_UNRELIABL: {
+              console.log("unreliable accuracy");
+              break;
+            }
+            default: {
+              console.log("Unrecognized accuracy");
+              break;
+            }
+          }
         },
         onSensorChanged: function (event) {
           var rotationMatrix = Array.create("float", 16);

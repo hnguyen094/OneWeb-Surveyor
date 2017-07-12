@@ -20,6 +20,7 @@ var STATE_WAITING_PRECAPTURE = 2;
 var STATE_WAITING_NON_PRECAPTURE = 3;
 var STATE_PICTURE_TAKEN = 4;
 var mState = STATE_PREVIEW;
+var wrappedCallback;
 
 var app = require('application');
 var common = require('./nativescript-camera-preview-common');
@@ -82,10 +83,11 @@ exports.onTakeShot = function(args) {
   console.log("onTakeShot");
   lockFocus();
 }
-exports.onCreatingView = function(args) {
+exports.onCreatingView = function(callback, args) {
   var appContext = app.android.context;
   var cameraManager = appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
   var cameras = cameraManager.getCameraIdList();
+  wrappedCallback = zonedCallback(callback);
   for (var index = 0; index < cameras.length; index++) {
       var currentCamera = cameras[index];
       var currentCameraSpecs = cameraManager.getCameraCharacteristics(currentCamera);
@@ -267,6 +269,7 @@ var mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListene
     },
 
     onSurfaceTextureUpdated: function(texture) {
+      wrappedCallback();
         // console.log("onSurfaceTexturUpdated");
     },
 
