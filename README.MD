@@ -45,3 +45,11 @@ Live Camera | Yes | Yes
 Rotation Sensor | Yes | Yes
 Stitching | No | No
 Data | No | No
+
+#### Notes:
+
+Endings are CRLF because the project was developed in Windows. If you're working on Mac or Linux, and is encountering line ending issues, use:
+$ git config --global core.autocrlf input
+and checkout again. I think this could be an issue because I kept getting this when committing to git:
+https://stackoverflow.com/questions/5834014/lf-will-be-replaced-by-crlf-in-git-what-is-that-and-is-it-important
+

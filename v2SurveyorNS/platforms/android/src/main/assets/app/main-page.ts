@@ -10,11 +10,23 @@ import { HelloWorldModel } from './main-view-model';
 import * as cameraPreview from './nativescript-camera-preview/nativescript-camera-preview';
 import * as rotVector from "./nativescript-rotation-vector/index";
 import * as app from "application";
+import * as frameModule from "tns-core-modules/ui/frame";
+import * as animation from "tns-core-modules/ui/animation";
+
+let crosshair :any;
 
 export function onLoaded(args: EventData) {
   cameraPreview.onLoaded(args);
+  let myPage = <Page>args.object;
+  crosshair = myPage.getViewById("crosshair");
+
   rotVector.startRotUpdates(function(data) {
       console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      crosshair.animate({
+        rotate: -data.z,
+        duration: 0,
+        delay: 0
+      });
   });
 }
 export function onCreatingView(args: EventData) {
@@ -47,7 +59,7 @@ export function navigatingTo(args: EventData) {
 
 //TODO: Camera onResume, when it's lost. FYI: https://docs.nativescript.org/core-concepts/application-lifecycle
 app.on(app.resumeEvent, function(args) {
-  onCreatingView(args);
+  //onCreatingView(args);
 });
 app.on(app.suspendEvent, function(args) {
   rotVector.stopRotUpdates();

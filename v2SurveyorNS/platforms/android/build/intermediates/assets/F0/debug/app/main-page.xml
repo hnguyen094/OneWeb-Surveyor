@@ -16,7 +16,7 @@
         <Button id="capturebtn" text="Capture" tap="onTakeShot()" class="btn btn-primary"/>
       </AbsoluteLayout>
       <AbsoluteLayout horizontalAlignment="center" verticalAlignment="center">
-        <Image src="res://circle-arrow" stretch="none" />
+        <Image id="crosshair" src="res://circlearrow" stretch="aspectFit" width="100%" height="200%"/>
       </AbsoluteLayout>
     </GridLayout>
 </Page>

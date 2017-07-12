@@ -10,11 +10,22 @@ import { HelloWorldModel } from './main-view-model';
 import * as cameraPreview from './nativescript-camera-preview/nativescript-camera-preview';
 import * as rotVector from "./nativescript-rotation-vector/index";
 import * as app from "application";
+import * as frameModule from "tns-core-modules/ui/frame";
+import * as animation from "tns-core-modules/ui/animation";
+
+let crosshair :any;
 
 export function onLoaded(args: EventData) {
   cameraPreview.onLoaded(args);
+  let myPage = <Page>args.object;
+  crosshair = myPage.getViewById("crosshair");
+
   rotVector.startRotUpdates(function(data) {
       console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      crosshair.animate({
+        rotate: -data.z,
+        duration: 0.01
+      });
   });
 }
 export function onCreatingView(args: EventData) {
