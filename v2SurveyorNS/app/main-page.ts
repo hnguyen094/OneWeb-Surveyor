@@ -57,7 +57,7 @@ export function onCreatingView(args: EventData) {
       rotate: -z,
       duration: 0
     });
-  },args);
+  },1920, 1080, args);
 }
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
