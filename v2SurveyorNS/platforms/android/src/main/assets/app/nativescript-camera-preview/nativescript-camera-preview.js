@@ -22,8 +22,18 @@ var STATE_PICTURE_TAKEN = 4;
 var mState = STATE_PREVIEW;
 var wrappedCallback;
 
+const REQUEST_IMAGE_CAPTURE = 3453;
+const REQUEST_REQUIRED_PERMISSIONS = 1234;
+
 var app = require('application');
 var common = require('./nativescript-camera-preview-common');
+
+exports.requestPermissions = function () {
+    if (android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != android.content.pm.PackageManager.PERMISSION_GRANTED ||
+        android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.CAMERA) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+        android.support.v4.app.ActivityCompat.requestPermissions(app.android.currentContext, [android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE], REQUEST_REQUIRED_PERMISSIONS);
+    }
+};
 
 exports.onLoaded = common.onLoaded;
 var lockFocus = function() { //TODO: could be error with private/scope
@@ -64,9 +74,8 @@ var createCameraPreviewSession = function() {
     }
 
     var texture = mTextureView.getSurfaceTexture();
-
     // We configure the size of default buffer to be the size of camera preview we want.
-    // texture.setDefaultBufferSize(800, 480);
+    // texture.setDefaultBufferSize(1080, 1920);
 
     // This is the output Surface we need to start preview.
     var surface = new android.view.Surface(texture);
@@ -103,7 +112,7 @@ exports.onCreatingView = function(callback, args) {
       // get all available sizes ad set the format
       var map = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
       var format = map.getOutputSizes(android.graphics.ImageFormat.JPEG);
-      // console.log("Format: " + format + " " + format.length + " " + format[4]);
+      console.log("Format: " + format + " " + format.length + " " + format[4] + " " + format[0]);
 
       // we are taking not the largest possible but some of the 5th in the list of resolutions
       if (format && format !== null) {
@@ -129,17 +138,6 @@ exports.onCreatingView = function(callback, args) {
 
       } else if(android.support.v4.content.ContextCompat.checkSelfPermission(appContext, android.Manifest.permission.CAMERA) == android.content.pm.PackageManager.PERMISSION_DENIED) {
           console.log("NO PERMISIONS - about to try get them!!!"); // I am crashing here - wrong reference for shouldShowRequestPermissionRationale !?
-
-          // console.log(android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale(appContext, android.Manifest.permission.CAMERA).toString());
-
-          // if (android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale(appContext, android.Manifest.permission.CAMERA)){
-          //     console.log("No Permission to use the Camera services");
-          // }
-
-          // // var stringArray = Array.create(java.lang.String, 1);
-          // // stringArray[0] = android.Manifest.permission.CAMERA;
-          // console.log("Permison is about to be granted!!!!");
-          // android.support.v4.app.ActivityCompat.requestPermissions(appContext, [], REQUEST_CAMERA_RESULT);
       }
   } else {
       cameraManager.openCamera(mCameraId, mStateCallBack, mBackgroundHandler);

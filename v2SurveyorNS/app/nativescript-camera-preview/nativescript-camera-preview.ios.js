@@ -3,6 +3,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var output;
 var common = require('./nativescript-camera-preview-common');
 
+exports.requestPermissions = function () {
+    var authStatus = PHPhotoLibrary.authorizationStatus();
+    if (authStatus === 0) {
+        PHPhotoLibrary.requestAuthorization(function (auth) {
+            if (auth === 3) {
+                if (trace.isEnabled()) {
+                    trace.write("Application can access photo library assets.", trace.categories.Debug);
+                }
+                return;
+            }
+        });
+    }
+    else if (authStatus !== 3) {
+        if (trace.isEnabled()) {
+            trace.write("Application can not access photo library assets.", trace.categories.Debug);
+        }
+    }
+};
+
 exports.onLoaded = common.onLoaded;
 
 exports.onTakeShot = function(args) {
