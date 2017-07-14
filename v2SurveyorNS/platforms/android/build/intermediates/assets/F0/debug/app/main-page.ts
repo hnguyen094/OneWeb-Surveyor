@@ -12,12 +12,34 @@ import * as rotVector from "./nativescript-rotation-vector/index";
 import * as app from "application";
 import * as frameModule from "tns-core-modules/ui/frame";
 import * as animation from "tns-core-modules/ui/animation";
+import * as platform from "platform";
 
 
 let crosshair :any;
 let x,y,z;
 
+export function showSideDrawer(args: EventData) {
+    console.log("Show SideDrawer tapped.");
+}
+
 export function onLoaded(args: EventData) {
+  var View :any = android.view.View;
+
+  if (app.android && platform.device.sdkVersion >= '21') {
+      var window = app.android.startActivity.getWindow();
+      // set the status bar to Color.Transparent
+      window.setStatusBarColor(0x000000);
+
+      var decorView = window.getDecorView();
+      decorView.setSystemUiVisibility(
+          View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+          | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+          | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+          | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+          | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+          | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+  }
+  cameraPreview.requestPermissions();
   cameraPreview.onLoaded(args);
   let myPage = <Page>args.object;
   crosshair = myPage.getViewById("crosshair");
@@ -35,7 +57,7 @@ export function onCreatingView(args: EventData) {
       rotate: -z,
       duration: 0
     });
-  },args);
+  }, 5344, 3006, args);
 }
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);

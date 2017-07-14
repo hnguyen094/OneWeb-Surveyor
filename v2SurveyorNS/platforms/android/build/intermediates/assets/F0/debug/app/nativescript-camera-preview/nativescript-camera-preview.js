@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var utilsModule = require("tns-core-modules/utils/utils");
 var mCameraId;
 var mCaptureSession;
 var mCameraDevice;
@@ -13,17 +14,37 @@ var mPreviewRequest;
 var mImageReader;
 var mCaptureCallback;
 var mFile;
+// var mPreviewSize;
 
-var STATE_PREVIEW = 0;
-var STATE_WAITING_LOCK = 1;
-var STATE_WAITING_PRECAPTURE = 2;
-var STATE_WAITING_NON_PRECAPTURE = 3;
-var STATE_PICTURE_TAKEN = 4;
+const STATE_PREVIEW = 0;
+const STATE_WAITING_LOCK = 1;
+const STATE_WAITING_PRECAPTURE = 2;
+const STATE_WAITING_NON_PRECAPTURE = 3;
+const STATE_PICTURE_TAKEN = 4;
 var mState = STATE_PREVIEW;
+/**
+ * Max preview width that is guaranteed by Camera2 API
+ */
+const MAX_PREVIEW_WIDTH = 1920;
+/**
+ * Max preview height that is guaranteed by Camera2 API
+ */
+const MAX_PREVIEW_HEIGHT = 1080;
+
 var wrappedCallback;
+
+const REQUEST_IMAGE_CAPTURE = 3453;
+const REQUEST_REQUIRED_PERMISSIONS = 1234;
 
 var app = require('application');
 var common = require('./nativescript-camera-preview-common');
+
+exports.requestPermissions = function () {
+    if (android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != android.content.pm.PackageManager.PERMISSION_GRANTED ||
+        android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.CAMERA) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+        android.support.v4.app.ActivityCompat.requestPermissions(app.android.currentContext, [android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE], REQUEST_REQUIRED_PERMISSIONS);
+    }
+};
 
 exports.onLoaded = common.onLoaded;
 var lockFocus = function() { //TODO: could be error with private/scope
@@ -64,9 +85,8 @@ var createCameraPreviewSession = function() {
     }
 
     var texture = mTextureView.getSurfaceTexture();
-
     // We configure the size of default buffer to be the size of camera preview we want.
-    // texture.setDefaultBufferSize(800, 480);
+    // texture.setDefaultBufferSize(1920, 1440);
 
     // This is the output Surface we need to start preview.
     var surface = new android.view.Surface(texture);
@@ -83,7 +103,7 @@ exports.onTakeShot = function(args) {
   console.log("onTakeShot");
   lockFocus();
 }
-exports.onCreatingView = function(callback, args) {
+exports.onCreatingView = function(callback, width, height, args) {
   var appContext = app.android.context;
   var cameraManager = appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
   var cameras = cameraManager.getCameraIdList();
@@ -91,7 +111,6 @@ exports.onCreatingView = function(callback, args) {
   for (var index = 0; index < cameras.length; index++) {
       var currentCamera = cameras[index];
       var currentCameraSpecs = cameraManager.getCameraCharacteristics(currentCamera);
-
       // get available lenses and set the camera-type (front or back)
       var facing = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.LENS_FACING);
 
@@ -103,8 +122,13 @@ exports.onCreatingView = function(callback, args) {
       // get all available sizes ad set the format
       var map = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
       var format = map.getOutputSizes(android.graphics.ImageFormat.JPEG);
-      // console.log("Format: " + format + " " + format.length + " " + format[4]);
-
+      console.log("Format: " + format + " " + format.length + " " + format[0] + " " + format[1]+ " " + format[2]+ " " + format[3]+ " " + format[4]);
+      // For still image captures, we use the largest available size.
+      let largest = java.util.Collections.max(
+        java.util.Arrays.asList(map.getOutputSizes(android.graphics.ImageFormat.JPEG)),
+          new CompareSizesByArea());
+      mImageReader = android.media.ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
+        android.graphics.ImageFormat.JPEG, /*maxImages*/2);
       // we are taking not the largest possible but some of the 5th in the list of resolutions
       if (format && format !== null) {
           var dimensions = format[0].toString().split('x');
@@ -115,6 +139,22 @@ exports.onCreatingView = function(callback, args) {
           mImageReader = new android.media.ImageReader.newInstance(largestWidth, largestHeight, android.graphics.ImageFormat.JPEG, /*maxImages*/2);
           mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, mBackgroundHandler);
       }
+      let displaySize = new android.graphics.Point();
+      let maxPreviewWidth = displaySize.y;
+      let maxPreviewHeight = displaySize.x;
+      if(maxPreviewWidth > MAX_PREVIEW_WIDTH) {
+        maxPreviewWidth = MAX_PREVIEW_WIDTH;
+      }
+      if (maxPreviewHeight > MAX_PREVIEW_HEIGHT) {
+          maxPreviewHeight = MAX_PREVIEW_HEIGHT;
+      }
+      // Danger, W.R.! Attempting to use too large a preview size could  exceed the camera
+      // bus' bandwidth limitation, resulting in gorgeous previews but the storage of
+      // garbage capture data.
+      /*mPreviewSize = chooseOptimalSize(map.getOutputSizes(android.graphics.SurfaceTexture.class),
+              rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
+              maxPreviewHeight, largest);
+      */
   }
   mStateCallBack = new MyStateCallback();
 
@@ -129,17 +169,6 @@ exports.onCreatingView = function(callback, args) {
 
       } else if(android.support.v4.content.ContextCompat.checkSelfPermission(appContext, android.Manifest.permission.CAMERA) == android.content.pm.PackageManager.PERMISSION_DENIED) {
           console.log("NO PERMISIONS - about to try get them!!!"); // I am crashing here - wrong reference for shouldShowRequestPermissionRationale !?
-
-          // console.log(android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale(appContext, android.Manifest.permission.CAMERA).toString());
-
-          // if (android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale(appContext, android.Manifest.permission.CAMERA)){
-          //     console.log("No Permission to use the Camera services");
-          // }
-
-          // // var stringArray = Array.create(java.lang.String, 1);
-          // // stringArray[0] = android.Manifest.permission.CAMERA;
-          // console.log("Permison is about to be granted!!!!");
-          // android.support.v4.app.ActivityCompat.requestPermissions(appContext, [], REQUEST_CAMERA_RESULT);
       }
   } else {
       cameraManager.openCamera(mCameraId, mStateCallBack, mBackgroundHandler);
@@ -149,8 +178,60 @@ exports.onCreatingView = function(callback, args) {
 
   mTextureView = new android.view.TextureView(app.android.context);
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
+  mTextureView.setMeasuredDimension(1920, 1440);
   args.view = mTextureView;
 }
+
+//TODO: Choose optimal size function : https://github.com/googlesamples/android-Camera2Basic/blob/master/Application/src/main/java/com/example/android/camera2basic/Camera2BasicFragment.java#L384
+var chooseOptimalSize = function (choices, textureViewWidth,
+  textureViewHeight, maxWidth, maxHeight, aspectRatio) {
+    // Collect the supported resolutions that are at least as big as the preview Surface
+    let bigEnough = new java.util.ArrayList();
+    const x = aspectRatio.getWidth();
+    const y = aspectRatio.getHeight();
+    const ratio = y / x;
+    for (let index = 0; index < choices.length; index++) {
+      const optionRatio = choices[index].getHeight() / choices[index].getWidth();
+      if (ratio == optionRatio) {
+        bigEnough.add(choices[index]);
+      }
+    }
+
+    // Pick the smallest of those big enough. If there is no one big enough, pick the
+     // largest of those not big enough.
+    if (bigEnough.size() > 0) {
+      return java.util.Collections.min(bigEnough, new CompareSizesByArea());
+    } else if (notBigEnough.size() > 0) {
+      return java.util.Collections.max(notBigEnough, new CompareSizesByArea());
+    } else {
+      console.log("Couldn't find any suitable preview size");
+      return choices[0];
+    }
+}
+
+var constructorCalled = false;
+var CompareSizesByArea = java.lang.Object.extend({
+  interfaces: [java.util.Comparator],
+  comparing: function() {},
+  comparingDouble: function() {},
+  comparingInt: function() {},
+  comparingLong: function() {},
+  equals: function() {},
+  naturalOrder: function() {},
+  nullsFirst: function() {},
+  nullsLast: function() {},
+  reversed: function() {},
+  reverseOrder: function() {},
+  thenComparing: function() {},
+  thenComparingDouble: function() {},
+  thenComparingInt: function() {},
+  thenComparingLong: function() {},
+  compare: function(lhs, rhs) {
+    return java.lang.Long.signum(lhs.getWidth() * lhs.getHeight() -
+          rhs.getWidth() * rhs.getHeight());
+  }
+});
+
 // from Java ; public static abstract class
 var MyCameraCaptureSessionStateCallback = android.hardware.camera2.CameraCaptureSession.StateCallback.extend({
     onConfigured: function(cameraCaptureSession) {

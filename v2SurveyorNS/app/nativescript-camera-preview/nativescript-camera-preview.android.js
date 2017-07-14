@@ -14,14 +14,14 @@ var mPreviewRequest;
 var mImageReader;
 var mCaptureCallback;
 var mFile;
-var mPreviewSize;
+// var mPreviewSize;
 
 const STATE_PREVIEW = 0;
 const STATE_WAITING_LOCK = 1;
 const STATE_WAITING_PRECAPTURE = 2;
 const STATE_WAITING_NON_PRECAPTURE = 3;
 const STATE_PICTURE_TAKEN = 4;
-const mState = STATE_PREVIEW;
+var mState = STATE_PREVIEW;
 /**
  * Max preview width that is guaranteed by Camera2 API
  */
@@ -86,7 +86,7 @@ var createCameraPreviewSession = function() {
 
     var texture = mTextureView.getSurfaceTexture();
     // We configure the size of default buffer to be the size of camera preview we want.
-    texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
+    // texture.setDefaultBufferSize(1920, 1440);
 
     // This is the output Surface we need to start preview.
     var surface = new android.view.Surface(texture);
@@ -122,7 +122,7 @@ exports.onCreatingView = function(callback, width, height, args) {
       // get all available sizes ad set the format
       var map = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
       var format = map.getOutputSizes(android.graphics.ImageFormat.JPEG);
-      console.log("Format: " + format + " " + format.length + " " + format[4] + " " + format[0]);
+      console.log("Format: " + format + " " + format.length + " " + format[0] + " " + format[1]+ " " + format[2]+ " " + format[3]+ " " + format[4]);
       // For still image captures, we use the largest available size.
       let largest = java.util.Collections.max(
         java.util.Arrays.asList(map.getOutputSizes(android.graphics.ImageFormat.JPEG)),
@@ -140,8 +140,6 @@ exports.onCreatingView = function(callback, width, height, args) {
           mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, mBackgroundHandler);
       }
       let displaySize = new android.graphics.Point();
-      let rotatedPreviewWidth = width;
-      let rotatedPreviewHeight = height;
       let maxPreviewWidth = displaySize.y;
       let maxPreviewHeight = displaySize.x;
       if(maxPreviewWidth > MAX_PREVIEW_WIDTH) {
@@ -153,9 +151,10 @@ exports.onCreatingView = function(callback, width, height, args) {
       // Danger, W.R.! Attempting to use too large a preview size could  exceed the camera
       // bus' bandwidth limitation, resulting in gorgeous previews but the storage of
       // garbage capture data.
-      mPreviewSize = chooseOptimalSize(map.getOutputSizes(android.graphics.SurfaceTexture.class),
+      /*mPreviewSize = chooseOptimalSize(map.getOutputSizes(android.graphics.SurfaceTexture.class),
               rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
               maxPreviewHeight, largest);
+      */
   }
   mStateCallBack = new MyStateCallback();
 
@@ -179,6 +178,7 @@ exports.onCreatingView = function(callback, width, height, args) {
 
   mTextureView = new android.view.TextureView(app.android.context);
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
+  mTextureView.setMeasuredDimension(1920, 1440);
   args.view = mTextureView;
 }
 

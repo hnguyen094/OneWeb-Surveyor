@@ -1,0 +1,21 @@
+ActionBar {
+    background-color:  #3C5AFD;
+    color: white;
+}
+
+@keyframes defaultScale {
+  from {
+    transform: scaleX(1);
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleX(2);
+    transform: scaleY(2);
+  }
+}
+
+#crosshair {
+  animation-name: defaultScale;
+  animation-duration: 0s;
+  animation-fill-mode: forwards;
+}

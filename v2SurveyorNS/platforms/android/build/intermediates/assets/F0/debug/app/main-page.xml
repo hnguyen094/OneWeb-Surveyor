@@ -1,9 +1,12 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded" navigatingTo="navigatingTo" class="page" actionBarHidden="false">
-    <Page.actionBar>
-        <ActionBar title="{N} Surveyor" icon="" class="action-bar">
-          <NavigationButton text="Back" icon="" tap="" />
-        </ActionBar>
-    </Page.actionBar>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded" navigatingTo="navigatingTo" class="page" actionBarHidden="true">
+  <ActionBar title="{N} Surveyor">
+    <android>
+      <NavigationButton icon="res://ic_menu" tap="showSlideout" />
+    </android>
+    <ios>
+      <ActionItem icon="res://ic_menu" ios.position="left" tap="showSideDrawer" />
+    </ios>
+  </ActionBar>
 <!--
     You can learn more about NativeScript layouts at
     https://docs.nativescript.org/ui/layout-containers
@@ -12,13 +15,9 @@
     -->
     <GridLayout>
       <StackLayout>
-        <Placeholder creatingView="onCreatingView" id="placeholder-view" />
+        <Placeholder creatingView="onCreatingView" id="placeholder-view"/>
       </StackLayout>
-      <AbsoluteLayout horizontalAlignment="center" verticalAlignment="bottom">
-        <Button id="capturebtn" text="Capture" tap="onTakeShot" class="btn btn-primary"/>
-      </AbsoluteLayout>
-      <AbsoluteLayout horizontalAlignment="center" verticalAlignment="center">
-        <Image id="crosshair" src="res://circlearrow" stretch="aspectFit"/>
-      </AbsoluteLayout>
+      <Button id="capturebtn" text="Capture" tap="onTakeShot" class="btn btn-primary" horizontalAlignment="center" verticalAlignment="bottom"/>
+      <Image id="crosshair" src="res://circlearrow" stretch="aspectFill" horizontalAlignment="center" verticalAlignment="center"/>
     </GridLayout>
 </Page>
