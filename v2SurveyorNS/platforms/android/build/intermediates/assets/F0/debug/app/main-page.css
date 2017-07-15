@@ -3,14 +3,12 @@ ActionBar {
     color: white;
 }
 
-@keyframes defaultScale {
+/*@keyframes defaultScale {
   from {
-    transform: scaleX(1);
-    transform: scaleY(1);
+    transform: scale(1, 1);
   }
   to {
-    transform: scaleX(2);
-    transform: scaleY(2);
+    transform: scale(2, 2);
   }
 }
 
@@ -18,4 +16,4 @@ ActionBar {
   animation-name: defaultScale;
   animation-duration: 0s;
   animation-fill-mode: forwards;
-}
+}*/

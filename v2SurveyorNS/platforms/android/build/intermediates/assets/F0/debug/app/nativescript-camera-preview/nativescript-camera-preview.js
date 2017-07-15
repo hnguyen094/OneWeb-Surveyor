@@ -86,7 +86,7 @@ var createCameraPreviewSession = function() {
 
     var texture = mTextureView.getSurfaceTexture();
     // We configure the size of default buffer to be the size of camera preview we want.
-    // texture.setDefaultBufferSize(1920, 1440);
+    // texture.setDefaultSize(1920, 1440);
 
     // This is the output Surface we need to start preview.
     var surface = new android.view.Surface(texture);
@@ -103,7 +103,7 @@ exports.onTakeShot = function(args) {
   console.log("onTakeShot");
   lockFocus();
 }
-exports.onCreatingView = function(callback, width, height, args) {
+exports.onCreatingView = function(callback, args) {
   var appContext = app.android.context;
   var cameraManager = appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
   var cameras = cameraManager.getCameraIdList();
@@ -178,7 +178,6 @@ exports.onCreatingView = function(callback, width, height, args) {
 
   mTextureView = new android.view.TextureView(app.android.context);
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
-  mTextureView.setMeasuredDimension(1920, 1440);
   args.view = mTextureView;
 }
 
@@ -339,7 +338,7 @@ var mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListene
         // openCamera(width, height);
     },
 
-    onSurfaceTextureSizeChanged: function(texture, width, height) {
+    onSurfaceTextureSizeChanged: function(texture) {
         console.log('onSurfaceTextureSizeChanged');
         // configureTransform(width, height);
     },

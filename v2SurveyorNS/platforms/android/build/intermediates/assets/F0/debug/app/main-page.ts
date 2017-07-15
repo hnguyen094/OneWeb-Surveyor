@@ -24,26 +24,29 @@ export function showSideDrawer(args: EventData) {
 
 export function onLoaded(args: EventData) {
   var View :any = android.view.View;
+  //
+  // if (app.android && platform.device.sdkVersion >= '21') {
+  //     var window = app.android.startActivity.getWindow();
+  //     // set the status bar to Color.Transparent
+  //     window.setStatusBarColor(0x000000);
+  //     var decorView = window.getDecorView();
+  //     decorView.setSystemUiVisibility(
+  //         View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+  //         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+  //         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+  //         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+  //         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+  //         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+  // }
 
-  if (app.android && platform.device.sdkVersion >= '21') {
-      var window = app.android.startActivity.getWindow();
-      // set the status bar to Color.Transparent
-      window.setStatusBarColor(0x000000);
-
-      var decorView = window.getDecorView();
-      decorView.setSystemUiVisibility(
-          View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-          | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-          | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-          | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-          | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-          | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-  }
   cameraPreview.requestPermissions();
   cameraPreview.onLoaded(args);
   let myPage = <Page>args.object;
   crosshair = myPage.getViewById("crosshair");
-
+  crosshair.animate({
+    scale: {x: 2.25, y: 2.25},
+    duration: 0
+  });
   rotVector.startRotUpdates(function(data) {
       //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
@@ -57,7 +60,7 @@ export function onCreatingView(args: EventData) {
       rotate: -z,
       duration: 0
     });
-  }, 5344, 3006, args);
+  }, args);
 }
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);

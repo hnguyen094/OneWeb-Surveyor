@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded" navigatingTo="navigatingTo" class="page" actionBarHidden="true">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded" navigatingTo="navigatingTo" class="page" actionBarHidden="false">
   <ActionBar title="{N} Surveyor">
     <android>
       <NavigationButton icon="res://ic_menu" tap="showSlideout" />
