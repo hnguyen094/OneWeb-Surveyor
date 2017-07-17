@@ -176,7 +176,7 @@ exports.onCreatingView = function(callback, args) {
 
   // cameraManager.openCamera(mCameraId, mStateCallBack, mBackgroundHandler);
 
-  mTextureView = new AutoFitTextureView(app.android.context);
+  mTextureView = new AutoFitTextureView(app.android.context, null);
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
   args.view = mTextureView;
 }
@@ -228,7 +228,7 @@ var CompareSizesByArea = java.lang.Object.extend({
   compare: function(lhs, rhs) {
     return java.lang.Long.signum(lhs.getWidth() * lhs.getHeight() -
           rhs.getWidth() * rhs.getHeight());
-  }
+  },
   init: function() {
     CompareSizesByArea_constructorCalled = true;
   }
@@ -239,9 +239,9 @@ let mRatioWidth = 0;
 let mRatioHeight= 0;
 var AutoFitTextureView = android.view.TextureView.extend({
     //constructor
-    init: function(context) {
+    init: function(context, value) {
         AutoFitTextureView_constructorCalled = true;
-        this.super.init(context, null);
+        // this.super.init(context, null);
     },
     setAspectRatio: function(width, height) {
         if (width < 0 || height < 0) {
@@ -253,16 +253,22 @@ var AutoFitTextureView = android.view.TextureView.extend({
     },
     onMeasure: function(widthMeasureSpec, heightMeasureSpec) {
         this.super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        let width = this.super.getMeasuredWidth();
+        let height = this.super.getMeasuredHeight();
+        console.log("width: " + width + " height: " + height);
         if (0 == mRatioWidth || 0 == mRatioHeight) {
-          setMeasuredDimension(width, height);
+          this.super.setMeasuredDimension(width, height);
         } else {
           if (width < height * mRatioWidth / mRatioHeight) {
-            setMeasuredDimension(width, width * mRatioHeight / mRatioWidth);
+            this.super.setMeasuredDimension(width, width * mRatioHeight / mRatioWidth);
           } else {
-            setMeasuredDimension(height * mRatioWidth / mRatioHeight, height);
+            this.super.setMeasuredDimension(height * mRatioWidth / mRatioHeight, height);
           }
         }
-    }
+    },
+    setMeasuredDimension: function(width, height) {},
+    MeasureSpec: function(measurement) {}
+
 });
 
 // from Java ; public static abstract class
