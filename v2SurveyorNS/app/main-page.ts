@@ -60,7 +60,7 @@ export function onCreatingView(args: EventData) {
       rotate: -z,
       duration: 0.01
     });
-  }, 1920, 1080, args);
+  }, 2560, 1440, args);
 }
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);

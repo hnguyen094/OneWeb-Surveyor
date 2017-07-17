@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var utilsModule = require("tns-core-modules/utils/utils");
+var platformModule = require("tns-core-modules/platform");
 var mCameraId;
 var mCaptureSession;
 var mCameraDevice;
@@ -25,11 +26,11 @@ var mState = STATE_PREVIEW;
 /**
  * Max preview width that is guaranteed by Camera2 API
  */
-const MAX_PREVIEW_WIDTH = 1920;
+const MAX_PREVIEW_WIDTH = 2560;
 /**
  * Max preview height that is guaranteed by Camera2 API
  */
-const MAX_PREVIEW_HEIGHT = 1080;
+const MAX_PREVIEW_HEIGHT = 1440;
 
 var wrappedCallback;
 
@@ -141,9 +142,8 @@ exports.onCreatingView = function(callback, width, height, args) {
           mImageReader = new android.media.ImageReader.newInstance(largestWidth, largestHeight, android.graphics.ImageFormat.JPEG, /*maxImages*/2);
           mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, mBackgroundHandler);
       }
-      let displaySize = new android.graphics.Point();
-      let maxPreviewWidth = displaySize.y;
-      let maxPreviewHeight = displaySize.x;
+      let maxPreviewWidth = platformModule.screen.mainScreen.widthPixels;
+      let maxPreviewHeight = platformModule.screen.mainScreen.heightPixels;
       if(maxPreviewWidth > MAX_PREVIEW_WIDTH) {
         maxPreviewWidth = MAX_PREVIEW_WIDTH;
       }
@@ -189,6 +189,8 @@ var chooseOptimalSize = function (choices, textureViewWidth,
     // Collect the supported resolutions that are at least as big as the preview Surface
     let bigEnough = new java.util.ArrayList();
     let notBigEnough = new java.util.ArrayList();
+    //const x = aspectRatio.getWidth();
+    //const y = aspectRatio.getHeight();
     const x = textureViewWidth;
     const y = textureViewHeight;
     const ratio = y / x;
@@ -248,7 +250,6 @@ var AutoFitTextureView = android.view.TextureView.extend({
     },
     onMeasure: function(widthMeasureSpec, heightMeasureSpec) {
         this.super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        this.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
         let width = this.super.getMeasuredWidth();
         let height = this.super.getMeasuredHeight();
         console.log("width: " + width + " height: " + height + " ratioWidth: " + mRatioWidth + " ratioHeight: " + mRatioHeight);
