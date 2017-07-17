@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded" navigatingTo="navigatingTo" class="page" actionBarHidden="false">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded" navigatingTo="navigatingTo" class="page" actionBarHidden="true">
   <ActionBar title="{N} Surveyor">
     <android>
       <NavigationButton icon="res://ic_menu" tap="showSlideout" />
@@ -15,9 +15,10 @@
     -->
     <GridLayout>
       <StackLayout>
-        <Placeholder creatingView="onCreatingView" id="placeholder-view"/>
+        <Placeholder creatingView="onCreatingView" id="placeholder-view">
+          <Image id="crosshair" src="res://circlearrow" stretch="aspectFill" horizontalAlignment="center" verticalAlignment="center"/>
+        </Placeholder>
       </StackLayout>
       <Button id="capturebtn" text="Capture" tap="onTakeShot" class="btn btn-primary" horizontalAlignment="center" verticalAlignment="bottom"/>
-      <Image id="crosshair" src="res://circlearrow" stretch="aspectFill" horizontalAlignment="center" verticalAlignment="center"/>
     </GridLayout>
 </Page>

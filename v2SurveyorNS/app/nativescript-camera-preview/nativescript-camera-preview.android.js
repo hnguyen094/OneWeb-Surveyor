@@ -14,7 +14,7 @@ var mPreviewRequest;
 var mImageReader;
 var mCaptureCallback;
 var mFile;
-// var mPreviewSize;
+var mPreviewSize;
 
 const STATE_PREVIEW = 0;
 const STATE_WAITING_LOCK = 1;
@@ -103,8 +103,9 @@ exports.onTakeShot = function(args) {
   console.log("onTakeShot");
   lockFocus();
 }
-exports.onCreatingView = function(callback, args) {
+exports.onCreatingView = function(callback, width, height, args) {
   var appContext = app.android.context;
+  mTextureView = new AutoFitTextureView(appContext, null);
   var cameraManager = appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
   var cameras = cameraManager.getCameraIdList();
   wrappedCallback = zonedCallback(callback);
@@ -130,6 +131,7 @@ exports.onCreatingView = function(callback, args) {
       mImageReader = android.media.ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
         android.graphics.ImageFormat.JPEG, /*maxImages*/2);
       // we are taking not the largest possible but some of the 5th in the list of resolutions
+      console.log("largest is " + largest);
       if (format && format !== null) {
           var dimensions = format[0].toString().split('x');
           var largestWidth = +dimensions[0];
@@ -151,10 +153,10 @@ exports.onCreatingView = function(callback, args) {
       // Danger, W.R.! Attempting to use too large a preview size could  exceed the camera
       // bus' bandwidth limitation, resulting in gorgeous previews but the storage of
       // garbage capture data.
-      /*mPreviewSize = chooseOptimalSize(map.getOutputSizes(android.graphics.SurfaceTexture.class),
-              rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
+      mPreviewSize = chooseOptimalSize(map.getOutputSizes(android.graphics.SurfaceTexture.class),
+              width, height, maxPreviewWidth,
               maxPreviewHeight, largest);
-      */
+      mTextureView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
   }
   mStateCallBack = new MyStateCallback();
 
@@ -176,7 +178,7 @@ exports.onCreatingView = function(callback, args) {
 
   // cameraManager.openCamera(mCameraId, mStateCallBack, mBackgroundHandler);
 
-  mTextureView = new AutoFitTextureView(app.android.context, null);
+
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
   args.view = mTextureView;
 }
@@ -249,13 +251,13 @@ var AutoFitTextureView = android.view.TextureView.extend({
         }
         mRatioWidth = width;
         mRatioHeight= height;
-        requestLayout();
+        this.super.requestLayout();
     },
     onMeasure: function(widthMeasureSpec, heightMeasureSpec) {
         this.super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         let width = this.super.getMeasuredWidth();
         let height = this.super.getMeasuredHeight();
-        console.log("width: " + width + " height: " + height);
+        console.log("width: " + width + " height: " + height + " ratioWidth: " + mRatioWidth + " ratioHeight: " + mRatioHeight);
         if (0 == mRatioWidth || 0 == mRatioHeight) {
           this.super.setMeasuredDimension(width, height);
         } else {
