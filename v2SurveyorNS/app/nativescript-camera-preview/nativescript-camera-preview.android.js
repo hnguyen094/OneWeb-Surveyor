@@ -151,10 +151,10 @@ exports.onCreatingView = function(callback, args) {
       // Danger, W.R.! Attempting to use too large a preview size could  exceed the camera
       // bus' bandwidth limitation, resulting in gorgeous previews but the storage of
       // garbage capture data.
-      /*mPreviewSize = chooseOptimalSize(map.getOutputSizes(android.graphics.SurfaceTexture.class),
+      mPreviewSize = chooseOptimalSize(map.getOutputSizes(android.graphics.SurfaceTexture.class),
               rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
               maxPreviewHeight, largest);
-      */
+      
   }
   mStateCallBack = new MyStateCallback();
 
