@@ -151,10 +151,10 @@ exports.onCreatingView = function(callback, args) {
       // Danger, W.R.! Attempting to use too large a preview size could  exceed the camera
       // bus' bandwidth limitation, resulting in gorgeous previews but the storage of
       // garbage capture data.
-      mPreviewSize = chooseOptimalSize(map.getOutputSizes(android.graphics.SurfaceTexture.class),
+      /*mPreviewSize = chooseOptimalSize(map.getOutputSizes(android.graphics.SurfaceTexture.class),
               rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
               maxPreviewHeight, largest);
-      
+      */
   }
   mStateCallBack = new MyStateCallback();
 
@@ -176,7 +176,7 @@ exports.onCreatingView = function(callback, args) {
 
   // cameraManager.openCamera(mCameraId, mStateCallBack, mBackgroundHandler);
 
-  mTextureView = new android.view.TextureView(app.android.context);
+  mTextureView = new AutoFitTextureView(app.android.context);
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
   args.view = mTextureView;
 }
@@ -208,7 +208,7 @@ var chooseOptimalSize = function (choices, textureViewWidth,
     }
 }
 
-var constructorCalled = false;
+var CompareSizesByArea_constructorCalled = false;
 var CompareSizesByArea = java.lang.Object.extend({
   interfaces: [java.util.Comparator],
   comparing: function() {},
@@ -229,6 +229,40 @@ var CompareSizesByArea = java.lang.Object.extend({
     return java.lang.Long.signum(lhs.getWidth() * lhs.getHeight() -
           rhs.getWidth() * rhs.getHeight());
   }
+  init: function() {
+    CompareSizesByArea_constructorCalled = true;
+  }
+});
+
+var AutoFitTextureView_constructorCalled = false;
+let mRatioWidth = 0;
+let mRatioHeight= 0;
+var AutoFitTextureView = android.view.TextureView.extend({
+    //constructor
+    init: function(context) {
+        AutoFitTextureView_constructorCalled = true;
+        this.super.init(context, null);
+    },
+    setAspectRatio: function(width, height) {
+        if (width < 0 || height < 0) {
+          console.log("error with aspect ratio function");
+        }
+        mRatioWidth = width;
+        mRatioHeight= height;
+        requestLayout();
+    },
+    onMeasure: function(widthMeasureSpec, heightMeasureSpec) {
+        this.super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if (0 == mRatioWidth || 0 == mRatioHeight) {
+          setMeasuredDimension(width, height);
+        } else {
+          if (width < height * mRatioWidth / mRatioHeight) {
+            setMeasuredDimension(width, width * mRatioHeight / mRatioWidth);
+          } else {
+            setMeasuredDimension(height * mRatioWidth / mRatioHeight, height);
+          }
+        }
+    }
 });
 
 // from Java ; public static abstract class
