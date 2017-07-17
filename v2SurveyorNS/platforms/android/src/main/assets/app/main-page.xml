@@ -15,10 +15,9 @@
     -->
     <GridLayout>
       <StackLayout>
-        <Placeholder creatingView="onCreatingView" id="placeholder-view">
-          <Image id="crosshair" src="res://circlearrow" stretch="aspectFill" horizontalAlignment="center" verticalAlignment="center"/>
-        </Placeholder>
+        <Placeholder creatingView="onCreatingView" id="placeholder-view"/>
       </StackLayout>
       <Button id="capturebtn" text="Capture" tap="onTakeShot" class="btn btn-primary" horizontalAlignment="center" verticalAlignment="bottom"/>
+      <Image id="crosshair" src="res://circlearrow" stretch="aspectFill" horizontalAlignment="center" verticalAlignment="center"/>
     </GridLayout>
 </Page>

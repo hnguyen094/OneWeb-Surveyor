@@ -43,10 +43,10 @@ export function onLoaded(args: EventData) {
   cameraPreview.onLoaded(args);
   let myPage = <Page>args.object;
   crosshair = myPage.getViewById("crosshair");
-  // crosshair.animate({
-  //   scale: {x: 2.25, y: 2.25},
-  //   duration: 0
-  // });
+  crosshair.animate({
+    scale: {x: 2.25, y: 2.25},
+    duration: 0
+  });
   rotVector.startRotUpdates(function(data) {
       //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
@@ -56,11 +56,11 @@ export function onLoaded(args: EventData) {
 }
 export function onCreatingView(args: EventData) {
   cameraPreview.onCreatingView(function() {
-    // crosshair.animate({
-    //   rotate: -z,
-    //   duration: 0.01
-    // });
-  }, 1080, 1920, args);
+    crosshair.animate({
+      rotate: -z,
+      duration: 0.01
+    });
+  }, 1920, 1080, args);
 }
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);

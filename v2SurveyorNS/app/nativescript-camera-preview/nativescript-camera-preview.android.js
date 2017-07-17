@@ -86,7 +86,7 @@ var createCameraPreviewSession = function() {
 
     var texture = mTextureView.getSurfaceTexture();
     // We configure the size of default buffer to be the size of camera preview we want.
-    // texture.setDefaultSize(1920, 1440);
+     texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
 
     // This is the output Surface we need to start preview.
     var surface = new android.view.Surface(texture);
@@ -109,7 +109,7 @@ exports.onCreatingView = function(callback, width, height, args) {
   var cameraManager = appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
   var cameras = cameraManager.getCameraIdList();
   wrappedCallback = zonedCallback(callback);
-  for (var index = 0; index < cameras.length; index++) {
+  for (var index = cameras.length-1; index >= 0; index--) {
       var currentCamera = cameras[index];
       var currentCameraSpecs = cameraManager.getCameraCharacteristics(currentCamera);
       // get available lenses and set the camera-type (front or back)
@@ -188,21 +188,28 @@ var chooseOptimalSize = function (choices, textureViewWidth,
   textureViewHeight, maxWidth, maxHeight, aspectRatio) {
     // Collect the supported resolutions that are at least as big as the preview Surface
     let bigEnough = new java.util.ArrayList();
-    const x = aspectRatio.getWidth();
-    const y = aspectRatio.getHeight();
+    let notBigEnough = new java.util.ArrayList();
+    const x = textureViewWidth;
+    const y = textureViewHeight;
     const ratio = y / x;
+    console.log("Ratio is " + ratio + " and texture sizes are: " + textureViewWidth + " " + textureViewHeight);
     for (let index = 0; index < choices.length; index++) {
-      const optionRatio = choices[index].getHeight() / choices[index].getWidth();
-      if (ratio == optionRatio) {
-        bigEnough.add(choices[index]);
+      console.log("Item #"+ index + " is " + choices[index]);
+      if(choices[index].getWidth() <= maxWidth && choices[index].getHeight() <=maxHeight && choices[index].getHeight() == choices[index].getWidth() * y/x) {
+        if (choices[index].getWidth() >= textureViewWidth && choices[index].getHeight() >= textureViewHeight) {
+          bigEnough.add(choices[index]);
+        } else {
+          notBigEnough.add(choices[index]);
+        }
       }
     }
-
     // Pick the smallest of those big enough. If there is no one big enough, pick the
      // largest of those not big enough.
     if (bigEnough.size() > 0) {
+      console.log("choosing ratio big " + java.util.Collections.min(bigEnough, new CompareSizesByArea()));
       return java.util.Collections.min(bigEnough, new CompareSizesByArea());
     } else if (notBigEnough.size() > 0) {
+      console.log("choosing ratio small " + java.util.Collections.max(notBigEnough, new CompareSizesByArea()));
       return java.util.Collections.max(notBigEnough, new CompareSizesByArea());
     } else {
       console.log("Couldn't find any suitable preview size");
@@ -213,20 +220,6 @@ var chooseOptimalSize = function (choices, textureViewWidth,
 var CompareSizesByArea_constructorCalled = false;
 var CompareSizesByArea = java.lang.Object.extend({
   interfaces: [java.util.Comparator],
-  comparing: function() {},
-  comparingDouble: function() {},
-  comparingInt: function() {},
-  comparingLong: function() {},
-  equals: function() {},
-  naturalOrder: function() {},
-  nullsFirst: function() {},
-  nullsLast: function() {},
-  reversed: function() {},
-  reverseOrder: function() {},
-  thenComparing: function() {},
-  thenComparingDouble: function() {},
-  thenComparingInt: function() {},
-  thenComparingLong: function() {},
   compare: function(lhs, rhs) {
     return java.lang.Long.signum(lhs.getWidth() * lhs.getHeight() -
           rhs.getWidth() * rhs.getHeight());
@@ -255,6 +248,7 @@ var AutoFitTextureView = android.view.TextureView.extend({
     },
     onMeasure: function(widthMeasureSpec, heightMeasureSpec) {
         this.super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        this.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
         let width = this.super.getMeasuredWidth();
         let height = this.super.getMeasuredHeight();
         console.log("width: " + width + " height: " + height + " ratioWidth: " + mRatioWidth + " ratioHeight: " + mRatioHeight);
