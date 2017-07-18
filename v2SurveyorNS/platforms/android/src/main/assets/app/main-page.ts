@@ -13,6 +13,7 @@ import * as app from "application";
 import * as frameModule from "tns-core-modules/ui/frame";
 import * as animation from "tns-core-modules/ui/animation";
 import * as platform from "platform";
+import * as orientation from "nativescript-screen-orientation";
 
 
 let crosshair :any;
@@ -24,7 +25,7 @@ export function showSideDrawer(args: EventData) {
 
 export function onLoaded(args: EventData) {
   var View :any = android.view.View;
-
+  orientation.setCurrentOrientation("portrait", () => {});
   if (app.android && platform.device.sdkVersion >= '21') {
       var window = app.android.startActivity.getWindow();
       // set the status bar to Color.Transparent
@@ -60,7 +61,7 @@ export function onCreatingView(args: EventData) {
       rotate: -z,
       duration: 0.01
     });
-  }, 2560, 1440, args);
+  }, args);
 }
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);

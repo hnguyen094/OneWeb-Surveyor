@@ -34,7 +34,7 @@ exports.onTakeShot = function(args) {
   });
 }
 
-exports.onCreatingView = function(callback, width, height, args) {
+exports.onCreatingView = function(callback, args) {
   var session = new AVCaptureSession();
   session.sessionPreset = AVCaptureSessionPreset1280x720;
   var wrappedCallback = zonedCallback(callback);
