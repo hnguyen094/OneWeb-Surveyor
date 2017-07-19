@@ -189,7 +189,7 @@ exports.onCreatingView = function(callback, args) {
   if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.LOLLIPOP_MR1){
       console.log("checking presmisions ....");
       if(android.support.v4.content.ContextCompat.checkSelfPermission(appContext, android.Manifest.permission.CAMERA) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
-          console.log("Permison already granted.");
+          console.log("Permission already granted.");
       } else if(android.support.v4.content.ContextCompat.checkSelfPermission(appContext, android.Manifest.permission.CAMERA) == android.content.pm.PackageManager.PERMISSION_DENIED) {
           console.log("Permission not granted.");
       }
@@ -216,7 +216,7 @@ const chooseOptimalSize = function (choices, textureViewWidth,
     const ratio = textureViewHeight / textureViewWidth;
     let bigEnough = new java.util.ArrayList();
     let notBigEnough = new java.util.ArrayList();
-    console.log("Ratio is " + ratio + " and texture sizes are: " + textureViewWidth + " " + textureViewHeight);
+    //console.log("Ratio is " + ratio + " and texture sizes are: " + textureViewWidth + " " + textureViewHeight);
     for(let i = 0; i < choices.length; i++) {
       if(choices[i].getHeight() <= maxWidth && choices[i].getWidth() <=maxHeight && choices[i].getWidth() == choices[i].getHeight() * ratio) {
         if (choices[i].getHeight() >= textureViewWidth && choices[i].getWidth() >= textureViewHeight) {
@@ -226,12 +226,11 @@ const chooseOptimalSize = function (choices, textureViewWidth,
         }
       }
     }
-    console.log("OK");
     if (bigEnough.size() > 0) {
-      console.log("Big " + java.util.Collections.min(bigEnough, new CompareSizesByArea()));
+      //console.log("Big " + java.util.Collections.min(bigEnough, new CompareSizesByArea()));
       return java.util.Collections.min(bigEnough, new CompareSizesByArea());
     } else if (notBigEnough.size() > 0) {
-      console.log("Small " + java.util.Collections.max(notBigEnough, new CompareSizesByArea()));
+      //console.log("Small " + java.util.Collections.max(notBigEnough, new CompareSizesByArea()));
       return java.util.Collections.max(notBigEnough, new CompareSizesByArea());
     } else {
       console.log("Couldn't find any suitable preview size. Picking the first choice.");
@@ -302,7 +301,6 @@ const AutoFitTextureView = android.view.TextureView.extend({
         this.super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         const width = this.super.getMeasuredWidth();
         const height = this.super.getMeasuredHeight();
-        console.log("width: " + width + " height: " + height + " ratioWidth: " + mRatioWidth + " ratioHeight: " + mRatioHeight);
         if (0 == mRatioWidth || 0 == mRatioHeight) {
           this.super.setMeasuredDimension(width, height);
         } else {

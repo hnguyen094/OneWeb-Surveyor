@@ -25,7 +25,7 @@ export function showSideDrawer(args: EventData) {
 
 export function onLoaded(args: EventData) {
   var View :any = android.view.View;
-  orientation.setCurrentOrientation("potrait", () => {});
+  orientation.setCurrentOrientation("portrait", () => {});
   if (app.android && platform.device.sdkVersion >= '21') {
       var window = app.android.startActivity.getWindow();
       // set the status bar to Color.Transparent

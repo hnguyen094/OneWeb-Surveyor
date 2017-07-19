@@ -14,7 +14,7 @@ import * as frameModule from "tns-core-modules/ui/frame";
 import * as animation from "tns-core-modules/ui/animation";
 import * as platform from "platform";
 import * as orientation from "nativescript-screen-orientation";
-
+import * as params from "./nativescript-fov/nativescript-fov";
 
 let crosshair :any;
 let x,y,z;
@@ -23,14 +23,16 @@ export function showSideDrawer(args: EventData) {
     console.log("Show SideDrawer tapped.");
 }
 
+//TODO: split up the code
 export function onLoaded(args: EventData) {
-  var View :any = android.view.View;
+
+  const View :any = android.view.View;
   orientation.setCurrentOrientation("portrait", () => {});
   if (app.android && platform.device.sdkVersion >= '21') {
-      var window = app.android.startActivity.getWindow();
+      const window = app.android.startActivity.getWindow();
       // set the status bar to Color.Transparent
       window.setStatusBarColor(0x000000);
-      var decorView = window.getDecorView();
+      const decorView = window.getDecorView();
       decorView.setSystemUiVisibility(
           View.SYSTEM_UI_FLAG_LAYOUT_STABLE
           | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -39,10 +41,14 @@ export function onLoaded(args: EventData) {
           | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   }
-
   cameraPreview.requestPermissions();
+  // 
+  // params.onLoaded();
+  // params.getVerticalFOV();
+  // params.getHorizontalFOV();
+
   cameraPreview.onLoaded(args);
-  let myPage = <Page>args.object;
+  const myPage = <Page>args.object;
   crosshair = myPage.getViewById("crosshair");
   crosshair.animate({
     scale: {x: 2.25, y: 2.25},
@@ -55,6 +61,7 @@ export function onLoaded(args: EventData) {
       z = data.z;
   },  { sensorDelay: "game" });
 }
+
 export function onCreatingView(args: EventData) {
   cameraPreview.onCreatingView(function() {
     crosshair.animate({
@@ -63,9 +70,11 @@ export function onCreatingView(args: EventData) {
     });
   }, args);
 }
+
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
 }
+
 // Event handler for Page "navigatingTo" event attached in main-page.xml
 export function navigatingTo(args: EventData) {
     /*

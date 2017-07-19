@@ -34,7 +34,7 @@ function startRotUpdates(callback, options) {
         }
     }
     if (!rotSensor) {
-        rotSensor = sensorManager.getDefaultSensor(android.hardware.Sensor.TYPE_GAME_ROTATION_VECTOR);
+        rotSensor = sensorManager.getDefaultSensor(android.hardware.Sensor.TYPE_ROTATION_VECTOR);
         if (!rotSensor) {
             throw Error("Could get rotation vector sensor.");
         }
