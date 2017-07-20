@@ -25,9 +25,8 @@ export function showSideDrawer(args: EventData) {
 
 //TODO: split up the code
 export function onLoaded(args: EventData) {
-
-  const View :any = android.view.View;
   orientation.setCurrentOrientation("portrait", () => {});
+  const View :any = android.view.View;
   if (app.android && platform.device.sdkVersion >= '21') {
       const window = app.android.startActivity.getWindow();
       // set the status bar to Color.Transparent
@@ -42,11 +41,6 @@ export function onLoaded(args: EventData) {
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   }
   cameraPreview.requestPermissions();
-  // 
-  // params.onLoaded();
-  // params.getVerticalFOV();
-  // params.getHorizontalFOV();
-
   cameraPreview.onLoaded(args);
   const myPage = <Page>args.object;
   crosshair = myPage.getViewById("crosshair");
@@ -55,7 +49,7 @@ export function onLoaded(args: EventData) {
     duration: 0
   });
   rotVector.startRotUpdates(function(data) {
-      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
       y = data.y;
       z = data.z;
@@ -66,9 +60,12 @@ export function onCreatingView(args: EventData) {
   cameraPreview.onCreatingView(function() {
     crosshair.animate({
       rotate: -z,
-      duration: 0.01
+      duration: 0
     });
   }, args);
+  const maxSize = cameraPreview.getMaxSize();
+  params.initialize(maxSize[0], maxSize[1]);
+  console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
 
 export function onTakeShot(args: EventData) {

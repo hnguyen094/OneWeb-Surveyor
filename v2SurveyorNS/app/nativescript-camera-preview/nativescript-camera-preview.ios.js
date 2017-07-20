@@ -3,6 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var output;
 var common = require('./nativescript-camera-preview-common');
 
+exports.getMaxSize = function () {
+  
+}
+
 exports.requestPermissions = function () {
     var authStatus = PHPhotoLibrary.authorizationStatus();
     if (authStatus === 0) {

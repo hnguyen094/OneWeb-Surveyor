@@ -110,7 +110,7 @@ const createCameraPreviewSession = function() {
         return;
     }
     let texture = mTextureView.getSurfaceTexture();
-     texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight()); // sets the default buffer to the preview we want
+    texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight()); // sets the default buffer to the preview we want
     let surface = new android.view.Surface(texture); // the surface that will hold the preview
     mPreviewRequestBuilder = mCameraDevice.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_PREVIEW);
     mPreviewRequestBuilder.addTarget(surface);
@@ -139,11 +139,12 @@ exports.onCreatingView = function(callback, args) {
   const appContext = app.android.context;
   const cameraManager = appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
   const cameras = cameraManager.getCameraIdList();
-
   mTextureView = new AutoFitTextureView(appContext, null);
   wrappedCallback = zonedCallback(callback);
   for (let index = cameras.length-1; index >= 0; index--) { //TODO: break these into small functions
       let currentCameraSpecs = cameraManager.getCameraCharacteristics(cameras[index]);
+      //console.log(currentCameraSpecs);
+      //console.dir(currentCameraSpecs);
       // get available lenses and set the camera-type (front or back)
       let facing = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.LENS_FACING);
       if (facing !== null && facing == android.hardware.camera2.CameraCharacteristics.LENS_FACING_BACK) {
@@ -155,33 +156,26 @@ exports.onCreatingView = function(callback, args) {
       // get all available sizes and set the format
       const map = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
       const format = map.getOutputSizes(android.graphics.ImageFormat.JPEG);
+      // for(let i= 0; i < format.length;i++) {
+      //   console.log(format[i]);
+      // }
       //TODO: Remove debugging console.logs()
       // For still image captures, we use the largest available size.
-      const largest = java.util.Collections.max(
-        java.util.Arrays.asList(map.getOutputSizes(android.graphics.ImageFormat.JPEG)),
-          new CompareSizesByArea());
+      const largest = java.util.Collections.max(java.util.Arrays.asList(format), new CompareSizesByArea());
       mImageReader = android.media.ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
         android.graphics.ImageFormat.JPEG, /*maxImages*/2);
-      if (format && format !== null) {
-          const dimensions = format[0].toString().split('x');
-          const largestWidth = +dimensions[0];
-          const largestHeight = +dimensions[1];
+      mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, mBackgroundHandler);
 
-          // set the output image characteristics
-          mImageReader = new android.media.ImageReader.newInstance(largestWidth, largestHeight, android.graphics.ImageFormat.JPEG, /*maxImages*/2);
-          mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, mBackgroundHandler);
-      }
       let maxPreviewWidth = platformModule.screen.mainScreen.widthPixels;
       let maxPreviewHeight = platformModule.screen.mainScreen.heightPixels;
       if(maxPreviewWidth > MAX_PREVIEW_WIDTH) {
         maxPreviewWidth = MAX_PREVIEW_WIDTH;
       }
       if (maxPreviewHeight > MAX_PREVIEW_HEIGHT) {
-          maxPreviewHeight = MAX_PREVIEW_HEIGHT;
+        maxPreviewHeight = MAX_PREVIEW_HEIGHT;
       }
       mPreviewSize = chooseOptimalSize(map.getOutputSizes(android.graphics.SurfaceTexture.class),
-              maxPreviewWidth, maxPreviewHeight, maxPreviewWidth,
-              maxPreviewHeight);
+              null, null, maxPreviewWidth, maxPreviewHeight);
       mTextureView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
   }
   mStateCallBack = new MyStateCallback();
@@ -211,13 +205,16 @@ Function: finds the optimal size to display fullscreen. It searches through the 
 Note: All the choices[i].getWidth/getHeight functions are measuring in landscape; therefore everything is switched
       backwards
 */
-const chooseOptimalSize = function (choices, textureViewWidth,
-  textureViewHeight, maxWidth, maxHeight) {
+const chooseOptimalSize = function (choices, textureViewWidth, textureViewHeight, maxWidth, maxHeight) {
+    //console.log("Optimal size");
+    if (textureViewWidth == null) textureViewWidth = maxWidth;
+    if (textureViewHeight == null) textureViewHeight = maxHeight;
     const ratio = textureViewHeight / textureViewWidth;
     let bigEnough = new java.util.ArrayList();
     let notBigEnough = new java.util.ArrayList();
     //console.log("Ratio is " + ratio + " and texture sizes are: " + textureViewWidth + " " + textureViewHeight);
     for(let i = 0; i < choices.length; i++) {
+      //console.log(choices[i]);
       if(choices[i].getHeight() <= maxWidth && choices[i].getWidth() <=maxHeight && choices[i].getWidth() == choices[i].getHeight() * ratio) {
         if (choices[i].getHeight() >= textureViewWidth && choices[i].getWidth() >= textureViewHeight) {
           bigEnough.add(choices[i]);
@@ -228,7 +225,7 @@ const chooseOptimalSize = function (choices, textureViewWidth,
     }
     if (bigEnough.size() > 0) {
       //console.log("Big " + java.util.Collections.min(bigEnough, new CompareSizesByArea()));
-      return java.util.Collections.min(bigEnough, new CompareSizesByArea());
+      return java.util.Collections.max(bigEnough, new CompareSizesByArea());
     } else if (notBigEnough.size() > 0) {
       //console.log("Small " + java.util.Collections.max(notBigEnough, new CompareSizesByArea()));
       return java.util.Collections.max(notBigEnough, new CompareSizesByArea());
