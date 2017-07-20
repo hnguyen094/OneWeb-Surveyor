@@ -58,7 +58,6 @@ export function onLoaded(args: EventData) {
 
 export function onCreatingView(args: EventData) {
   params.initialize();
-  console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
   cameraPreview.onCreatingView(function() {
     crosshair.animate({
       rotate: -z,

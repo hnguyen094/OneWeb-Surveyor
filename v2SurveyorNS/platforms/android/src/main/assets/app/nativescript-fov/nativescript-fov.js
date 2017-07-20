@@ -17,7 +17,6 @@ function setFOV() {
 
 exports.setVars = function (maxWidth, maxHeight) {
   common.setVarsHelper(maxWidth, maxHeight);
-  console.log("max pic width: " + common.maxPictureWidth);
 }
 
 exports.initialize = function () {
