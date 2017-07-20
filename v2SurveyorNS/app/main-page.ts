@@ -49,7 +49,7 @@ export function onLoaded(args: EventData) {
     duration: 0
   });
   rotVector.startRotUpdates(function(data) {
-      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
       y = data.y;
       z = data.z;
@@ -57,13 +57,17 @@ export function onLoaded(args: EventData) {
 }
 
 export function onCreatingView(args: EventData) {
-
+  params.initialize();
+  console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
   cameraPreview.onCreatingView(function() {
     crosshair.animate({
       rotate: -z,
       duration: 0
     });
   }, args);
+  const maxSize = cameraPreview.getMaxSize();
+  params.setVars(maxSize[0], maxSize[1]);
+  console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
 
 export function onTakeShot(args: EventData) {
