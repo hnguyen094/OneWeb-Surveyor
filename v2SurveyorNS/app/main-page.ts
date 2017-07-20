@@ -40,7 +40,7 @@ export function onLoaded(args: EventData) {
           | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   }
-  cameraPreview.requestPermissions();
+  //cameraPreview.requestPermissions();
   cameraPreview.onLoaded(args);
   const myPage = <Page>args.object;
   crosshair = myPage.getViewById("crosshair");
@@ -57,15 +57,13 @@ export function onLoaded(args: EventData) {
 }
 
 export function onCreatingView(args: EventData) {
+
   cameraPreview.onCreatingView(function() {
     crosshair.animate({
       rotate: -z,
       duration: 0
     });
   }, args);
-  const maxSize = cameraPreview.getMaxSize();
-  params.initialize(maxSize[0], maxSize[1]);
-  console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
 
 export function onTakeShot(args: EventData) {

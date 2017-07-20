@@ -50,7 +50,6 @@ let wrappedCallback;
 Note: onLoaded is a function that works on both iOS and Android from the common files.
 exports allows it to be exposed for outside use
 */
-exports.onLoaded = common.onLoaded;
 
 exports.getMaxSize = function () {
   return [maxWidth, maxHeight];

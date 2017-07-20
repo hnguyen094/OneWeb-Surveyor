@@ -40,7 +40,7 @@ export function onLoaded(args: EventData) {
           | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   }
-  cameraPreview.requestPermissions();
+  //cameraPreview.requestPermissions();
   cameraPreview.onLoaded(args);
   const myPage = <Page>args.object;
   crosshair = myPage.getViewById("crosshair");
@@ -57,8 +57,6 @@ export function onLoaded(args: EventData) {
 }
 
 export function onCreatingView(args: EventData) {
-  params.initialize();
-  console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 
   cameraPreview.onCreatingView(function() {
     crosshair.animate({

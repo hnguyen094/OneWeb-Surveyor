@@ -4,7 +4,7 @@ var output;
 var common = require('./nativescript-camera-preview-common');
 
 exports.getMaxSize = function () {
-  
+
 }
 
 exports.requestPermissions = function () {
@@ -25,8 +25,6 @@ exports.requestPermissions = function () {
         }
     }
 };
-
-exports.onLoaded = common.onLoaded;
 
 exports.onTakeShot = function(args) {
   var videoConnection = output.connections[0];

@@ -27,6 +27,8 @@ const MAX_PREVIEW_HEIGHT            = 1920; // max preview height guaranteed by 
 const REQUEST_IMAGE_CAPTURE         = 3453;
 const REQUEST_REQUIRED_PERMISSIONS  = 1234;
 
+let maxHeight;
+let maxWidth;
 let mCameraId;
 let mCaptureSession;
 let mCameraDevice;
@@ -48,7 +50,15 @@ let wrappedCallback;
 Note: onLoaded is a function that works on both iOS and Android from the common files.
 exports allows it to be exposed for outside use
 */
-exports.onLoaded = common.onLoaded;
+
+exports.getMaxSize = function () {
+  return [maxWidth, maxHeight];
+}
+
+const setMaxSize = function (width, height) {
+  maxWidth = width;
+  maxHeight = height;
+}
 
 /**
 Function: requests the necessary permissions if they're not already granted for the camera
@@ -162,6 +172,7 @@ exports.onCreatingView = function(callback, args) {
       //TODO: Remove debugging console.logs()
       // For still image captures, we use the largest available size.
       const largest = java.util.Collections.max(java.util.Arrays.asList(format), new CompareSizesByArea());
+      setMaxSize(largest.getWidth(), largest.getHeight());
       mImageReader = android.media.ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
         android.graphics.ImageFormat.JPEG, /*maxImages*/2);
       mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, mBackgroundHandler);

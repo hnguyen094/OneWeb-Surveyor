@@ -6,15 +6,20 @@ let z; // constant value
 let maxPictureWidth;
 let maxPictureHeight;
 
+function setFOV(params) {
+  verticalFOV = params.getVerticalViewAngle();
+  horizontalFOV = params.getHorizontalViewAngle();
+}
+
 exports.initialize = function (maxWidth, maxHeight) {
   maxPictureHeight = maxHeight;
   maxPictureWidth = maxWidth;
-  mCamera = android.hardware.Camera.open(0); // change which camera to open, so it doesn't error out
+  mCamera = android.hardware.Camera.open(0); // TODO: change which camera to open, so it doesn't error out
   params = mCamera.getParameters();
   mCamera.release();
   mCamera = null;
-  verticalFOV = params.getVerticalViewAngle();
-  horizontalFOV = params.getHorizontalViewAngle();
+  setFOV();
+  setConstant();
   z = maxWidth/(2*Math.tan(horizontalFOV * Math.PI / 180 / 2));
 }
 
@@ -35,11 +40,4 @@ function calc(maxWidth, maxHeight) {
   // if we assume that the taller side is consant (aka, when I display 1280x720, the 1280 can be directly mapped onto the maxWidth
   // whereas the 720 is actually mapped to some cropped version of maxHeight) then we can also do the equivalent math:
   // x1 = x * 1280/maxWidth where x1 is the screen pixel value equivalent of x
-}
-
-// function should assume height/horizontalFOV is proportionally equivalent to the screen tallness. aka:
-// take in screenHeight, screenWidth
-function convertDegToScreenPixel(angleDeg, screenWidth, screenHeight) {
-    let x = 2*z*Math.tan(angleDeg * Math.PI / 180 / 2);
-    return x * screenWidth/maxPictureWidth;
 }
