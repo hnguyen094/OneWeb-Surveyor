@@ -40,14 +40,14 @@ Therefore, this version is a cleaner & working version of its predecessor.
 
 Features | Android | iOS
 --- | --- | ---
-UX (aesthetics) | No | No
-UI: Crosshair to elevation | Yes | No
-UI: Levels of elevation | No | No
+**UX** (aesthetics) | No | No
+**UI:** Crosshair to elevation | Yes | No
+**UI:** Levels of elevation | No | No
 Live Camera | Yes | Yes(?)
-Accuracy: Camera | No | No
+**Accuracy:** Camera | No | No
 Rotation Sensor | Yes | Yes(?)
 Data | No | No
-Accuracy: Data | N/A | N/A
+**Accuracy:** Data | N/A | N/A
 
 #### Notes:
 
