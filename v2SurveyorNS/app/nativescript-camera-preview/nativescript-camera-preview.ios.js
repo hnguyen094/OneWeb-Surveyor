@@ -1,10 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var output;
-var common = require('./nativescript-camera-preview-common');
+let output;
+let maxWidth;
+let maxHeight;
+const common = require('./nativescript-camera-preview-common');
 
 exports.getMaxSize = function () {
+  return [maxWidth, maxHeight];
+}
 
+const setMaxSize(width, height) {
+  maxWidth = width;
+  maxHeight = height;
 }
 
 exports.requestPermissions = function () {

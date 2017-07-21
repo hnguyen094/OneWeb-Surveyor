@@ -7,10 +7,9 @@ exports.getVerticalFOV = common.getVerticalFOV;
 exports.getHorizontalFOV = common.getHorizontalFOV;
 
 exports.setVars = function (maxWidth, maxHeight) {
-  setFOV();
   common.setVarsHelper(maxWidth, maxHeight);
 }
 
 exports.initialize = function () {
-
+  setFOV();
 }
