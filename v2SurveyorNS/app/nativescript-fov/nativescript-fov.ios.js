@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const common = require('./nativescript-fov-common');
 
-exports.Degrees2Pixels = common.Degrees2Pixels;
+exports.degrees2Pixels = common.degrees2Pixels;
 exports.getVerticalFOV = common.getVerticalFOV;
 exports.getHorizontalFOV = common.getHorizontalFOV;
 

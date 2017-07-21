@@ -14,23 +14,27 @@ import * as frameModule from "tns-core-modules/ui/frame";
 import * as animation from "tns-core-modules/ui/animation";
 import * as platform from "platform";
 import * as orientation from "nativescript-screen-orientation";
-
+import * as params from "./nativescript-fov/nativescript-fov";
 
 let crosshair :any;
 let x,y,z;
+let measuredWidth;
+
+const OUTER_CIRCLE_DIAMETER = 2;
 
 export function showSideDrawer(args: EventData) {
     console.log("Show SideDrawer tapped.");
 }
 
+//TODO: split up the code
 export function onLoaded(args: EventData) {
-  var View :any = android.view.View;
   orientation.setCurrentOrientation("portrait", () => {});
+  const View :any = android.view.View;
   if (app.android && platform.device.sdkVersion >= '21') {
-      var window = app.android.startActivity.getWindow();
+      const window = app.android.startActivity.getWindow();
       // set the status bar to Color.Transparent
       window.setStatusBarColor(0x000000);
-      var decorView = window.getDecorView();
+      const decorView = window.getDecorView();
       decorView.setSystemUiVisibility(
           View.SYSTEM_UI_FLAG_LAYOUT_STABLE
           | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -39,15 +43,8 @@ export function onLoaded(args: EventData) {
           | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   }
-
-  cameraPreview.requestPermissions();
+  //cameraPreview.requestPermissions();
   cameraPreview.onLoaded(args);
-  let myPage = <Page>args.object;
-  crosshair = myPage.getViewById("crosshair");
-  crosshair.animate({
-    scale: {x: 2.25, y: 2.25},
-    duration: 0
-  });
   rotVector.startRotUpdates(function(data) {
       //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
@@ -55,17 +52,27 @@ export function onLoaded(args: EventData) {
       z = data.z;
   },  { sensorDelay: "game" });
 }
+
 export function onCreatingView(args: EventData) {
+  params.initialize();
   cameraPreview.onCreatingView(function() {
     crosshair.animate({
+      scale: {x: measuredWidth/crosshair.getMeasuredHeight(), y: measuredWidth/crosshair.getMeasuredHeight()},
       rotate: -z,
-      duration: 0.01
+      duration: 0
     });
   }, args);
+  const maxSize = cameraPreview.getMaxSize();
+  params.setVars(maxSize[0], maxSize[1]);
+  measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
+  console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
+
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
+  console.log("el: " + y);
 }
+
 // Event handler for Page "navigatingTo" event attached in main-page.xml
 export function navigatingTo(args: EventData) {
     /*
@@ -74,7 +81,7 @@ export function navigatingTo(args: EventData) {
     https://docs.nativescript.org/api-reference/classes/_ui_page_.page.html
     */
     let page = <Page>args.object;
-
+    crosshair = page.getViewById("crosshair");
     /*
     A page’s bindingContext is an object that should be used to perform
     data binding between XML markup and TypeScript code. Properties

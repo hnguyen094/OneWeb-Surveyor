@@ -6,7 +6,7 @@ const common = require('./nativescript-fov-common');
 let mCamera = null;
 let params = null;
 
-exports.Degrees2Pixels = common.Degrees2Pixels;
+exports.degrees2Pixels = common.degrees2Pixels;
 exports.getVerticalFOV = common.getVerticalFOV;
 exports.getHorizontalFOV = common.getHorizontalFOV;
 

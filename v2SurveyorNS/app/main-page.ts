@@ -18,6 +18,9 @@ import * as params from "./nativescript-fov/nativescript-fov";
 
 let crosshair :any;
 let x,y,z;
+let measuredWidth;
+
+const OUTER_CIRCLE_DIAMETER = 2;
 
 export function showSideDrawer(args: EventData) {
     console.log("Show SideDrawer tapped.");
@@ -42,12 +45,6 @@ export function onLoaded(args: EventData) {
   }
   //cameraPreview.requestPermissions();
   cameraPreview.onLoaded(args);
-  const myPage = <Page>args.object;
-  crosshair = myPage.getViewById("crosshair");
-  crosshair.animate({
-    scale: {x: 2.25, y: 2.25},
-    duration: 0
-  });
   rotVector.startRotUpdates(function(data) {
       //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
@@ -60,17 +57,20 @@ export function onCreatingView(args: EventData) {
   params.initialize();
   cameraPreview.onCreatingView(function() {
     crosshair.animate({
+      scale: {x: measuredWidth/crosshair.getMeasuredHeight(), y: measuredWidth/crosshair.getMeasuredHeight()},
       rotate: -z,
       duration: 0
     });
   }, args);
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
+  measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
   console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
 
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
+  console.log("el: " + y);
 }
 
 // Event handler for Page "navigatingTo" event attached in main-page.xml
@@ -81,7 +81,7 @@ export function navigatingTo(args: EventData) {
     https://docs.nativescript.org/api-reference/classes/_ui_page_.page.html
     */
     let page = <Page>args.object;
-
+    crosshair = page.getViewById("crosshair");
     /*
     A page’s bindingContext is an object that should be used to perform
     data binding between XML markup and TypeScript code. Properties
