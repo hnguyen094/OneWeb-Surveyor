@@ -4,7 +4,7 @@ Contains multiple projects (approaches to the problem).
 
 ## **graphics**
 
-This folder contains all my created graphics with .pdn extentions (paint.NET). 
+This folder contains all my created graphics with .pdn extentions (paint.NET).
 
 To edit, download [paint.NET here](getpaint.net "paint.NET download page")
 
@@ -40,11 +40,14 @@ Therefore, this version is a cleaner & working version of its predecessor.
 
 Features | Android | iOS
 --- | --- | ---
-User Interface | No | No
-Live Camera | Yes | Yes
-Rotation Sensor | Yes | Yes
-Stitching | No | No
+UX (aesthetics) | No | No
+UI: Crosshair to elevation | Yes | No
+UI: Levels of elevation | No | No
+Live Camera | Yes | Yes(?)
+Accuracy: Camera | No | No
+Rotation Sensor | Yes | Yes(?)
 Data | No | No
+Accuracy: Data | N/A | N/A
 
 #### Notes:
 
@@ -52,4 +55,3 @@ Endings are CRLF because the project was developed in Windows. If you're working
 $ git config --global core.autocrlf input
 and checkout again. I think this could be an issue because I kept getting this when committing to git:
 https://stackoverflow.com/questions/5834014/lf-will-be-replaced-by-crlf-in-git-what-is-that-and-is-it-important
-
