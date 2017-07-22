@@ -7,6 +7,7 @@ let mCamera = null;
 let params = null;
 
 exports.degrees2Pixels = common.degrees2Pixels;
+exports.degrees2Scale = common.degrees2Scale;
 exports.getVerticalFOV = common.getVerticalFOV;
 exports.getHorizontalFOV = common.getHorizontalFOV;
 

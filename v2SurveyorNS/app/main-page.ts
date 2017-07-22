@@ -57,7 +57,8 @@ export function onCreatingView(args: EventData) {
   params.initialize();
   cameraPreview.onCreatingView(function() {
     crosshair.animate({
-      scale: {x: measuredWidth/crosshair.getMeasuredHeight(), y: measuredWidth/crosshair.getMeasuredHeight()},
+      scale: {x: params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight()),
+              y: params.degrees2Scale (OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight())},
       rotate: -z,
       duration: 0
     });
