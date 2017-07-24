@@ -72,7 +72,11 @@ export function onCreatingView(args: EventData) {
         x: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight()),
         y: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight())
       },
-      translate: { x : 0, y: 2560/4},
+      translate: {
+        x : 0,
+        y: params.pixels2Dp((params.degrees2Pixels(-y)) %
+                              params.degrees2Pixels(DISTANCE_BETWEEN_LINES))},
+
       rotate: -z,
       duration: 0
     });

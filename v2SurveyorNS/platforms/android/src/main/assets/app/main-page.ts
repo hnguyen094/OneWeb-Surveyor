@@ -48,7 +48,7 @@ export function onLoaded(args: EventData) {
   //cameraPreview.requestPermissions();
   cameraPreview.onLoaded(args);
   rotVector.startRotUpdates(function(data) {
-      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
       y = data.y;
       z = data.z;
@@ -66,18 +66,17 @@ export function onCreatingView(args: EventData) {
       rotate: -z,
       duration: 0
     });
-    let y2 = -params.degrees2Pixels(y);
+    const distanceFromCenter = params.pixels2Dp((params.degrees2Pixels(-y) %
+                          params.degrees2Pixels(DISTANCE_BETWEEN_LINES)));
     doubleline.animate({
       scale: {
         x: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight()),
         y: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight())
       },
       translate: {
-        x : 0,
-        y: params.pixels2Dp((params.degrees2Pixels(-y) %
-                              params.degrees2Pixels(DISTANCE_BETWEEN_LINES)) + (y>0?
-                              params.degrees2Pixels(DISTANCE_BETWEEN_LINES)/2 :
-                              -params.degrees2Pixels(DISTANCE_BETWEEN_LINES)/2))},
+        x : Math.sin(z*Math.PI/180)*distanceFromCenter,
+        y: Math.cos(z*Math.PI/180)*distanceFromCenter
+      },
 
       rotate: -z,
       duration: 0

@@ -18,6 +18,14 @@ exports.degrees2Scale= function(angle, length) {
   return exports.degrees2Pixels(angle) / length;
 }
 
+exports.dp2Pixels = function(dp) {
+  return dp * platformModule.screen.mainScreen.scale;
+}
+
+exports.pixels2Dp = function(pixels) {
+  return pixels / platformModule.screen.mainScreen.scale;
+}
+
 exports.setVarsHelper = function (maxWidth, maxHeight) { // exports for private use, rather than public
   exports.maxPictureHeight = maxHeight;
   exports.maxPictureWidth = maxWidth;
