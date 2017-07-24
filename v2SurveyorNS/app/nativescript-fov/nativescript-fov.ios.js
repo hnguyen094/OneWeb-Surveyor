@@ -12,5 +12,6 @@ exports.setVars = function (maxWidth, maxHeight) {
 }
 
 exports.initialize = function () {
-  setFOV();
+  const device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo);
+  console.log("ios horizontal FOV: " + device.activeFormat.videoFieldOfView);
 }

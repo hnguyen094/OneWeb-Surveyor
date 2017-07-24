@@ -11,18 +11,17 @@ exports.maxPictureHeight; // not used
 
 exports.degrees2Pixels= function(angle) {
   let x = 2 * exports.z * Math.tan(angle * Math.PI / 180 / 2);
-  console.log("WidthxHeight and widthPixels =" + exports.maxPictureWidth +"x"+ exports.maxPictureHeight + " and " + platformModule.screen.mainScreen.heightPixels);
   return x * platformModule.screen.mainScreen.heightPixels/exports.maxPictureWidth; // height pixels because screen is vertical (I think)
+}
+
+exports.degrees2Scale= function(angle, length) {
+  return exports.degrees2Pixels(angle) / length;
 }
 
 exports.setVarsHelper = function (maxWidth, maxHeight) { // exports for private use, rather than public
   exports.maxPictureHeight = maxHeight;
   exports.maxPictureWidth = maxWidth;
   exports.z = maxWidth/2/Math.tan(exports.horizontalFOV * Math.PI / 180 / 2);
-  // tan(fov/2) = (l/2)/d
-  // d = (l/2)/tan(fov/2)
-  // l = tan(fov/2)*d*2 // x = tan(angle/2) * z * 2
-  // angle = 2*Math.atan(z/2/d)
 }
 
 exports.getVerticalFOV = function () {

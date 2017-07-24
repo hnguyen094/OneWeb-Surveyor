@@ -22,10 +22,6 @@ exports.setVarsHelper = function (maxWidth, maxHeight) { // exports for private 
   exports.maxPictureHeight = maxHeight;
   exports.maxPictureWidth = maxWidth;
   exports.z = maxWidth/2/Math.tan(exports.horizontalFOV * Math.PI / 180 / 2);
-  // tan(fov/2) = (l/2)/d
-  // d = (l/2)/tan(fov/2)
-  // l = tan(fov/2)*d*2 // x = tan(angle/2) * z * 2
-  // angle = 2*Math.atan(z/2/d)
 }
 
 exports.getVerticalFOV = function () {

@@ -17,10 +17,12 @@ import * as orientation from "nativescript-screen-orientation";
 import * as params from "./nativescript-fov/nativescript-fov";
 
 let crosshair :any;
-let x,y,z;
+let doubleline :any;
+let x, y, z;
 let measuredWidth;
 
 const OUTER_CIRCLE_DIAMETER = 2;
+const DISTANCE_BETWEEN_LINES = 10;
 
 export function showSideDrawer(args: EventData) {
     console.log("Show SideDrawer tapped.");
@@ -57,11 +59,23 @@ export function onCreatingView(args: EventData) {
   params.initialize();
   cameraPreview.onCreatingView(function() {
     crosshair.animate({
-      scale: {x: params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight()),
-              y: params.degrees2Scale (OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight())},
+      scale: {
+        x: params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight()),
+        y: params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight())
+      },
       rotate: -z,
       duration: 0
     });
+    doubleline.animate({
+      scale: {
+        x: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight()),
+        y: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight())
+      },
+      translate: { x : 0, y: params.degrees2Pixels(-y) % params.degrees2Pixels(DISTANCE_BETWEEN_LINES/2)/2},
+      rotate: -z,
+      duration: 0
+    });
+
   }, args);
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
@@ -83,6 +97,7 @@ export function navigatingTo(args: EventData) {
     */
     let page = <Page>args.object;
     crosshair = page.getViewById("crosshair");
+    doubleline = page.getViewById("doubleline");
     /*
     A page’s bindingContext is an object that should be used to perform
     data binding between XML markup and TypeScript code. Properties
