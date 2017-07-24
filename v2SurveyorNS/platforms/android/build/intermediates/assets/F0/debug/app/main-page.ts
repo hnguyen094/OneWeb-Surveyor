@@ -66,12 +66,13 @@ export function onCreatingView(args: EventData) {
       rotate: -z,
       duration: 0
     });
+    let y2 = -params.degrees2Pixels(y);
     doubleline.animate({
       scale: {
         x: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight()),
         y: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight())
       },
-      //translate: { x : 0, y: -y},
+      translate: { x : 0, y: 2560/4},
       rotate: -z,
       duration: 0
     });

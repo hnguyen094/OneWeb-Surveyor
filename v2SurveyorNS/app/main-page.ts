@@ -66,12 +66,19 @@ export function onCreatingView(args: EventData) {
       rotate: -z,
       duration: 0
     });
+    let y2 = -params.degrees2Pixels(y);
     doubleline.animate({
       scale: {
         x: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight()),
         y: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight())
       },
-      translate: { x : 0, y: params.degrees2Pixels(-y) % params.degrees2Pixels(DISTANCE_BETWEEN_LINES/2)/2},
+      translate: {
+        x : 0,
+        y: params.pixels2Dp((params.degrees2Pixels(-y) %
+                              params.degrees2Pixels(DISTANCE_BETWEEN_LINES)) + (y>0?
+                              params.degrees2Pixels(DISTANCE_BETWEEN_LINES)/2 :
+                              -params.degrees2Pixels(DISTANCE_BETWEEN_LINES)/2))},
+
       rotate: -z,
       duration: 0
     });

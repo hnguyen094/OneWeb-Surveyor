@@ -3,6 +3,10 @@ ActionBar {
     color: white;
 }
 
+#capturebtn {
+  background-color: #1b5675;
+}
+
 /*@keyframes defaultScale {
   from {
     transform: scale(1, 1);

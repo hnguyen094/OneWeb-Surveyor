@@ -8,6 +8,8 @@ let params = null;
 
 exports.degrees2Pixels = common.degrees2Pixels;
 exports.degrees2Scale = common.degrees2Scale;
+exports.dp2Pixels = common.dp2Pixels;
+exports.pixels2Dp = common.pixels2Dp;
 exports.getVerticalFOV = common.getVerticalFOV;
 exports.getHorizontalFOV = common.getHorizontalFOV;
 

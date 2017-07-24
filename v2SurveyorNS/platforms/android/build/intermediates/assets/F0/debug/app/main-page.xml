@@ -18,7 +18,7 @@
         <Placeholder creatingView="onCreatingView" id="placeholder-view"/>
       </StackLayout>
       <Button id="capturebtn" text="Capture" tap="onTakeShot" class="btn btn-primary" horizontalAlignment="center" verticalAlignment="bottom"/>
-      <Image id="crosshair" src="res://circlearrowthin" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
+      <Image id="crosshair" src="res://newcirclethin" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
       <Image id="doubleline" src="res://doubleline" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
     </GridLayout>
 </Page>
