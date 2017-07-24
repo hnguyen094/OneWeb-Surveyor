@@ -58,20 +58,22 @@ export function onLoaded(args: EventData) {
 export function onCreatingView(args: EventData) {
   params.initialize();
   cameraPreview.onCreatingView(function() {
+    const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
     crosshair.animate({
       scale: {
-        x: params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight()),
-        y: params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight())
+        x: scaleCrosshair,
+        y: scaleCrosshair
       },
       rotate: -z,
       duration: 0
     });
+    const scaleDoubleLine = params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight());
     const distanceFromCenter = params.pixels2Dp((params.degrees2Pixels(-y) %
                           params.degrees2Pixels(DISTANCE_BETWEEN_LINES)));
     doubleline.animate({
       scale: {
-        x: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight()),
-        y: params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight())
+        x: scaleDoubleLine,
+        y: scaleDoubleLine
       },
       translate: {
         x : Math.sin(z*Math.PI/180)*distanceFromCenter,
