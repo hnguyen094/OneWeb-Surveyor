@@ -15,6 +15,7 @@ import * as animation from "tns-core-modules/ui/animation";
 import * as platform from "platform";
 import * as orientation from "nativescript-screen-orientation";
 import * as params from "./nativescript-fov/nativescript-fov";
+import * as permissions from "nativescript-permissions";
 
 let crosshair :any;
 let doubleline :any;
@@ -48,7 +49,6 @@ export function onLoaded(args: EventData) {
           | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   }
-  //cameraPreview.requestPermissions();
   cameraPreview.onLoaded(args);
 
 
@@ -61,60 +61,73 @@ export function onLoaded(args: EventData) {
 }
 
 export function onCreatingView(args: EventData) {
+  permissions.requestPermission(android["Manifest"].permission.CAMERA, "Need camera permissions for the camera preview")
+    .then( function(args) {
+
+    })
+    .catch(function() {
+      console.log("No permissions. Please grant them.");
+    })
   params.initialize();
-  cameraPreview.onCreatingView(function() {
-    const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
-    crosshair.animate({
-      scale: {
-        x: scaleCrosshair,
-        y: scaleCrosshair
-      },
-      rotate: -z,
-      duration: 0
-    });
-
-    const scaleDoubleLine = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight());
-    const distanceFromCenter = params.pixels2Dp((params.degrees2Pixels((-y % ANGLE_BETWEEN_LINES)
-                              - ANGLE_BETWEEN_LINES/2 * (y>0? -1: 1))));
-    lowerText.text = 10* Math.floor(-y/10);
-    upperText.text = 10* Math.floor((-y+10)/10);
-    doubleline.animate({
-      scale: {
-        x: scaleDoubleLine,
-        y: scaleDoubleLine
-      },
-      translate: {
-        x : Math.sin(z*Math.PI/180)*distanceFromCenter,
-        y: Math.cos(z*Math.PI/180)*distanceFromCenter
-      },
-
-      rotate: -z,
-      duration: 0
-    });
-    lowerText.animate({
-      translate: {
-        x : Math.sin(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-        y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
-      },
-      rotate: -z,
-      duration: 0
-    });
-    upperText.animate({
-      translate: {
-        x :  Math.sin(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-        y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
-      },
-      rotate: -z,
-      duration: 0
-    });
-
-  }, args);
+  cameraPreview.onCreatingView(creatingViewCallback, args);
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
   console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
+
 }
 
+function creatingViewCallback() {
+  const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
+  const scaleDoubleLine = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight());
+  const distanceFromCenter = params.pixels2Dp(params.degrees2Pixels(-y % ANGLE_BETWEEN_LINES
+                            - (y>0? -1: 1) * ANGLE_BETWEEN_LINES/2));
+  const yRotationComp = Math.cos(z*Math.PI/180);
+  const xRotationComp = Math.sin(z*Math.PI/180);
+  lowerText.text = 10* Math.floor(-y/10);
+  upperText.text = 10* Math.floor((-y+10)/10);
+  crosshair.animate({ //TODO: This doesn't actually update; its just here because other things haven't init yet
+    scale: {
+      x: scaleCrosshair,
+      y: scaleCrosshair
+    },
+    rotate: -z,
+    duration: 0
+  });
+  doubleline.animate({
+    scale: {
+      x: scaleDoubleLine,
+      y: scaleDoubleLine
+    },
+    translate: {
+      x : xRotationComp * distanceFromCenter,
+      y: yRotationComp * distanceFromCenter
+    },
+    rotate: -z,
+    duration: 0
+  });
+  lowerText.animate({
+    translate: {
+      x : xRotationComp * (distanceFromCenter + scaleDoubleLine *
+        params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
+      y : yRotationComp * (distanceFromCenter + scaleDoubleLine *
+        params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
+    },
+    rotate: -z,
+    duration: 0
+  });
+  upperText.animate({
+    translate: {
+      x :  xRotationComp * (distanceFromCenter - scaleDoubleLine *
+        params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
+      y :  yRotationComp * (distanceFromCenter - scaleDoubleLine *
+        params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
+    },
+    rotate: -z,
+    duration: 0
+  });
+
+}
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
   console.log("el: " + y);
@@ -154,5 +167,5 @@ app.on(app.suspendEvent, function(args) {
   rotVector.stopRotUpdates();
 });
 app.on(app.exitEvent, function(args) {
-  rotVector.stopRotUpdates();
+  //rotVector.stopRotUpdates();
 });

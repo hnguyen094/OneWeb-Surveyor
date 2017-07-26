@@ -9,6 +9,7 @@ ActionBar {
 
 .levelLine {
   color: #0EA548;
+  font-size: 20;
 }
 
 /*@keyframes defaultScale {
