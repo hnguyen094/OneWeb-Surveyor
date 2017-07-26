@@ -1,7 +1,7 @@
 {
-	"time": "Mon Jul 24 2017 16:26:37 GMT-0700 (Pacific Daylight Time)",
+	"time": "Tue Jul 25 2017 16:56:22 GMT-0700 (Pacific Daylight Time)",
 	"bundle": false,
 	"release": false,
-	"changesRequireBuild": false,
-	"changesRequireBuildTime": "Mon Jul 24 2017 16:21:24 GMT-0700 (Pacific Daylight Time)"
+	"changesRequireBuild": true,
+	"changesRequireBuildTime": "Tue Jul 25 2017 16:56:22 GMT-0700 (Pacific Daylight Time)"
 }

@@ -7,6 +7,10 @@ ActionBar {
   background-color: #1b5675;
 }
 
+.levelLine {
+  color: #0EA548;
+}
+
 /*@keyframes defaultScale {
   from {
     transform: scale(1, 1);

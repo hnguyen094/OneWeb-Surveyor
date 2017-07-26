@@ -18,11 +18,14 @@ import * as params from "./nativescript-fov/nativescript-fov";
 
 let crosshair :any;
 let doubleline :any;
+let upperText :any;
+let lowerText :any;
 let x, y, z;
 let measuredWidth;
+let page;
 
 const OUTER_CIRCLE_DIAMETER = 2;
-const DISTANCE_BETWEEN_LINES = 10;
+const ANGLE_BETWEEN_LINES = 10;
 
 export function showSideDrawer(args: EventData) {
     console.log("Show SideDrawer tapped.");
@@ -47,8 +50,10 @@ export function onLoaded(args: EventData) {
   }
   //cameraPreview.requestPermissions();
   cameraPreview.onLoaded(args);
+
+
   rotVector.startRotUpdates(function(data) {
-      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      // console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
       y = data.y;
       z = data.z;
@@ -67,9 +72,12 @@ export function onCreatingView(args: EventData) {
       rotate: -z,
       duration: 0
     });
-    const scaleDoubleLine = params.degrees2Scale(DISTANCE_BETWEEN_LINES, doubleline.getMeasuredHeight());
-    const distanceFromCenter = params.pixels2Dp((params.degrees2Pixels(-y) %
-                          params.degrees2Pixels(DISTANCE_BETWEEN_LINES)));
+
+    const scaleDoubleLine = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight());
+    const distanceFromCenter = params.pixels2Dp((params.degrees2Pixels((-y % ANGLE_BETWEEN_LINES)
+                              - ANGLE_BETWEEN_LINES/2 * (y>0? -1: 1))));
+    lowerText.text = 10* Math.floor(-y/10);
+    upperText.text = 10* Math.floor((-y+10)/10);
     doubleline.animate({
       scale: {
         x: scaleDoubleLine,
@@ -80,6 +88,22 @@ export function onCreatingView(args: EventData) {
         y: Math.cos(z*Math.PI/180)*distanceFromCenter
       },
 
+      rotate: -z,
+      duration: 0
+    });
+    lowerText.animate({
+      translate: {
+        x : Math.sin(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
+        y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
+      },
+      rotate: -z,
+      duration: 0
+    });
+    upperText.animate({
+      translate: {
+        x :  Math.sin(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
+        y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
+      },
       rotate: -z,
       duration: 0
     });
@@ -103,15 +127,18 @@ export function navigatingTo(args: EventData) {
     view the API reference of the Page to see what’s available at
     https://docs.nativescript.org/api-reference/classes/_ui_page_.page.html
     */
-    let page = <Page>args.object;
+    page = <Page>args.object;
     crosshair = page.getViewById("crosshair");
     doubleline = page.getViewById("doubleline");
+    upperText = page.getViewById("upperText");
+    lowerText = page.getViewById("lowerText");
     /*
     A page’s bindingContext is an object that should be used to perform
     data binding between XML markup and TypeScript code. Properties
     on the bindingContext can be accessed using the {{ }} syntax in XML.
     In this example, the {{ message }} and {{ onTap }} bindings are resolved
     against the object returned by createViewModel().
+
 
     You can learn more about data binding in NativeScript at
     https://docs.nativescript.org/core-concepts/data-binding.

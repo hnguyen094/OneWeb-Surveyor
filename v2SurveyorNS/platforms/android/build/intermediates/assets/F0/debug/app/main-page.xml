@@ -7,18 +7,16 @@
       <ActionItem icon="res://ic_menu" ios.position="left" tap="showSideDrawer" />
     </ios>
   </ActionBar>
-<!--
-    You can learn more about NativeScript layouts at
-    https://docs.nativescript.org/ui/layout-containers
-    You can view a full list of the
-    class names available for styling your app at https://docs.nativescript.org/ui/theme.
-    -->
+<!-- NativeScript layouts: https://docs.nativescript.org/ui/layout-containers
+    Full list of class names available for styles:https://docs.nativescript.org/ui/theme -->
     <GridLayout>
       <StackLayout>
         <Placeholder creatingView="onCreatingView" id="placeholder-view"/>
       </StackLayout>
       <Button id="capturebtn" text="Capture" tap="onTakeShot" class="btn btn-primary" horizontalAlignment="center" verticalAlignment="bottom"/>
-      <Image id="crosshair" src="res://newcirclethin" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
       <Image id="doubleline" src="res://newdoubleline" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
+      <Label id="upperText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
+      <Label id="lowerText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
+      <Image id="crosshair" src="res://newcirclethin" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
     </GridLayout>
 </Page>

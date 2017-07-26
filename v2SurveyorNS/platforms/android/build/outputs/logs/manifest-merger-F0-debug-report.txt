@@ -130,7 +130,7 @@ ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\
 	android:label
 		ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\AndroidManifest.xml:45:4-49
 	android:configChanges
-		ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\AndroidManifest.xml:46:4-65
+		ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\AndroidManifest.xml:46:4-53
 	android:theme
 		ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\AndroidManifest.xml:47:4-44
 	android:name
