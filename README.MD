@@ -43,7 +43,7 @@ Features | Android | iOS
 --- | --- | ---
 **UX** (aesthetics) | No | No
 **UI:** Crosshair to elevation | Yes | No
-**UI:** Levels of elevation | No | No
+**UI:** Levels of elevation | Yes | No
 Live Camera | Yes | Yes(?)
 **Accuracy:** Camera | No | No
 Rotation Sensor | Yes | Yes(?)
