@@ -5,6 +5,7 @@ let maxWidth;
 let maxHeight;
 const common = require('./nativescript-camera-preview-common');
 
+exports.onLoaded = common.onLoaded;
 exports.getMaxSize = function () {
   return [maxWidth, maxHeight];
 }

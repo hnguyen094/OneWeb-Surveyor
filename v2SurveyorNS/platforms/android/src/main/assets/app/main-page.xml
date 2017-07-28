@@ -11,8 +11,9 @@
     Full list of class names available for styles:https://docs.nativescript.org/ui/theme -->
     <GridLayout>
       <StackLayout>
-        <Placeholder creatingView="onCreatingView" id="placeholder-view"/>
+
       </StackLayout>
+      <Placeholder creatingView="onCreatingView" stretch="aspectFill" horizontalAlignment="center" verticalAlignment="center" id="placeholder-view"/>
       <Button id="capturebtn" text="Capture" tap="onTakeShot" class="btn btn-primary" horizontalAlignment="center" verticalAlignment="bottom"/>
       <Image id="doubleline" src="res://newdoubleline" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
       <Label id="upperText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>

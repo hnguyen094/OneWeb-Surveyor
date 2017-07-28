@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", {value : true});
 
-let page;
+exports.page;
+exports.cameraView;
 
 const app = require('application');
-function onLoaded(args) {
+function onLoaded(args, idName) {
   console.log("Loaded!");
-  page = args;
+  exports.page = args.object;
+  exports.cameraView = exports.page.getViewById(idName);
 }
 exports.onLoaded = onLoaded;

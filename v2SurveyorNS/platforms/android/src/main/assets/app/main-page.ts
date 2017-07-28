@@ -36,6 +36,7 @@ export function showSideDrawer(args: EventData) {
 export function onLoaded(args: EventData) {
   orientation.setCurrentOrientation("portrait", () => {});
   const View :any = android.view.View;
+  frameModule.setFragmentClass(cameraPreview.camera2BasicFragment);
   if (app.android && platform.device.sdkVersion >= '21') {
       const window = app.android.startActivity.getWindow();
       // set the status bar to Color.Transparent
@@ -49,7 +50,7 @@ export function onLoaded(args: EventData) {
           | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   }
-  cameraPreview.onLoaded(args);
+  cameraPreview.onLoaded(args, "placeholder-view");
 
 
   rotVector.startRotUpdates(function(data) {
@@ -74,7 +75,6 @@ export function onCreatingView(args: EventData) {
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
   console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
-
 }
 
 function creatingViewCallback() {
@@ -86,6 +86,7 @@ function creatingViewCallback() {
   const xRotationComp = Math.sin(z*Math.PI/180);
   lowerText.text = 10* Math.floor(-y/10);
   upperText.text = 10* Math.floor((-y+10)/10);
+
   crosshair.animate({ //TODO: This doesn't actually update; its just here because other things haven't init yet
     scale: {
       x: scaleCrosshair,
@@ -162,10 +163,13 @@ export function navigatingTo(args: EventData) {
 //TODO: Camera onResume, when it's lost. FYI: https://docs.nativescript.org/core-concepts/application-lifecycle
 app.on(app.resumeEvent, function(args) {
   //onCreatingView(args);
+  cameraPreview.onResume();
 });
 app.on(app.suspendEvent, function(args) {
-  rotVector.stopRotUpdates();
+  cameraPreview.onPause();
+  //rotVector.stopRotUpdates();
 });
 app.on(app.exitEvent, function(args) {
-  //rotVector.stopRotUpdates();
+  cameraPreview.onPause();
+  rotVector.stopRotUpdates();
 });

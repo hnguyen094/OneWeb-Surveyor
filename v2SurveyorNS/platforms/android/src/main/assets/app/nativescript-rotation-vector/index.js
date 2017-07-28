@@ -20,7 +20,8 @@ function getNativeDelay(options) {
 }
 function startRotUpdates(callback, options) {
     if (sensorListener) {
-        throw new Error("Already listening for rotational vector sensor updates.");
+        console.log("Already listening for rotational vector sensor updates.");
+        return;
     }
     var wrappedCallback = zonedCallback(callback);
     var activity = application.android.foregroundActivity;
