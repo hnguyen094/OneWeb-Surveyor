@@ -1,5 +1,4 @@
 {
-    "nativescript-permissions": true,
     "nativescript-screen-orientation": true,
     "nativescript-theme-core": true,
     "tns-core-modules": true,

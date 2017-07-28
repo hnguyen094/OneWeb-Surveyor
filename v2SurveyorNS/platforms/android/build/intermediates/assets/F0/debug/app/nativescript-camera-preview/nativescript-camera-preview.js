@@ -42,7 +42,7 @@ let mPreviewRequest;
 let mImageReader;
 let mCaptureCallback; // UNSURE
 let mFile; // UNSURE
-let mPreviewSize;
+let mPreviewSize; // UNSURE
 let mState                  = STATE_PREVIEW;
 let wrappedCallback;
 
@@ -53,6 +53,20 @@ exports allows it to be exposed for outside use
 exports.onLoaded = common.onLoaded;
 exports.getMaxSize = function () {
   return [maxWidth, maxHeight];
+}
+
+exports.onPause = function() {
+  console.log('Entering onPause');
+
+};
+
+exports.onResume = function() {
+  console.log("entering onResume");
+  // When the screen is turned off and turned back on, the SurfaceTexture is already
+  // available, and "onSurfaceTextureAvailable" will not be called. In that case, we can open
+  // a camera and start preview from here (otherwise, we wait until the surface is ready in
+  // the SurfaceTextureListener).
+
 }
 
 const setMaxSize = function (width, height) {
@@ -66,9 +80,9 @@ Requests for WRITE_EXTERNAL_STORAGE and CAMERA.
 Note: exports allows it to be exposed for outside use
 */
 exports.requestPermissions = function () {
-    //console.log("Camera preview is checking permissions: ");
-    if (android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.CAMERA) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-        android.support.v4.app.ActivityCompat.requestPermissions(app.android.currentContext, [android.Manifest.permission.CAMERA], REQUEST_REQUIRED_PERMISSIONS);
+    if (android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != android.content.pm.PackageManager.PERMISSION_GRANTED ||
+        android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.CAMERA) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+        android.support.v4.app.ActivityCompat.requestPermissions(app.android.currentContext, [android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE], REQUEST_REQUIRED_PERMISSIONS);
     }
 };
 
@@ -76,7 +90,6 @@ exports.requestPermissions = function () {
 Function: Takes a picture.
 */
 const lockFocus = function() { //TODO: could be error with private/scope
-  console.log("Entering lockFocus");
   mState = STATE_WAITING_LOCK;
   mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);
 }
@@ -85,7 +98,6 @@ const lockFocus = function() { //TODO: could be error with private/scope
 Function: prepares the camera while waiting for capture. // UNSURE
 */
 const runPrecaptureSequence = function() {
-  console.log("Entering runPrecaptureSequence");
     // This is how to tell the camera to trigger.
     mPreviewRequestBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER, android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER_START);
     // Tell #mCaptureCallback to wait for the precapture sequence to be set.
@@ -97,7 +109,6 @@ const runPrecaptureSequence = function() {
 Function: captures a still picture. // UNSURE
 */
 const captureStillPicture = function() {
-  console.log("Entering captureStillPicture");
     // This is the CaptureRequest.Builder that we use to take a picture.
     const captureBuilder = mCameraDevice.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_STILL_CAPTURE);
     captureBuilder.addTarget(mImageReader.getSurface());
@@ -118,11 +129,10 @@ const captureStillPicture = function() {
 Function: creates the surface to draw the camera preview.
 */
 const createCameraPreviewSession = function() {
-    console.log("Entering createCameraPreviewSession");
+    console.log("createCameraPreviewSession");
     if (!mSurfaceTexture || !mCameraDevice) {
         return;
     }
-
     let texture = mTextureView.getSurfaceTexture();
     texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight()); // sets the default buffer to the preview we want
     let surface = new android.view.Surface(texture); // the surface that will hold the preview
@@ -130,7 +140,7 @@ const createCameraPreviewSession = function() {
     mPreviewRequestBuilder.addTarget(surface);
     let surfaceList = new java.util.ArrayList();
     surfaceList.add(surface);
-    mCameraDevice.createCaptureSession(surfaceList, new MyCameraCaptureSessionStateCallback(), mBackgroundHandler);
+    mCameraDevice.createCaptureSession(surfaceList, new MyCameraCaptureSessionStateCallback(), null);
 }
 
 /**
@@ -139,7 +149,7 @@ Function: called when the capture button is clicked.
 Note: exports allows it to be exposed for outside use
 */
 exports.onTakeShot = function(args) {
-  console.log("Entering onTakeShot");
+  console.log("onTakeShot");
   lockFocus();
 }
 
@@ -150,28 +160,34 @@ Function: sets up the camera to create the view
 Note: exports allows it to be exposed for outside use
 */
 exports.onCreatingView = function(callback, args) {
-  console.log("Entering onCreatingView");
   const appContext = app.android.context;
   const cameraManager = appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
   const cameras = cameraManager.getCameraIdList();
   mTextureView = new AutoFitTextureView(appContext, null);
   wrappedCallback = zonedCallback(callback);
-  for (let index = 0; index < cameras.length; index++) { //TODO: break these into small functions
+  for (let index = cameras.length-1; index >= 0; index--) { //TODO: break these into small functions
       let currentCameraSpecs = cameraManager.getCameraCharacteristics(cameras[index]);
+      //console.log(currentCameraSpecs);
+      //console.dir(currentCameraSpecs);
       // get available lenses and set the camera-type (front or back)
       let facing = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.LENS_FACING);
       if (facing !== null && facing == android.hardware.camera2.CameraCharacteristics.LENS_FACING_BACK) {
         console.log("BACK camera");
         mCameraId = cameras[index];
       } else {
-        //console.log("FRONT camera");
-        continue;
+        console.log("FRONT camera");
       }
       // get all available sizes and set the format
       const map = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-      // const activeArraySize = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE);
+<<<<<<< HEAD
+      // const activeArraySize = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE); //TODO: Use this for max picture size instead, this is what the FOV is based on
       // console.log("activeArraySize " + activeArraySize);
+=======
+>>>>>>> parent of 18872d0... Zoom error only occurs SOMETIMES
       const format = map.getOutputSizes(android.graphics.ImageFormat.JPEG);
+      // for(let i= 0; i < format.length;i++) {
+      //   console.log(format[i]);
+      // }
       //TODO: Remove debugging console.logs()
       // For still image captures, we use the largest available size.
       const largest = java.util.Collections.max(java.util.Arrays.asList(format), new CompareSizesByArea());
@@ -193,7 +209,15 @@ exports.onCreatingView = function(callback, args) {
       mTextureView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
   }
   mStateCallBack = new MyStateCallback();
-
+  //API 23 runtime permission check
+  if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.LOLLIPOP_MR1){
+      console.log("checking presmisions ....");
+      if(android.support.v4.content.ContextCompat.checkSelfPermission(appContext, android.Manifest.permission.CAMERA) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+          console.log("Permission already granted.");
+      } else if(android.support.v4.content.ContextCompat.checkSelfPermission(appContext, android.Manifest.permission.CAMERA) == android.content.pm.PackageManager.PERMISSION_DENIED) {
+          console.log("Permission not granted.");
+      }
+  }
   cameraManager.openCamera(mCameraId, mStateCallBack, mBackgroundHandler);
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
   args.view = mTextureView;
@@ -204,23 +228,23 @@ Function: finds the optimal size to display fullscreen. It searches through the 
           (choices) and collects the correct aspect ratio relative to textureViewWidth and textureViewHeight.
           Then, it picks the smallest of those bigEnough, or then the largest of those notBigEnough.
 @param  choices   the different preview resolutions that the camera supports by default
-@param textureViewWidth   the width of the available texture size. Fullscreen by default from where it's called
-@param textureViewHeight  the height of the available texture size. Fullscreen by default from where it's called
+@param textureViewWidth   the width of the texture. Fullscreen by default from where it's called
+@param textureViewHeight  the height of the texture. Fullscreen by default from where it's called
 @param maxWidth   The fullscreen width
 @param maxHeight  The fullscreen height
 Note: All the choices[i].getWidth/getHeight functions are measuring in landscape; therefore everything is switched
       backwards
 */
 const chooseOptimalSize = function (choices, textureViewWidth, textureViewHeight, maxWidth, maxHeight) {
-    console.log("Entering chooseOptimalSize");
+    //console.log("Optimal size");
     if (textureViewWidth == null) textureViewWidth = maxWidth;
     if (textureViewHeight == null) textureViewHeight = maxHeight;
     const ratio = textureViewHeight / textureViewWidth;
     let bigEnough = new java.util.ArrayList();
     let notBigEnough = new java.util.ArrayList();
-    console.log("Ratio is " + ratio + " and texture sizes are: " + textureViewWidth + " " + textureViewHeight);
+    //console.log("Ratio is " + ratio + " and texture sizes are: " + textureViewWidth + " " + textureViewHeight);
     for(let i = 0; i < choices.length; i++) {
-      console.log(choices[i]);
+      //console.log(choices[i]);
       if(choices[i].getHeight() <= maxWidth && choices[i].getWidth() <=maxHeight && choices[i].getWidth() == choices[i].getHeight() * ratio) {
         if (choices[i].getHeight() >= textureViewWidth && choices[i].getWidth() >= textureViewHeight) {
           bigEnough.add(choices[i]);
@@ -229,12 +253,11 @@ const chooseOptimalSize = function (choices, textureViewWidth, textureViewHeight
         }
       }
     }
-    //return choices[0];
     if (bigEnough.size() > 0) {
-      console.log("Big " + java.util.Collections.min(bigEnough, new CompareSizesByArea()));
-      return java.util.Collections.min(bigEnough, new CompareSizesByArea());
+      //console.log("Big " + java.util.Collections.min(bigEnough, new CompareSizesByArea()));
+      return java.util.Collections.max(bigEnough, new CompareSizesByArea());
     } else if (notBigEnough.size() > 0) {
-      console.log("Small " + java.util.Collections.max(notBigEnough, new CompareSizesByArea()));
+      //console.log("Small " + java.util.Collections.max(notBigEnough, new CompareSizesByArea()));
       return java.util.Collections.max(notBigEnough, new CompareSizesByArea());
     } else {
       console.log("Couldn't find any suitable preview size. Picking the first choice.");
@@ -254,7 +277,6 @@ const CompareSizesByArea = java.lang.Object.extend({
   Function: constructor
   */
   init: function() {
-    console.log("Entering CompareSizesByArea");
     CompareSizesByArea_constructorCalled = true;
   },
   /**
@@ -262,7 +284,6 @@ const CompareSizesByArea = java.lang.Object.extend({
   Returns: +1 if the first is larger, -1 if the second is larger, 0, if equal.
   */
   compare: function(lhs, rhs) {
-    console.log("Entering compare");
     return java.lang.Long.signum(lhs.getWidth() * lhs.getHeight() -
           rhs.getWidth() * rhs.getHeight());
   }
@@ -283,7 +304,6 @@ const AutoFitTextureView = android.view.TextureView.extend({
     @param  value see TextureView's constructor. Should be null.
     */
     init: function(context, value) {
-        console.log("Entering AutoFitTextureView");
         AutoFitTextureView_constructorCalled = true;
     },
     /**
@@ -292,7 +312,6 @@ const AutoFitTextureView = android.view.TextureView.extend({
     @param  height  the height for the ratio.
     */
     setAspectRatio: function(width, height) {
-      console.log("Entering setAspectRatio");
         if (width < 0 || height < 0) {
           console.log("error with aspect ratio function");
         }
@@ -306,7 +325,6 @@ const AutoFitTextureView = android.view.TextureView.extend({
     @param  heightMeasureSpec   used for TextureView's onMeasure function
     */
     onMeasure: function(widthMeasureSpec, heightMeasureSpec) {
-      console.log("Entering onMeasure");
         this.super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         const width = this.super.getMeasuredWidth();
         const height = this.super.getMeasuredHeight();
@@ -334,7 +352,11 @@ const MyCameraCaptureSessionStateCallback = android.hardware.camera2.CameraCaptu
         }
         mCaptureSession = cameraCaptureSession;
         mPreviewRequest = mPreviewRequestBuilder.build(); // displaying the camera preview
-        mCaptureSession.setRepeatingRequest(mPreviewRequest, new MyCaptureSessionCaptureCallback(), mBackgroundHandler);
+<<<<<<< HEAD
+        mCaptureSession.setRepeatingRequest(mPreviewRequest, null, mBackgroundHandler);
+=======
+        mCaptureSession.setRepeatingRequest(mPreviewRequest, new MyCaptureSessionCaptureCallback(), null);
+>>>>>>> parent of 18872d0... Zoom error only occurs SOMETIMES
     },
 
     onConfigureFailed: function(cameraCaptureSession) {
@@ -347,50 +369,50 @@ Class: from Java ; public static abstract class.
 See github repo at the link on the top of this page to better understand
 */
 const MyCaptureSessionCaptureCallback = android.hardware.camera2.CameraCaptureSession.CaptureCallback.extend({
-  process: function(result) {
-    switch (mState) {
-      case STATE_PREVIEW: {// We have nothing to do when the camera preview is working normally.
-        break;
-      }
-      case STATE_WAITING_LOCK: {
-        const afState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AF_STATE);
-        if (afState === null) {
-          captureStillPicture();
-        } else if (android.hardware.camera2.CaptureResult.CONTROL_AF_STATE_FOCUSED_LOCKED == afState ||
-                android.hardware.camera2.CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED == afState) {
-          // CONTROL_AE_STATE can be null on some devices
-          const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
-          if (aeState === null ||
-                  aeState == android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_CONVERGED) {
-              mState = STATE_PICTURE_TAKEN;
-              captureStillPicture();
-          } else {
-              runPrecaptureSequence();
-          }
+    process: function(result) {
+        switch (mState) {
+                case STATE_PREVIEW: {// We have nothing to do when the camera preview is working normally.
+                    break;
+                }
+                case STATE_WAITING_LOCK: {
+                    const afState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AF_STATE);
+                    if (afState === null) {
+                        captureStillPicture();
+                    } else if (android.hardware.camera2.CaptureResult.CONTROL_AF_STATE_FOCUSED_LOCKED == afState ||
+                            android.hardware.camera2.CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED == afState) {
+                        // CONTROL_AE_STATE can be null on some devices
+                        const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
+                        if (aeState === null ||
+                                aeState == android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_CONVERGED) {
+                            mState = STATE_PICTURE_TAKEN;
+                            captureStillPicture();
+                        } else {
+                            runPrecaptureSequence();
+                        }
+                    }
+                    break;
+                }
+                case STATE_WAITING_PRECAPTURE: {
+                    // CONTROL_AE_STATE can be null on some devices
+                    const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
+                    if (aeState === null ||
+                            aeState == android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_PRECAPTURE ||
+                            aeState == android.hardware.camera2.CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) {
+                        mState = STATE_WAITING_NON_PRECAPTURE;
+                    }
+                    break;
+                }
+                case STATE_WAITING_NON_PRECAPTURE: {
+                    // CONTROL_AE_STATE can be null on some devices
+                    const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
+                    if (aeState === null || aeState != android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_PRECAPTURE) {
+                        mState = STATE_PICTURE_TAKEN;
+                        captureStillPicture();
+                    }
+                    break;
+                }
         }
-        break;
-      }
-      case STATE_WAITING_PRECAPTURE: {
-        // CONTROL_AE_STATE can be null on some devices
-        const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
-        if (aeState === null ||
-              aeState == android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_PRECAPTURE ||
-              aeState == android.hardware.camera2.CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) {
-          mState = STATE_WAITING_NON_PRECAPTURE;
-        }
-        break;
-      }
-      case STATE_WAITING_NON_PRECAPTURE: {
-        // CONTROL_AE_STATE can be null on some devices
-        const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
-        if (aeState === null || aeState != android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_PRECAPTURE) {
-          mState = STATE_PICTURE_TAKEN;
-          captureStillPicture();
-        }
-        break;
-      }
-    }
-  },
+    },
 
     onCaptureProgressed: function(session, request, partialResult) {
         this.process(partialResult);
@@ -413,7 +435,7 @@ See github repo at the link on the top of this page to better understand
 const mOnImageAvailableListener = new android.media.ImageReader.OnImageAvailableListener({
     onImageAvailable: function (reader) {
         // here we should save our image to file when image is available
-        console.log("Entering onImageAvailable");
+        console.log("onImageAvailable");
         console.log(reader);
     }
 });
@@ -424,17 +446,26 @@ See github repo at the link on the top of this page to better understand
 */
 const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListener({
     onSurfaceTextureAvailable: function(texture, width, height) {
-        console.log('Entering onSurfaceTextureAvailable');
+        console.log('onSurfaceTextureAvailable');
         mSurfaceTexture = texture;
         createCameraPreviewSession();
+        // openCamera()
+
+        common.cameraView.animate({
+          scale: {
+            x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
+            y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
+          duration: 2000
+        });
     },
 
     onSurfaceTextureSizeChanged: function(texture) {
-        console.log('Entering onSurfaceTextureSizeChanged');
+        console.log('onSurfaceTextureSizeChanged');
         // configureTransform(width, height);
     },
 
     onSurfaceTextureDestroyed: function(texture) {
+        console.log('Entering onSurfaceTextureDestroyed');
         return true;
     },
 
@@ -449,11 +480,11 @@ See github repo at the link on the top of this page to better understand
 */
 const MyStateCallback = android.hardware.camera2.CameraDevice.StateCallback.extend({
     onOpened: function(cameraDevice) {
-        console.log("Entering onOpened " + cameraDevice);
+        console.log("onOpened " + cameraDevice);
 
         mCameraOpenCloseLock.release();
         mCameraDevice = cameraDevice;
-        // createCameraPreviewSession();
+        createCameraPreviewSession();
     },
 
     onDisconnected: function(cameraDevice) {
@@ -465,7 +496,7 @@ const MyStateCallback = android.hardware.camera2.CameraDevice.StateCallback.exte
     },
 
     onError: function(cameraDevice, error) {
-        console.log("Entering onError");
+        console.log("onError");
         console.log("onError: device = " + cameraDevice);
         console.log("onError: error =  " + error);
 
@@ -475,6 +506,29 @@ const MyStateCallback = android.hardware.camera2.CameraDevice.StateCallback.exte
     },
 
     onClosed: function(cameraDevice) {
+<<<<<<< HEAD
         console.log("Entering onClosed");
+        try {
+          mCameraOpenCloseLock.acquire();
+          if (null != mCaptureSession) {
+              mCaptureSession.close();
+              mCaptureSession = null;
+          }
+          if (null != mCameraDevice) {
+              mCameraDevice.close();
+              mCameraDevice = null;
+          }
+          if (null != mImageReader) {
+              mImageReader.close();
+              mImageReader = null;
+          }
+        } catch (e) {
+          throw Error("Interrupted while trying to lock camera closing.");
+        } finally {
+          mCameraOpenCloseLock.release();
+        }
+=======
+        console.log("onClosed");
+>>>>>>> parent of 18872d0... Zoom error only occurs SOMETIMES
     }
 });

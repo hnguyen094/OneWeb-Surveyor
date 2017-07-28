@@ -13,7 +13,6 @@
     }
   },
   "dependencies": {
-    "nativescript-permissions": "^1.2.3",
     "nativescript-screen-orientation": "^2.0.0",
     "nativescript-theme-core": "~1.0.2",
     "tns-core-modules": "~3.1.0"
