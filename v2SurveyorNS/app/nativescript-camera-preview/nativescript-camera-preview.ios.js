@@ -10,6 +10,14 @@ exports.getMaxSize = function () {
   return [maxWidth, maxHeight];
 }
 
+exports.onPause = function () {
+  //TODO: implement
+}
+
+exports.onResume = function () {
+  //TODO: implement
+}
+
 const setMaxSize(width, height) {
   maxWidth = width;
   maxHeight = height;

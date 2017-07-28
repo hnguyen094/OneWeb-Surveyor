@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", {value : true});
 
 exports.page;
-exports.cameraView;
 
 const app = require('application');
 function onLoaded(args, idName) {
