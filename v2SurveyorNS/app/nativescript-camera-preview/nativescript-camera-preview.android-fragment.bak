@@ -34,7 +34,6 @@ const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListe
     onSurfaceTextureAvailable: function(texture, width, height) {
       // openCamera(width, height);
         console.log('Entering onSurfaceTextureAvailable');
-        mSurfaceTexture = texture;
         createCameraPreviewSession();
         common.cameraView.animate({
           scale: {
@@ -283,7 +282,7 @@ const AutoFitTextureView = android.view.TextureView.extend({
 });
 
 exports.camera2BasicFragment = android.app.Fragment.extend({ // NEW: // A different approach to the current problem
-  interfaces: [android.support.v13.app.FragmentCompat.OnRequestPermissionsResultCallback],
+  interfaces: [android.support.v13.app.FragmentCompat.OnRequestPermissionsResultCallback], //TODO: Fix
   /**
   Function: finds the optimal size to display fullscreen. It searches through the list of available preview sizes
             {@code choices} and collects the correct aspect ratio relative to {@code textureViewWidth} and
@@ -543,7 +542,7 @@ exports.camera2BasicFragment = android.app.Fragment.extend({ // NEW: // A differ
     }
   },
   takePicture: function() {
-    lockFocus();
+    this.lockFocus();
   },
   lockFocus: function () {
     try {
@@ -575,7 +574,7 @@ exports.camera2BasicFragment = android.app.Fragment.extend({ // NEW: // A differ
       captureBuilder.addTarget(mImageReader.getSurface());
       captureBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AF_MODE,
           android.hardware.camera2.CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-      const CaptureCallback = CameraCaptureSession.CaptureCallback().extend({
+      const CaptureCallback = CameraCaptureSession.CaptureCallback.extend({
         onCaptureCompleted: function (session, request, result) {
           unlockFocus();
         }

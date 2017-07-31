@@ -17,58 +17,230 @@ const platformModule = require("tns-core-modules/platform");
 const app = require('application');
 const common = require('./nativescript-camera-preview-common');
 
-const STATE_PREVIEW                 = 0; // UNSURE
-const STATE_WAITING_LOCK            = 1; // UNSURE
-const STATE_WAITING_PRECAPTURE      = 2; // UNSURE
-const STATE_WAITING_NON_PRECAPTURE  = 3; // UNSURE
-const STATE_PICTURE_TAKEN           = 4; // UNSURE
+const REQUEST_CAMERA_PERMISSION     = 1;
+const STATE_PREVIEW                 = 0;
+const STATE_WAITING_LOCK            = 1;
+const STATE_WAITING_PRECAPTURE      = 2;
+const STATE_WAITING_NON_PRECAPTURE  = 3;
+const STATE_PICTURE_TAKEN           = 4;
 const MAX_PREVIEW_WIDTH             = 1080; // max preview width guaranteed by Camera2 API
 const MAX_PREVIEW_HEIGHT            = 1920; // max preview height guaranteed by Camera2 API
-const REQUEST_IMAGE_CAPTURE         = 3453;
-const REQUEST_REQUIRED_PERMISSIONS  = 1234;
 
-let maxHeight;
-let maxWidth;
-let mCameraId;
-let mCaptureSession;
-let mCameraDevice;
-let mStateCallBack;
-let mBackgroundHandler      = null;
-let mCameraOpenCloseLock    = new java.util.concurrent.Semaphore(1); // UNSURE
-let mTextureView;
-let mSurfaceTexture;
-let mPreviewRequestBuilder;
-let mPreviewRequest;
-let mImageReader;
-let mCaptureCallback; // UNSURE
-let mFile; // UNSURE
-let mPreviewSize; // UNSURE
-let mState                  = STATE_PREVIEW;
-let wrappedCallback;
+/**
+from Java : public static interface
+See github repo at the link on the top of this page to better understand
+*/
+const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListener({
+    onSurfaceTextureAvailable: function(texture, width, height) {
+        console.log('onSurfaceTextureAvailable');
+        createCameraPreviewSession();
+        // openCamera()
+
+        common.cameraView.animate({
+          scale: {
+            x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
+            y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
+          duration: 2000
+        });
+    },
+
+    onSurfaceTextureSizeChanged: function(texture) {
+        console.log('onSurfaceTextureSizeChanged');
+        // configureTransform(width, height);
+    },
+
+    onSurfaceTextureDestroyed: function(texture) {
+        console.log('Entering onSurfaceTextureDestroyed');
+        return true;
+    },
+
+    onSurfaceTextureUpdated: function(texture) {
+      surfaceUpdateCallback();
+    },
+});
+
+let mCameraId; // Type: String
+let mTextureView; // Type: AutoFitTextureView (extends TextureView)
+let mCaptureSession; // Type: CameraCaptureSession
+let mCameraDevice; // Type: CameraDevice // Reference to the opened CameraDevice
+let mPreviewSize; // Type: Size // preview size of the camera preview
+
+/**
+Class: from Java : public static abstract class
+See github repo at the link on the top of this page to better understand
+*/
+const MyStateCallback = android.hardware.camera2.CameraDevice.StateCallback.extend({
+    onOpened: function(cameraDevice) {
+      /*
+      mCameraOpenCloseLock.release();
+      mCameraDevice = cameraDevice;
+      createCameraPreviewSession();
+      */
+        console.log("Entering onOpened " + cameraDevice);
+        mCameraOpenCloseLock.release();
+        mCameraDevice = cameraDevice;
+        createCameraPreviewSession();
+    },
+
+    onDisconnected: function(cameraDevice) {
+      /*
+      mCameraOpenCloseLock.release();
+      cameraDevice.close();
+      mCameraDevice = null;
+      */
+        console.log("onDisconnected");
+        mCameraOpenCloseLock.release();
+        cameraDevice.close();
+        mCameraDevice = null;
+    },
+
+    onError: function(cameraDevice, error) {
+      /*
+      mCameraOpenCloseLock.release();
+      cameraDevice.close();
+      mCameraDevice = null;
+      Activity activity = getActivity();
+      if (null != activity) {
+          activity.finish();
+      }
+      */
+        console.log("Entering onError");
+        console.log("onError: device = " + cameraDevice);
+        console.log("onError: error =  " + error);
+        mCameraOpenCloseLock.release();
+        cameraDevice.close();
+        mCameraDevice = null;
+    },
+
+    onClosed: function(cameraDevice) {
+        console.log("onClosed");
+    }
+  });
+
+let mBackgroundThread; // NEW: // Type: HandlerThread // An additional thread for running tasks that shouldn't block the UI
+let mBackgroundHandler; // Type: Handler // Handler to run things in the background
+let mImageReader; // Type: ImageReader // handles still image capture
+
+/**
+(example for: java static interface to javaScript )
+from Java : public static interface
+See github repo at the link on the top of this page to better understand
+*/
+const mOnImageAvailableListener = new android.media.ImageReader.OnImageAvailableListener({
+    onImageAvailable: function (reader) {
+      // mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+        // here we should save our image to file when image is available
+        console.log("onImageAvailable");
+        console.log(reader);
+    }
+});
+
+let mPreviewRequestBuilder; // Type: CaptureRequest.Builder
+let mPreviewRequest; // Type CaptureRequest // Generated by mPreviewRequestBuilder
+let mState                  = STATE_PREVIEW; // Type: int // current state of camera as defined by constants above
+let mCameraOpenCloseLock    = new java.util.concurrent.Semaphore(1); // Type: Semaphore // Prevent the app from exiting before closing the camera
+let mFlashSupported; // Unused // Type: boolean
+let mSensorOrientation; // Unused // Type: int
+
+/**
+Class: from Java ; public static abstract class.
+See github repo at the link on the top of this page to better understand
+*/
+const MyCaptureSessionCaptureCallback =  android.hardware.camera2.CameraCaptureSession.CaptureCallback.extend({
+  process: function(result) {
+    switch (mState) {
+      case STATE_PREVIEW: {// We have nothing to do when the camera preview is working normally.
+        break;
+      }
+      case STATE_WAITING_LOCK: {
+        const afState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AF_STATE);
+        if (afState === null) {
+          captureStillPicture();
+        } else if (android.hardware.camera2.CaptureResult.CONTROL_AF_STATE_FOCUSED_LOCKED == afState ||
+                android.hardware.camera2.CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED == afState) {
+          // CONTROL_AE_STATE can be null on some devices
+          const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
+          if (aeState === null ||
+                  aeState == android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_CONVERGED) {
+              mState = STATE_PICTURE_TAKEN;
+              captureStillPicture();
+          } else {
+              runPrecaptureSequence();
+          }
+        }
+        break;
+      }
+      case STATE_WAITING_PRECAPTURE: {
+        // CONTROL_AE_STATE can be null on some devices
+        const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
+        if (aeState === null ||
+              aeState == android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_PRECAPTURE ||
+              aeState == android.hardware.camera2.CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) {
+          mState = STATE_WAITING_NON_PRECAPTURE;
+        }
+        break;
+      }
+      case STATE_WAITING_NON_PRECAPTURE: {
+        // CONTROL_AE_STATE can be null on some devices
+        const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
+        if (aeState === null || aeState != android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_PRECAPTURE) {
+          mState = STATE_PICTURE_TAKEN;
+          captureStillPicture();
+        }
+        break;
+      }
+    }
+  },
+
+  onCaptureProgressed: function(/*CameraCaptureSession*/session, /*CaptureRequest*/request, /*CaptureResult*/partialResult) {
+      this.process(partialResult);
+  },
+
+  onCaptureCompleted: function (session, request, result) {
+      this.process(result);
+  }
+});
+
+const mCaptureCallback = new MyCaptureSessionCaptureCallback(); // An instance of the above
+let maxHeight; // the height that is needed to be queried by getMaxSize
+let maxWidth; // the height that is needed to be queried by getMaxSize
+let surfaceUpdateCallback; // function to be ran at every surface update from outside the module
+
 
 /**
 Note: onLoaded is a function that works on both iOS and Android from the common files.
 exports allows it to be exposed for outside use
 */
 exports.onLoaded = common.onLoaded;
+
+/**
+@return   the max size that the JPEG image can be. This should be the same as the
+maximum sensor size (which is what is actually needed) to calculate the FOV
+*/
 exports.getMaxSize = function () {
   return [maxWidth, maxHeight];
 }
 
+/**
+Function: Function that handles what happens when the app pauses
+Note: Empty for now //TODO
+*/
 exports.onPause = function() {
   console.log('Entering onPause');
 
 };
 
+/**
+Function: function that handles what happens when the app resumes
+Note: Empty for now //TODO
+*/
 exports.onResume = function() {
   console.log("entering onResume");
-  // When the screen is turned off and turned back on, the SurfaceTexture is already
-  // available, and "onSurfaceTextureAvailable" will not be called. In that case, we can open
-  // a camera and start preview from here (otherwise, we wait until the surface is ready in
-  // the SurfaceTextureListener).
-
 }
 
+/**
+Function: internally sets maxWidth and maxHeight when they are found
+*/
 const setMaxSize = function (width, height) {
   maxWidth = width;
   maxHeight = height;
@@ -82,7 +254,7 @@ Note: exports allows it to be exposed for outside use
 exports.requestPermissions = function () {
     if (android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != android.content.pm.PackageManager.PERMISSION_GRANTED ||
         android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.CAMERA) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-        android.support.v4.app.ActivityCompat.requestPermissions(app.android.currentContext, [android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE], REQUEST_REQUIRED_PERMISSIONS);
+        android.support.v4.app.ActivityCompat.requestPermissions(app.android.currentContext, [android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE], REQUEST_CAMERA_PERMISSION);
     }
 };
 
@@ -90,50 +262,66 @@ exports.requestPermissions = function () {
 Function: Takes a picture.
 */
 const lockFocus = function() { //TODO: could be error with private/scope
-  mState = STATE_WAITING_LOCK;
-  mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);
+  try {
+    // Doesn't work, but won't complain unless I catch the error:
+    mPreviewRequestBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AF_TRIGGER,
+         android.hardware.camera2.CameraMetadata.CONTROL_AF_TRIGGER_START);
+    mState = STATE_WAITING_LOCK;
+    mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);
+  } catch(e) {
+    console.log("Error: Can't access camera.[lockFocus]");
+  }
 }
 
 /**
 Function: prepares the camera while waiting for capture. // UNSURE
 */
 const runPrecaptureSequence = function() {
-    // This is how to tell the camera to trigger.
-    mPreviewRequestBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER, android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER_START);
-    // Tell #mCaptureCallback to wait for the precapture sequence to be set.
+  try {
+    mPreviewRequestBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER,
+        android.hardware.camera2.CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER_START);
     mState = STATE_WAITING_PRECAPTURE;
     mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler);
+  } catch(e) {
+    throw Error("Error: Can't access camera.[runPrecaptureSequence]");
+  }
 }
 
 /**
 Function: captures a still picture. // UNSURE
 */
 const captureStillPicture = function() {
-    // This is the CaptureRequest.Builder that we use to take a picture.
-    const captureBuilder = mCameraDevice.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_STILL_CAPTURE);
+  console.log("Entering captureStillPicture");
+  try {
+    const activity = app.android.currentContext;
+    if (activity == null || mCameraDevice == null) {
+      return;
+    }
+    const captureBuilder = mCameraDevice.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_PREVIEW);
     captureBuilder.addTarget(mImageReader.getSurface());
-    // Use the same AE and AF modes as the preview.
-    captureBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AF_MODE, android.hardware.camera2.CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-            setAutoFlash(captureBuilder);
-    // java class: extends the CaptureCallback class
-    const CaptureCallback = android.hardware.camera2.CameraCaptureSession.CaptureCallback.extend({
-        onCaptureCompleted: function (session, request, result) {
-            console.log("onCaptureCompleted");
-        }
+    captureBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AF_MODE,
+        android.hardware.camera2.CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+    const CaptureCallback = CameraCaptureSession.CaptureCallback().extend({
+      onCaptureCompleted: function (session, request, result) {
+        unlockFocus();
+      }
     });
     mCaptureSession.stopRepeating();
     mCaptureSession.capture(captureBuilder.build(), CaptureCallback, null);
+  } catch(e) {
+    throw Error("Error: Can't access camera.[captureStillPicture]");
+  }
 }
 
 /**
 Function: creates the surface to draw the camera preview.
 */
 const createCameraPreviewSession = function() {
-    console.log("createCameraPreviewSession");
-    if (!mSurfaceTexture || !mCameraDevice) {
+    console.log("Entering createCameraPreviewSession");
+    let texture = mTextureView.getSurfaceTexture();
+    if (!mCameraDevice || !texture) {
         return;
     }
-    let texture = mTextureView.getSurfaceTexture();
     texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight()); // sets the default buffer to the preview we want
     let surface = new android.view.Surface(texture); // the surface that will hold the preview
     mPreviewRequestBuilder = mCameraDevice.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_PREVIEW);
@@ -164,7 +352,7 @@ exports.onCreatingView = function(callback, args) {
   const cameraManager = appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
   const cameras = cameraManager.getCameraIdList();
   mTextureView = new AutoFitTextureView(appContext, null);
-  wrappedCallback = zonedCallback(callback);
+  surfaceUpdateCallback = zonedCallback(callback);
   for (let index = cameras.length-1; index >= 0; index--) { //TODO: break these into small functions
       let currentCameraSpecs = cameraManager.getCameraCharacteristics(cameras[index]);
       //console.log(currentCameraSpecs);
@@ -179,11 +367,6 @@ exports.onCreatingView = function(callback, args) {
       }
       // get all available sizes and set the format
       const map = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-<<<<<<< HEAD
-      // const activeArraySize = currentCameraSpecs.get(android.hardware.camera2.CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE); //TODO: Use this for max picture size instead, this is what the FOV is based on
-      // console.log("activeArraySize " + activeArraySize);
-=======
->>>>>>> parent of 18872d0... Zoom error only occurs SOMETIMES
       const format = map.getOutputSizes(android.graphics.ImageFormat.JPEG);
       // for(let i= 0; i < format.length;i++) {
       //   console.log(format[i]);
@@ -208,7 +391,7 @@ exports.onCreatingView = function(callback, args) {
               null, null, maxPreviewWidth, maxPreviewHeight);
       mTextureView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
   }
-  mStateCallBack = new MyStateCallback();
+  let mStateCallBack = new MyStateCallback();
   //API 23 runtime permission check
   if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.LOLLIPOP_MR1){
       console.log("checking presmisions ....");
@@ -352,183 +535,10 @@ const MyCameraCaptureSessionStateCallback = android.hardware.camera2.CameraCaptu
         }
         mCaptureSession = cameraCaptureSession;
         mPreviewRequest = mPreviewRequestBuilder.build(); // displaying the camera preview
-<<<<<<< HEAD
-        mCaptureSession.setRepeatingRequest(mPreviewRequest, null, mBackgroundHandler);
-=======
         mCaptureSession.setRepeatingRequest(mPreviewRequest, new MyCaptureSessionCaptureCallback(), null);
->>>>>>> parent of 18872d0... Zoom error only occurs SOMETIMES
     },
 
     onConfigureFailed: function(cameraCaptureSession) {
         console.log("onConfigureFailed " + cameraCaptureSession);
-    }
-});
-
-/**
-Class: from Java ; public static abstract class.
-See github repo at the link on the top of this page to better understand
-*/
-const MyCaptureSessionCaptureCallback = android.hardware.camera2.CameraCaptureSession.CaptureCallback.extend({
-    process: function(result) {
-        switch (mState) {
-                case STATE_PREVIEW: {// We have nothing to do when the camera preview is working normally.
-                    break;
-                }
-                case STATE_WAITING_LOCK: {
-                    const afState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AF_STATE);
-                    if (afState === null) {
-                        captureStillPicture();
-                    } else if (android.hardware.camera2.CaptureResult.CONTROL_AF_STATE_FOCUSED_LOCKED == afState ||
-                            android.hardware.camera2.CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED == afState) {
-                        // CONTROL_AE_STATE can be null on some devices
-                        const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
-                        if (aeState === null ||
-                                aeState == android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_CONVERGED) {
-                            mState = STATE_PICTURE_TAKEN;
-                            captureStillPicture();
-                        } else {
-                            runPrecaptureSequence();
-                        }
-                    }
-                    break;
-                }
-                case STATE_WAITING_PRECAPTURE: {
-                    // CONTROL_AE_STATE can be null on some devices
-                    const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
-                    if (aeState === null ||
-                            aeState == android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_PRECAPTURE ||
-                            aeState == android.hardware.camera2.CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) {
-                        mState = STATE_WAITING_NON_PRECAPTURE;
-                    }
-                    break;
-                }
-                case STATE_WAITING_NON_PRECAPTURE: {
-                    // CONTROL_AE_STATE can be null on some devices
-                    const aeState = result.get(android.hardware.camera2.CaptureResult.CONTROL_AE_STATE);
-                    if (aeState === null || aeState != android.hardware.camera2.CaptureResult.CONTROL_AE_STATE_PRECAPTURE) {
-                        mState = STATE_PICTURE_TAKEN;
-                        captureStillPicture();
-                    }
-                    break;
-                }
-        }
-    },
-
-    onCaptureProgressed: function(session, request, partialResult) {
-        this.process(partialResult);
-    },
-
-    onCaptureCompleted: function (session, request, result) {
-        this.process(result);
-    },
-
-    onCaptureFailed: function (session, request, failure) {
-        console.log(failure);
-    }
-});
-
-/**
-(example for: java static interface to javaScript )
-from Java : public static interface
-See github repo at the link on the top of this page to better understand
-*/
-const mOnImageAvailableListener = new android.media.ImageReader.OnImageAvailableListener({
-    onImageAvailable: function (reader) {
-        // here we should save our image to file when image is available
-        console.log("onImageAvailable");
-        console.log(reader);
-    }
-});
-
-/**
-from Java : public static interface
-See github repo at the link on the top of this page to better understand
-*/
-const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListener({
-    onSurfaceTextureAvailable: function(texture, width, height) {
-        console.log('onSurfaceTextureAvailable');
-        mSurfaceTexture = texture;
-        createCameraPreviewSession();
-        // openCamera()
-
-        common.cameraView.animate({
-          scale: {
-            x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
-            y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
-          duration: 2000
-        });
-    },
-
-    onSurfaceTextureSizeChanged: function(texture) {
-        console.log('onSurfaceTextureSizeChanged');
-        // configureTransform(width, height);
-    },
-
-    onSurfaceTextureDestroyed: function(texture) {
-        console.log('Entering onSurfaceTextureDestroyed');
-        return true;
-    },
-
-    onSurfaceTextureUpdated: function(texture) {
-      wrappedCallback();
-    },
-});
-
-/**
-Class: from Java : public static abstract class
-See github repo at the link on the top of this page to better understand
-*/
-const MyStateCallback = android.hardware.camera2.CameraDevice.StateCallback.extend({
-    onOpened: function(cameraDevice) {
-        console.log("onOpened " + cameraDevice);
-
-        mCameraOpenCloseLock.release();
-        mCameraDevice = cameraDevice;
-        createCameraPreviewSession();
-    },
-
-    onDisconnected: function(cameraDevice) {
-        console.log("onDisconnected");
-
-        mCameraOpenCloseLock.release();
-        cameraDevice.close();
-        mCameraDevice = null;
-    },
-
-    onError: function(cameraDevice, error) {
-        console.log("onError");
-        console.log("onError: device = " + cameraDevice);
-        console.log("onError: error =  " + error);
-
-        mCameraOpenCloseLock.release();
-        cameraDevice.close();
-        mCameraDevice = null;
-    },
-
-    onClosed: function(cameraDevice) {
-<<<<<<< HEAD
-        console.log("Entering onClosed");
-        try {
-          mCameraOpenCloseLock.acquire();
-          if (null != mCaptureSession) {
-              mCaptureSession.close();
-              mCaptureSession = null;
-          }
-          if (null != mCameraDevice) {
-              mCameraDevice.close();
-              mCameraDevice = null;
-          }
-          if (null != mImageReader) {
-              mImageReader.close();
-              mImageReader = null;
-          }
-        } catch (e) {
-          throw Error("Interrupted while trying to lock camera closing.");
-        } finally {
-          mCameraOpenCloseLock.release();
-        }
-=======
-        console.log("onClosed");
->>>>>>> parent of 18872d0... Zoom error only occurs SOMETIMES
     }
 });

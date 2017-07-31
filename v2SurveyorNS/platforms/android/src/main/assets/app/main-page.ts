@@ -15,6 +15,7 @@ import * as animation from "tns-core-modules/ui/animation";
 import * as platform from "platform";
 import * as orientation from "nativescript-screen-orientation";
 import * as params from "./nativescript-fov/nativescript-fov";
+import * as permissions from "nativescript-permissions";
 
 let crosshair :any;
 let doubleline :any;
@@ -60,6 +61,13 @@ export function onLoaded(args: EventData) {
 }
 
 export function onCreatingView(args: EventData) {
+  permissions.requestPermission(android["Manifest"].permission.CAMERA, "I need these permissions for the viewfinder")
+  .then(function() {
+     console.log("Woo Hoo, I have the power!");
+  })
+  .catch(function() {
+     console.log("Uh oh, no permissions - plan B time!");
+  });
   params.initialize();
   cameraPreview.onCreatingView(function() {
     const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
@@ -152,7 +160,7 @@ app.on(app.resumeEvent, function(args) {
 });
 app.on(app.suspendEvent, function(args) {
   cameraPreview.onPause();
-  //rotVector.stopRotUpdates();
+  rotVector.stopRotUpdates();
 });
 app.on(app.exitEvent, function(args) {
   rotVector.stopRotUpdates();
