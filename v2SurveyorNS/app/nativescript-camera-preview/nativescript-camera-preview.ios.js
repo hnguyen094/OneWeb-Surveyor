@@ -18,7 +18,7 @@ exports.onResume = function () {
   //TODO: implement
 }
 
-const setMaxSize(width, height) {
+const setMaxSize = function (width, height) {
   maxWidth = width;
   maxHeight = height;
 }
