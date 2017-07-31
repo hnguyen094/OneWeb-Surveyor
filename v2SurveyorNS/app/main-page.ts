@@ -28,9 +28,9 @@ let page;
 const OUTER_CIRCLE_DIAMETER = 2;
 const ANGLE_BETWEEN_LINES = 10;
 
-export function showSideDrawer(args: EventData) {
-    console.log("Show SideDrawer tapped.");
-}
+// export function showSideDrawer(args: EventData) {
+//     console.log("Show SideDrawer tapped.");
+// }
 
 //TODO: split up the code
 export function onLoaded(args: EventData) {
