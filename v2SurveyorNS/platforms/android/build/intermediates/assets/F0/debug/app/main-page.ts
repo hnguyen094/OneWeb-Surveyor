@@ -160,7 +160,7 @@ app.on(app.resumeEvent, function(args) {
 });
 app.on(app.suspendEvent, function(args) {
   cameraPreview.onPause();
-  //rotVector.stopRotUpdates();
+  rotVector.stopRotUpdates();
 });
 app.on(app.exitEvent, function(args) {
   rotVector.stopRotUpdates();

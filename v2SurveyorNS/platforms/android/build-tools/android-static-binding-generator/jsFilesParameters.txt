@@ -3,7 +3,6 @@ C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\main-page.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\main-view-model.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-camera-preview\nativescript-camera-preview-common.js
-C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-camera-preview\nativescript-camera-preview.android-fragment.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-camera-preview\nativescript-camera-preview.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-fov\nativescript-fov-common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-fov\nativescript-fov.js
