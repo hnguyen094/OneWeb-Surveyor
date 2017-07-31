@@ -1,12 +1,12 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded" navigatingTo="navigatingTo" class="page" actionBarHidden="true">
-  <ActionBar title="{N} Surveyor">
+  <!-- <ActionBar title="{N} Surveyor">
     <android>
       <NavigationButton icon="res://ic_menu" tap="showSlideout" />
     </android>
     <ios>
       <ActionItem icon="res://ic_menu" ios.position="left" tap="showSideDrawer" />
     </ios>
-  </ActionBar>
+  </ActionBar> -->
 <!-- NativeScript layouts: https://docs.nativescript.org/ui/layout-containers
     Full list of class names available for styles:https://docs.nativescript.org/ui/theme -->
     <GridLayout>

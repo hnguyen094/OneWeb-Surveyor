@@ -61,13 +61,15 @@ export function onLoaded(args: EventData) {
 }
 
 export function onCreatingView(args: EventData) {
-  permissions.requestPermission(android["Manifest"].permission.CAMERA, "I need these permissions for the viewfinder")
-  .then(function() {
-     console.log("Woo Hoo, I have the power!");
-  })
-  .catch(function() {
-     console.log("Uh oh, no permissions - plan B time!");
-  });
+  if(app.android) {
+    permissions.requestPermission(android["Manifest"].permission.CAMERA, "I need these permissions for the viewfinder")
+    .then(function() {
+       console.log("Woo Hoo, I have the power!");
+    })
+    .catch(function() {
+       console.log("Uh oh, no permissions - plan B time!");
+    });
+  }
   params.initialize();
   cameraPreview.onCreatingView(function() {
     const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
