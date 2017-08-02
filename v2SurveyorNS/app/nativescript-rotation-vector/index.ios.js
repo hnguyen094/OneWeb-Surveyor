@@ -29,37 +29,39 @@ function startRotUpdates(callback, options) {
     accManager.deviceMotionUpdateInterval = getNativeDelay(options);
     if (accManager.deviceMotionAvailable) {
         var queue = NSOperationQueue.alloc().init();
-        accManager.startDeviceMotionUpdatesToQueueWithHandler(CMAttitudeReferenceFrameXMagneticNorthZVertical, queue, function (data, error) {
+        console.log("motionamanger "+ CMMotionManager);
+        console.dir(accManager);
+        var referenceFrame = CMAttitudeReferenceFrame.CMAttitudeReferenceFrameXArbitraryCorrectedZVertical;
+        console.log("Ref frame " + referenceFrame);
+        accManager.startDeviceMotionUpdatesUsingReferenceFrameToQueueWithHandler(referenceFrame, queue, function (data, error) {
             dispatch_async(main_queue, function () {
-              console.log(accManager.availableAttitudeReferenceFrames(CMAttitudeReferenceFrameXMagneticNorthZVertical));
-
-
-              let origin = data.gravity;
-              console.log(origin);
-              let original_matrix = data.attitude.rotationMatrix;
-              console.log(GLKit);
-              let temp_matrix = app.ios.GLKMatrix3Invert(original_matrix, null);
-              let inverse_matrix;
-              inverse_matrix.m11 = invert.m00;
-              inverse_matrix.m12 = invert.m01;
-              inverse_matrix.m13 = invert.m02;
-              inverse_matrix.m21 = invert.m10;
-              inverse_matrix.m22 = invert.m11;
-              inverse_matrix.m23 = invert.m12;
-              inverse_matrix.m31 = invert.m20;
-              inverse_matrix.m32 = invert.m21;
-              inverse_matrix.m33 = invert.m22;
-              let result;
-              result.x = origin.x * inverse_matrix.m11 + origin.y * inverse_matrix.m12 + origin.z * inverse_matrix.m13;
-              result.y = origin.x * inverse_matrix.m21 + origin.y * inverse_matrix.m22 + origin.z * inverse_matrix.m23;
-              result.z = origin.x * inverse_matrix.m31 + origin.y * inverse_matrix.m32 + origin.z * inverse_matrix.m33;
+              // console.dir(accManager);
+              // let origin = data.gravity;
+              // console.log(origin);
+              // let original_matrix = data.attitude.rotationMatrix;
+              // console.log("GLK matrix invert is " +GLKit);
+              // let temp_matrix = GLKMatrix3Invert(original_matrix, null);
+              // let inverse_matrix;
+              // inverse_matrix.m11 = invert.m00;
+              // inverse_matrix.m12 = invert.m01;
+              // inverse_matrix.m13 = invert.m02;
+              // inverse_matrix.m21 = invert.m10;
+              // inverse_matrix.m22 = invert.m11;
+              // inverse_matrix.m23 = invert.m12;
+              // inverse_matrix.m31 = invert.m20;
+              // inverse_matrix.m32 = invert.m21;
+              // inverse_matrix.m33 = invert.m22;
+              // let result;
+              // result.x = origin.x * inverse_matrix.m11 + origin.y * inverse_matrix.m12 + origin.z * inverse_matrix.m13;
+              // result.y = origin.x * inverse_matrix.m21 + origin.y * inverse_matrix.m22 + origin.z * inverse_matrix.m23;
+              // result.z = origin.x * inverse_matrix.m31 + origin.y * inverse_matrix.m32 + origin.z * inverse_matrix.m33;
 
               //let inverse_matrix = original_matrix.inverse(); // TODO: Implement
-
+              const quat = data.attitude.quaternion;
                 wrappedCallback({
-                    x: result.x * 180/ Math.PI, // TODO: Probably doesn't work
-                    y: result.y * 180 /Math.PI,
-                    z: result.z * 180/ Math.PI
+                    x: 180/Math.PI * Math.atan2(2*(quat.y*quat.w - quat.x*quat.z), 1- 2*quat.y*quat.y - 2*quat.z*quat.z), // TODO: Probably doesn't work
+                    y: 180/Math.PI * Math.atan2(2*(quat.x*quat.w + quat.y*quat.z), 1- 2*quat.x*quat.x - 2*quat.z*quat.z),
+                    z: 180/Math.PI * Math.asin(2*(quat.x*quat.z - quat.w*quat.y)) // yaw
                 });
             });
         });
