@@ -73,6 +73,20 @@ const updateCallback = function() {
     rotate: -z,
     duration: 0
   });
+
+  let cameraView = page.getViewById("placeholder-view");;
+  cameraView.animate({
+    scale: {
+      x: platform.screen.mainScreen.widthPixels/cameraView.getMeasuredWidth(),
+      y: platform.screen.mainScreen.widthPixels/cameraView.getMeasuredWidth()
+    },
+    translate: {
+      x: 0,
+      y: app.ios? -10 : 0
+    },
+    duration: 2000
+  });
+
 };
 
 // export function showSideDrawer(args: EventData) {
@@ -100,7 +114,7 @@ export function onLoaded(args: EventData) {
 
 
   rotVector.startRotUpdates(function(data) {
-      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
       y = data.y;
       z = data.z;
@@ -118,8 +132,10 @@ export function onCreatingView(args: EventData) {
        console.log("Uh oh, no permissions - plan B time!");
     });
   }
-  params.initialize();
+
+  if(app.android) params.initialize();
   cameraPreview.onCreatingView(updateCallback, args);
+  if (app.ios) params.initialize();
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);

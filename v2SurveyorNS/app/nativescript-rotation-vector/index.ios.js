@@ -59,9 +59,9 @@ function startRotUpdates(callback, options) {
               //let inverse_matrix = original_matrix.inverse(); // TODO: Implement
               const quat = data.attitude.quaternion;
                 wrappedCallback({
-                    x: 180/Math.PI * Math.atan2(2*(quat.y*quat.w - quat.x*quat.z), 1- 2*quat.y*quat.y - 2*quat.z*quat.z), // TODO: Probably doesn't work
-                    y: 180/Math.PI * Math.atan2(2*(quat.x*quat.w + quat.y*quat.z), 1- 2*quat.x*quat.x - 2*quat.z*quat.z),
-                    z: 180/Math.PI * Math.asin(2*(quat.x*quat.z - quat.w*quat.y)) // yaw
+                    x: -180/Math.PI * Math.atan2(2*(quat.y*quat.w - quat.x*quat.z), 1- 2*quat.y*quat.y - 2*quat.z*quat.z), // TODO: Probably doesn't work
+                    y: -180/Math.PI * Math.atan2(2*(quat.x*quat.w + quat.y*quat.z), 1- 2*quat.x*quat.x - 2*quat.z*quat.z),
+                    z: -180/Math.PI * Math.asin(2*(quat.x*quat.z - quat.w*quat.y)) // yaw
                 });
             });
         });
