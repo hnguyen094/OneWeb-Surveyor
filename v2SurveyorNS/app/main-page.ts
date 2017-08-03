@@ -29,6 +29,7 @@ const OUTER_CIRCLE_DIAMETER = 2;
 const ANGLE_BETWEEN_LINES = 10;
 
 const updateCallback = function() {
+  console.log("Entered updateCallback");
   const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
   crosshair.animate({
     scale: {
@@ -122,7 +123,7 @@ export function onLoaded(args: EventData) {
       x = data.x;
       y = data.y;
       z = data.z;
-      updateCallback();
+      if(app.ios) updateCallback();
   },  { sensorDelay: "game" });
 }
 

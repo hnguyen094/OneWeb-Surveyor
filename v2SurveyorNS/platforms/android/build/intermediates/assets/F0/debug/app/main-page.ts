@@ -28,15 +28,80 @@ let page;
 const OUTER_CIRCLE_DIAMETER = 2;
 const ANGLE_BETWEEN_LINES = 10;
 
-export function showSideDrawer(args: EventData) {
-    console.log("Show SideDrawer tapped.");
-}
+const updateCallback = function() {
+  const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
+  crosshair.animate({
+    scale: {
+      x: scaleCrosshair,
+      y: scaleCrosshair
+    },
+    translate: {
+      x: 0,
+      y: app.ios? -10 : 0
+    },
+    rotate: -z,
+    duration: 0
+  });
+
+  const scaleDoubleLine = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight());
+  const distanceFromCenter = params.pixels2Dp((params.degrees2Pixels((-y % ANGLE_BETWEEN_LINES)
+                            - ANGLE_BETWEEN_LINES/2 * (y>0? -1: 1))));
+  lowerText.text = 10* Math.floor(-y/10);
+  upperText.text = 10* Math.floor((-y+10)/10);
+  doubleline.animate({
+    scale: {
+      x: scaleDoubleLine,
+      y: scaleDoubleLine
+    },
+    translate: {
+      x : Math.sin(z*Math.PI/180)*distanceFromCenter,
+      y: Math.cos(z*Math.PI/180)*distanceFromCenter + (app.ios? -10 : 0)
+    },
+
+    rotate: -z,
+    duration: 0
+  });
+  lowerText.animate({
+    translate: {
+      x : Math.sin(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
+      y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + (app.ios? -10 : 0)
+    },
+    rotate: -z,
+    duration: 0
+  });
+  upperText.animate({
+    translate: {
+      x :  Math.sin(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
+      y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + (app.ios? -10 : 0)
+    },
+    rotate: -z,
+    duration: 0
+  });
+
+  let cameraView = page.getViewById("placeholder-view");;
+  cameraView.animate({
+    scale: {
+      x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
+      y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
+    },
+    translate: {
+      x: 0,
+      y: app.ios? -10 : 0
+    },
+    duration: 2000
+  });
+
+};
+
+// export function showSideDrawer(args: EventData) {
+//     console.log("Show SideDrawer tapped.");
+// }
 
 //TODO: split up the code
 export function onLoaded(args: EventData) {
   orientation.setCurrentOrientation("portrait", () => {});
-  const View :any = android.view.View;
   if (app.android && platform.device.sdkVersion >= '21') {
+      const View :any = android.view.View;
       const window = app.android.startActivity.getWindow();
       // set the status bar to Color.Transparent
       window.setStatusBarColor(0x000000);
@@ -57,65 +122,24 @@ export function onLoaded(args: EventData) {
       x = data.x;
       y = data.y;
       z = data.z;
+      updateCallback();
   },  { sensorDelay: "game" });
 }
 
 export function onCreatingView(args: EventData) {
-  permissions.requestPermission(android["Manifest"].permission.CAMERA, "I need these permissions for the viewfinder")
-  .then(function() {
-     console.log("Woo Hoo, I have the power!");
-  })
-  .catch(function() {
-     console.log("Uh oh, no permissions - plan B time!");
-  });
-  params.initialize();
-  cameraPreview.onCreatingView(function() {
-    const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
-    crosshair.animate({
-      scale: {
-        x: scaleCrosshair,
-        y: scaleCrosshair
-      },
-      rotate: -z,
-      duration: 0
+  if(app.android) {
+    permissions.requestPermission(android["Manifest"].permission.CAMERA, "I need these permissions for the viewfinder")
+    .then(function() {
+       console.log("Woo Hoo, I have the power!");
+    })
+    .catch(function() {
+       console.log("Uh oh, no permissions - plan B time!");
     });
+  }
 
-    const scaleDoubleLine = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight());
-    const distanceFromCenter = params.pixels2Dp((params.degrees2Pixels((-y % ANGLE_BETWEEN_LINES)
-                              - ANGLE_BETWEEN_LINES/2 * (y>0? -1: 1))));
-    lowerText.text = 10* Math.floor(-y/10);
-    upperText.text = 10* Math.floor((-y+10)/10);
-    doubleline.animate({
-      scale: {
-        x: scaleDoubleLine,
-        y: scaleDoubleLine
-      },
-      translate: {
-        x : Math.sin(z*Math.PI/180)*distanceFromCenter,
-        y: Math.cos(z*Math.PI/180)*distanceFromCenter
-      },
-
-      rotate: -z,
-      duration: 0
-    });
-    lowerText.animate({
-      translate: {
-        x : Math.sin(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-        y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
-      },
-      rotate: -z,
-      duration: 0
-    });
-    upperText.animate({
-      translate: {
-        x :  Math.sin(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-        y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
-      },
-      rotate: -z,
-      duration: 0
-    });
-
-  }, args);
+  if(app.android) params.initialize();
+  cameraPreview.onCreatingView(updateCallback, args);
+  if (app.ios) params.initialize();
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);

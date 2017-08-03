@@ -36,12 +36,12 @@ const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListe
         createCameraPreviewSession();
         // openCamera()
 
-        common.cameraView.animate({
-          scale: {
-            x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
-            y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
-          duration: 2000
-        });
+        // common.cameraView.animate({
+        //   scale: {
+        //     x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
+        //     y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
+        //   duration: 2000
+        // });
     },
 
     onSurfaceTextureSizeChanged: function(texture) {
@@ -402,6 +402,7 @@ const stopBackgroundThread = function () {
   // }
 }
 const setUpCameraOutputs = function() {
+  console.log("Entering setUpCameraOutputs");
   const activity = app.android.context;
   const cameraManager = activity.getSystemService(android.content.Context.CAMERA_SERVICE);
   const cameras = cameraManager.getCameraIdList();
@@ -616,6 +617,7 @@ Note: exports allows it to be exposed for outside use
 */
 //TODO TODO TODO TODO Fix Fix Fix Fix
 exports.onCreatingView = function(callback, args) {
+  console.log("Entering onCreatingView");
   setUpCameraOutputs();
   surfaceUpdateCallback = zonedCallback(callback);
   const activity = app.android.context;
