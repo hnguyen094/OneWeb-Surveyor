@@ -76,7 +76,7 @@ function startRotUpdates(callback, options) {
         var queue = NSOperationQueue.alloc().init();
         console.log("motionamanger "+ CMMotionManager);
         console.dir(accManager);
-        var referenceFrame = CMAttitudeReferenceFrame.CMAttitudeReferenceFrameXArbitraryCorrectedZVertical;
+        var referenceFrame = CMAttitudeReferenceFrame.CMAttitudeReferenceFrameXMagneticNorthZVertical;
         console.log("Ref frame " + referenceFrame);
         accManager.startDeviceMotionUpdatesUsingReferenceFrameToQueueWithHandler(referenceFrame, queue, function (data, error) {
             dispatch_async(main_queue, function () {
