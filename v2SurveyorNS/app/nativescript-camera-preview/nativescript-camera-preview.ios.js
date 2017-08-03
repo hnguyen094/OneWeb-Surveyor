@@ -57,7 +57,7 @@ exports.onTakeShot = function(args) {
 
 exports.onCreatingView = function(callback, args) {
   var session = new AVCaptureSession();
-  session.sessionPreset = AVCaptureSessionPresetHigh;
+  session.sessionPreset = AVCaptureSessionPreset1920x1080;
 
   var wrappedCallback = zonedCallback(callback);
   // Adding capture device
