@@ -119,7 +119,7 @@ export function onLoaded(args: EventData) {
 
 
   rotVector.startRotUpdates(function(data) {
-      // console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
       y = data.y;
       z = data.z;

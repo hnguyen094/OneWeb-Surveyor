@@ -21,7 +21,7 @@ function getNativeDelay(options) {
 
 function remapRotationMatrix(rotationMatrix) { // convrted from Android's version
   const r = rotationMatrix;
-  const matrixArray = [r.m11, r.m12, r.m13, r.m21, r.m22, r.m23, r.m31, r.m32, r.m33];
+  const matrixArray = [-r.m11, -r.m12, -r.m13, -r.m21, -r.m22, -r.m23, -r.m31, -r.m32, -r.m33];
   let resultMatrixArray = [0,0,0,0,0,0,0,0,0];
   // defining the two axis, instead of as a param
   let X = 1;
@@ -59,7 +59,8 @@ function getOrientation(matrixArray) { //converted from Android's version
   const resultOrientation = [0,0,0];
   resultOrientation[0] = Math.atan2(matrixArray[1], matrixArray[4]);
   resultOrientation[1] = Math.asin(-matrixArray[7]);
-  resultOrientation[2] = Math.atan2(-matrixArray[8], matrixArray[10]);
+  resultOrientation[2] = Math.atan2(-matrixArray[6], matrixArray[8]);
+  return resultOrientation;
 }
 
 function startRotUpdates(callback, options) {
@@ -103,7 +104,6 @@ function startRotUpdates(callback, options) {
               //let inverse_matrix = original_matrix.inverse(); // TODO: Implement
 
               const orientations = getOrientation(remapRotationMatrix(data.attitude.rotationMatrix));
-
                 wrappedCallback({
                 //     x: -180/Math.PI * Math.atan2(2*(quat.y*quat.w - quat.x*quat.z), 1- 2*quat.y*quat.y - 2*quat.z*quat.z), // TODO: Probably doesn't work
                 //     y: -Math.atan2(2 * (quat.x * quat.w + quat.y * quat.z), 1 - 2 * quat.x * quat.x - 2 * quat.z * quat.z) * 180 / Math.PI,
