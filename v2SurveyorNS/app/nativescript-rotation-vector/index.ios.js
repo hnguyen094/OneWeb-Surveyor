@@ -40,7 +40,7 @@ function startRotUpdates(callback, options) {
               // console.log(origin);
               // let original_matrix = data.attitude.rotationMatrix;
               const r = data.attitude.rotationMatrix;
-              // console.dir("GLK matrix invert is " +[r.m11, r.m12, r.m13, r.m21, r.m22, r.m23, r.m31, r.m32, r.m33]);
+              console.dir([r.m11, r.m12, r.m13, r.m21, r.m22, r.m23, r.m31, r.m32, r.m33]);
               // let temp_matrix = GLKMatrix3Invert(original_matrix, null);
               // let inverse_matrix;
               // inverse_matrix.m11 = invert.m00;

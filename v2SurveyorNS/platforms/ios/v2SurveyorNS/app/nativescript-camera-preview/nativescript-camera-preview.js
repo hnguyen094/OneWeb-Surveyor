@@ -47,18 +47,24 @@ exports.requestPermissions = function () {
 
 exports.onTakeShot = function(args) {
   var videoConnection = output.connections[0];
-  output.captureStillImageAsynchronouslyFromConnectionCompletionHandler(videoConnection, function (buffer, error) {
-      var imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer);
-      var image = UIImage.imageWithData(imageData);
-      UIImageWriteToSavedPhotosAlbum(image, null, null, null);
-      AudioServicesPlaySystemSound(144);
-  });
+  // below function doesn't work
+  console.dir(output);
+  // output.captureStillImageAsynchronouslyFromConnectionCompletionHandler(videoConnection, function (buffer, error) {
+  //     var imageData = AVCapturePhotoOutput.jpegStillImageNSDataRepresentation(buffer);
+  //     var image = UIImage.imageWithData(imageData);
+  //     UIImageWriteToSavedPhotosAlbum(image, null, null, null);
+  //     AudioServicesPlaySystemSound(144);
+  // });
+  // output.capturePhotoWithSettingsDelegate(null, null);
 }
 
 exports.onCreatingView = function(callback, args) {
   var session = new AVCaptureSession();
-  session.sessionPreset = AVCaptureSessionPreset1920x1080;
-
+  if(session.canSetSessionPreset(AVCaptureSessionPreset1920x1080)) {
+    session.sessionPreset = AVCaptureSessionPreset1920x1080;
+  } else {
+    session.sessionPreset = AVCaptureSessionPresetHigh;
+  }
   var wrappedCallback = zonedCallback(callback);
   // Adding capture device
   var device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo);
@@ -67,7 +73,7 @@ exports.onCreatingView = function(callback, args) {
       throw new Error("Error trying to open camera.");
   }
   session.addInput(input);
-  output = new AVCaptureStillImageOutput();
+  output = new AVCapturePhotoOutput();
   session.addOutput(output);
   session.startRunning();
   var videoLayer = AVCaptureVideoPreviewLayer.layerWithSession(session);
