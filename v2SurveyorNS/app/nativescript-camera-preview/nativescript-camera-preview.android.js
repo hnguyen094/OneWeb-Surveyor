@@ -344,7 +344,7 @@ Note: Empty for now //TODO
 */
 exports.onResume = function() {
   console.log("entering onResume");
-  startBackgroundThread();
+  //startBackgroundThread(); //TODO: When starting another thread, typescript couldn't find this module anymore. Need to fix
   if (!mTextureView) {
     return;
   }
