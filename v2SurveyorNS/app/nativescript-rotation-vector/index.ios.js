@@ -39,7 +39,8 @@ function startRotUpdates(callback, options) {
               // let origin = data.gravity;
               // console.log(origin);
               // let original_matrix = data.attitude.rotationMatrix;
-              // console.log("GLK matrix invert is " +GLKit);
+              const r = data.attitude.rotationMatrix;
+              // console.dir("GLK matrix invert is " +[r.m11, r.m12, r.m13, r.m21, r.m22, r.m23, r.m31, r.m32, r.m33]);
               // let temp_matrix = GLKMatrix3Invert(original_matrix, null);
               // let inverse_matrix;
               // inverse_matrix.m11 = invert.m00;
@@ -59,9 +60,12 @@ function startRotUpdates(callback, options) {
               //let inverse_matrix = original_matrix.inverse(); // TODO: Implement
               const quat = data.attitude.quaternion;
                 wrappedCallback({
-                    x: -180/Math.PI * Math.atan2(2*(quat.y*quat.w - quat.x*quat.z), 1- 2*quat.y*quat.y - 2*quat.z*quat.z), // TODO: Probably doesn't work
-                    y: -180/Math.PI * Math.atan2(2*(quat.x*quat.w + quat.y*quat.z), 1- 2*quat.x*quat.x - 2*quat.z*quat.z),
-                    z: -180/Math.PI * Math.asin(2*(quat.x*quat.z - quat.w*quat.y)) // yaw
+                //     x: -180/Math.PI * Math.atan2(2*(quat.y*quat.w - quat.x*quat.z), 1- 2*quat.y*quat.y - 2*quat.z*quat.z), // TODO: Probably doesn't work
+                //     y: -Math.atan2(2 * (quat.x * quat.w + quat.y * quat.z), 1 - 2 * quat.x * quat.x - 2 * quat.z * quat.z) * 180 / Math.PI,
+                //     z: Math.atan2(2 * (quat.y * quat.w - quat.x * quat.z), 1 - 2 * quat.y * quat.y - 2 * quat.z * quat.z) * 180/ Math.PI
+                       x: 180/Math.PI * Math.atan2(r.m21, r.m22),
+                       y: 180/Math.PI * Math.asin(-r.m23),
+                       z: 180/Math.PI * Math.atan2(-r.m13, r.m33)
                 });
             });
         });

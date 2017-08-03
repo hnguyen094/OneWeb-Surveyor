@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const platformModule = require("tns-core-modules/platform");
+
+
 let output;
 let maxWidth;
 let maxHeight;
@@ -54,7 +57,8 @@ exports.onTakeShot = function(args) {
 
 exports.onCreatingView = function(callback, args) {
   var session = new AVCaptureSession();
-  session.sessionPreset = AVCaptureSessionPreset1280x720;
+  session.sessionPreset = AVCaptureSessionPresetHigh;
+
   var wrappedCallback = zonedCallback(callback);
   // Adding capture device
   var device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo);
@@ -63,15 +67,14 @@ exports.onCreatingView = function(callback, args) {
       throw new Error("Error trying to open camera.");
   }
   session.addInput(input);
-
   output = new AVCaptureStillImageOutput();
   session.addOutput(output);
-
   session.startRunning();
-
   var videoLayer = AVCaptureVideoPreviewLayer.layerWithSession(session);
-
-  var view = UIView.alloc().initWithFrame({ origin: { x: 0, y: 0 }, size: { width: 400, height: 600 } });
+  let dimensions = CMVideoFormatDescriptionGetDimensions(device.activeFormat.formatDescription);
+  setMaxSize(dimensions.width, dimensions.height);
+  //var view = UIView.alloc().initWithFrame({ origin: { x: 0, y: 0 }, size: { width: 1000, height: 1000 } });
+  var view = UIView.alloc().initWithFrame({ origin: { x: 0, y: 0 }, size: { width: 300, height: 300*16/9} });
   videoLayer.frame = view.bounds;
   view.layer.addSublayer(videoLayer);
   args.view = view;

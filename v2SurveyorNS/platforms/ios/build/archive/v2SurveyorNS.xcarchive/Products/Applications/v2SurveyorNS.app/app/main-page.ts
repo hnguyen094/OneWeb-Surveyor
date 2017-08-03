@@ -35,6 +35,10 @@ const updateCallback = function() {
       x: scaleCrosshair,
       y: scaleCrosshair
     },
+    translate: {
+      x: 0,
+      y: app.ios? -10 : 0
+    },
     rotate: -z,
     duration: 0
   });
@@ -51,7 +55,7 @@ const updateCallback = function() {
     },
     translate: {
       x : Math.sin(z*Math.PI/180)*distanceFromCenter,
-      y: Math.cos(z*Math.PI/180)*distanceFromCenter
+      y: Math.cos(z*Math.PI/180)*distanceFromCenter + (app.ios? -10 : 0)
     },
 
     rotate: -z,
@@ -60,7 +64,7 @@ const updateCallback = function() {
   lowerText.animate({
     translate: {
       x : Math.sin(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-      y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
+      y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + (app.ios? -10 : 0)
     },
     rotate: -z,
     duration: 0
@@ -68,11 +72,25 @@ const updateCallback = function() {
   upperText.animate({
     translate: {
       x :  Math.sin(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-      y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
+      y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + (app.ios? -10 : 0)
     },
     rotate: -z,
     duration: 0
   });
+
+  let cameraView = page.getViewById("placeholder-view");;
+  cameraView.animate({
+    scale: {
+      x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
+      y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
+    },
+    translate: {
+      x: 0,
+      y: app.ios? -10 : 0
+    },
+    duration: 2000
+  });
+
 };
 
 // export function showSideDrawer(args: EventData) {
@@ -104,6 +122,7 @@ export function onLoaded(args: EventData) {
       x = data.x;
       y = data.y;
       z = data.z;
+      updateCallback();
   },  { sensorDelay: "game" });
 }
 
@@ -117,8 +136,10 @@ export function onCreatingView(args: EventData) {
        console.log("Uh oh, no permissions - plan B time!");
     });
   }
-  params.initialize();
+
+  if(app.android) params.initialize();
   cameraPreview.onCreatingView(updateCallback, args);
+  if (app.ios) params.initialize();
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);

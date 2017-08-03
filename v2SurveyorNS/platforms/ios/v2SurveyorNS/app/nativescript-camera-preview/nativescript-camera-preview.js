@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const platformModule = require("tns-core-modules/platform");
 
+
 let output;
 let maxWidth;
 let maxHeight;

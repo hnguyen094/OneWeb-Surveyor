@@ -94,7 +94,7 @@
 		</data>
 		<key>Frameworks/NativeScript.framework/NativeScript</key>
 		<data>
-		kw/CmCxzkcUu1KhLV5JeQUMSxIk=
+		eSTrK8jmHZ8OTdQKn/EavsRN1wI=
 		</data>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -114,7 +114,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		k9dq38x8BU1RsnngrtRfyaGTyJA=
+		ZpHCwrlOmuzlBzy9jhDLxkZd4VM=
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
@@ -222,19 +222,19 @@
 		</data>
 		<key>app/main-page.css</key>
 		<data>
-		fvut8KyDz4ef/ID73enkKq4zqxw=
+		ns5mDYPMqIutMqyeZl2YGiOV1Lc=
 		</data>
 		<key>app/main-page.js</key>
 		<data>
-		HnVxFfeJv0BmXunc/DKeSkMaF+4=
+		OJS0NLH4RNOEOgpVVNE4vRsz4OY=
 		</data>
 		<key>app/main-page.ts</key>
 		<data>
-		CkTlMvVLTTHyq1OcC6oU4gDpnxg=
+		l5elAGUGjmn8XwgQkFs4lgHtuv8=
 		</data>
 		<key>app/main-page.xml</key>
 		<data>
-		F1K7jLKHlwhHmttIxd9oVIKnQkI=
+		dzSdpPqK6TlVu+LqWR/qUKdSvjo=
 		</data>
 		<key>app/main-view-model.js</key>
 		<data>
@@ -262,7 +262,7 @@
 		</data>
 		<key>app/nativescript-camera-preview/nativescript-camera-preview.js</key>
 		<data>
-		kWdaJ5b1I74/brW7lcQL49TqAY4=
+		noD28aDvFe+yOr8gZTTKwm/yzAE=
 		</data>
 		<key>app/nativescript-camera-preview/package.json</key>
 		<data>
@@ -282,7 +282,7 @@
 		</data>
 		<key>app/nativescript-fov/nativescript-fov.js</key>
 		<data>
-		JWdDa9M2+RvdvP4W/OfzCeZJ2Tw=
+		37C/A6IPoD8gBJcDccUnkgJJsow=
 		</data>
 		<key>app/nativescript-rotation-vector/.npmignore</key>
 		<data>
@@ -302,7 +302,7 @@
 		</data>
 		<key>app/nativescript-rotation-vector/index.js</key>
 		<data>
-		FUREuG4/w3IiTc3cSTailnzTZvc=
+		v4SAc7lbmByH0d2qEXD8LQM600I=
 		</data>
 		<key>app/nativescript-rotation-vector/package.json</key>
 		<data>
@@ -2098,11 +2098,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			kw/CmCxzkcUu1KhLV5JeQUMSxIk=
+			eSTrK8jmHZ8OTdQKn/EavsRN1wI=
 			</data>
 			<key>hash2</key>
 			<data>
-			vZznVVYeGW6WGDykKwxJP26QP71bOyCLgenPWCkJRQM=
+			Kh8AEp7MOd/9jW5A5K7RSm6AzTAaJYzN0dj6OOi2Zxw=
 			</data>
 		</dict>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
@@ -2428,44 +2428,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fvut8KyDz4ef/ID73enkKq4zqxw=
+			ns5mDYPMqIutMqyeZl2YGiOV1Lc=
 			</data>
 			<key>hash2</key>
 			<data>
-			S6sFhiAkjN3qe9Ao1mAzyA4rx5MpD/ZRyXbJk07hJgI=
+			VBN1yNTD/mQa2QI56Tpa7Ko7T0xfZA9kNJy5JnfCJRM=
 			</data>
 		</dict>
 		<key>app/main-page.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HnVxFfeJv0BmXunc/DKeSkMaF+4=
+			OJS0NLH4RNOEOgpVVNE4vRsz4OY=
 			</data>
 			<key>hash2</key>
 			<data>
-			kcggoAq7wdsk7QAFLbN/iqrp70lIEHJlnEIzfLNaW/0=
+			1H5MVPYAr8wQJ+MC2RxNXnNmDY4w8pxaLQEo9foGo50=
 			</data>
 		</dict>
 		<key>app/main-page.ts</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CkTlMvVLTTHyq1OcC6oU4gDpnxg=
+			l5elAGUGjmn8XwgQkFs4lgHtuv8=
 			</data>
 			<key>hash2</key>
 			<data>
-			lRXyur0hQgLhrzsBFHG7KGjmJorJrTPi3XWAlHCD5CM=
+			O/3bE23GKPCEMdZ35otyxMMSQYz3Ssjyg958BGyRNqg=
 			</data>
 		</dict>
 		<key>app/main-page.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			F1K7jLKHlwhHmttIxd9oVIKnQkI=
+			dzSdpPqK6TlVu+LqWR/qUKdSvjo=
 			</data>
 			<key>hash2</key>
 			<data>
-			KQ1AZtMv2BnImMeEHCSmi5dMvrrDKtorG35s4UoDPhg=
+			U2BBVsOnOLT5HZfObB+RNVYgbMmE+xDQ1lZddyhxggA=
 			</data>
 		</dict>
 		<key>app/main-view-model.js</key>
@@ -2538,11 +2538,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			kWdaJ5b1I74/brW7lcQL49TqAY4=
+			noD28aDvFe+yOr8gZTTKwm/yzAE=
 			</data>
 			<key>hash2</key>
 			<data>
-			NRNwiRIIfRzCIYsg6v8fUXU+fCRSJk6f/l/QqEe8nnE=
+			nET/ceW4uE6mKv6RSPXH+hNfRxCo0DB0Dka2S48rK5E=
 			</data>
 		</dict>
 		<key>app/nativescript-camera-preview/package.json</key>
@@ -2593,11 +2593,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JWdDa9M2+RvdvP4W/OfzCeZJ2Tw=
+			37C/A6IPoD8gBJcDccUnkgJJsow=
 			</data>
 			<key>hash2</key>
 			<data>
-			nh60CIFZwHDiS8Vjrg2GOwOdyinQfZfdPyCjujpyb4Q=
+			Wq2gCZEQuptaKjBS/fZxoIwL5bW98tc34DpMQynwljs=
 			</data>
 		</dict>
 		<key>app/nativescript-rotation-vector/.npmignore</key>
@@ -2648,11 +2648,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			FUREuG4/w3IiTc3cSTailnzTZvc=
+			v4SAc7lbmByH0d2qEXD8LQM600I=
 			</data>
 			<key>hash2</key>
 			<data>
-			aVIep+oUlKDwszeqPU8AnAxncD/In1dXG9PxWdbyPeg=
+			+fRPePlvLTJ363RXOKqA2WRQNiWfbDbnRDCdA3WGKjI=
 			</data>
 		</dict>
 		<key>app/nativescript-rotation-vector/package.json</key>

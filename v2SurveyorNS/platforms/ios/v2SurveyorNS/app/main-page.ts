@@ -35,6 +35,10 @@ const updateCallback = function() {
       x: scaleCrosshair,
       y: scaleCrosshair
     },
+    translate: {
+      x: 0,
+      y: app.ios? -10 : 0
+    },
     rotate: -z,
     duration: 0
   });
@@ -51,7 +55,7 @@ const updateCallback = function() {
     },
     translate: {
       x : Math.sin(z*Math.PI/180)*distanceFromCenter,
-      y: Math.cos(z*Math.PI/180)*distanceFromCenter
+      y: Math.cos(z*Math.PI/180)*distanceFromCenter + (app.ios? -10 : 0)
     },
 
     rotate: -z,
@@ -60,7 +64,7 @@ const updateCallback = function() {
   lowerText.animate({
     translate: {
       x : Math.sin(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-      y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
+      y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + (app.ios? -10 : 0)
     },
     rotate: -z,
     duration: 0
@@ -68,7 +72,7 @@ const updateCallback = function() {
   upperText.animate({
     translate: {
       x :  Math.sin(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-      y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2))
+      y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + (app.ios? -10 : 0)
     },
     rotate: -z,
     duration: 0
@@ -77,8 +81,8 @@ const updateCallback = function() {
   let cameraView = page.getViewById("placeholder-view");;
   cameraView.animate({
     scale: {
-      x: platform.screen.mainScreen.widthPixels/cameraView.getMeasuredWidth(),
-      y: platform.screen.mainScreen.widthPixels/cameraView.getMeasuredWidth()
+      x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
+      y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
     },
     translate: {
       x: 0,
@@ -114,7 +118,7 @@ export function onLoaded(args: EventData) {
 
 
   rotVector.startRotUpdates(function(data) {
-      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      // console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
       y = data.y;
       z = data.z;
