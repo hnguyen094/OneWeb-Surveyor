@@ -42,11 +42,11 @@ Therefore, this version is a cleaner & working version of its predecessor.
 Features | Android | iOS
 --- | --- | ---
 **UX** (aesthetics) | No | No
-**UI:** Crosshair to elevation | Yes | No
-**UI:** Levels of elevation | Yes | No
-Live Camera | Yes | Yes(?)
+**UI:** Crosshair to elevation | Yes | Yes
+**UI:** Levels of elevation | Yes | Yes
+Live Camera | Yes | Yes
 **Accuracy:** Camera | No | No
-Rotation Sensor | Yes | Yes(?)
+Rotation Sensor | Yes | Yes
 Data | No | No
 **Accuracy:** Data | N/A | N/A
 
