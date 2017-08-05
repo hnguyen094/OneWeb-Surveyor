@@ -80,29 +80,6 @@ function startRotUpdates(callback, options) {
         console.log("Ref frame " + referenceFrame);
         accManager.startDeviceMotionUpdatesUsingReferenceFrameToQueueWithHandler(referenceFrame, queue, function (data, error) {
             dispatch_async(main_queue, function () {
-              // console.dir(accManager);
-              // let origin = data.gravity;
-              // console.log(origin);
-              // let original_matrix = data.attitude.rotationMatrix;
-
-              // let temp_matrix = GLKMatrix3Invert(original_matrix, null);
-              // let inverse_matrix;
-              // inverse_matrix.m11 = invert.m00;
-              // inverse_matrix.m12 = invert.m01;
-              // inverse_matrix.m13 = invert.m02;
-              // inverse_matrix.m21 = invert.m10;
-              // inverse_matrix.m22 = invert.m11;
-              // inverse_matrix.m23 = invert.m12;
-              // inverse_matrix.m31 = invert.m20;
-              // inverse_matrix.m32 = invert.m21;
-              // inverse_matrix.m33 = invert.m22;
-              // let result;
-              // result.x = origin.x * inverse_matrix.m11 + origin.y * inverse_matrix.m12 + origin.z * inverse_matrix.m13;
-              // result.y = origin.x * inverse_matrix.m21 + origin.y * inverse_matrix.m22 + origin.z * inverse_matrix.m23;
-              // result.z = origin.x * inverse_matrix.m31 + origin.y * inverse_matrix.m32 + origin.z * inverse_matrix.m33;
-
-              //let inverse_matrix = original_matrix.inverse(); // TODO: Implement
-
               const orientations = getOrientation(remapRotationMatrix(data.attitude.rotationMatrix));
                 wrappedCallback({
                 //     x: -180/Math.PI * Math.atan2(2*(quat.y*quat.w - quat.x*quat.z), 1- 2*quat.y*quat.y - 2*quat.z*quat.z), // TODO: Probably doesn't work
