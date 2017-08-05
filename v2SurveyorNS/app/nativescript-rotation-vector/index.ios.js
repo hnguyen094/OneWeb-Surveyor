@@ -81,13 +81,13 @@ function startRotUpdates(callback, options) {
         accManager.startDeviceMotionUpdatesUsingReferenceFrameToQueueWithHandler(referenceFrame, queue, function (data, error) {
             dispatch_async(main_queue, function () {
               const orientations = getOrientation(remapRotationMatrix(data.attitude.rotationMatrix));
+              for(let i = 0; i < orientations.length; i++) {
+                orientations[i] *= 180/Math.PI;
+              }
                 wrappedCallback({
-                //     x: -180/Math.PI * Math.atan2(2*(quat.y*quat.w - quat.x*quat.z), 1- 2*quat.y*quat.y - 2*quat.z*quat.z), // TODO: Probably doesn't work
-                //     y: -Math.atan2(2 * (quat.x * quat.w + quat.y * quat.z), 1 - 2 * quat.x * quat.x - 2 * quat.z * quat.z) * 180 / Math.PI,
-                //     z: Math.atan2(2 * (quat.y * quat.w - quat.x * quat.z), 1 - 2 * quat.y * quat.y - 2 * quat.z * quat.z) * 180/ Math.PI
-                       x: 180/Math.PI * orientations[0],
-                       y: 180/Math.PI * orientations[1],
-                       z: 180/Math.PI * orientations[2]
+                  x: orientations[0],
+                  y: orientations[1],
+                  z: orientations[2]
                 });
             });
         });
