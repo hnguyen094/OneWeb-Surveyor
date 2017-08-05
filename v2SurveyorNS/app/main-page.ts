@@ -78,19 +78,20 @@ const updateCallback = function() {
     rotate: -z,
     duration: 0
   });
-
-  let cameraView = page.getViewById("placeholder-view");;
-  cameraView.animate({
-    scale: {
-      x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
-      y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
-    },
-    translate: {
-      x: 0,
-      y: app.ios? -10 : 0
-    },
-    duration: 2000
-  });
+  if (app.ios) {
+    let cameraView = page.getViewById("placeholder-view");;
+    cameraView.animate({
+      scale: {
+        x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
+        y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
+      },
+      translate: {
+        x: 0,
+        y: app.ios? -10 : 0
+      },
+      duration: 2000
+    });
+  }
 
 };
 

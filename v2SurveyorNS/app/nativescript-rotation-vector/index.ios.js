@@ -57,9 +57,9 @@ function remapRotationMatrix(rotationMatrix) { // convrted from Android's versio
 
 function getOrientation(matrixArray) { //converted from Android's version
   const resultOrientation = [0,0,0];
-  resultOrientation[0] = Math.atan2(matrixArray[6], matrixArray[4]);
-  resultOrientation[1] = Math.asin(-matrixArray[7]);
-  resultOrientation[2] = Math.atan2(-matrixArray[6], matrixArray[8]);
+  resultOrientation[0] = Math.atan2(matrixArray[1], matrixArray[4]);
+  resultOrientation[1] = Math.asin(matrixArray[7]);
+  resultOrientation[2] = -Math.atan2(-matrixArray[6], -matrixArray[8]);
   return resultOrientation;
 }
 
