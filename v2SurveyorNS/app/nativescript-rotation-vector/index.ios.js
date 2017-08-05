@@ -21,7 +21,7 @@ function getNativeDelay(options) {
 
 function remapRotationMatrix(rotationMatrix) { // convrted from Android's version
   const r = rotationMatrix;
-  const matrixArray = [-r.m11, -r.m12, -r.m13, -r.m21, -r.m22, -r.m23, -r.m31, -r.m32, -r.m33];
+  const matrixArray = [-r.m11, -r.m21, -r.m31, -r.m12, -r.m22, -r.m32, -r.m13, -r.m23, -r.m33];
   let resultMatrixArray = [0,0,0,0,0,0,0,0,0];
   // defining the two axis, instead of as a param
   let X = 1;
