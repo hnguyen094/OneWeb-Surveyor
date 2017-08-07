@@ -29,6 +29,7 @@ const OUTER_CIRCLE_DIAMETER = 2;
 const ANGLE_BETWEEN_LINES = 10;
 
 const updateCallback = function() {
+  // console.log("Entered updateCallback");
   const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
   crosshair.animate({
     scale: {
@@ -77,19 +78,20 @@ const updateCallback = function() {
     rotate: -z,
     duration: 0
   });
-
-  let cameraView = page.getViewById("placeholder-view");;
-  cameraView.animate({
-    scale: {
-      x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
-      y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
-    },
-    translate: {
-      x: 0,
-      y: app.ios? -10 : 0
-    },
-    duration: 2000
-  });
+  if (app.ios) {
+    let cameraView = page.getViewById("placeholder-view");;
+    cameraView.animate({
+      scale: {
+        x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
+        y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
+      },
+      translate: {
+        x: 0,
+        y: app.ios? -10 : 0
+      },
+      duration: 2000
+    });
+  }
 
 };
 
@@ -118,11 +120,11 @@ export function onLoaded(args: EventData) {
 
 
   rotVector.startRotUpdates(function(data) {
-      // console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
       y = data.y;
       z = data.z;
-      updateCallback();
+      if(app.ios) updateCallback();
   },  { sensorDelay: "game" });
 }
 

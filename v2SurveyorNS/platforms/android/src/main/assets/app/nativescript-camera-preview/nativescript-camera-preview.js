@@ -30,11 +30,18 @@ const MAX_PREVIEW_HEIGHT            = 1920; // max preview height guaranteed by 
 from Java : public static interface
 See github repo at the link on the top of this page to better understand
 */
+let isFirst = true;
 const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListener({
     onSurfaceTextureAvailable: function(texture, width, height) {
         console.log('onSurfaceTextureAvailable');
+        // if(isFirst){
+        //   isFirst = false;
+        // } else {
+        //   openCamera();
+        // }
         createCameraPreviewSession();
-        // openCamera()
+
+        // openCamera();
 
         // common.cameraView.animate({
         //   scale: {
@@ -79,7 +86,8 @@ const MyStateCallback = android.hardware.camera2.CameraDevice.StateCallback.exte
         console.log("Entering onOpened " + cameraDevice);
         mCameraOpenCloseLock.release();
         mCameraDevice = cameraDevice;
-        createCameraPreviewSession();
+        // createCameraPreviewSession();
+
     },
 
     onDisconnected: function(cameraDevice) {
@@ -122,7 +130,7 @@ const MyStateCallback = android.hardware.camera2.CameraDevice.StateCallback.exte
   });
 
 let mBackgroundThread; // NEW: // Type: HandlerThread // An additional thread for running tasks that shouldn't block the UI
-let mBackgroundHandler; // Type: Handler // Handler to run things in the background
+let mBackgroundHandler = null; // Type: Handler // Handler to run things in the background
 let mImageReader; // Type: ImageReader // handles still image capture
 
 /**
@@ -334,8 +342,8 @@ Note: Empty for now //TODO
 */
 exports.onPause = function() {
   console.log('Entering onPause');
-  closeCamera();
-  stopBackgroundThread();
+  //closeCamera();
+  //stopBackgroundThread();
 };
 
 /**
@@ -354,7 +362,7 @@ exports.onResume = function() {
     // available, and "onSurfaceTextureAvailable" will not be called. In that case, we can open
     // a camera and start preview from here (otherwise, we wait until the surface is ready in
     // the SurfaceTextureListener).
-    openCamera(mTextureView.getWidth(), mTextureView.getHeight());
+    openCamera();
   } else {
     mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
   }
@@ -401,6 +409,21 @@ const stopBackgroundThread = function () {
   //   throw Error("Error: BackgroundThread isn't stopping.");
   // }
 }
+const openCamera = function() {
+  setUpCameraOutputs();
+  const activity = app.android.context;
+  const cameraManager = activity.getSystemService(android.content.Context.CAMERA_SERVICE);
+  let mStateCallBack = new MyStateCallback();
+  try {
+    if(!mCameraOpenCloseLock.tryAcquire(2500, java.util.concurrent.TimeUnit.MILLISECONDS)) {
+      throw Error("Error: Timeout waiting to lock camera opening.")
+    }
+    cameraManager.openCamera(mCameraId, mStateCallBack, mBackgroundHandler);
+  } catch(e) {
+    throw Error("Error: camera opening can't be locked.");
+  }
+}
+
 const setUpCameraOutputs = function() {
   console.log("Entering setUpCameraOutputs");
   const activity = app.android.context;
@@ -593,6 +616,7 @@ const createCameraPreviewSession = function() {
       mPreviewRequestBuilder.addTarget(surface);
       let surfaceList = new java.util.ArrayList();
       surfaceList.add(surface);
+      surfaceList.add(mImageReader.getSurface());
       mCameraDevice.createCaptureSession(surfaceList, new MyCameraCaptureSessionStateCallback(), null);
     } catch(e) {
       throw Error("Error: can't access camera.[createCameraPreviewSession]");
@@ -618,20 +642,10 @@ Note: exports allows it to be exposed for outside use
 //TODO TODO TODO TODO Fix Fix Fix Fix
 exports.onCreatingView = function(callback, args) {
   console.log("Entering onCreatingView");
-  setUpCameraOutputs();
   surfaceUpdateCallback = zonedCallback(callback);
-  const activity = app.android.context;
-  const cameraManager = activity.getSystemService(android.content.Context.CAMERA_SERVICE);
-  let mStateCallBack = new MyStateCallback();
-  try {
-    if(!mCameraOpenCloseLock.tryAcquire(2500, java.util.concurrent.TimeUnit.MILLISECONDS)) {
-      throw Error("Error: Timeout waiting to lock camera opening.")
-    }
-    cameraManager.openCamera(mCameraId, mStateCallBack, mBackgroundHandler);
-  } catch(e) {
-    throw Error("Error: camera opening can't be locked.");
-  }
+  openCamera();
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
+  console.log("this is " + mTextureView);
   args.view = mTextureView;
 }
 

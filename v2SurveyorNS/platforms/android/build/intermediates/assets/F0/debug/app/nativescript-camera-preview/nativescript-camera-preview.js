@@ -36,12 +36,12 @@ const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListe
         createCameraPreviewSession();
         // openCamera()
 
-        common.cameraView.animate({
-          scale: {
-            x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
-            y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
-          duration: 2000
-        });
+        // common.cameraView.animate({
+        //   scale: {
+        //     x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
+        //     y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
+        //   duration: 2000
+        // });
     },
 
     onSurfaceTextureSizeChanged: function(texture) {
@@ -122,7 +122,7 @@ const MyStateCallback = android.hardware.camera2.CameraDevice.StateCallback.exte
   });
 
 let mBackgroundThread; // NEW: // Type: HandlerThread // An additional thread for running tasks that shouldn't block the UI
-let mBackgroundHandler; // Type: Handler // Handler to run things in the background
+let mBackgroundHandler = null; // Type: Handler // Handler to run things in the background
 let mImageReader; // Type: ImageReader // handles still image capture
 
 /**
@@ -335,7 +335,7 @@ Note: Empty for now //TODO
 exports.onPause = function() {
   console.log('Entering onPause');
   closeCamera();
-  stopBackgroundThread();
+  //stopBackgroundThread();
 };
 
 /**
@@ -344,7 +344,7 @@ Note: Empty for now //TODO
 */
 exports.onResume = function() {
   console.log("entering onResume");
-  startBackgroundThread();
+  //startBackgroundThread(); //TODO: When starting another thread, typescript couldn't find this module anymore. Need to fix
   if (!mTextureView) {
     return;
   }
@@ -402,6 +402,7 @@ const stopBackgroundThread = function () {
   // }
 }
 const setUpCameraOutputs = function() {
+  console.log("Entering setUpCameraOutputs");
   const activity = app.android.context;
   const cameraManager = activity.getSystemService(android.content.Context.CAMERA_SERVICE);
   const cameras = cameraManager.getCameraIdList();
@@ -616,6 +617,7 @@ Note: exports allows it to be exposed for outside use
 */
 //TODO TODO TODO TODO Fix Fix Fix Fix
 exports.onCreatingView = function(callback, args) {
+  console.log("Entering onCreatingView");
   setUpCameraOutputs();
   surfaceUpdateCallback = zonedCallback(callback);
   const activity = app.android.context;

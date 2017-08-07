@@ -35,7 +35,7 @@ function startRotUpdates(callback, options) {
         }
     }
     if (!rotSensor) {
-        rotSensor = sensorManager.getDefaultSensor(android.hardware.Sensor.TYPE_GAME_ROTATION_VECTOR);
+        rotSensor = sensorManager.getDefaultSensor(android.hardware.Sensor.TYPE_ROTATION_VECTOR);
         if (!rotSensor) {
             throw Error("Could get rotation vector sensor.");
         }
@@ -70,6 +70,12 @@ function startRotUpdates(callback, options) {
           android.hardware.SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
           var remappedRotationMatrix =  Array.create("float", 16);
           android.hardware.SensorManager.remapCoordinateSystem(rotationMatrix, android.hardware.SensorManager.AXIS_X, android.hardware.SensorManager.AXIS_Z, remappedRotationMatrix);
+
+          var str= "";
+          for (let i =0; i < 16; i++){
+            str += " " + rotationMatrix[i];
+          }
+          console.log("Thing is " + str);
           var orientations =  Array.create("float", 3);
           android.hardware.SensorManager.getOrientation(remappedRotationMatrix, orientations);
           for (let i = 0; i < 3; i++) {
