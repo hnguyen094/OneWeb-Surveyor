@@ -1,0 +1,71 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "nativescript-rotation-vector",
+        "scope": null,
+        "escapedName": "nativescript-rotation-vector",
+        "name": "nativescript-rotation-vector",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\hnguyen\\HelloWorld"
+    ]
+  ],
+  "_npmVersion": "4.2.0",
+  "_phantomChildren": {},
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "contributors": [
+    {
+      "name": "Alexander Vakrilov",
+      "email": "alexander.vakrilov@gmail.com"
+    },
+    {
+      "name": "Shawn Pavel",
+      "email": "shawn@liveshopper.com"
+    },
+    {
+      "name": "Hung Nguyen",
+      "email": "hungnguyen094@gmail.com"
+    }
+  ],
+  "dependencies": {},
+  "description": "NativeScript rotation vector plugin.",
+  "devDependencies": {
+    "tns-core-modules": ">2.0.0",
+    "tns-platform-declarations": ">2.0.0",
+    "typescript": ">2.0.6"
+  },
+  "directories": {},
+  "keywords": [
+    "nativescript",
+    "physics",
+    "sensor",
+    "hardware"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "nativescript-rotation-vector",
+  "nativescript": {
+    "platforms": {
+      "ios": "3.0.0",
+      "android": "3.0.0"
+    },
+    "tns-ios": {
+      "version": "3.0.0"
+    }
+  },
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "tns-core-modules": ">2.0.0"
+  },
+  "scripts": {
+    "prepublish": "tsc"
+  },
+  "typings": "index.d.ts",
+  "version": "2.0.1"
+}

@@ -10,8 +10,8 @@ exports.getVerticalFOV = common.getVerticalFOV;
 exports.getHorizontalFOV = common.getHorizontalFOV;
 
 function setFOV(HFOV) {
-  common.horizontalFOV = HFOV;
-  common.verticalFOV = 180/ Math.PI * 2* Math.atan(Math.tan(HFOV * Math.PI/180/2) * 9/16); //TODO: Fix the aspect ratio constant
+  common.horizontalFOV = 64;
+  common.verticalFOV = 180/ Math.PI * 2* Math.atan(Math.tan(common.horizontalFOV * Math.PI/180/2) * 9/16); //TODO: Fix the aspect ratio constant
   console.log("HFOV x VFOV: " + common.horizontalFOV + "x" + common.verticalFOV); //TODO: Make sure they're consistent with the android
 }
 exports.setVars = function (maxWidth, maxHeight) {

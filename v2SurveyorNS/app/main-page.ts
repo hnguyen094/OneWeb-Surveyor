@@ -79,7 +79,7 @@ const updateCallback = function() {
     duration: 0
   });
   if (app.ios) {
-    let cameraView = page.getViewById("placeholder-view");;
+    let cameraView = page.getViewById("placeholder-view");
     cameraView.animate({
       scale: {
         x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
@@ -87,7 +87,7 @@ const updateCallback = function() {
       },
       translate: {
         x: 0,
-        y: app.ios? -10 : 0
+        y: app.ios? 10 : 0
       },
       duration: 2000
     });

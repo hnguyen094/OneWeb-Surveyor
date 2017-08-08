@@ -78,19 +78,20 @@ const updateCallback = function() {
     rotate: -z,
     duration: 0
   });
-
-  let cameraView = page.getViewById("placeholder-view");;
-  cameraView.animate({
-    scale: {
-      x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
-      y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
-    },
-    translate: {
-      x: 0,
-      y: app.ios? -10 : 0
-    },
-    duration: 2000
-  });
+  if (app.ios) {
+    let cameraView = page.getViewById("placeholder-view");
+    cameraView.animate({
+      scale: {
+        x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
+        y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
+      },
+      translate: {
+        x: 0,
+        y: app.ios? 10 : 0
+      },
+      duration: 2000
+    });
+  }
 
 };
 
@@ -116,15 +117,6 @@ export function onLoaded(args: EventData) {
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   }
   cameraPreview.onLoaded(args, "placeholder-view");
-
-
-  rotVector.startRotUpdates(function(data) {
-      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
-      x = data.x;
-      y = data.y;
-      z = data.z;
-      if(app.ios) updateCallback();
-  },  { sensorDelay: "game" });
 }
 
 export function onCreatingView(args: EventData) {
@@ -179,14 +171,35 @@ export function navigatingTo(args: EventData) {
 }
 
 //TODO: Camera onResume, when it's lost. FYI: https://docs.nativescript.org/core-concepts/application-lifecycle
+
+// app.android.on(app.AndroidApplication.activityPausedEvent, function (args) {
+//   //app.android.foregroundActivity.onPause();
+//   // cameraPreview.onPause();
+//   rotVector.stopRotUpdates();
+// });
+// app.android.on(app.AndroidApplication.activityResumedEvent, function (args) {
+//   //app.android.foregroundActivity.onResume();
+//   cameraPreview.onResume();
+
+// });
+//
 app.on(app.resumeEvent, function(args) {
   //onCreatingView(args);
+  rotVector.startRotUpdates(function(data) {
+      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      x = data.x;
+      y = data.y;
+      z = data.z;
+      if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
+  },  { sensorDelay: "game" });
   cameraPreview.onResume();
+
 });
 app.on(app.suspendEvent, function(args) {
   cameraPreview.onPause();
   rotVector.stopRotUpdates();
 });
 app.on(app.exitEvent, function(args) {
+  console.log("Entering exitEvent");
   rotVector.stopRotUpdates();
 });
