@@ -43,12 +43,12 @@ const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListe
 
         // openCamera();
 
-        // common.cameraView.animate({
-        //   scale: {
-        //     x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
-        //     y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
-        //   duration: 2000
-        // });
+        common.cameraView.animate({
+          scale: {
+            x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
+            y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
+          duration: 2000
+        });
     },
 
     onSurfaceTextureSizeChanged: function(texture) {
