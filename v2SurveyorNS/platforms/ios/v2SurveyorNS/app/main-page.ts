@@ -106,7 +106,7 @@ export function onLoaded(args: EventData) {
       const View :any = android.view.View;
       const window = app.android.startActivity.getWindow();
       // set the status bar to Color.Transparent
-      window.setStatusBarColor(0x000000);
+      // window.setStatusBarColor(0x000000);
       const decorView = window.getDecorView();
       decorView.setSystemUiVisibility(
           View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -132,7 +132,7 @@ export function onCreatingView(args: EventData) {
 
   if(app.android) params.initialize();
   cameraPreview.onCreatingView(updateCallback, args);
-  if (app.ios) params.initialize();
+  if (app.ios !== undefined) params.initialize();
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
@@ -144,49 +144,18 @@ export function onTakeShot(args: EventData) {
   console.log("el: " + y);
 }
 
-// Event handler for Page "navigatingTo" event attached in main-page.xml
 export function navigatingTo(args: EventData) {
-    /*
-    This gets a reference this page’s <Page> UI component. You can
-    view the API reference of the Page to see what’s available at
-    https://docs.nativescript.org/api-reference/classes/_ui_page_.page.html
-    */
     page = <Page>args.object;
     crosshair = page.getViewById("crosshair");
     doubleline = page.getViewById("doubleline");
     upperText = page.getViewById("upperText");
     lowerText = page.getViewById("lowerText");
-    /*
-    A page’s bindingContext is an object that should be used to perform
-    data binding between XML markup and TypeScript code. Properties
-    on the bindingContext can be accessed using the {{ }} syntax in XML.
-    In this example, the {{ message }} and {{ onTap }} bindings are resolved
-    against the object returned by createViewModel().
-
-
-    You can learn more about data binding in NativeScript at
-    https://docs.nativescript.org/core-concepts/data-binding.
-    */
     page.bindingContext = new HelloWorldModel();
 }
 
-//TODO: Camera onResume, when it's lost. FYI: https://docs.nativescript.org/core-concepts/application-lifecycle
-
-// app.android.on(app.AndroidApplication.activityPausedEvent, function (args) {
-//   //app.android.foregroundActivity.onPause();
-//   // cameraPreview.onPause();
-//   rotVector.stopRotUpdates();
-// });
-// app.android.on(app.AndroidApplication.activityResumedEvent, function (args) {
-//   //app.android.foregroundActivity.onResume();
-//   cameraPreview.onResume();
-
-// });
-//
 app.on(app.resumeEvent, function(args) {
-  //onCreatingView(args);
   rotVector.startRotUpdates(function(data) {
-      console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
       x = data.x;
       y = data.y;
       z = data.z;
@@ -196,10 +165,12 @@ app.on(app.resumeEvent, function(args) {
 
 });
 app.on(app.suspendEvent, function(args) {
+  console.log("onsuspend");
   cameraPreview.onPause();
   rotVector.stopRotUpdates();
 });
 app.on(app.exitEvent, function(args) {
+  console.log("onexit");
   console.log("Entering exitEvent");
   rotVector.stopRotUpdates();
 });

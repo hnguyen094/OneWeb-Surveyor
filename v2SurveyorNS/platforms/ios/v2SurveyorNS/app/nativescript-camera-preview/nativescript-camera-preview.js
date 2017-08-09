@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const platformModule = require("tns-core-modules/platform");
+const application = require("application");
 
 
 let output;
+let session;
 let maxWidth;
 let maxHeight;
 const common = require('./nativescript-camera-preview-common');
@@ -14,11 +16,19 @@ exports.getMaxSize = function () {
 }
 
 exports.onPause = function () {
-  //TODO: implement
+  if(session) {
+      if(session.isRunning) {
+        session.stopRunning();
+      }
+  }
 }
 
 exports.onResume = function () {
-  //TODO: implement
+  if(session) {
+    if(!session.isRunning) {
+      session.startRunning();
+    }
+  }
 }
 
 const setMaxSize = function (width, height) {
@@ -47,19 +57,11 @@ exports.requestPermissions = function () {
 
 exports.onTakeShot = function(args) {
   var videoConnection = output.connections[0];
-  // below function doesn't work
   console.dir(output);
-  // output.captureStillImageAsynchronouslyFromConnectionCompletionHandler(videoConnection, function (buffer, error) {
-  //     var imageData = AVCapturePhotoOutput.jpegStillImageNSDataRepresentation(buffer);
-  //     var image = UIImage.imageWithData(imageData);
-  //     UIImageWriteToSavedPhotosAlbum(image, null, null, null);
-  //     AudioServicesPlaySystemSound(144);
-  // });
-  // output.capturePhotoWithSettingsDelegate(null, null);
 }
 
 exports.onCreatingView = function(callback, args) {
-  var session = new AVCaptureSession();
+  session = new AVCaptureSession();
   if(session.canSetSessionPreset(AVCaptureSessionPreset1920x1080)) {
     session.sessionPreset = AVCaptureSessionPreset1920x1080;
   } else {
@@ -79,7 +81,6 @@ exports.onCreatingView = function(callback, args) {
   var videoLayer = AVCaptureVideoPreviewLayer.layerWithSession(session);
   let dimensions = CMVideoFormatDescriptionGetDimensions(device.activeFormat.formatDescription);
   setMaxSize(dimensions.width, dimensions.height);
-  //var view = UIView.alloc().initWithFrame({ origin: { x: 0, y: 0 }, size: { width: 1000, height: 1000 } });
   var view = UIView.alloc().initWithFrame({ origin: { x: 0, y: 0 }, size: { width: 300, height: 300*16/9} });
   videoLayer.frame = view.bounds;
   view.layer.addSublayer(videoLayer);
