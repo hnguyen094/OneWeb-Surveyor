@@ -18,8 +18,8 @@ function getNativeDelay(options) {
             return 0.001;
     }
 }
-
-function remapRotationMatrix(rotationMatrix) { // convrted from Android's version
+// From: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/hardware/SensorManager.java#1277
+function remapRotationMatrix(rotationMatrix) {
   const r = rotationMatrix;
   const matrixArray = [-r.m11, -r.m21, -r.m31, -r.m12, -r.m22, -r.m32, -r.m13, -r.m23, -r.m33];
   let resultMatrixArray = [0,0,0,0,0,0,0,0,0];
@@ -42,7 +42,6 @@ function remapRotationMatrix(rotationMatrix) { // convrted from Android's versio
   const sx = (X>=0x80);
   const sy = (Y>=0x80);
   const sz = (Z>=0x80);
-
   // Perform R * r, in avoiding actual muls and adds.
   for (let j = 0; j < 3; j++) {
     const offset = j * 3;
@@ -74,10 +73,7 @@ function startRotUpdates(callback, options) {
     accManager.deviceMotionUpdateInterval = getNativeDelay(options);
     if (accManager.deviceMotionAvailable) {
         var queue = NSOperationQueue.alloc().init();
-        console.log("motionamanger "+ CMMotionManager);
-        console.dir(accManager);
         var referenceFrame = CMAttitudeReferenceFrame.CMAttitudeReferenceFrameXMagneticNorthZVertical;
-        console.log("Ref frame " + referenceFrame);
         accManager.startDeviceMotionUpdatesUsingReferenceFrameToQueueWithHandler(referenceFrame, queue, function (data, error) {
             dispatch_async(main_queue, function () {
               const orientations = getOrientation(remapRotationMatrix(data.attitude.rotationMatrix));
@@ -102,7 +98,7 @@ function stopRotUpdates() {
     if (!isListening) {
         throw new Error("Currently not listening for Device Motion events.");
     }
-    accManager.stopRotUpdates();
+    accManager.stopDeviceMotionUpdates();
     isListening = false;
 }
 exports.stopRotUpdates = stopRotUpdates;
