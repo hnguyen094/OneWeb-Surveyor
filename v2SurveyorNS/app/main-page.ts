@@ -136,7 +136,7 @@ export function onCreatingView(args: EventData) {
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
-  console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
+  // console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
 
 export function onTakeShot(args: EventData) {
@@ -165,12 +165,9 @@ app.on(app.resumeEvent, function(args) {
 
 });
 app.on(app.suspendEvent, function(args) {
-  console.log("onsuspend");
   cameraPreview.onPause();
   rotVector.stopRotUpdates();
 });
 app.on(app.exitEvent, function(args) {
-  console.log("onexit");
-  console.log("Entering exitEvent");
   rotVector.stopRotUpdates();
 });

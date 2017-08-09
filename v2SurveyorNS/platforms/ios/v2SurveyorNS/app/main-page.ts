@@ -136,7 +136,7 @@ export function onCreatingView(args: EventData) {
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
-  console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
+  // console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
 
 export function onTakeShot(args: EventData) {
