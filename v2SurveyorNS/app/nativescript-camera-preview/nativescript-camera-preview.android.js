@@ -642,6 +642,7 @@ Note: exports allows it to be exposed for outside use
 //TODO TODO TODO TODO Fix Fix Fix Fix
 exports.onCreatingView = function(callback, args) {
   console.log("Entering onCreatingView");
+
   surfaceUpdateCallback = zonedCallback(callback);
   openCamera();
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);

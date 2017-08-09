@@ -129,7 +129,6 @@ export function onCreatingView(args: EventData) {
        console.log("Uh oh, no permissions - plan B time!");
     });
   }
-
   if(app.android) params.initialize();
   cameraPreview.onCreatingView(updateCallback, args);
   if (app.ios !== undefined) params.initialize();

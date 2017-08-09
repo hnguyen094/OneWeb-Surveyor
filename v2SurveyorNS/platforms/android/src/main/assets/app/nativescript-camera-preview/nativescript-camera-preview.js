@@ -43,12 +43,12 @@ const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListe
 
         // openCamera();
 
-        // common.cameraView.animate({
-        //   scale: {
-        //     x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
-        //     y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
-        //   duration: 2000
-        // });
+        common.cameraView.animate({
+          scale: {
+            x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
+            y: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight()},
+          duration: 2000
+        });
     },
 
     onSurfaceTextureSizeChanged: function(texture) {
@@ -642,6 +642,7 @@ Note: exports allows it to be exposed for outside use
 //TODO TODO TODO TODO Fix Fix Fix Fix
 exports.onCreatingView = function(callback, args) {
   console.log("Entering onCreatingView");
+
   surfaceUpdateCallback = zonedCallback(callback);
   openCamera();
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
