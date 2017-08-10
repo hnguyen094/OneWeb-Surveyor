@@ -102,7 +102,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		ji8nLZvpzQR8pe9Xh8hoO79iuWs=
+		0gvCxSqPYZcYH797dobM7W+ClQ4=
 		</data>
 		<key>Frameworks/NativeScript.framework/Info.plist</key>
 		<data>
@@ -110,7 +110,7 @@
 		</data>
 		<key>Frameworks/NativeScript.framework/NativeScript</key>
 		<data>
-		ilcrOIXSKsvpFLVzwICV9vwvhhw=
+		kbNtNOErhh6cadsmkwrkzhHF8vA=
 		</data>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -130,7 +130,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		CGt3XtGnf/CLJgtxGEU28JiQibk=
+		kE+mVpss1DytJMy42CchSSbFB0A=
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
@@ -198,7 +198,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		1PwMFJAYtoC7wCjLFmJAOMRAs2I=
+		/ke+DH6hb/7EVY9DCBMhzU4IrcM=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -206,7 +206,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		2XScdHb9hGixyHCei/lS3Kqfuy0=
+		8DJsM+B3a897OvygcuE2c+bAKHI=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -222,7 +222,7 @@
 		</data>
 		<key>app/app.js</key>
 		<data>
-		tLHQxcUCs6+Lg8p7ELkb7hsU1ac=
+		HoDgSoIAd6zoCundt9V6+hwZTeQ=
 		</data>
 		<key>app/app.ts</key>
 		<data>
@@ -230,7 +230,7 @@
 		</data>
 		<key>app/bundle-config.js</key>
 		<data>
-		JqSRqdZp0ZMX/AAf4a9s2i0JGp8=
+		o9lVxracDrCmKGr2UpOBvufdgkQ=
 		</data>
 		<key>app/bundle-config.ts</key>
 		<data>
@@ -242,19 +242,19 @@
 		</data>
 		<key>app/main-page.js</key>
 		<data>
-		4H5Ag5Wci9OXlASYE67OdKs1kzA=
+		0W/fc6CdfvyzKwVcU3Bbpb9d+LA=
 		</data>
 		<key>app/main-page.ts</key>
 		<data>
-		8fO03Bi01qGnfQqH8oLEpL5lvvQ=
+		3pRqdmx2VOg0V0dqz2kdxlkW5LQ=
 		</data>
 		<key>app/main-page.xml</key>
 		<data>
-		dzSdpPqK6TlVu+LqWR/qUKdSvjo=
+		YPrpiaGkrbEfwfmKi7vHLkJq3zg=
 		</data>
 		<key>app/main-view-model.js</key>
 		<data>
-		vvd0HOSpyyZ2qCG5xn9mBFDBfKw=
+		rqv9s4d04vJhqUvcqCImb4iIshY=
 		</data>
 		<key>app/main-view-model.ts</key>
 		<data>
@@ -298,7 +298,7 @@
 		</data>
 		<key>app/nativescript-fov/nativescript-fov.js</key>
 		<data>
-		tT6BQUPMeb5MKwDgE1bC7Gzi86g=
+		4+Km35rr2c/6gT4v68RfPJvd5tg=
 		</data>
 		<key>app/nativescript-rotation-vector/.npmignore</key>
 		<data>
@@ -318,7 +318,7 @@
 		</data>
 		<key>app/nativescript-rotation-vector/index.js</key>
 		<data>
-		eftg9dkqJ4XGk58KxyjB0zC2oEU=
+		7O+kgLIy2ruL1l6clJA2uMw1Pm4=
 		</data>
 		<key>app/nativescript-rotation-vector/package.json</key>
 		<data>
@@ -2136,11 +2136,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ji8nLZvpzQR8pe9Xh8hoO79iuWs=
+			0gvCxSqPYZcYH797dobM7W+ClQ4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Sp799tYCPSz1N0iW4CLl3MMrhsGpXbw8sZDLjZAm1L8=
+			xWidzi04Q5wK71SE/rdFfJJsWxjB5hX/ODsozaC9QeE=
 			</data>
 		</dict>
 		<key>Frameworks/NativeScript.framework/Info.plist</key>
@@ -2158,11 +2158,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ilcrOIXSKsvpFLVzwICV9vwvhhw=
+			kbNtNOErhh6cadsmkwrkzhHF8vA=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZDNsnoq1BT1HzAtgSgFRu5nZNPV6G/x5brXB36kADgs=
+			BvQ21JktlDJV/WXu5JcjGh7F9peg4Eaagl+WCiLCTC0=
 			</data>
 		</dict>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
@@ -2389,11 +2389,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1PwMFJAYtoC7wCjLFmJAOMRAs2I=
+			/ke+DH6hb/7EVY9DCBMhzU4IrcM=
 			</data>
 			<key>hash2</key>
 			<data>
-			MsIyFwJ78lF+Tvaymf/f2Kew0EivzqGe2Td/CejE0Mk=
+			NIYYJsAQxQH1kLCK/L9wWDKjK47uNg+rF7qo8+DF1oA=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -2411,11 +2411,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2XScdHb9hGixyHCei/lS3Kqfuy0=
+			8DJsM+B3a897OvygcuE2c+bAKHI=
 			</data>
 			<key>hash2</key>
 			<data>
-			67ejSXp7SyXZOWf+mwDFqrI0ecpRg8eOnspMfIcJk7Q=
+			2XAh9kPdAFcjaHruYtb3Hzw988ObfPKZW4gSdiRRKUw=
 			</data>
 		</dict>
 		<key>app/README.md</key>
@@ -2444,11 +2444,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tLHQxcUCs6+Lg8p7ELkb7hsU1ac=
+			HoDgSoIAd6zoCundt9V6+hwZTeQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			GYzx1Z3p/gqEjXyu8eHCqWt5MwyrMM0d70tVgg8d9Ws=
+			1kR4uqXScv8glM6BnlmnGrxa66Dzv/m4PZu1fK5GgC4=
 			</data>
 		</dict>
 		<key>app/app.ts</key>
@@ -2466,11 +2466,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JqSRqdZp0ZMX/AAf4a9s2i0JGp8=
+			o9lVxracDrCmKGr2UpOBvufdgkQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			yoHRvdIluJJlKfMOJLmjPjb0QXguweatY46lPvk4Eaw=
+			voE5f3IbR8luhQaX6YC//FMZY1UDv9w+Wr+JxFpCF7k=
 			</data>
 		</dict>
 		<key>app/bundle-config.ts</key>
@@ -2499,44 +2499,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4H5Ag5Wci9OXlASYE67OdKs1kzA=
+			0W/fc6CdfvyzKwVcU3Bbpb9d+LA=
 			</data>
 			<key>hash2</key>
 			<data>
-			VVOqGIS9c0oi/GkcIHGmLwsoEsZgkQjogDfaMNTsQtY=
+			lWQCkBz6Yt7Za8vARBkphZD8e5vr8REg74E+mPPziHw=
 			</data>
 		</dict>
 		<key>app/main-page.ts</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8fO03Bi01qGnfQqH8oLEpL5lvvQ=
+			3pRqdmx2VOg0V0dqz2kdxlkW5LQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			JplwJFRf35rH6xrdfSP+9jiZ7MfcwCY2npr4xAC5bRQ=
+			J1Pf4tiLFAsEhOKtoqEjcw8n4QJFXrsVgrWplNKFhQ0=
 			</data>
 		</dict>
 		<key>app/main-page.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			dzSdpPqK6TlVu+LqWR/qUKdSvjo=
+			YPrpiaGkrbEfwfmKi7vHLkJq3zg=
 			</data>
 			<key>hash2</key>
 			<data>
-			U2BBVsOnOLT5HZfObB+RNVYgbMmE+xDQ1lZddyhxggA=
+			WDhZuE141W0NoVOgGulqS56AXvAeebmx3NOTxs02ChY=
 			</data>
 		</dict>
 		<key>app/main-view-model.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vvd0HOSpyyZ2qCG5xn9mBFDBfKw=
+			rqv9s4d04vJhqUvcqCImb4iIshY=
 			</data>
 			<key>hash2</key>
 			<data>
-			JQiLBsad4Qu22LL968QlRLbfFT+A2cbgQbNBx6wN5o8=
+			GnweRyi4TdLp/V+KbFOVO5T7kKY+laRVyak4hHFOT/A=
 			</data>
 		</dict>
 		<key>app/main-view-model.ts</key>
@@ -2653,11 +2653,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tT6BQUPMeb5MKwDgE1bC7Gzi86g=
+			4+Km35rr2c/6gT4v68RfPJvd5tg=
 			</data>
 			<key>hash2</key>
 			<data>
-			nL8cszn4Qj2npWQIB0eZfpa6PeLN0EpI26XLRRjc7FQ=
+			coFQcJKYnvV1D+mxMYRkvVJZ0PyItasB8s1rpAVdkbw=
 			</data>
 		</dict>
 		<key>app/nativescript-rotation-vector/.npmignore</key>
@@ -2708,11 +2708,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			eftg9dkqJ4XGk58KxyjB0zC2oEU=
+			7O+kgLIy2ruL1l6clJA2uMw1Pm4=
 			</data>
 			<key>hash2</key>
 			<data>
-			uPmn3WBv8Oc017OjCwH1uwOw0Jk1b7G+P0xzyf4Uqxw=
+			vmaqgarM2t5uIYrkF6/GyHlN+wlbIef7TWGzvPoOq3M=
 			</data>
 		</dict>
 		<key>app/nativescript-rotation-vector/package.json</key>

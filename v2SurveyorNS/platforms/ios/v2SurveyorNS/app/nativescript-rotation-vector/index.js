@@ -97,7 +97,8 @@ function startRotUpdates(callback, options) {
 exports.startRotUpdates = startRotUpdates;
 function stopRotUpdates() {
     if (!isListening) {
-        throw new Error("Currently not listening for Device Motion events.");
+        console.log("Currently not listening for Device Motion events.");
+        return;
     }
     accManager.stopDeviceMotionUpdates();
     isListening = false;

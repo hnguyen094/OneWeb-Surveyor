@@ -30,6 +30,7 @@ const ANGLE_BETWEEN_LINES = 10;
 
 const updateCallback = function() {
   // console.log("Entered updateCallback");
+  const yTranslate = app.ios? -20 : 0;
   const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
   crosshair.animate({
     scale: {
@@ -38,7 +39,7 @@ const updateCallback = function() {
     },
     translate: {
       x: 0,
-      y: app.ios? -10 : 0
+      y: yTranslate
     },
     rotate: -z,
     duration: 0
@@ -56,7 +57,7 @@ const updateCallback = function() {
     },
     translate: {
       x : Math.sin(z*Math.PI/180)*distanceFromCenter,
-      y: Math.cos(z*Math.PI/180)*distanceFromCenter + (app.ios? -10 : 0)
+      y: Math.cos(z*Math.PI/180)*distanceFromCenter + yTranslate
     },
 
     rotate: -z,
@@ -65,7 +66,7 @@ const updateCallback = function() {
   lowerText.animate({
     translate: {
       x : Math.sin(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-      y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + (app.ios? -10 : 0)
+      y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + yTranslate
     },
     rotate: -z,
     duration: 0
@@ -73,7 +74,7 @@ const updateCallback = function() {
   upperText.animate({
     translate: {
       x :  Math.sin(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-      y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + (app.ios? -10 : 0)
+      y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + yTranslate
     },
     rotate: -z,
     duration: 0
@@ -87,7 +88,7 @@ const updateCallback = function() {
       },
       translate: {
         x: 0,
-        y: app.ios? 10 : 0
+        y: app.ios? -10 : 0
       },
       duration: 2000
     });
