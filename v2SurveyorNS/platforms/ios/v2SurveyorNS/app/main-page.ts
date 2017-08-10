@@ -129,10 +129,16 @@ export function onCreatingView(args: EventData) {
        console.log("Uh oh, no permissions - plan B time!");
     });
   }
-
   if(app.android) params.initialize();
   cameraPreview.onCreatingView(updateCallback, args);
   if (app.ios !== undefined) params.initialize();
+  rotVector.startRotUpdates(function(data) {
+      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      x = data.x;
+      y = data.y;
+      z = data.z;
+      if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
+  },  { sensorDelay: "game" });
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
@@ -165,12 +171,9 @@ app.on(app.resumeEvent, function(args) {
 
 });
 app.on(app.suspendEvent, function(args) {
-  console.log("onsuspend");
   cameraPreview.onPause();
   rotVector.stopRotUpdates();
 });
 app.on(app.exitEvent, function(args) {
-  console.log("onexit");
-  console.log("Entering exitEvent");
   rotVector.stopRotUpdates();
 });

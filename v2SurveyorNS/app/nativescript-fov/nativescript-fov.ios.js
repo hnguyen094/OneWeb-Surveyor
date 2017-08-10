@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const common = require('./nativescript-fov-common');
 
-const ERROR_ADJUSTMENT = 63/59.68;
+const ERROR_ADJUSTMENT = 63/59.68; // 63 is the correct, actual FOV; 59.68 is the API-given FOV
 
 exports.degrees2Pixels = common.degrees2Pixels;
 exports.degrees2Scale = common.degrees2Scale;

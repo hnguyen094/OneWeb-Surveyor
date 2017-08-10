@@ -64,7 +64,8 @@ function getOrientation(matrixArray) { //converted from Android's version
 
 function startRotUpdates(callback, options) {
     if (isListening) {
-        throw new Error("Already listening for motion updates.");
+        console.log("Already listening for motion updates.");
+        return;
     }
     var wrappedCallback = zonedCallback(callback);
     if (!accManager) {

@@ -25,11 +25,11 @@ rot.startRotUpdates(function(data) {
 
 ## Expected Values
 
- * x- roll
+ * x- azimuth
     * Spin Left/Right from -180 to 180 degrees
- * y- pitch
+ * y- roll
     * Tilt Up/Down from -90 to 90 degrees
- * z- yaw
+ * z- pitch
     * Tilt Left/Right from -180 to 180 degrees
 
 ## Options

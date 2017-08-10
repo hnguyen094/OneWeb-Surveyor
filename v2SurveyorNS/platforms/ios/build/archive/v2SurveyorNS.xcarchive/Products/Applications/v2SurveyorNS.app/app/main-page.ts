@@ -29,6 +29,7 @@ const OUTER_CIRCLE_DIAMETER = 2;
 const ANGLE_BETWEEN_LINES = 10;
 
 const updateCallback = function() {
+  // console.log("Entered updateCallback");
   const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
   crosshair.animate({
     scale: {
@@ -77,19 +78,20 @@ const updateCallback = function() {
     rotate: -z,
     duration: 0
   });
-
-  let cameraView = page.getViewById("placeholder-view");;
-  cameraView.animate({
-    scale: {
-      x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
-      y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
-    },
-    translate: {
-      x: 0,
-      y: app.ios? -10 : 0
-    },
-    duration: 2000
-  });
+  if (app.ios) {
+    let cameraView = page.getViewById("placeholder-view");
+    cameraView.animate({
+      scale: {
+        x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
+        y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
+      },
+      translate: {
+        x: 0,
+        y: app.ios? 10 : 0
+      },
+      duration: 2000
+    });
+  }
 
 };
 
@@ -104,7 +106,7 @@ export function onLoaded(args: EventData) {
       const View :any = android.view.View;
       const window = app.android.startActivity.getWindow();
       // set the status bar to Color.Transparent
-      window.setStatusBarColor(0x000000);
+      // window.setStatusBarColor(0x000000);
       const decorView = window.getDecorView();
       decorView.setSystemUiVisibility(
           View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -115,15 +117,6 @@ export function onLoaded(args: EventData) {
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   }
   cameraPreview.onLoaded(args, "placeholder-view");
-
-
-  rotVector.startRotUpdates(function(data) {
-      // console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
-      x = data.x;
-      y = data.y;
-      z = data.z;
-      updateCallback();
-  },  { sensorDelay: "game" });
 }
 
 export function onCreatingView(args: EventData) {
@@ -136,14 +129,13 @@ export function onCreatingView(args: EventData) {
        console.log("Uh oh, no permissions - plan B time!");
     });
   }
-
   if(app.android) params.initialize();
   cameraPreview.onCreatingView(updateCallback, args);
-  if (app.ios) params.initialize();
+  if (app.ios !== undefined) params.initialize();
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
-  console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
+  // console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
 
 export function onTakeShot(args: EventData) {
@@ -151,36 +143,25 @@ export function onTakeShot(args: EventData) {
   console.log("el: " + y);
 }
 
-// Event handler for Page "navigatingTo" event attached in main-page.xml
 export function navigatingTo(args: EventData) {
-    /*
-    This gets a reference this page’s <Page> UI component. You can
-    view the API reference of the Page to see what’s available at
-    https://docs.nativescript.org/api-reference/classes/_ui_page_.page.html
-    */
     page = <Page>args.object;
     crosshair = page.getViewById("crosshair");
     doubleline = page.getViewById("doubleline");
     upperText = page.getViewById("upperText");
     lowerText = page.getViewById("lowerText");
-    /*
-    A page’s bindingContext is an object that should be used to perform
-    data binding between XML markup and TypeScript code. Properties
-    on the bindingContext can be accessed using the {{ }} syntax in XML.
-    In this example, the {{ message }} and {{ onTap }} bindings are resolved
-    against the object returned by createViewModel().
-
-
-    You can learn more about data binding in NativeScript at
-    https://docs.nativescript.org/core-concepts/data-binding.
-    */
     page.bindingContext = new HelloWorldModel();
 }
 
-//TODO: Camera onResume, when it's lost. FYI: https://docs.nativescript.org/core-concepts/application-lifecycle
 app.on(app.resumeEvent, function(args) {
-  //onCreatingView(args);
+  rotVector.startRotUpdates(function(data) {
+      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+      x = data.x;
+      y = data.y;
+      z = data.z;
+      if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
+  },  { sensorDelay: "game" });
   cameraPreview.onResume();
+
 });
 app.on(app.suspendEvent, function(args) {
   cameraPreview.onPause();

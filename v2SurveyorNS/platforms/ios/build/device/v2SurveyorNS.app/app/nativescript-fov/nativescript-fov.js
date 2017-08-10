@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const common = require('./nativescript-fov-common');
 
+const ERROR_ADJUSTMENT = 63/59.68;
+
 exports.degrees2Pixels = common.degrees2Pixels;
 exports.degrees2Scale = common.degrees2Scale;
 exports.dp2Pixels = common.dp2Pixels;
@@ -10,9 +12,8 @@ exports.getVerticalFOV = common.getVerticalFOV;
 exports.getHorizontalFOV = common.getHorizontalFOV;
 
 function setFOV(HFOV) {
-  common.horizontalFOV = HFOV;
-  common.verticalFOV = 180/ Math.PI * 2* Math.atan(Math.tan(HFOV * Math.PI/180/2) * 9/16); //TODO: Fix the aspect ratio constant
-  console.log("HFOV x VFOV: " + common.horizontalFOV + "x" + common.verticalFOV); //TODO: Make sure they're consistent with the android
+  common.horizontalFOV = HFOV * ERROR_ADJUSTMENT; // the constant hopefully corrects every device.
+  common.verticalFOV = 180/ Math.PI * 2* Math.atan(Math.tan(common.horizontalFOV * Math.PI/180/2) * 9/16); //TODO: Fix the aspect ratio constant
 }
 exports.setVars = function (maxWidth, maxHeight) {
   common.setVarsHelper(maxWidth, maxHeight);
