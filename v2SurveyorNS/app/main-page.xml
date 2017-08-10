@@ -17,6 +17,6 @@
       <Image id="doubleline" src="res://newdoubleline" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
       <Label id="upperText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
       <Label id="lowerText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
-      <Image id="crosshair" src="res://newcirclethin" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
+      <Image id="crosshair" src="res://newcirclethin" stretch="none" horizontalAlignment="center" verticalAlignment="center"/>
     </GridLayout>
 </Page>
