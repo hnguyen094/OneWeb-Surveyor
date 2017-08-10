@@ -6,6 +6,7 @@ purpose of the file is to pass control to the app’s first module.
 
 import "./bundle-config";
 import * as app from 'application';
+import * as permissions from "nativescript-permissions";
 
 app.start({ moduleName: 'main-page' });
 

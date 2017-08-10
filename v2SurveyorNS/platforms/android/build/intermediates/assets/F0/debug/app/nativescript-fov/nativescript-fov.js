@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 
 const common = require('./nativescript-fov-common');
+const permissions = require("nativescript-permissions");
 
 let mCamera = null;
 let params = null;
