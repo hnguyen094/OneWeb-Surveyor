@@ -106,7 +106,7 @@
 		</data>
 		<key>Frameworks/NativeScript.framework/NativeScript</key>
 		<data>
-		aT+5L3ghKCYms0WALqCBYteUyxM=
+		T1CG3ljGhy8fpV87g6sO9oYHOCg=
 		</data>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -118,7 +118,7 @@
 		</data>
 		<key>Frameworks/TNSWidgets.framework/TNSWidgets</key>
 		<data>
-		zQNtJt+ZDkW6uKNvzpOE5fjlb8s=
+		0m8WoJobLyu60LpjmlUhlylY/28=
 		</data>
 		<key>Frameworks/TNSWidgets.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -194,7 +194,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		3lMKG5KD/5qhtlrkBgXBs4663+4=
+		0nRGIOrAxhRSxQ6S1P4uOy1gzQI=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -202,7 +202,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		Mn2S1eYSGCP+IXLlj+BHSlLe738=
+		MQEmxhEZJk17MJS6Gvozc6GRZYI=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -246,7 +246,7 @@
 		</data>
 		<key>app/main-page.xml</key>
 		<data>
-		ZR3dD7IS3+jLUOCZnwS6wu9bN7M=
+		tbrNvkTNdMdfRVKNGielafevwgU=
 		</data>
 		<key>app/nativescript-camera-preview/README.md</key>
 		<data>
@@ -2223,11 +2223,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aT+5L3ghKCYms0WALqCBYteUyxM=
+			T1CG3ljGhy8fpV87g6sO9oYHOCg=
 			</data>
 			<key>hash2</key>
 			<data>
-			5zubVvff3VrWmJg/9IP6sHUZe75X/lt+/oldfxtpcnU=
+			OO5lTza6FUoezKpbWyNdMcNCaevWNu4koRJT+19jeGs=
 			</data>
 		</dict>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
@@ -2256,11 +2256,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zQNtJt+ZDkW6uKNvzpOE5fjlb8s=
+			0m8WoJobLyu60LpjmlUhlylY/28=
 			</data>
 			<key>hash2</key>
 			<data>
-			f0vE/brZSvUnxhbnfv5jQijxrZppOx1/+jIXN3MVl1M=
+			0GOIFUPPgd/RDdzOkYCtOWP5jGxbK4NYNmdd33jA670=
 			</data>
 		</dict>
 		<key>Frameworks/TNSWidgets.framework/_CodeSignature/CodeResources</key>
@@ -2454,11 +2454,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3lMKG5KD/5qhtlrkBgXBs4663+4=
+			0nRGIOrAxhRSxQ6S1P4uOy1gzQI=
 			</data>
 			<key>hash2</key>
 			<data>
-			VDUzYPLGeoWxwAY0TLOetQLS5PuN6nyAEJR8RzOUhHQ=
+			M2ydrfDZgHWV6v7E++mwLm3PdW77mybQ0aUtRXy1REY=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -2476,11 +2476,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Mn2S1eYSGCP+IXLlj+BHSlLe738=
+			MQEmxhEZJk17MJS6Gvozc6GRZYI=
 			</data>
 			<key>hash2</key>
 			<data>
-			8ZiZJmfiz6hWqyO6S019DGarQNqsx59Y0IOpeT2CrCs=
+			W++3xMMrIrwS8RpyE2ljxYQU79yHVw9L7TBLOcfy+BE=
 			</data>
 		</dict>
 		<key>app/README.md</key>
@@ -2586,11 +2586,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZR3dD7IS3+jLUOCZnwS6wu9bN7M=
+			tbrNvkTNdMdfRVKNGielafevwgU=
 			</data>
 			<key>hash2</key>
 			<data>
-			t96UWOR8uhE5DG/NY9VDEAmuhMXR+n0Q+j5+iMrR3qE=
+			eMJYjqjGRs0ImlHczefAoUX4bqqgSeb26ejntkM4v1M=
 			</data>
 		</dict>
 		<key>app/nativescript-camera-preview/README.md</key>

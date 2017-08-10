@@ -110,7 +110,7 @@
 		</data>
 		<key>Frameworks/NativeScript.framework/NativeScript</key>
 		<data>
-		Gtzu4JX1Waw7lXjrTnQXG72PHTs=
+		M1sbhP2gatSFYADCyBsRSjOStZk=
 		</data>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -198,7 +198,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		7Oytg20BW9EcTM12T9Ol2M0JxVo=
+		lcRdhZ1j8zEDebmUcOoOT67KaSY=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -206,7 +206,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		tyDAWflN1+/EItbsWvkAuHWSGY0=
+		wGaRwHltdyLNV1jZhSBN75VGx4s=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -250,7 +250,7 @@
 		</data>
 		<key>app/main-page.xml</key>
 		<data>
-		ZR3dD7IS3+jLUOCZnwS6wu9bN7M=
+		tbrNvkTNdMdfRVKNGielafevwgU=
 		</data>
 		<key>app/nativescript-camera-preview/README.md</key>
 		<data>
@@ -2234,11 +2234,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Gtzu4JX1Waw7lXjrTnQXG72PHTs=
+			M1sbhP2gatSFYADCyBsRSjOStZk=
 			</data>
 			<key>hash2</key>
 			<data>
-			VJ0EfpffPMDYYWaAOOXlxGaUQAUyHDUoKg2X2yr5gmU=
+			rbC9eQ4KWit58G+ZO7zPfn+nAxvjJfnqCJ9eF3mL4C0=
 			</data>
 		</dict>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
@@ -2465,11 +2465,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7Oytg20BW9EcTM12T9Ol2M0JxVo=
+			lcRdhZ1j8zEDebmUcOoOT67KaSY=
 			</data>
 			<key>hash2</key>
 			<data>
-			2I5fWG7XtqM+qpTKmujG3p5GfCq0LEtuJXSrS+mUFQI=
+			jc3DiLe+wduyL1y7Yz3aPrMiUSXnUIm1L8zEL1THB10=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -2487,11 +2487,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tyDAWflN1+/EItbsWvkAuHWSGY0=
+			wGaRwHltdyLNV1jZhSBN75VGx4s=
 			</data>
 			<key>hash2</key>
 			<data>
-			QRQ3l14QxhLl35x/PHX7KX/uc65dRqW8iuaI2+UYzLw=
+			xdygaPV54X/jI8re5ZoGnopC7nRswWJC5sMe0kO0EIs=
 			</data>
 		</dict>
 		<key>app/README.md</key>
@@ -2597,11 +2597,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZR3dD7IS3+jLUOCZnwS6wu9bN7M=
+			tbrNvkTNdMdfRVKNGielafevwgU=
 			</data>
 			<key>hash2</key>
 			<data>
-			t96UWOR8uhE5DG/NY9VDEAmuhMXR+n0Q+j5+iMrR3qE=
+			eMJYjqjGRs0ImlHczefAoUX4bqqgSeb26ejntkM4v1M=
 			</data>
 		</dict>
 		<key>app/nativescript-camera-preview/README.md</key>
