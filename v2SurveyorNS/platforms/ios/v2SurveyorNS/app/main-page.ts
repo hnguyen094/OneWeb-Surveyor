@@ -6,7 +6,6 @@ logic, and to set up your page’s data binding.
 
 import { EventData } from 'data/observable';
 import { Page } from 'ui/page';
-import { HelloWorldModel } from './main-view-model';
 import * as cameraPreview from './nativescript-camera-preview/nativescript-camera-preview';
 import * as rotVector from "./nativescript-rotation-vector/index";
 import * as app from "application";
@@ -96,6 +95,14 @@ const updateCallback = function() {
 
 };
 
+const rotationCallback = function(data) {
+    //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+    x = data.x;
+    y = data.y;
+    z = data.z;
+    if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
+};
+
 // export function showSideDrawer(args: EventData) {
 //     console.log("Show SideDrawer tapped.");
 // }
@@ -133,13 +140,7 @@ export function onCreatingView(args: EventData) {
   if(app.android) params.initialize();
   cameraPreview.onCreatingView(updateCallback, args);
   if (app.ios !== undefined) params.initialize();
-  rotVector.startRotUpdates(function(data) {
-      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
-      x = data.x;
-      y = data.y;
-      z = data.z;
-      if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
-  },  { sensorDelay: "game" });
+  rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
@@ -157,17 +158,10 @@ export function navigatingTo(args: EventData) {
     doubleline = page.getViewById("doubleline");
     upperText = page.getViewById("upperText");
     lowerText = page.getViewById("lowerText");
-    page.bindingContext = new HelloWorldModel();
 }
 
 app.on(app.resumeEvent, function(args) {
-  rotVector.startRotUpdates(function(data) {
-      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
-      x = data.x;
-      y = data.y;
-      z = data.z;
-      if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
-  },  { sensorDelay: "game" });
+  rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   cameraPreview.onResume();
 
 });

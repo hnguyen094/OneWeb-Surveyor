@@ -6,7 +6,6 @@ logic, and to set up your page’s data binding.
 
 import { EventData } from 'data/observable';
 import { Page } from 'ui/page';
-import { HelloWorldModel } from './main-view-model';
 import * as cameraPreview from './nativescript-camera-preview/nativescript-camera-preview';
 import * as rotVector from "./nativescript-rotation-vector/index";
 import * as app from "application";
@@ -30,6 +29,7 @@ const ANGLE_BETWEEN_LINES = 10;
 
 const updateCallback = function() {
   // console.log("Entered updateCallback");
+  const yTranslate = app.ios? -20 : 0;
   const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
   crosshair.animate({
     scale: {
@@ -38,7 +38,7 @@ const updateCallback = function() {
     },
     translate: {
       x: 0,
-      y: app.ios? -10 : 0
+      y: yTranslate
     },
     rotate: -z,
     duration: 0
@@ -56,7 +56,7 @@ const updateCallback = function() {
     },
     translate: {
       x : Math.sin(z*Math.PI/180)*distanceFromCenter,
-      y: Math.cos(z*Math.PI/180)*distanceFromCenter + (app.ios? -10 : 0)
+      y: Math.cos(z*Math.PI/180)*distanceFromCenter + yTranslate
     },
 
     rotate: -z,
@@ -65,7 +65,7 @@ const updateCallback = function() {
   lowerText.animate({
     translate: {
       x : Math.sin(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-      y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + (app.ios? -10 : 0)
+      y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + yTranslate
     },
     rotate: -z,
     duration: 0
@@ -73,7 +73,7 @@ const updateCallback = function() {
   upperText.animate({
     translate: {
       x :  Math.sin(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-      y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + (app.ios? -10 : 0)
+      y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + yTranslate
     },
     rotate: -z,
     duration: 0
@@ -87,12 +87,20 @@ const updateCallback = function() {
       },
       translate: {
         x: 0,
-        y: app.ios? 10 : 0
+        y: app.ios? -10 : 0
       },
       duration: 2000
     });
   }
 
+};
+
+const rotationCallback = function(data) {
+    //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
+    x = data.x;
+    y = data.y;
+    z = data.z;
+    if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
 };
 
 // export function showSideDrawer(args: EventData) {
@@ -132,13 +140,7 @@ export function onCreatingView(args: EventData) {
   if(app.android) params.initialize();
   cameraPreview.onCreatingView(updateCallback, args);
   if (app.ios !== undefined) params.initialize();
-  rotVector.startRotUpdates(function(data) {
-      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
-      x = data.x;
-      y = data.y;
-      z = data.z;
-      if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
-  },  { sensorDelay: "game" });
+  rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
@@ -156,17 +158,10 @@ export function navigatingTo(args: EventData) {
     doubleline = page.getViewById("doubleline");
     upperText = page.getViewById("upperText");
     lowerText = page.getViewById("lowerText");
-    page.bindingContext = new HelloWorldModel();
 }
 
 app.on(app.resumeEvent, function(args) {
-  rotVector.startRotUpdates(function(data) {
-      //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
-      x = data.x;
-      y = data.y;
-      z = data.z;
-      if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
-  },  { sensorDelay: "game" });
+  rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   cameraPreview.onResume();
 
 });

@@ -1,7 +1,7 @@
 {
+    "nativescript-charts": true,
     "nativescript-permissions": true,
     "nativescript-screen-orientation": true,
-    "nativescript-status-bar": true,
     "nativescript-theme-core": true,
     "tns-core-modules": true,
     "tns-core-modules-widgets": true
