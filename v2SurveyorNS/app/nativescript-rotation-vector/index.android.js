@@ -89,7 +89,8 @@ function startRotUpdates(callback, options) {
 exports.startRotUpdates = startRotUpdates;
 function stopRotUpdates() {
     if (!sensorListener) {
-        throw new Error("Currently not listening for rotational vector events.");
+        console.log("Currently not listening for rotational vector events.");
+        return;
     }
     sensorManager.unregisterListener(sensorListener);
     sensorListener = undefined;
