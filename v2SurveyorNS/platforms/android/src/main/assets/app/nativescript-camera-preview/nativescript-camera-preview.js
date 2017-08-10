@@ -34,15 +34,7 @@ let isFirst = true;
 const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListener({
     onSurfaceTextureAvailable: function(texture, width, height) {
         console.log('onSurfaceTextureAvailable');
-        // if(isFirst){
-        //   isFirst = false;
-        // } else {
-        //   openCamera();
-        // }
         createCameraPreviewSession();
-
-        // openCamera();
-
         common.cameraView.animate({
           scale: {
             x: platformModule.screen.mainScreen.heightPixels/common.cameraView.getMeasuredHeight(),
@@ -53,7 +45,6 @@ const mSurfaceTextureListener = new android.view.TextureView.SurfaceTextureListe
 
     onSurfaceTextureSizeChanged: function(texture) {
         console.log('onSurfaceTextureSizeChanged');
-        // configureTransform(width, height);
     },
 
     onSurfaceTextureDestroyed: function(texture) {
@@ -103,25 +94,16 @@ const MyStateCallback = android.hardware.camera2.CameraDevice.StateCallback.exte
     },
 
     onError: function(cameraDevice, error) {
-      /*
+      console.log("Entering onError");
+      console.log("onError: device = " + cameraDevice);
+      console.log("onError: error =  " + error);
       mCameraOpenCloseLock.release();
       cameraDevice.close();
       mCameraDevice = null;
-      Activity activity = getActivity();
-      if (null != activity) {
-          activity.finish();
+      const activity = app.android.context;
+      if (activity != null) {
+        activity.finish();
       }
-      */
-        console.log("Entering onError");
-        console.log("onError: device = " + cameraDevice);
-        console.log("onError: error =  " + error);
-        mCameraOpenCloseLock.release();
-        cameraDevice.close();
-        mCameraDevice = null;
-        const activity = app.android.context;
-        if (activity != null) {
-          activity.finish();
-        }
     },
 
     onClosed: function(cameraDevice) {
@@ -237,7 +219,7 @@ const CompareSizesByArea = java.lang.Object.extend({
   */
   compare: function(lhs, rhs) {
     return java.lang.Long.signum(lhs.getWidth() * lhs.getHeight() -
-          rhs.getWidth() * rhs.getHeight());
+          rhs.getWidth() * rhs.getHeight()); // -1 if negative, 1 if positive
   }
 });
 
@@ -348,11 +330,10 @@ exports.onPause = function() {
 
 /**
 Function: function that handles what happens when the app resumes
-Note: Empty for now //TODO
 */
 exports.onResume = function() {
   console.log("entering onResume");
-  //startBackgroundThread(); //TODO: When starting another thread, typescript couldn't find this module anymore. Need to fix
+  //startBackgroundThread();
   if (!mTextureView) {
     return;
   }
@@ -423,7 +404,6 @@ const openCamera = function() {
     throw Error("Error: camera opening can't be locked.");
   }
 }
-
 const setUpCameraOutputs = function() {
   console.log("Entering setUpCameraOutputs");
   const activity = app.android.context;
@@ -539,9 +519,8 @@ Requests for WRITE_EXTERNAL_STORAGE and CAMERA.
 Note: exports allows it to be exposed for outside use
 */
 exports.requestPermissions = function () {
-    if (android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != android.content.pm.PackageManager.PERMISSION_GRANTED ||
-        android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.CAMERA) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-        android.support.v4.app.ActivityCompat.requestPermissions(app.android.currentContext, [android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE], REQUEST_CAMERA_PERMISSION);
+    if (android.support.v4.content.ContextCompat.checkSelfPermission(app.android.currentContext, android.Manifest.permission.CAMERA) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+        android.support.v4.app.ActivityCompat.requestPermissions(app.android.currentContext, [android.Manifest.permission.CAMERA], REQUEST_CAMERA_PERMISSION);
     }
 };
 
@@ -610,6 +589,7 @@ const createCameraPreviewSession = function() {
       if (!mCameraDevice || !texture) {
           return;
       }
+      console.log("mPreviewSize is w x h: "+ mPreviewSize.getWidth() + " x " + mPreviewSize.getHeight());
       texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight()); // sets the default buffer to the preview we want
       let surface = new android.view.Surface(texture); // the surface that will hold the preview
       mPreviewRequestBuilder = mCameraDevice.createCaptureRequest(android.hardware.camera2.CameraDevice.TEMPLATE_PREVIEW);
@@ -680,11 +660,10 @@ const chooseOptimalSize = function (choices, textureViewWidth, textureViewHeight
         }
       }
     }
+    // return choices[0];
     if (bigEnough.size() > 0) {
-      //console.log("Big " + java.util.Collections.min(bigEnough, new CompareSizesByArea()));
       return java.util.Collections.max(bigEnough, new CompareSizesByArea());
     } else if (notBigEnough.size() > 0) {
-      //console.log("Small " + java.util.Collections.max(notBigEnough, new CompareSizesByArea()));
       return java.util.Collections.max(notBigEnough, new CompareSizesByArea());
     } else {
       console.log("Couldn't find any suitable preview size. Picking the first choice.");

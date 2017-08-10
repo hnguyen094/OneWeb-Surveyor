@@ -1,0 +1,115 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "nativescript-charts",
+        "scope": null,
+        "escapedName": "nativescript-charts",
+        "name": "nativescript-charts",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS"
+    ]
+  ],
+  "_from": "nativescript-charts@latest",
+  "_id": "nativescript-charts@0.0.7",
+  "_inCache": true,
+  "_location": "/nativescript-charts",
+  "_nodeVersion": "6.9.5",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/nativescript-charts-0.0.7.tgz_1486061715211_0.8851759661920369"
+  },
+  "_npmUser": {
+    "name": "markosko",
+    "email": "markosko.mm@gmail.com"
+  },
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "nativescript-charts",
+    "scope": null,
+    "escapedName": "nativescript-charts",
+    "name": "nativescript-charts",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nativescript-charts/-/nativescript-charts-0.0.7.tgz",
+  "_shasum": "a388a743d59d2ea8145f11a3cede273a2c19efed",
+  "_shrinkwrap": null,
+  "_spec": "nativescript-charts",
+  "_where": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS",
+  "author": {
+    "name": "Marek Maszay",
+    "email": "markosko.mm@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/markosko/nativescript-charts/issues"
+  },
+  "dependencies": {},
+  "description": "Chart plugin for Nativescript.",
+  "devDependencies": {
+    "prompt": "^1.0.0",
+    "rimraf": "^2.5.0",
+    "tns-core-modules": "^2.2.1",
+    "tns-platform-declarations": "^2.2.0",
+    "typescript": "^1.8.10"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "a388a743d59d2ea8145f11a3cede273a2c19efed",
+    "tarball": "https://registry.npmjs.org/nativescript-charts/-/nativescript-charts-0.0.7.tgz"
+  },
+  "gitHead": "4d31745766d46583f79f3ca3954686d045c1649f",
+  "homepage": "https://github.com/markosko/nativescript-charts",
+  "keywords": [
+    "NativeScript",
+    "JavaScript",
+    "Android",
+    "nativescript-charts",
+    "charts"
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/markosko/nativescript-charts/blob/master/LICENSE"
+  },
+  "main": "nativescript-charts.js",
+  "maintainers": [
+    {
+      "name": "markosko",
+      "email": "markosko.mm@gmail.com"
+    }
+  ],
+  "name": "nativescript-charts",
+  "nativescript": {
+    "platforms": {
+      "android": "2.4.0"
+    }
+  },
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markosko/nativescript-charts.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "demo.android": "npm run preparedemo && cd demo && tns run android",
+    "demo.ios": "npm run preparedemo && cd demo && tns emulate ios",
+    "demo.ios.device": "npm run preparedemo && cd demo && tns run ios",
+    "postclone": "npm i && node scripts/postclone.js",
+    "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-nativescript-charts && tns plugin add .. && tns install",
+    "rebuild": "tsc && cd demo && tns plugin remove nativescript-charts && tns plugin add .. && tns platform clean android && tns run android",
+    "run.android": "cd demo && tns run android",
+    "setup": "npm i && cd demo && npm i && cd .. && npm run build && cd demo && tns plugin add .. && cd .."
+  },
+  "typings": "index.d.ts",
+  "version": "0.0.7"
+}

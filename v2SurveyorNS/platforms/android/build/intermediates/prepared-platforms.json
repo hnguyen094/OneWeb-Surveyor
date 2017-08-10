@@ -1,4 +1,5 @@
 {
+    "nativescript-charts": true,
     "nativescript-permissions": true,
     "nativescript-screen-orientation": true,
     "nativescript-theme-core": true,
