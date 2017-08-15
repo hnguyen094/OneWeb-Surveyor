@@ -15,6 +15,7 @@ import * as platform from "platform";
 import * as orientation from "nativescript-screen-orientation";
 import * as params from "./nativescript-fov/nativescript-fov";
 import * as permissions from "nativescript-permissions";
+import * as charts from "./nativescript-chart/chart";
 
 let crosshair :any;
 let doubleline :any;
@@ -29,6 +30,9 @@ const ANGLE_BETWEEN_LINES = 10;
 
 const updateCallback = function() {
   // console.log("Entered updateCallback");
+
+  charts.updateGraph(x,y);
+
   const yTranslate = app.ios? -20 : 0;
   const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
   crosshair.animate({
@@ -132,6 +136,7 @@ export function onCreatingView(args: EventData) {
     permissions.requestPermission(android["Manifest"].permission.CAMERA, "I need these permissions for the viewfinder")
     .then(function() {
        console.log("Woo Hoo, I have the power!");
+       charts.initGraph(page);
     })
     .catch(function() {
        console.log("Uh oh, no permissions - plan B time!");
@@ -168,7 +173,9 @@ app.on(app.resumeEvent, function(args) {
 app.on(app.suspendEvent, function(args) {
   cameraPreview.onPause();
   rotVector.stopRotUpdates();
+  charts.onExit();
 });
 app.on(app.exitEvent, function(args) {
+  console.log("On Exitting");
   rotVector.stopRotUpdates();
 });

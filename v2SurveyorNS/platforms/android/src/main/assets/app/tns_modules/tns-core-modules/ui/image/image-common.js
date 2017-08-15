@@ -29,9 +29,8 @@ var ImageBase = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    ImageBase.prototype._createImageSourceFromSrc = function () {
+    ImageBase.prototype._createImageSourceFromSrc = function (value) {
         var _this = this;
-        var value = this.src;
         var originalValue = value;
         var sync = this.loadMode === "sync";
         if (typeof value === "string" || value instanceof String) {
@@ -111,6 +110,7 @@ var ImageBase = (function (_super) {
     return ImageBase;
 }(view_1.View));
 exports.ImageBase = ImageBase;
+ImageBase.prototype.recycleNativeView = true;
 exports.imageSourceProperty = new view_1.Property({ name: "imageSource" });
 exports.imageSourceProperty.register(ImageBase);
 exports.srcProperty = new view_1.Property({ name: "src" });

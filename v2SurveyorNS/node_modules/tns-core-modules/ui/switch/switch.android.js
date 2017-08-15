@@ -20,11 +20,11 @@ function initializeCheckedChangeListener() {
             var owner = this.owner;
             switch_common_1.checkedProperty.nativeValueChange(owner, isChecked);
         };
+        CheckedChangeListenerImpl = __decorate([
+            Interfaces([android.widget.CompoundButton.OnCheckedChangeListener])
+        ], CheckedChangeListenerImpl);
         return CheckedChangeListenerImpl;
     }(java.lang.Object));
-    CheckedChangeListenerImpl = __decorate([
-        Interfaces([android.widget.CompoundButton.OnCheckedChangeListener])
-    ], CheckedChangeListenerImpl);
     CheckedChangeListener = CheckedChangeListenerImpl;
 }
 var Switch = (function (_super) {

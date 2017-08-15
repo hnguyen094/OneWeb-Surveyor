@@ -9,6 +9,8 @@ var application = require("../../application");
 __export(require("./action-bar-common"));
 var R_ID_HOME = 0x0102002c;
 var ACTION_ITEM_ID_OFFSET = 10000;
+var DEFAULT_ELEVATION = 4;
+var AppCompatTextView;
 var actionItemIdGenerator = ACTION_ITEM_ID_OFFSET;
 function generateItemId() {
     actionItemIdGenerator++;
@@ -20,6 +22,7 @@ function initializeMenuItemClickListener() {
     if (MenuItemClickListener) {
         return;
     }
+    AppCompatTextView = android.support.v7.widget.AppCompatTextView;
     var MenuItemClickListenerImpl = (function (_super) {
         __extends(MenuItemClickListenerImpl, _super);
         function MenuItemClickListenerImpl(owner) {
@@ -31,11 +34,11 @@ function initializeMenuItemClickListener() {
             var itemId = item.getItemId();
             return this.owner._onAndroidItemSelected(itemId);
         };
+        MenuItemClickListenerImpl = __decorate([
+            Interfaces([android.support.v7.widget.Toolbar.OnMenuItemClickListener])
+        ], MenuItemClickListenerImpl);
         return MenuItemClickListenerImpl;
     }(java.lang.Object));
-    MenuItemClickListenerImpl = __decorate([
-        Interfaces([android.support.v7.widget.Toolbar.OnMenuItemClickListener])
-    ], MenuItemClickListenerImpl);
     MenuItemClickListener = MenuItemClickListenerImpl;
     appResources = application.android.context.getResources();
 }
@@ -282,9 +285,13 @@ var ActionBar = (function (_super) {
         }
     };
     ActionBar._setOnClickListener = function (item) {
+        var weakRef = new WeakRef(item);
         item.actionView.android.setOnClickListener(new android.view.View.OnClickListener({
             onClick: function (v) {
-                item._raiseTap();
+                var owner = weakRef.get();
+                if (owner) {
+                    owner._raiseTap();
+                }
             }
         }));
     };
@@ -319,9 +326,18 @@ var ActionBar = (function (_super) {
         }
     };
     ActionBar.prototype[action_bar_common_1.colorProperty.getDefault] = function () {
+        var nativeView = this.nativeView;
         if (!defaultTitleTextColor) {
-            var textView = new android.widget.TextView(this._context);
-            defaultTitleTextColor = textView.getTextColors().getDefaultColor();
+            var tv = getAppCompatTextView(nativeView);
+            if (!tv) {
+                var title = nativeView.getTitle();
+                nativeView.setTitle("");
+                tv = getAppCompatTextView(nativeView);
+                if (title) {
+                    nativeView.setTitle(title);
+                }
+            }
+            defaultTitleTextColor = tv ? tv.getTextColors().getDefaultColor() : -570425344;
         }
         return defaultTitleTextColor;
     };
@@ -329,9 +345,31 @@ var ActionBar = (function (_super) {
         var color = value instanceof action_bar_common_1.Color ? value.android : value;
         this.nativeView.setTitleTextColor(color);
     };
+    ActionBar.prototype[action_bar_common_1.flatProperty.setNative] = function (value) {
+        var compat = android.support.v4.view.ViewCompat;
+        if (compat.setElevation) {
+            if (value) {
+                compat.setElevation(this.nativeView, 0);
+            }
+            else {
+                var val = DEFAULT_ELEVATION * action_bar_common_1.layout.getDisplayDensity();
+                compat.setElevation(this.nativeView, val);
+            }
+        }
+    };
     return ActionBar;
 }(action_bar_common_1.ActionBarBase));
 exports.ActionBar = ActionBar;
+function getAppCompatTextView(toolbar) {
+    for (var i = 0, count = toolbar.getChildCount(); i < count; i++) {
+        var child = toolbar.getChildAt(i);
+        if (child instanceof AppCompatTextView) {
+            return child;
+        }
+    }
+    return null;
+}
+ActionBar.prototype.recycleNativeView = true;
 var defaultTitleTextColor;
 function getDrawableOrResourceId(icon, resources) {
     if (typeof icon !== "string") {

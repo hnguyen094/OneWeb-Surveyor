@@ -208,6 +208,7 @@ var FlexboxLayoutBase = (function (_super) {
     return FlexboxLayoutBase;
 }(layout_base_1.LayoutBase));
 exports.FlexboxLayoutBase = FlexboxLayoutBase;
+FlexboxLayoutBase.prototype.recycleNativeView = true;
 exports.flexDirectionProperty = new layout_base_1.CssProperty({ name: "flexDirection", cssName: "flex-direction", defaultValue: FlexDirection.ROW, affectsLayout: layout_base_1.isIOS, valueConverter: FlexDirection.parse });
 exports.flexDirectionProperty.register(layout_base_1.Style);
 exports.flexWrapProperty = new layout_base_1.CssProperty({ name: "flexWrap", cssName: "flex-wrap", defaultValue: "nowrap", affectsLayout: layout_base_1.isIOS, valueConverter: FlexWrap.parse });
@@ -279,7 +280,7 @@ Object.defineProperty(layout_base_1.View.prototype, "alignSelf", {
     configurable: true
 });
 var flexFlowProperty = new layout_base_1.ShorthandProperty({
-    name: "flex-flow", cssName: "flex-flow",
+    name: "flexFlow", cssName: "flex-flow",
     getter: function () {
         return this.flexDirection + " " + this.flexWrap;
     },

@@ -65,7 +65,7 @@ function registerOnGlobalContext(name, module) {
 }
 var snapshotGlobals;
 function install() {
-    if (global.__snapshot) {
+    if (global.__snapshot || global.__snapshotEnabled) {
         if (!snapshotGlobals) {
             var timer = require("timer");
             var dialogs = require("ui/dialogs");

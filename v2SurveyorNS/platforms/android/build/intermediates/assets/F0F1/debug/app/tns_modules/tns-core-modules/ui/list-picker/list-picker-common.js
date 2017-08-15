@@ -20,6 +20,7 @@ var ListPickerBase = (function (_super) {
     return ListPickerBase;
 }(view_1.View));
 exports.ListPickerBase = ListPickerBase;
+ListPickerBase.prototype.recycleNativeView = true;
 exports.selectedIndexProperty = new view_1.CoercibleProperty({
     name: "selectedIndex", defaultValue: -1,
     valueConverter: function (v) { return parseInt(v); },

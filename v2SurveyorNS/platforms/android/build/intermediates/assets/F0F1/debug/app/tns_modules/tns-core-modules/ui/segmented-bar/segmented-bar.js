@@ -33,11 +33,11 @@ function initializeNativeClasses() {
                 owner.selectedIndex = parseInt(id);
             }
         };
+        TabChangeListenerImpl = __decorate([
+            Interfaces([android.widget.TabHost.OnTabChangeListener])
+        ], TabChangeListenerImpl);
         return TabChangeListenerImpl;
     }(java.lang.Object));
-    TabChangeListenerImpl = __decorate([
-        Interfaces([android.widget.TabHost.OnTabChangeListener])
-    ], TabChangeListenerImpl);
     var TabContentFactoryImpl = (function (_super) {
         __extends(TabContentFactoryImpl, _super);
         function TabContentFactoryImpl(owner) {
@@ -52,11 +52,11 @@ function initializeNativeClasses() {
             tv.setEllipsize(android.text.TextUtils.TruncateAt.END);
             return tv;
         };
+        TabContentFactoryImpl = __decorate([
+            Interfaces([android.widget.TabHost.TabContentFactory])
+        ], TabContentFactoryImpl);
         return TabContentFactoryImpl;
     }(java.lang.Object));
-    TabContentFactoryImpl = __decorate([
-        Interfaces([android.widget.TabHost.TabContentFactory])
-    ], TabContentFactoryImpl);
     var TabHostImpl = (function (_super) {
         __extends(TabHostImpl, _super);
         function TabHostImpl(context, attrs) {

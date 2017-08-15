@@ -35,11 +35,11 @@ function initializeDateChangedListener() {
                 date_picker_common_1.dateProperty.nativeValueChange(owner, new Date(year, month, day));
             }
         };
+        DateChangedListenerImpl = __decorate([
+            Interfaces([android.widget.DatePicker.OnDateChangedListener])
+        ], DateChangedListenerImpl);
         return DateChangedListenerImpl;
     }(java.lang.Object));
-    DateChangedListenerImpl = __decorate([
-        Interfaces([android.widget.DatePicker.OnDateChangedListener])
-    ], DateChangedListenerImpl);
     DateChangedListener = DateChangedListenerImpl;
 }
 var DatePicker = (function (_super) {

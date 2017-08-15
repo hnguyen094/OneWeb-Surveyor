@@ -40,11 +40,11 @@ function initializeTouchListener() {
             }
             return nativeView.onTouchEvent(event);
         };
+        TouchListenerImpl = __decorate([
+            Interfaces([android.view.View.OnTouchListener])
+        ], TouchListenerImpl);
         return TouchListenerImpl;
     }(java.lang.Object));
-    TouchListenerImpl = __decorate([
-        Interfaces([android.view.View.OnTouchListener])
-    ], TouchListenerImpl);
     TouchListener = TouchListenerImpl;
 }
 var View = (function (_super) {
@@ -66,12 +66,17 @@ var View = (function (_super) {
         if (this.touchListenerIsSet) {
             this.nativeView.setOnTouchListener(null);
             this.touchListenerIsSet = false;
+            this.nativeView.setClickable(this._isClickable);
         }
         this._cancelAllAnimations();
         _super.prototype.onUnloaded.call(this);
     };
     View.prototype.hasGestureObservers = function () {
         return this._gestureObservers && Object.keys(this._gestureObservers).length > 0;
+    };
+    View.prototype.initNativeView = function () {
+        _super.prototype.initNativeView.call(this);
+        this._isClickable = this.nativeView.isClickable();
     };
     View.prototype.setOnTouchListener = function () {
         if (this.nativeView && this.hasGestureObservers()) {
@@ -218,9 +223,6 @@ var View = (function (_super) {
         }
         return result | (childMeasuredState & view_common_1.layout.MEASURED_STATE_MASK);
     };
-    View.prototype[view_common_1.isEnabledProperty.getDefault] = function () {
-        return this.nativeView.isEnabled();
-    };
     View.prototype[view_common_1.isEnabledProperty.setNative] = function (value) {
         this.nativeView.setEnabled(value);
     };
@@ -242,9 +244,6 @@ var View = (function (_super) {
     View.prototype[view_common_1.automationTextProperty.setNative] = function (value) {
         this.nativeView.setContentDescription(value);
     };
-    View.prototype[view_common_1.isUserInteractionEnabledProperty.getDefault] = function () {
-        return true;
-    };
     View.prototype[view_common_1.isUserInteractionEnabledProperty.setNative] = function (value) {
         if (!value) {
             initializeDisabledListener();
@@ -252,6 +251,9 @@ var View = (function (_super) {
         }
         else {
             this.setOnTouchListener();
+            if (!this.touchListenerIsSet) {
+                this.nativeView.setOnTouchListener(null);
+            }
         }
     };
     View.prototype[style_properties_1.visibilityProperty.getDefault] = function () {
@@ -298,15 +300,27 @@ var View = (function (_super) {
             switch (value) {
                 case "left":
                     lp.gravity = android.view.Gravity.LEFT | (lp.gravity & android.view.Gravity.VERTICAL_GRAVITY_MASK);
+                    if (lp.weight < 0) {
+                        lp.weight = -2;
+                    }
                     break;
                 case "center":
                     lp.gravity = android.view.Gravity.CENTER_HORIZONTAL | (lp.gravity & android.view.Gravity.VERTICAL_GRAVITY_MASK);
+                    if (lp.weight < 0) {
+                        lp.weight = -2;
+                    }
                     break;
                 case "right":
                     lp.gravity = android.view.Gravity.RIGHT | (lp.gravity & android.view.Gravity.VERTICAL_GRAVITY_MASK);
+                    if (lp.weight < 0) {
+                        lp.weight = -2;
+                    }
                     break;
                 case "stretch":
                     lp.gravity = android.view.Gravity.FILL_HORIZONTAL | (lp.gravity & android.view.Gravity.VERTICAL_GRAVITY_MASK);
+                    if (lp.weight < 0) {
+                        lp.weight = -1;
+                    }
                     break;
             }
             nativeView.setLayoutParams(lp);
@@ -322,15 +336,27 @@ var View = (function (_super) {
             switch (value) {
                 case "top":
                     lp.gravity = android.view.Gravity.TOP | (lp.gravity & android.view.Gravity.HORIZONTAL_GRAVITY_MASK);
+                    if (lp.height < 0) {
+                        lp.height = -2;
+                    }
                     break;
                 case "middle":
                     lp.gravity = android.view.Gravity.CENTER_VERTICAL | (lp.gravity & android.view.Gravity.HORIZONTAL_GRAVITY_MASK);
+                    if (lp.height < 0) {
+                        lp.height = -2;
+                    }
                     break;
                 case "bottom":
                     lp.gravity = android.view.Gravity.BOTTOM | (lp.gravity & android.view.Gravity.HORIZONTAL_GRAVITY_MASK);
+                    if (lp.height < 0) {
+                        lp.height = -2;
+                    }
                     break;
                 case "stretch":
                     lp.gravity = android.view.Gravity.FILL_VERTICAL | (lp.gravity & android.view.Gravity.HORIZONTAL_GRAVITY_MASK);
+                    if (lp.height < 0) {
+                        lp.height = -1;
+                    }
                     break;
             }
             nativeView.setLayoutParams(lp);
@@ -352,13 +378,15 @@ var View = (function (_super) {
         org.nativescript.widgets.ViewHelper.setTranslateY(this.nativeView, view_common_1.layout.toDevicePixels(value));
     };
     View.prototype[style_properties_1.zIndexProperty.getDefault] = function () {
-        return org.nativescript.widgets.ViewHelper.getZIndex(this.nativeView);
+        return 0;
     };
     View.prototype[style_properties_1.zIndexProperty.setNative] = function (value) {
         org.nativescript.widgets.ViewHelper.setZIndex(this.nativeView, value);
     };
     View.prototype[style_properties_1.backgroundInternalProperty.getDefault] = function () {
-        return this.nativeView.getBackground();
+        var nativeView = this.nativeView;
+        var drawable = nativeView.getBackground();
+        return drawable ? drawable.getConstantState().newDrawable(nativeView.getResources()) : null;
     };
     View.prototype[style_properties_1.backgroundInternalProperty.setNative] = function (value) {
         this._redrawNativeBackground(value);
@@ -380,24 +408,32 @@ var View = (function (_super) {
         }
     };
     View.prototype._redrawNativeBackground = function (value) {
-        if (value instanceof android.graphics.drawable.Drawable) {
-            this.nativeView.setBackground(value);
-        }
-        else {
+        if (value instanceof background_1.Background) {
             background_1.ad.onBackgroundOrBorderPropertyChanged(this);
         }
+        else {
+            var nativeView = this.nativeView;
+            org.nativescript.widgets.ViewHelper.setBackground(nativeView, value);
+            nativeView.setPadding(this._defaultPaddingLeft, this._defaultPaddingTop, this._defaultPaddingRight, this._defaultPaddingBottom);
+            nativeView.background = undefined;
+            var cache = nativeView;
+            if (cache.layerType !== undefined) {
+                cache.setLayerType(cache.layerType, null);
+                cache.layerType = undefined;
+            }
+        }
     };
+    __decorate([
+        profiling_1.profile
+    ], View.prototype, "onLoaded", null);
+    __decorate([
+        profiling_1.profile
+    ], View.prototype, "onUnloaded", null);
+    __decorate([
+        profiling_1.profile
+    ], View.prototype, "requestLayout", null);
     return View;
 }(view_common_1.ViewCommon));
-__decorate([
-    profiling_1.profile
-], View.prototype, "onLoaded", null);
-__decorate([
-    profiling_1.profile
-], View.prototype, "onUnloaded", null);
-__decorate([
-    profiling_1.profile
-], View.prototype, "requestLayout", null);
 exports.View = View;
 var CustomLayoutView = (function (_super) {
     __extends(CustomLayoutView, _super);
@@ -434,10 +470,12 @@ var CustomLayoutView = (function (_super) {
     };
     CustomLayoutView.prototype._removeViewFromNativeVisualTree = function (child) {
         _super.prototype._removeViewFromNativeVisualTree.call(this, child);
-        if (this.nativeView && child.nativeView) {
-            this.nativeView.removeView(child.nativeView);
+        var nativeView = this.nativeView;
+        var childView = child.nativeView;
+        if (nativeView && childView) {
+            nativeView.removeView(childView);
             if (view_common_1.traceEnabled()) {
-                view_common_1.traceWrite(this + ".nativeView.removeView(" + child + ".nativeView)", view_common_1.traceCategories.VisualTreeEvents);
+                view_common_1.traceWrite(nativeView + ".removeView(" + childView + ")", view_common_1.traceCategories.VisualTreeEvents);
                 view_common_1.traceNotifyEvent(child, "childInLayoutRemovedFromNativeVisualTree");
             }
         }
@@ -496,46 +534,34 @@ function createNativePercentLengthProperty(options) {
     }
 }
 createNativePercentLengthProperty({
-    getter: style_properties_1.marginTopProperty.getDefault,
     setter: style_properties_1.marginTopProperty.setNative,
-    get getPixels() { return org.nativescript.widgets.ViewHelper.getMarginTop; },
     get setPixels() { return org.nativescript.widgets.ViewHelper.setMarginTop; },
     get setPercent() { return org.nativescript.widgets.ViewHelper.setMarginTopPercent; }
 });
 createNativePercentLengthProperty({
-    getter: style_properties_1.marginRightProperty.getDefault,
     setter: style_properties_1.marginRightProperty.setNative,
-    get getPixels() { return org.nativescript.widgets.ViewHelper.getMarginRight; },
     get setPixels() { return org.nativescript.widgets.ViewHelper.setMarginRight; },
     get setPercent() { return org.nativescript.widgets.ViewHelper.setMarginRightPercent; }
 });
 createNativePercentLengthProperty({
-    getter: style_properties_1.marginBottomProperty.getDefault,
     setter: style_properties_1.marginBottomProperty.setNative,
-    get getPixels() { return org.nativescript.widgets.ViewHelper.getMarginBottom; },
     get setPixels() { return org.nativescript.widgets.ViewHelper.setMarginBottom; },
     get setPercent() { return org.nativescript.widgets.ViewHelper.setMarginBottomPercent; }
 });
 createNativePercentLengthProperty({
-    getter: style_properties_1.marginLeftProperty.getDefault,
     setter: style_properties_1.marginLeftProperty.setNative,
-    get getPixels() { return org.nativescript.widgets.ViewHelper.getMarginLeft; },
     get setPixels() { return org.nativescript.widgets.ViewHelper.setMarginLeft; },
     get setPercent() { return org.nativescript.widgets.ViewHelper.setMarginLeftPercent; }
 });
 createNativePercentLengthProperty({
-    getter: style_properties_1.widthProperty.getDefault,
     setter: style_properties_1.widthProperty.setNative,
     auto: -1,
-    get getPixels() { return org.nativescript.widgets.ViewHelper.getWidth; },
     get setPixels() { return org.nativescript.widgets.ViewHelper.setWidth; },
     get setPercent() { return org.nativescript.widgets.ViewHelper.setWidthPercent; }
 });
 createNativePercentLengthProperty({
-    getter: style_properties_1.heightProperty.getDefault,
     setter: style_properties_1.heightProperty.setNative,
     auto: -1,
-    get getPixels() { return org.nativescript.widgets.ViewHelper.getHeight; },
     get setPixels() { return org.nativescript.widgets.ViewHelper.setHeight; },
     get setPercent() { return org.nativescript.widgets.ViewHelper.setHeightPercent; }
 });

@@ -65,18 +65,19 @@ var alignSelfMap = (_f = {},
 var FlexboxLayout = (function (_super) {
     __extends(FlexboxLayout, _super);
     function FlexboxLayout() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    FlexboxLayout.prototype.createNativeView = function () {
+        var _this = _super.call(this) || this;
         if (!widgetFlexboxLayout) {
             widgetFlexboxLayout = org.nativescript.widgets.FlexboxLayout;
             widgetLayoutParams = widgetFlexboxLayout.LayoutParams;
         }
+        return _this;
+    }
+    FlexboxLayout.prototype.createNativeView = function () {
         return new widgetFlexboxLayout(this._context);
     };
-    FlexboxLayout.prototype.disposeNativeView = function () {
+    FlexboxLayout.prototype.resetNativeView = function () {
+        _super.prototype.resetNativeView.call(this);
         this.nativeView.invalidateOrdersCache();
-        _super.prototype.disposeNativeView.call(this);
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.flexDirectionProperty.getDefault] = function () {
         return flexbox_layout_common_1.flexDirectionProperty.defaultValue;

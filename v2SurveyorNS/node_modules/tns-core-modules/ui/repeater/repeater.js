@@ -94,12 +94,13 @@ var Repeater = (function (_super) {
         var heightAndState = layout_base_1.View.resolveSizeAndState(result.measuredHeight, height, heightMode, 0);
         this.setMeasuredDimension(widthAndState, heightAndState);
     };
+    __decorate([
+        profiling_1.profile
+    ], Repeater.prototype, "onLoaded", null);
     return Repeater;
 }(layout_base_1.CustomLayoutView));
-__decorate([
-    profiling_1.profile
-], Repeater.prototype, "onLoaded", null);
 exports.Repeater = Repeater;
+Repeater.prototype.recycleNativeView = true;
 exports.itemTemplateProperty = new layout_base_1.Property({
     name: "itemTemplate", affectsLayout: true, valueChanged: function (target) {
         target._requestRefresh();

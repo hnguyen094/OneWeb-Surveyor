@@ -12,6 +12,7 @@ var SwitchBase = (function (_super) {
     return SwitchBase;
 }(view_1.View));
 exports.SwitchBase = SwitchBase;
+SwitchBase.prototype.recycleNativeView = true;
 exports.checkedProperty = new view_1.Property({ name: "checked", defaultValue: false, valueConverter: view_1.booleanConverter });
 exports.checkedProperty.register(SwitchBase);
 //# sourceMappingURL=switch-common.js.map

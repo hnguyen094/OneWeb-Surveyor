@@ -113,13 +113,14 @@ var ListViewBase = (function (_super) {
     ListViewBase.prototype.updateEffectiveRowHeight = function () {
         exports.rowHeightProperty.coerce(this);
     };
+    ListViewBase.itemLoadingEvent = "itemLoading";
+    ListViewBase.itemTapEvent = "itemTap";
+    ListViewBase.loadMoreItemsEvent = "loadMoreItems";
+    ListViewBase.knownFunctions = ["itemTemplateSelector"];
     return ListViewBase;
 }(view_1.View));
-ListViewBase.itemLoadingEvent = "itemLoading";
-ListViewBase.itemTapEvent = "itemTap";
-ListViewBase.loadMoreItemsEvent = "loadMoreItems";
-ListViewBase.knownFunctions = ["itemTemplateSelector"];
 exports.ListViewBase = ListViewBase;
+ListViewBase.prototype.recycleNativeView = true;
 exports.itemsProperty = new view_1.Property({
     name: "items", valueChanged: function (target, oldValue, newValue) {
         if (oldValue instanceof view_1.Observable) {

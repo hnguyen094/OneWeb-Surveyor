@@ -8,6 +8,7 @@ var gestures_1 = require("../gestures");
 __export(require("./button-common"));
 var ClickListener;
 var APILEVEL;
+var AndroidButton;
 function initializeClickListener() {
     if (ClickListener) {
         return;
@@ -22,13 +23,14 @@ function initializeClickListener() {
         ClickListenerImpl.prototype.onClick = function (v) {
             this.owner._emit(button_common_1.ButtonBase.tapEvent);
         };
+        ClickListenerImpl = __decorate([
+            Interfaces([android.view.View.OnClickListener])
+        ], ClickListenerImpl);
         return ClickListenerImpl;
     }(java.lang.Object));
-    ClickListenerImpl = __decorate([
-        Interfaces([android.view.View.OnClickListener])
-    ], ClickListenerImpl);
     ClickListener = ClickListenerImpl;
     APILEVEL = android.os.Build.VERSION.SDK_INT;
+    AndroidButton = android.widget.Button;
 }
 var Button = (function (_super) {
     __extends(Button, _super);
@@ -37,19 +39,27 @@ var Button = (function (_super) {
     }
     Button.prototype.createNativeView = function () {
         initializeClickListener();
-        var button = new android.widget.Button(this._context);
+        var button = new AndroidButton(this._context);
         var clickListener = new ClickListener(this);
         button.setOnClickListener(clickListener);
         button.clickListener = clickListener;
         return button;
     };
     Button.prototype.initNativeView = function () {
-        this.nativeView.clickListener.owner = this;
+        var nativeView = this.nativeView;
+        nativeView.clickListener.owner = this;
         _super.prototype.initNativeView.call(this);
     };
     Button.prototype.disposeNativeView = function () {
         this.nativeView.clickListener.owner = null;
         _super.prototype.disposeNativeView.call(this);
+    };
+    Button.prototype.resetNativeView = function () {
+        _super.prototype.resetNativeView.call(this);
+        if (this._stateListAnimator && APILEVEL >= 21) {
+            this.nativeView.setStateListAnimator(this._stateListAnimator);
+            this._stateListAnimator = undefined;
+        }
     };
     Button.prototype._updateHandler = function (subscribe) {
         var _this = this;
@@ -94,26 +104,27 @@ var Button = (function (_super) {
     Button.prototype[button_common_1.paddingLeftProperty.setNative] = function (value) {
         org.nativescript.widgets.ViewHelper.setPaddingLeft(this.nativeView, button_common_1.Length.toDevicePixels(value, 0) + button_common_1.Length.toDevicePixels(this.style.borderLeftWidth, 0));
     };
-    Button.prototype[button_common_1.zIndexProperty.getDefault] = function () {
-        return org.nativescript.widgets.ViewHelper.getZIndex(this.nativeView);
-    };
     Button.prototype[button_common_1.zIndexProperty.setNative] = function (value) {
-        org.nativescript.widgets.ViewHelper.setZIndex(this.nativeView, value);
         if (APILEVEL >= 21) {
-            this.nativeView.setStateListAnimator(null);
+            var nativeView = this.nativeView;
+            if (!this._stateListAnimator) {
+                this._stateListAnimator = nativeView.getStateListAnimator();
+            }
+            nativeView.setStateListAnimator(null);
         }
+        org.nativescript.widgets.ViewHelper.setZIndex(this.nativeView, value);
     };
     Button.prototype[button_common_1.textAlignmentProperty.setNative] = function (value) {
         var newValue = value === "initial" ? "center" : value;
         _super.prototype[button_common_1.textAlignmentProperty.setNative].call(this, newValue);
     };
+    __decorate([
+        profiling_1.profile
+    ], Button.prototype, "createNativeView", null);
+    __decorate([
+        button_common_1.PseudoClassHandler("normal", "highlighted", "pressed", "active")
+    ], Button.prototype, "_updateHandler", null);
     return Button;
 }(button_common_1.ButtonBase));
-__decorate([
-    profiling_1.profile
-], Button.prototype, "createNativeView", null);
-__decorate([
-    button_common_1.PseudoClassHandler("normal", "highlighted", "pressed", "active")
-], Button.prototype, "_updateHandler", null);
 exports.Button = Button;
 //# sourceMappingURL=button.js.map

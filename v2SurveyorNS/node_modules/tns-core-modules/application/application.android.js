@@ -74,18 +74,18 @@ var AndroidApplication = (function (_super) {
             delete this._registeredReceivers[intentFilter];
         }
     };
+    AndroidApplication.activityCreatedEvent = ActivityCreated;
+    AndroidApplication.activityDestroyedEvent = ActivityDestroyed;
+    AndroidApplication.activityStartedEvent = ActivityStarted;
+    AndroidApplication.activityPausedEvent = ActivityPaused;
+    AndroidApplication.activityResumedEvent = ActivityResumed;
+    AndroidApplication.activityStoppedEvent = ActivityStopped;
+    AndroidApplication.saveActivityStateEvent = SaveActivityState;
+    AndroidApplication.activityResultEvent = ActivityResult;
+    AndroidApplication.activityBackPressedEvent = ActivityBackPressed;
+    AndroidApplication.activityRequestPermissionsEvent = ActivityRequestPermissions;
     return AndroidApplication;
 }(application_common_1.Observable));
-AndroidApplication.activityCreatedEvent = ActivityCreated;
-AndroidApplication.activityDestroyedEvent = ActivityDestroyed;
-AndroidApplication.activityStartedEvent = ActivityStarted;
-AndroidApplication.activityPausedEvent = ActivityPaused;
-AndroidApplication.activityResumedEvent = ActivityResumed;
-AndroidApplication.activityStoppedEvent = ActivityStopped;
-AndroidApplication.saveActivityStateEvent = SaveActivityState;
-AndroidApplication.activityResultEvent = ActivityResult;
-AndroidApplication.activityBackPressedEvent = ActivityBackPressed;
-AndroidApplication.activityRequestPermissionsEvent = ActivityRequestPermissions;
 exports.AndroidApplication = AndroidApplication;
 var androidApp = new AndroidApplication();
 exports.android = androidApp;
@@ -151,7 +151,7 @@ function initLifecycleCallbacks() {
             }
             androidApp.notify({ eventName: ActivityCreated, object: androidApp, activity: activity, bundle: savedInstanceState });
             if (application_common_1.hasListeners(application_common_1.displayedEvent)) {
-                var rootView_1 = activity.findViewById(android.R.id.content);
+                var rootView_1 = activity.getWindow().getDecorView().getRootView();
                 var onGlobalLayoutListener_1 = new android.view.ViewTreeObserver.OnGlobalLayoutListener({
                     onGlobalLayout: function () {
                         application_common_1.notify({ eventName: application_common_1.displayedEvent, object: androidApp, activity: activity });

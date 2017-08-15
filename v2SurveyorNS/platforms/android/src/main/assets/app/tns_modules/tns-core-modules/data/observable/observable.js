@@ -147,9 +147,9 @@ var Observable = (function () {
         }
         return -1;
     };
+    Observable.propertyChangeEvent = "propertyChange";
     return Observable;
 }());
-Observable.propertyChangeEvent = "propertyChange";
 exports.Observable = Observable;
 var ObservableFromObject = (function (_super) {
     __extends(ObservableFromObject, _super);

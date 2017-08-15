@@ -262,17 +262,17 @@ var StyleScope = (function () {
     StyleScope.prototype.getAnimations = function (ruleset) {
         return ruleset[animationsSymbol];
     };
+    __decorate([
+        profiling_1.profile
+    ], StyleScope.prototype, "setCss", null);
+    __decorate([
+        profiling_1.profile
+    ], StyleScope.prototype, "appendCss", null);
+    __decorate([
+        profiling_1.profile
+    ], StyleScope.prototype, "_createSelectors", null);
     return StyleScope;
 }());
-__decorate([
-    profiling_1.profile
-], StyleScope.prototype, "setCss", null);
-__decorate([
-    profiling_1.profile
-], StyleScope.prototype, "appendCss", null);
-__decorate([
-    profiling_1.profile
-], StyleScope.prototype, "_createSelectors", null);
 exports.StyleScope = StyleScope;
 function createSelectorsFromCss(css, cssFileName, keyframes) {
     try {
@@ -363,17 +363,14 @@ exports.applyInlineStyle = applyInlineStyle;
 function isKeyframe(node) {
     return node.type === "keyframes";
 }
-var InlineSelector = (function (_super) {
-    __extends(InlineSelector, _super);
+var InlineSelector = (function () {
     function InlineSelector(ruleSet) {
-        var _this = _super.call(this) || this;
-        _this.specificity = 0x01000000;
-        _this.rarity = 0;
-        _this.dynamic = false;
-        _this.ruleset = ruleSet;
-        return _this;
+        this.specificity = 0x01000000;
+        this.rarity = 0;
+        this.dynamic = false;
+        this.ruleset = ruleSet;
     }
     InlineSelector.prototype.match = function (node) { return true; };
     return InlineSelector;
-}(css_selector_1.SelectorCore));
+}());
 //# sourceMappingURL=style-scope.js.map

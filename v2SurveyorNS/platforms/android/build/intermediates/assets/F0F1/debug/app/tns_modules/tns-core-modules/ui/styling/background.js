@@ -30,8 +30,8 @@ var ad;
         var cache = view.nativeView;
         var drawable = nativeView.getBackground();
         var androidView = view;
-        if (androidView.background === undefined && drawable) {
-            androidView.background = drawable.getConstantState();
+        if (androidView._cachedDrawableConstState === undefined && drawable) {
+            androidView._cachedDrawableConstState = drawable.getConstantState();
         }
         if (isSetColorFilterOnlyWidget(nativeView)
             && drawable
@@ -64,9 +64,9 @@ var ad;
             }
         }
         else {
-            var defaultDrawable = androidView.background ? androidView.background.newDrawable() : null;
+            var defaultDrawable = androidView._cachedDrawableConstState ? androidView._cachedDrawableConstState.newDrawable(nativeView.getResources()) : null;
             org.nativescript.widgets.ViewHelper.setBackground(nativeView, defaultDrawable);
-            androidView.background = undefined;
+            androidView._cachedDrawableConstState = undefined;
             if (cache.layerType !== undefined) {
                 cache.setLayerType(cache.layerType, null);
                 cache.layerType = undefined;

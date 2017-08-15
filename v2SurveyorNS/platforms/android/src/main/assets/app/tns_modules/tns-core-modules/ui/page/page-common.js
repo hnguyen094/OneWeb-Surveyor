@@ -136,7 +136,8 @@ var PageBase = (function (_super) {
     };
     Object.defineProperty(PageBase.prototype, "frame", {
         get: function () {
-            return this.parent;
+            var frame = this.parent;
+            return frame instanceof frame_1.Frame ? frame : undefined;
         },
         enumerable: true,
         configurable: true
@@ -266,17 +267,17 @@ var PageBase = (function (_super) {
         resetCssValuesFunc(this);
         content_view_1.eachDescendant(this, resetCssValuesFunc);
     };
+    PageBase.navigatingToEvent = "navigatingTo";
+    PageBase.navigatedToEvent = "navigatedTo";
+    PageBase.navigatingFromEvent = "navigatingFrom";
+    PageBase.navigatedFromEvent = "navigatedFrom";
+    PageBase.shownModallyEvent = "shownModally";
+    PageBase.showingModallyEvent = "showingModally";
+    __decorate([
+        profiling_1.profile
+    ], PageBase.prototype, "onLoaded", null);
     return PageBase;
 }(content_view_1.ContentView));
-PageBase.navigatingToEvent = "navigatingTo";
-PageBase.navigatedToEvent = "navigatedTo";
-PageBase.navigatingFromEvent = "navigatingFrom";
-PageBase.navigatedFromEvent = "navigatedFrom";
-PageBase.shownModallyEvent = "shownModally";
-PageBase.showingModallyEvent = "showingModally";
-__decorate([
-    profiling_1.profile
-], PageBase.prototype, "onLoaded", null);
 exports.PageBase = PageBase;
 exports.actionBarHiddenProperty = new content_view_1.Property({ name: "actionBarHidden", affectsLayout: content_view_1.isIOS, valueConverter: content_view_1.booleanConverter });
 exports.actionBarHiddenProperty.register(PageBase);

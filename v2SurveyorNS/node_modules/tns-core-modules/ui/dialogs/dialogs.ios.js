@@ -20,9 +20,9 @@ var UIAlertViewDelegateImpl = (function (_super) {
     UIAlertViewDelegateImpl.prototype.alertViewClickedButtonAtIndex = function (view, index) {
         this._callback(view, index);
     };
+    UIAlertViewDelegateImpl.ObjCProtocols = [UIAlertViewDelegate];
     return UIAlertViewDelegateImpl;
 }(NSObject));
-UIAlertViewDelegateImpl.ObjCProtocols = [UIAlertViewDelegate];
 var UIActionSheetDelegateImpl = (function (_super) {
     __extends(UIActionSheetDelegateImpl, _super);
     function UIActionSheetDelegateImpl() {
@@ -36,9 +36,9 @@ var UIActionSheetDelegateImpl = (function (_super) {
     UIActionSheetDelegateImpl.prototype.actionSheetClickedButtonAtIndex = function (actionSheet, index) {
         this._callback(actionSheet, index);
     };
+    UIActionSheetDelegateImpl.ObjCProtocols = [UIActionSheetDelegate];
     return UIActionSheetDelegateImpl;
 }(NSObject));
-UIActionSheetDelegateImpl.ObjCProtocols = [UIActionSheetDelegate];
 function createUIAlertView(options) {
     var alert = UIAlertView.new();
     alert.title = options && options.title ? options.title : "";

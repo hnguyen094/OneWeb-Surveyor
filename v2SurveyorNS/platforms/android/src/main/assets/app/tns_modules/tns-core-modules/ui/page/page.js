@@ -108,7 +108,7 @@ var Page = (function (_super) {
         }
     };
     Page.prototype._tearDownUI = function (force) {
-        var skipDetached = !force && this.frame.android.cachePagesOnNavigate && !this._isBackNavigation;
+        var skipDetached = !force && this.frame && this.frame.android.cachePagesOnNavigate && !this._isBackNavigation;
         if (!skipDetached) {
             _super.prototype._tearDownUI.call(this);
             this._isAddedToNativeVisualTree = false;
@@ -189,10 +189,10 @@ var Page = (function (_super) {
             window_4.setStatusBarColor(color);
         }
     };
+    __decorate([
+        profiling_1.profile
+    ], Page.prototype, "onLoaded", null);
     return Page;
 }(page_common_1.PageBase));
-__decorate([
-    profiling_1.profile
-], Page.prototype, "onLoaded", null);
 exports.Page = Page;
 //# sourceMappingURL=page.js.map

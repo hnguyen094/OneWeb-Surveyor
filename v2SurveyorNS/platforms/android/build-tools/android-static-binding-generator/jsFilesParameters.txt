@@ -4,9 +4,13 @@ C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-camera-preview\activity.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-camera-preview\nativescript-camera-preview-common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-camera-preview\nativescript-camera-preview.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-chart\chart.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-fov\nativescript-fov-common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-fov\nativescript-fov.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-rotation-vector\index.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-bitmap-factory\BitmapFactory.commons.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-bitmap-factory\BitmapFactory.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-bitmap-factory\index.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-charts\nativescript-charts.common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-charts\nativescript-charts.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-charts\components\axes\index.js
@@ -94,7 +98,6 @@ C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\image\image.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\image-cache\image-cache-common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\image-cache\image-cache.js
-C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\label\label-common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\label\label.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\layouts\layout-base-common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\layouts\layout-base.js
@@ -150,7 +153,6 @@ C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\text-base\text-base.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\text-field\text-field-common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\text-field\text-field.js
-C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\text-view\text-view-common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\text-view\text-view.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\time-picker\time-picker-common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\ui\time-picker\time-picker.js

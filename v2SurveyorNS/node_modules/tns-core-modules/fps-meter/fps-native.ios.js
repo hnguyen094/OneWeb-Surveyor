@@ -16,11 +16,11 @@ var FrameHandlerImpl = (function (_super) {
             owner._handleFrame(sender);
         }
     };
+    FrameHandlerImpl.ObjCExposedMethods = {
+        "handleFrame": { returns: interop.types.void, params: [CADisplayLink] }
+    };
     return FrameHandlerImpl;
 }(NSObject));
-FrameHandlerImpl.ObjCExposedMethods = {
-    "handleFrame": { returns: interop.types.void, params: [CADisplayLink] }
-};
 var FPSCallback = (function () {
     function FPSCallback(onFrame) {
         this.onFrame = onFrame;

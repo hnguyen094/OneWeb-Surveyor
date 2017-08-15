@@ -62,7 +62,7 @@ var GridLayout = (function (_super) {
         this.rowsInternal.forEach(function (itemSpec, index, rows) { _this._onRowAdded(itemSpec); }, this);
         this.columnsInternal.forEach(function (itemSpec, index, rows) { _this._onColumnAdded(itemSpec); }, this);
     };
-    GridLayout.prototype.disposeNativeView = function () {
+    GridLayout.prototype.resetNativeView = function () {
         for (var i = this.rowsInternal.length; i--; i >= 0) {
             var itemSpec = this.rowsInternal[i];
             this._onRowRemoved(itemSpec, i);
@@ -71,7 +71,7 @@ var GridLayout = (function (_super) {
             var itemSpec = this.columnsInternal[i];
             this._onColumnRemoved(itemSpec, i);
         }
-        _super.prototype.disposeNativeView.call(this);
+        _super.prototype.resetNativeView.call(this);
     };
     GridLayout.prototype._onRowAdded = function (itemSpec) {
         if (this.nativeView) {

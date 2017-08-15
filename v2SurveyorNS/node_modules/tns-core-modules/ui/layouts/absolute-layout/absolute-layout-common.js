@@ -36,6 +36,7 @@ var AbsoluteLayoutBase = (function (_super) {
     return AbsoluteLayoutBase;
 }(layout_base_1.LayoutBase));
 exports.AbsoluteLayoutBase = AbsoluteLayoutBase;
+AbsoluteLayoutBase.prototype.recycleNativeView = true;
 exports.leftProperty = new layout_base_1.Property({
     name: "left", defaultValue: layout_base_1.zeroLength,
     valueChanged: function (target, oldValue, newValue) {

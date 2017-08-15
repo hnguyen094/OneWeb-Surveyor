@@ -195,9 +195,9 @@ var TabViewBase = (function (_super) {
             }
         }
     };
+    TabViewBase.selectedIndexChangedEvent = "selectedIndexChanged";
     return TabViewBase;
 }(view_1.View));
-TabViewBase.selectedIndexChangedEvent = "selectedIndexChanged";
 exports.TabViewBase = TabViewBase;
 exports.selectedIndexProperty = new view_1.CoercibleProperty({
     name: "selectedIndex", defaultValue: -1, affectsLayout: view_1.isIOS,

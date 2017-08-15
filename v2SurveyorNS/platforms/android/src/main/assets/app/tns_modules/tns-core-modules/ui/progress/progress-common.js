@@ -12,6 +12,7 @@ var ProgressBase = (function (_super) {
     return ProgressBase;
 }(view_1.View));
 exports.ProgressBase = ProgressBase;
+ProgressBase.prototype.recycleNativeView = true;
 exports.valueProperty = new view_1.CoercibleProperty({
     name: "value",
     defaultValue: 0,

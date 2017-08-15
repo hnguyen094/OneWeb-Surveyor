@@ -288,11 +288,11 @@ var File = (function (_super) {
             throw new Error("Cannot access a locked file.");
         }
     };
+    __decorate([
+        profiling_1.profile
+    ], File.prototype, "readTextSync", null);
     return File;
 }(FileSystemEntity));
-__decorate([
-    profiling_1.profile
-], File.prototype, "readTextSync", null);
 exports.File = File;
 var Folder = (function (_super) {
     __extends(Folder, _super);

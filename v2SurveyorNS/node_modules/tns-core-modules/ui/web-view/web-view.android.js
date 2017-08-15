@@ -94,13 +94,13 @@ var WebView = (function (_super) {
         _super.prototype.initNativeView.call(this);
         this.nativeView.client.owner = this;
     };
-    WebView.prototype.resetNativeView = function () {
+    WebView.prototype.disposeNativeView = function () {
         var nativeView = this.nativeView;
         if (nativeView) {
             nativeView.destroy();
         }
         nativeView.client.owner = null;
-        _super.prototype.resetNativeView.call(this);
+        _super.prototype.disposeNativeView.call(this);
     };
     WebView.prototype._loadUrl = function (src) {
         var nativeView = this.nativeView;

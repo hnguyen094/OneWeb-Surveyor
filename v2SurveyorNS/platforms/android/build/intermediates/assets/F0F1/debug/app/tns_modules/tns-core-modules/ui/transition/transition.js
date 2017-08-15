@@ -654,8 +654,8 @@ var Transition = (function () {
     Transition.prototype.toString = function () {
         return types_1.getClass(this) + "@" + this._id;
     };
+    Transition.transitionId = 0;
     return Transition;
 }());
-Transition.transitionId = 0;
 exports.Transition = Transition;
 //# sourceMappingURL=transition.js.map

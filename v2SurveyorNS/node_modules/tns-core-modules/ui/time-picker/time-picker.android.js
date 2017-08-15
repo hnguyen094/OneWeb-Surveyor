@@ -25,11 +25,11 @@ function initializeTimeChangedListener() {
             var validTime = time_picker_common_1.getValidTime(timePicker, hour, minute);
             time_picker_common_1.timeProperty.nativeValueChange(timePicker, new Date(0, 0, 0, validTime.hour, validTime.minute));
         };
+        TimeChangedListenerImpl = __decorate([
+            Interfaces([android.widget.TimePicker.OnTimeChangedListener])
+        ], TimeChangedListenerImpl);
         return TimeChangedListenerImpl;
     }(java.lang.Object));
-    TimeChangedListenerImpl = __decorate([
-        Interfaces([android.widget.TimePicker.OnTimeChangedListener])
-    ], TimeChangedListenerImpl);
     TimeChangedListener = TimeChangedListenerImpl;
 }
 var apiLevel;

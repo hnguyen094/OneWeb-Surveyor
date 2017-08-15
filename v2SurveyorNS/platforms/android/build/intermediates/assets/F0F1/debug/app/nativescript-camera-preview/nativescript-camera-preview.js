@@ -289,8 +289,8 @@ const MyCameraCaptureSessionStateCallback = android.hardware.camera2.CameraCaptu
         }
         mCaptureSession = cameraCaptureSession;
         try {
-          // mPreviewRequestBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AF_MODE,
-          //     android.hardware.camera2.CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+          mPreviewRequestBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AF_MODE,
+              new java.lang.Integer(android.hardware.camera2.CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE));
           mPreviewRequest = mPreviewRequestBuilder.build();
           mCaptureSession.setRepeatingRequest(mPreviewRequest,
               mCaptureCallback, mBackgroundHandler);
@@ -619,14 +619,12 @@ Function: sets up the camera to create the view
 @param  args  the argument is used to set the view (converts AutoFitTextureView (extends TextureView) to NS View)
 Note: exports allows it to be exposed for outside use
 */
-//TODO TODO TODO TODO Fix Fix Fix Fix
 exports.onCreatingView = function(callback, args) {
   console.log("Entering onCreatingView");
 
   surfaceUpdateCallback = zonedCallback(callback);
   openCamera();
   mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
-  console.log("this is " + mTextureView);
   args.view = mTextureView;
 }
 

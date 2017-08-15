@@ -12,6 +12,7 @@ var DatePickerBase = (function (_super) {
     return DatePickerBase;
 }(view_1.View));
 exports.DatePickerBase = DatePickerBase;
+DatePickerBase.prototype.recycleNativeView = true;
 exports.yearProperty = new view_1.Property({ name: "year", valueConverter: function (v) { return parseInt(v); } });
 exports.yearProperty.register(DatePickerBase);
 exports.monthProperty = new view_1.Property({ name: "month", valueConverter: function (v) { return parseInt(v); } });

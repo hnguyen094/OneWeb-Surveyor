@@ -39,11 +39,11 @@ var MemmoryWarningHandler = (function (_super) {
         this._cache.removeAllObjects();
         utils.GC();
     };
+    MemmoryWarningHandler.ObjCExposedMethods = {
+        "clearCache": { returns: interop.types.void, params: [] }
+    };
     return MemmoryWarningHandler;
 }(NSObject));
-MemmoryWarningHandler.ObjCExposedMethods = {
-    "clearCache": { returns: interop.types.void, params: [] }
-};
 var Cache = (function (_super) {
     __extends(Cache, _super);
     function Cache() {

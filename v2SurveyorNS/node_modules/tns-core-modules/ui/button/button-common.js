@@ -22,8 +22,9 @@ var ButtonBase = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    ButtonBase.tapEvent = "tap";
     return ButtonBase;
 }(text_base_1.TextBase));
-ButtonBase.tapEvent = "tap";
 exports.ButtonBase = ButtonBase;
+ButtonBase.prototype.recycleNativeView = true;
 //# sourceMappingURL=button-common.js.map

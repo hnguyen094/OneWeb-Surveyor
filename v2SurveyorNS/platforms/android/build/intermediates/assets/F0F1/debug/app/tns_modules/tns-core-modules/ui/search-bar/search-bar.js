@@ -38,11 +38,11 @@ function initializeNativeClasses() {
             this[QUERY] = query;
             return true;
         };
+        CompatQueryTextListenerImpl = __decorate([
+            Interfaces([android.support.v7.widget.SearchView.OnQueryTextListener])
+        ], CompatQueryTextListenerImpl);
         return CompatQueryTextListenerImpl;
     }(java.lang.Object));
-    CompatQueryTextListenerImpl = __decorate([
-        Interfaces([android.support.v7.widget.SearchView.OnQueryTextListener])
-    ], CompatQueryTextListenerImpl);
     var CompatCloseListenerImpl = (function (_super) {
         __extends(CompatCloseListenerImpl, _super);
         function CompatCloseListenerImpl(owner) {
@@ -54,11 +54,11 @@ function initializeNativeClasses() {
             this.owner._emit(search_bar_common_1.SearchBarBase.clearEvent);
             return true;
         };
+        CompatCloseListenerImpl = __decorate([
+            Interfaces([android.support.v7.widget.SearchView.OnCloseListener])
+        ], CompatCloseListenerImpl);
         return CompatCloseListenerImpl;
     }(java.lang.Object));
-    CompatCloseListenerImpl = __decorate([
-        Interfaces([android.support.v7.widget.SearchView.OnCloseListener])
-    ], CompatCloseListenerImpl);
     QueryTextListener = CompatQueryTextListenerImpl;
     CloseListener = CompatCloseListenerImpl;
 }
@@ -158,20 +158,28 @@ var SearchBar = (function (_super) {
         this.nativeView.setQuery(text, false);
     };
     SearchBar.prototype[search_bar_common_1.hintProperty.getDefault] = function () {
-        return "";
+        return null;
     };
     SearchBar.prototype[search_bar_common_1.hintProperty.setNative] = function (value) {
-        var text = (value === null || value === undefined) ? '' : value.toString();
-        this.nativeView.setQueryHint(text);
+        if (value === null || value === undefined) {
+            this.nativeView.setQueryHint(null);
+        }
+        else {
+            this.nativeView.setQueryHint(value.toString());
+        }
     };
     SearchBar.prototype[search_bar_common_1.textFieldBackgroundColorProperty.getDefault] = function () {
         var textView = this._getTextView();
-        return textView.getCurrentTextColor();
+        return textView.getBackground();
     };
     SearchBar.prototype[search_bar_common_1.textFieldBackgroundColorProperty.setNative] = function (value) {
         var textView = this._getTextView();
-        var color = value instanceof search_bar_common_1.Color ? value.android : value;
-        textView.setBackgroundColor(color);
+        if (value instanceof search_bar_common_1.Color) {
+            textView.setBackgroundColor(value.android);
+        }
+        else {
+            org.nativescript.widgets.ViewHelper.setBackground(textView, value);
+        }
     };
     SearchBar.prototype[search_bar_common_1.textFieldHintColorProperty.getDefault] = function () {
         var textView = this._getTextView();

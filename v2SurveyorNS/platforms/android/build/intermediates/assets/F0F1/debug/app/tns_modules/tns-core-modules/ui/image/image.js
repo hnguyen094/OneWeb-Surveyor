@@ -26,11 +26,11 @@ function initializeImageLoadedListener() {
                 owner.isLoading = false;
             }
         };
+        ImageLoadedListenerImpl = __decorate([
+            Interfaces([org.nativescript.widgets.image.Worker.OnImageLoadedListener])
+        ], ImageLoadedListenerImpl);
         return ImageLoadedListenerImpl;
     }(java.lang.Object));
-    ImageLoadedListenerImpl = __decorate([
-        Interfaces([org.nativescript.widgets.image.Worker.OnImageLoadedListener])
-    ], ImageLoadedListenerImpl);
     ImageLoadedListener = ImageLoadedListenerImpl;
 }
 var Image = (function (_super) {
@@ -61,12 +61,15 @@ var Image = (function (_super) {
         this.nativeView.listener.owner = null;
         _super.prototype.disposeNativeView.call(this);
     };
-    Image.prototype._createImageSourceFromSrc = function () {
+    Image.prototype.resetNativeView = function () {
+        _super.prototype.resetNativeView.call(this);
+        this.nativeView.setImageMatrix(new android.graphics.Matrix());
+    };
+    Image.prototype._createImageSourceFromSrc = function (value) {
         var imageView = this.nativeView;
         if (!imageView) {
             return;
         }
-        var value = this.src;
         if (!value) {
             imageView.setUri(null, 0, 0, false, true);
             return;
@@ -76,7 +79,7 @@ var Image = (function (_super) {
             value = value.trim();
             this.isLoading = true;
             if (image_common_1.isDataURI(value)) {
-                _super.prototype._createImageSourceFromSrc.call(this);
+                _super.prototype._createImageSourceFromSrc.call(this, value);
             }
             else if (image_common_1.isFileOrResourcePath(value)) {
                 if (value.indexOf(image_common_1.RESOURCE_PREFIX) === 0) {
@@ -95,7 +98,7 @@ var Image = (function (_super) {
             }
         }
         else {
-            _super.prototype._createImageSourceFromSrc.call(this);
+            _super.prototype._createImageSourceFromSrc.call(this, value);
         }
     };
     Image.prototype[image_common_1.stretchProperty.getDefault] = function () {
@@ -148,7 +151,7 @@ var Image = (function (_super) {
         return undefined;
     };
     Image.prototype[image_common_1.srcProperty.setNative] = function (value) {
-        this._createImageSourceFromSrc();
+        this._createImageSourceFromSrc(value);
     };
     return Image;
 }(image_common_1.ImageBase));

@@ -1,5 +1,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uptime = global.android ? org.nativescript.Process.getUpTime : global.__tns_uptime;
+function uptime() {
+    return global.android ? org.nativescript.Process.getUpTime() : global.__tns_uptime();
+}
+exports.uptime = uptime;
 var timers = {};
 var anyGlobal = global;
 var profileNames = [];
@@ -95,17 +98,17 @@ function enable(mode) {
     }[mode];
 }
 exports.enable = enable;
-if (!global.__snapshot) {
-    try {
-        var appConfig = global.require("~/package.json");
-        if (appConfig && appConfig.profiling) {
-            if (appConfig && appConfig.profiling) {
-                enable(appConfig.profiling);
-            }
-        }
+try {
+    var appConfig = require("~/package.json");
+    if (appConfig && appConfig.profiling) {
+        enable(appConfig.profiling);
     }
-    catch (e) {
-        console.log("Profiling startup failed to figure out defaults from package.json, error: " + e);
+}
+catch (e1) {
+    try {
+        console.log("Profiling startup failed to figure out defaults from package.json, error: " + e1);
+    }
+    catch (e2) {
     }
 }
 function disable() {

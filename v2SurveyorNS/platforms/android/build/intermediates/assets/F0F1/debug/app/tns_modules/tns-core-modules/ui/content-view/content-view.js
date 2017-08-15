@@ -88,4 +88,5 @@ var ContentView = (function (_super) {
     return ContentView;
 }(view_1.CustomLayoutView));
 exports.ContentView = ContentView;
+ContentView.prototype.recycleNativeView = true;
 //# sourceMappingURL=content-view.js.map

@@ -2,6 +2,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+var profiling_1 = require("../../profiling");
 __export(require("../core/view"));
 var view_1 = require("../core/view");
 var knownCollections;
@@ -216,8 +217,6 @@ var ActionItemBase = (function (_super) {
                 this._actionView = value;
                 if (this._actionView) {
                     this._addView(this._actionView);
-                    this._actionView.style[view_1.horizontalAlignmentProperty.cssName] = "center";
-                    this._actionView.style[view_1.verticalAlignmentProperty.cssName] = "middle";
                 }
                 if (this._actionBar) {
                     this._actionBar.update();
@@ -239,6 +238,13 @@ var ActionItemBase = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    ActionItemBase.prototype.onLoaded = function () {
+        if (this._actionView) {
+            this._actionView.style[view_1.horizontalAlignmentProperty.cssName] = "center";
+            this._actionView.style[view_1.verticalAlignmentProperty.cssName] = "middle";
+        }
+        _super.prototype.onLoaded.call(this);
+    };
     ActionItemBase.prototype._raiseTap = function () {
         this._emit(ActionItemBase.tapEvent);
     };
@@ -250,9 +256,12 @@ var ActionItemBase = (function (_super) {
             callback(this._actionView);
         }
     };
+    ActionItemBase.tapEvent = "tap";
+    __decorate([
+        profiling_1.profile
+    ], ActionItemBase.prototype, "onLoaded", null);
     return ActionItemBase;
 }(view_1.ViewBase));
-ActionItemBase.tapEvent = "tap";
 exports.ActionItemBase = ActionItemBase;
 function isVisible(item) {
     return item.visibility === "visible";
@@ -274,4 +283,6 @@ var iconProperty = new view_1.Property({ name: "icon", valueChanged: onItemChang
 iconProperty.register(ActionItemBase);
 var visibilityProperty = new view_1.Property({ name: "visibility", defaultValue: "visible", valueChanged: onItemChanged });
 visibilityProperty.register(ActionItemBase);
+exports.flatProperty = new view_1.Property({ name: "flat", defaultValue: false, valueConverter: view_1.booleanConverter });
+exports.flatProperty.register(ActionBarBase);
 //# sourceMappingURL=action-bar-common.js.map

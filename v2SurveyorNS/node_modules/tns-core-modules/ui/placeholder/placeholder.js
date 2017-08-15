@@ -10,8 +10,8 @@ var Placeholder = (function (_super) {
         this.notify(args);
         return args.view;
     };
+    Placeholder.creatingViewEvent = "creatingView";
     return Placeholder;
 }(view_1.View));
-Placeholder.creatingViewEvent = "creatingView";
 exports.Placeholder = Placeholder;
 //# sourceMappingURL=placeholder.js.map

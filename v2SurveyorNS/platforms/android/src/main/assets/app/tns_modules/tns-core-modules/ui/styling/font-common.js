@@ -16,8 +16,11 @@ var FontBase = (function () {
     });
     Object.defineProperty(FontBase.prototype, "isBold", {
         get: function () {
-            return this.fontWeight === FontWeight.BOLD
-                || this.fontWeight === "700";
+            return this.fontWeight === FontWeight.SEMI_BOLD ||
+                this.fontWeight === FontWeight.BOLD ||
+                this.fontWeight === "700" ||
+                this.fontWeight === FontWeight.EXTRA_BOLD ||
+                this.fontWeight === FontWeight.BLACK;
         },
         enumerable: true,
         configurable: true
@@ -34,9 +37,9 @@ var FontBase = (function () {
             value1.fontStyle === value2.fontStyle &&
             value1.fontWeight === value2.fontWeight;
     };
+    FontBase.default = undefined;
     return FontBase;
 }());
-FontBase.default = undefined;
 exports.FontBase = FontBase;
 var FontStyle;
 (function (FontStyle) {

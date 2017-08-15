@@ -27,11 +27,11 @@ function initializeSeekBarChangeListener() {
         };
         SeekBarChangeListenerImpl.prototype.onStopTrackingTouch = function (seekBar) {
         };
+        SeekBarChangeListenerImpl = __decorate([
+            Interfaces([android.widget.SeekBar.OnSeekBarChangeListener])
+        ], SeekBarChangeListenerImpl);
         return SeekBarChangeListenerImpl;
     }(java.lang.Object));
-    SeekBarChangeListenerImpl = __decorate([
-        Interfaces([android.widget.SeekBar.OnSeekBarChangeListener])
-    ], SeekBarChangeListenerImpl);
     SeekBarChangeListener = SeekBarChangeListenerImpl;
 }
 var Slider = (function (_super) {
@@ -56,6 +56,13 @@ var Slider = (function (_super) {
         var nativeView = this.nativeView;
         nativeView.listener.owner = null;
         _super.prototype.disposeNativeView.call(this);
+    };
+    Slider.prototype.resetNativeView = function () {
+        _super.prototype.resetNativeView.call(this);
+        var nativeView = this.nativeView;
+        nativeView.setMax(100);
+        nativeView.setProgress(0);
+        nativeView.setKeyProgressIncrement(1);
     };
     Slider.prototype.setNativeValuesSilently = function (newValue, newMaxValue) {
         this._supressNativeValue = true;

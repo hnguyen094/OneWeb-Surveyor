@@ -10,10 +10,17 @@ var HtmlView = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     HtmlView.prototype.createNativeView = function () {
-        var textView = new android.widget.TextView(this._context);
-        textView.setLinksClickable(true);
-        textView.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
-        return textView;
+        return new android.widget.TextView(this._context);
+    };
+    HtmlView.prototype.initNativeView = function () {
+        _super.prototype.initNativeView.call(this);
+        var nativeView = this.nativeView;
+        nativeView.setLinksClickable(true);
+        nativeView.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+    };
+    HtmlView.prototype.resetNativeView = function () {
+        _super.prototype.resetNativeView.call(this);
+        this.nativeView.setAutoLinkMask(0);
     };
     HtmlView.prototype[html_view_common_1.htmlProperty.getDefault] = function () {
         return "";

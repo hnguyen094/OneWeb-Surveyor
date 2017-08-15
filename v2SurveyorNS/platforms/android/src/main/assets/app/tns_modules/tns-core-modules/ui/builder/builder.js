@@ -525,11 +525,11 @@ var xml2ui;
         ComponentParser.isKnownCollection = function (name, context) {
             return ComponentParser.KNOWNCOLLECTIONS in context && context[ComponentParser.KNOWNCOLLECTIONS] && name in context[ComponentParser.KNOWNCOLLECTIONS];
         };
+        ComponentParser.KNOWNCOLLECTIONS = "knownCollections";
+        ComponentParser.KNOWNTEMPLATES = "knownTemplates";
+        ComponentParser.KNOWNMULTITEMPLATES = "knownMultiTemplates";
         return ComponentParser;
     }());
-    ComponentParser.KNOWNCOLLECTIONS = "knownCollections";
-    ComponentParser.KNOWNTEMPLATES = "knownTemplates";
-    ComponentParser.KNOWNMULTITEMPLATES = "knownMultiTemplates";
     xml2ui.ComponentParser = ComponentParser;
 })(xml2ui || (xml2ui = {}));
 //# sourceMappingURL=builder.js.map

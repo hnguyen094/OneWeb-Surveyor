@@ -1,4 +1,5 @@
 {
+    "nativescript-bitmap-factory": true,
     "nativescript-charts": true,
     "nativescript-permissions": true,
     "nativescript-screen-orientation": true,

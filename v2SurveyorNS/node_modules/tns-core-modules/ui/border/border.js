@@ -35,10 +35,11 @@ var Border = (function (_super) {
         var verticalBorderLength = this.effectiveBorderTopWidth + this.effectiveBorderBottomWidth;
         content_view_1.View.layoutChild(this, this.layoutView, this.effectiveBorderLeftWidth, this.effectiveBorderTopWidth, right - left - horizontalBorderLength, bottom - top - verticalBorderLength);
     };
+    Border = __decorate([
+        Deprecated
+    ], Border);
     return Border;
 }(content_view_1.ContentView));
-Border = __decorate([
-    Deprecated
-], Border);
 exports.Border = Border;
+Border.prototype.recycleNativeView = true;
 //# sourceMappingURL=border.js.map

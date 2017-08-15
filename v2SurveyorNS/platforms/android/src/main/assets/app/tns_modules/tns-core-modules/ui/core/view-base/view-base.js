@@ -75,7 +75,7 @@ function eachDescendant(view, callback) {
 }
 exports.eachDescendant = eachDescendant;
 var viewIdCounter = 1;
-var contextMap = new Map();
+var contextMap = new WeakMap();
 function getNativeView(context, typeName) {
     var typeMap = contextMap.get(context);
     if (!typeMap) {
@@ -125,6 +125,15 @@ var ViewBase = (function (_super) {
     Object.defineProperty(ViewBase.prototype, "typeName", {
         get: function () {
             return types.getClass(this);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ViewBase.prototype, "recycleNativeView", {
+        get: function () {
+            return false;
+        },
+        set: function (value) {
         },
         enumerable: true,
         configurable: true
@@ -498,9 +507,8 @@ var ViewBase = (function (_super) {
         }
     };
     ViewBase.prototype.resetNativeView = function () {
-        if (this.nativeView && this.recycleNativeView && platform_1.isAndroid) {
-            properties_1.resetNativeView(this);
-        }
+    };
+    ViewBase.prototype.resetNativeViewInternal = function () {
         if (this._cssState) {
             this._cancelAllAnimations();
         }
@@ -517,14 +525,14 @@ var ViewBase = (function (_super) {
         bindable_1.traceNotifyEvent(this, "_onContextChanged");
         var nativeView;
         if (platform_1.isAndroid) {
-            if (this.recycleNativeView) {
-                nativeView = getNativeView(context, this.typeName);
-            }
             if (!nativeView) {
                 nativeView = this.createNativeView();
             }
             this._androidView = nativeView;
             if (nativeView) {
+                if (this._isPaddingRelative === undefined) {
+                    this._isPaddingRelative = nativeView.isPaddingRelative();
+                }
                 var result = nativeView.defaultPaddings;
                 if (result === undefined) {
                     result = org.nativescript.widgets.ViewHelper.getPadding(nativeView);
@@ -587,20 +595,13 @@ var ViewBase = (function (_super) {
         if (bindable_1.traceEnabled()) {
             bindable_1.traceWrite(this + "._tearDownUI(" + force + ")", bindable_1.traceCategories.VisualTreeEvents);
         }
-        this.resetNativeView();
+        this.resetNativeViewInternal();
         this.eachChild(function (child) {
             child._tearDownUI(force);
             return true;
         });
         if (this.parent) {
             this.parent._removeViewFromNativeVisualTree(this);
-        }
-        var nativeView = this.nativeView;
-        if (nativeView && this.recycleNativeView && platform_1.isAndroid) {
-            var nativeParent = platform_1.isAndroid ? nativeView.getParent() : nativeView.superview;
-            if (!nativeParent) {
-                putNativeView(this._context, this);
-            }
         }
         this.disposeNativeView();
         this._suspendNativeUpdates();
@@ -691,49 +692,49 @@ var ViewBase = (function (_super) {
             }
         }
     };
+    ViewBase.loadedEvent = "loaded";
+    ViewBase.unloadedEvent = "unloaded";
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "onLoaded", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "onUnloaded", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "_applyStyleFromScope", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "_setCssState", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "applyCssState", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "addPseudoClass", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "deletePseudoClass", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "_applyInlineStyle", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "requestLayout", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "_addView", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "_setStyleScope", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "_setupUI", null);
+    __decorate([
+        profiling_1.profile
+    ], ViewBase.prototype, "_tearDownUI", null);
     return ViewBase;
 }(bindable_1.Observable));
-ViewBase.loadedEvent = "loaded";
-ViewBase.unloadedEvent = "unloaded";
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "onLoaded", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "onUnloaded", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "_applyStyleFromScope", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "_setCssState", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "applyCssState", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "addPseudoClass", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "deletePseudoClass", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "_applyInlineStyle", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "requestLayout", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "_addView", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "_setStyleScope", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "_setupUI", null);
-__decorate([
-    profiling_1.profile
-], ViewBase.prototype, "_tearDownUI", null);
 exports.ViewBase = ViewBase;
 ViewBase.prototype.isCollapsed = false;
 ViewBase.prototype._oldLeft = 0;

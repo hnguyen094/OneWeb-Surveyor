@@ -12,6 +12,7 @@ var SliderBase = (function (_super) {
     return SliderBase;
 }(view_1.View));
 exports.SliderBase = SliderBase;
+SliderBase.prototype.recycleNativeView = true;
 exports.valueProperty = new view_1.CoercibleProperty({
     name: "value", defaultValue: 0, coerceValue: function (target, value) {
         value = Math.max(value, target.minValue);

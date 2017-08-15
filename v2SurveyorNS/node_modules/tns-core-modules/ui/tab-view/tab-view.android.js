@@ -51,17 +51,12 @@ function initializeNativeClasses() {
             }
             return item.view.nativeView;
         };
-        PagerAdapterImpl.prototype.destroyItem = function (container, index, _object) {
+        PagerAdapterImpl.prototype.destroyItem = function (container, index, nativeView) {
             if (tab_view_common_1.traceEnabled()) {
-                tab_view_common_1.traceWrite("TabView.PagerAdapter.destroyItem; container: " + container + "; index: " + index + "; _object: " + _object, tab_view_common_1.traceCategory);
+                tab_view_common_1.traceWrite("TabView.PagerAdapter.destroyItem; container: " + container + "; index: " + index + "; nativeView: " + nativeView, tab_view_common_1.traceCategory);
             }
-            var item = this.items[index];
-            var nativeView = item.view.nativeView;
-            if (!nativeView || !_object) {
+            if (!nativeView) {
                 return;
-            }
-            if (nativeView.toString() !== _object.toString()) {
-                throw new Error("Expected " + nativeView.toString() + " to equal " + _object.toString());
             }
             container.removeView(nativeView);
         };
@@ -291,6 +286,7 @@ var TabView = (function (_super) {
         var length = items ? items.length : 0;
         if (length === 0) {
             this._tabLayout.setItems(null, null);
+            this._pagerAdapter.notifyDataSetChanged();
             return;
         }
         var tabItems = new Array();

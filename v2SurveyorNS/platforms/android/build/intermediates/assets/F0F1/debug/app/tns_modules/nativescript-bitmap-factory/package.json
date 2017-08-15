@@ -1,0 +1,108 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "nativescript-bitmap-factory",
+        "scope": null,
+        "escapedName": "nativescript-bitmap-factory",
+        "name": "nativescript-bitmap-factory",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS"
+    ]
+  ],
+  "_from": "nativescript-bitmap-factory@latest",
+  "_id": "nativescript-bitmap-factory@1.7.1",
+  "_inCache": true,
+  "_location": "/nativescript-bitmap-factory",
+  "_nodeVersion": "7.5.0",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/nativescript-bitmap-factory-1.7.1.tgz_1493770294522_0.3524766876362264"
+  },
+  "_npmUser": {
+    "name": "mkloubert",
+    "email": "marcel.kloubert@gmx.net"
+  },
+  "_npmVersion": "4.2.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "nativescript-bitmap-factory",
+    "scope": null,
+    "escapedName": "nativescript-bitmap-factory",
+    "name": "nativescript-bitmap-factory",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nativescript-bitmap-factory/-/nativescript-bitmap-factory-1.7.1.tgz",
+  "_shasum": "d123d5de2fac8c395ec4b8f0aadfcd3999333d0c",
+  "_shrinkwrap": null,
+  "_spec": "nativescript-bitmap-factory",
+  "_where": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS",
+  "author": {
+    "name": "Marcel Joachim Kloubert",
+    "email": "marcel.kloubert@gmx.net"
+  },
+  "bugs": {
+    "url": "https://github.com/mkloubert/nativescript-bitmap-factory/issues"
+  },
+  "dependencies": {},
+  "description": "A NativeScript module for creating and manipulating bitmap images.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "d123d5de2fac8c395ec4b8f0aadfcd3999333d0c",
+    "tarball": "https://registry.npmjs.org/nativescript-bitmap-factory/-/nativescript-bitmap-factory-1.7.1.tgz"
+  },
+  "homepage": "https://github.com/mkloubert/nativescript-bitmap-factory",
+  "keywords": [
+    "NativeScript",
+    "Bitmaps",
+    "Factory",
+    "Factories",
+    "Images",
+    "Circles",
+    "Lines",
+    "Args",
+    "Rectangles",
+    "Ovals",
+    "Points",
+    "Text",
+    "Strings",
+    "PNG",
+    "JPEG",
+    "JPG"
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/mkloubert/nativescript-bitmap-factory/blob/master/LICENSE"
+  },
+  "maintainers": [
+    {
+      "name": "mkloubert",
+      "email": "marcel.kloubert@gmx.net"
+    }
+  ],
+  "name": "nativescript-bitmap-factory",
+  "nativescript": {
+    "platforms": {
+      "ios": "1.0.0",
+      "android": "1.1.0"
+    }
+  },
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkloubert/nativescript-bitmap-factory.git"
+  },
+  "scripts": {},
+  "version": "1.7.1"
+}

@@ -4,7 +4,7 @@
   "readme": "NativeScript Application",
   "repository": "<fill-your-repository-here>",
   "nativescript": {
-    "id": "org.nativescript.v2SurveyorNS",
+    "id": "net.oneweb.v2SurveyorNS",
     "tns-ios": {
       "version": "3.1.0"
     },
@@ -13,6 +13,7 @@
     }
   },
   "dependencies": {
+    "nativescript-bitmap-factory": "^1.7.1",
     "nativescript-charts": "0.0.7",
     "nativescript-permissions": "^1.2.3",
     "nativescript-screen-orientation": "^2.0.0",
@@ -25,6 +26,6 @@
     "babylon": "6.4.5",
     "lazy": "1.0.11",
     "nativescript-dev-typescript": "~0.5.0",
-    "typescript": "~2.2.1"
+    "typescript": "^2.5.0-dev.20170808"
   }
 }

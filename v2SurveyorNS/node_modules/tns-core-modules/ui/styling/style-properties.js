@@ -474,15 +474,15 @@ exports.backgroundInternalProperty = new properties_1.CssProperty({
 exports.backgroundInternalProperty.register(style_1.Style);
 exports.backgroundImageProperty = new properties_1.CssProperty({
     name: "backgroundImage", cssName: "background-image", valueChanged: function (target, oldValue, newValue) {
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withImage(newValue);
+        var background = target.backgroundInternal.withImage(newValue);
+        target.backgroundInternal = background;
     }
 });
 exports.backgroundImageProperty.register(style_1.Style);
 exports.backgroundColorProperty = new properties_1.CssAnimationProperty({
     name: "backgroundColor", cssName: "background-color", valueChanged: function (target, oldValue, newValue) {
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withColor(newValue);
+        var background = target.backgroundInternal.withColor(newValue);
+        target.backgroundInternal = background;
     }, equalityComparer: color_1.Color.equals, valueConverter: function (value) { return new color_1.Color(value); }
 });
 exports.backgroundColorProperty.register(style_1.Style);
@@ -498,22 +498,22 @@ var BackgroundRepeat;
 exports.backgroundRepeatProperty = new properties_1.CssProperty({
     name: "backgroundRepeat", cssName: "background-repeat", valueConverter: BackgroundRepeat.parse,
     valueChanged: function (target, oldValue, newValue) {
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withRepeat(newValue);
+        var background = target.backgroundInternal.withRepeat(newValue);
+        target.backgroundInternal = background;
     }
 });
 exports.backgroundRepeatProperty.register(style_1.Style);
 exports.backgroundSizeProperty = new properties_1.CssProperty({
     name: "backgroundSize", cssName: "background-size", valueChanged: function (target, oldValue, newValue) {
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withSize(newValue);
+        var background = target.backgroundInternal.withSize(newValue);
+        target.backgroundInternal = background;
     }
 });
 exports.backgroundSizeProperty.register(style_1.Style);
 exports.backgroundPositionProperty = new properties_1.CssProperty({
     name: "backgroundPosition", cssName: "background-position", valueChanged: function (target, oldValue, newValue) {
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withPosition(newValue);
+        var background = target.backgroundInternal.withPosition(newValue);
+        target.backgroundInternal = background;
     }
 });
 exports.backgroundPositionProperty.register(style_1.Style);
@@ -598,29 +598,29 @@ var borderColorProperty = new properties_1.ShorthandProperty({
 borderColorProperty.register(style_1.Style);
 exports.borderTopColorProperty = new properties_1.CssProperty({
     name: "borderTopColor", cssName: "border-top-color", valueChanged: function (target, oldValue, newValue) {
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderTopColor(newValue);
+        var background = target.backgroundInternal.withBorderTopColor(newValue);
+        target.backgroundInternal = background;
     }, equalityComparer: color_1.Color.equals, valueConverter: function (value) { return new color_1.Color(value); }
 });
 exports.borderTopColorProperty.register(style_1.Style);
 exports.borderRightColorProperty = new properties_1.CssProperty({
     name: "borderRightColor", cssName: "border-right-color", valueChanged: function (target, oldValue, newValue) {
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderRightColor(newValue);
+        var background = target.backgroundInternal.withBorderRightColor(newValue);
+        target.backgroundInternal = background;
     }, equalityComparer: color_1.Color.equals, valueConverter: function (value) { return new color_1.Color(value); }
 });
 exports.borderRightColorProperty.register(style_1.Style);
 exports.borderBottomColorProperty = new properties_1.CssProperty({
     name: "borderBottomColor", cssName: "border-bottom-color", valueChanged: function (target, oldValue, newValue) {
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderBottomColor(newValue);
+        var background = target.backgroundInternal.withBorderBottomColor(newValue);
+        target.backgroundInternal = background;
     }, equalityComparer: color_1.Color.equals, valueConverter: function (value) { return new color_1.Color(value); }
 });
 exports.borderBottomColorProperty.register(style_1.Style);
 exports.borderLeftColorProperty = new properties_1.CssProperty({
     name: "borderLeftColor", cssName: "border-left-color", valueChanged: function (target, oldValue, newValue) {
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderLeftColor(newValue);
+        var background = target.backgroundInternal.withBorderLeftColor(newValue);
+        target.backgroundInternal = background;
     }, equalityComparer: color_1.Color.equals, valueConverter: function (value) { return new color_1.Color(value); }
 });
 exports.borderLeftColorProperty.register(style_1.Style);
@@ -665,8 +665,8 @@ exports.borderTopWidthProperty = new properties_1.CssProperty({
             throw new Error("border-top-width should be Non-Negative Finite number. Value: " + value);
         }
         target.view.effectiveBorderTopWidth = value;
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderTopWidth(value);
+        var background = target.backgroundInternal.withBorderTopWidth(value);
+        target.backgroundInternal = background;
     }, valueConverter: Length.parse
 });
 exports.borderTopWidthProperty.register(style_1.Style);
@@ -678,8 +678,8 @@ exports.borderRightWidthProperty = new properties_1.CssProperty({
             throw new Error("border-right-width should be Non-Negative Finite number. Value: " + value);
         }
         target.view.effectiveBorderRightWidth = value;
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderRightWidth(value);
+        var background = target.backgroundInternal.withBorderRightWidth(value);
+        target.backgroundInternal = background;
     }, valueConverter: Length.parse
 });
 exports.borderRightWidthProperty.register(style_1.Style);
@@ -691,8 +691,8 @@ exports.borderBottomWidthProperty = new properties_1.CssProperty({
             throw new Error("border-bottom-width should be Non-Negative Finite number. Value: " + value);
         }
         target.view.effectiveBorderBottomWidth = value;
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderBottomWidth(value);
+        var background = target.backgroundInternal.withBorderBottomWidth(value);
+        target.backgroundInternal = background;
     }, valueConverter: Length.parse
 });
 exports.borderBottomWidthProperty.register(style_1.Style);
@@ -704,8 +704,8 @@ exports.borderLeftWidthProperty = new properties_1.CssProperty({
             throw new Error("border-left-width should be Non-Negative Finite number. Value: " + value);
         }
         target.view.effectiveBorderLeftWidth = value;
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderLeftWidth(value);
+        var background = target.backgroundInternal.withBorderLeftWidth(value);
+        target.backgroundInternal = background;
     }, valueConverter: Length.parse
 });
 exports.borderLeftWidthProperty.register(style_1.Style);
@@ -746,8 +746,8 @@ exports.borderTopLeftRadiusProperty = new properties_1.CssProperty({
         if (!isNonNegativeFiniteNumber(value)) {
             throw new Error("border-top-left-radius should be Non-Negative Finite number. Value: " + value);
         }
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderTopLeftRadius(value);
+        var background = target.backgroundInternal.withBorderTopLeftRadius(value);
+        target.backgroundInternal = background;
     }, valueConverter: Length.parse
 });
 exports.borderTopLeftRadiusProperty.register(style_1.Style);
@@ -757,8 +757,8 @@ exports.borderTopRightRadiusProperty = new properties_1.CssProperty({
         if (!isNonNegativeFiniteNumber(value)) {
             throw new Error("border-top-right-radius should be Non-Negative Finite number. Value: " + value);
         }
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderTopRightRadius(value);
+        var background = target.backgroundInternal.withBorderTopRightRadius(value);
+        target.backgroundInternal = background;
     }, valueConverter: Length.parse
 });
 exports.borderTopRightRadiusProperty.register(style_1.Style);
@@ -768,8 +768,8 @@ exports.borderBottomRightRadiusProperty = new properties_1.CssProperty({
         if (!isNonNegativeFiniteNumber(value)) {
             throw new Error("border-bottom-right-radius should be Non-Negative Finite number. Value: " + value);
         }
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderBottomRightRadius(value);
+        var background = target.backgroundInternal.withBorderBottomRightRadius(value);
+        target.backgroundInternal = background;
     }, valueConverter: Length.parse
 });
 exports.borderBottomRightRadiusProperty.register(style_1.Style);
@@ -779,8 +779,8 @@ exports.borderBottomLeftRadiusProperty = new properties_1.CssProperty({
         if (!isNonNegativeFiniteNumber(value)) {
             throw new Error("border-bottom-left-radius should be Non-Negative Finite number. Value: " + value);
         }
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withBorderBottomLeftRadius(value);
+        var background = target.backgroundInternal.withBorderBottomLeftRadius(value);
+        target.backgroundInternal = background;
     }, valueConverter: Length.parse
 });
 exports.borderBottomLeftRadiusProperty.register(style_1.Style);
@@ -800,8 +800,8 @@ exports.clipPathProperty = new properties_1.CssProperty({
         if (!isClipPathValid(newValue)) {
             throw new Error("clip-path is not valid.");
         }
-        var background = target.backgroundInternal;
-        target.backgroundInternal = background.withClipPath(newValue);
+        var background = target.backgroundInternal.withClipPath(newValue);
+        target.backgroundInternal = background;
     }
 });
 exports.clipPathProperty.register(style_1.Style);
@@ -812,7 +812,7 @@ function isFloatValueConverter(value) {
     }
     return newValue;
 }
-exports.zIndexProperty = new properties_1.CssProperty({ name: "zIndex", cssName: "z-index", defaultValue: Number.NaN, valueConverter: isFloatValueConverter });
+exports.zIndexProperty = new properties_1.CssProperty({ name: "zIndex", cssName: "z-index", valueConverter: isFloatValueConverter });
 exports.zIndexProperty.register(style_1.Style);
 function opacityConverter(value) {
     var newValue = parseFloat(value);

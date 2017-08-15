@@ -321,11 +321,11 @@ var Frame = (function (_super) {
         }
         _super.prototype._processNavigationContext.call(this, navigationContext);
     };
+    __decorate([
+        profiling_1.profile
+    ], Frame.prototype, "_navigateCore", null);
     return Frame;
 }(frame_common_1.FrameBase));
-__decorate([
-    profiling_1.profile
-], Frame.prototype, "_navigateCore", null);
 exports.Frame = Frame;
 var framesCounter = 0;
 var framesCache = new Array();
@@ -636,32 +636,32 @@ var FragmentCallbacksImplementation = (function () {
     FragmentCallbacksImplementation.prototype.toStringOverride = function (fragment, superFunc) {
         return fragment.getTag() + "<" + (this.entry ? this.entry.resolvedPage : "") + ">";
     };
+    __decorate([
+        profiling_1.profile
+    ], FragmentCallbacksImplementation.prototype, "onHiddenChanged", null);
+    __decorate([
+        profiling_1.profile
+    ], FragmentCallbacksImplementation.prototype, "onCreateAnimator", null);
+    __decorate([
+        profiling_1.profile
+    ], FragmentCallbacksImplementation.prototype, "onCreate", null);
+    __decorate([
+        profiling_1.profile
+    ], FragmentCallbacksImplementation.prototype, "onCreateView", null);
+    __decorate([
+        profiling_1.profile
+    ], FragmentCallbacksImplementation.prototype, "onSaveInstanceState", null);
+    __decorate([
+        profiling_1.profile
+    ], FragmentCallbacksImplementation.prototype, "onDestroyView", null);
+    __decorate([
+        profiling_1.profile
+    ], FragmentCallbacksImplementation.prototype, "onDestroy", null);
+    __decorate([
+        profiling_1.profile
+    ], FragmentCallbacksImplementation.prototype, "toStringOverride", null);
     return FragmentCallbacksImplementation;
 }());
-__decorate([
-    profiling_1.profile
-], FragmentCallbacksImplementation.prototype, "onHiddenChanged", null);
-__decorate([
-    profiling_1.profile
-], FragmentCallbacksImplementation.prototype, "onCreateAnimator", null);
-__decorate([
-    profiling_1.profile
-], FragmentCallbacksImplementation.prototype, "onCreate", null);
-__decorate([
-    profiling_1.profile
-], FragmentCallbacksImplementation.prototype, "onCreateView", null);
-__decorate([
-    profiling_1.profile
-], FragmentCallbacksImplementation.prototype, "onSaveInstanceState", null);
-__decorate([
-    profiling_1.profile
-], FragmentCallbacksImplementation.prototype, "onDestroyView", null);
-__decorate([
-    profiling_1.profile
-], FragmentCallbacksImplementation.prototype, "onDestroy", null);
-__decorate([
-    profiling_1.profile
-], FragmentCallbacksImplementation.prototype, "toStringOverride", null);
 var ActivityCallbacksImplementation = (function () {
     function ActivityCallbacksImplementation() {
     }
@@ -791,32 +791,32 @@ var ActivityCallbacksImplementation = (function () {
             intent: data
         });
     };
+    __decorate([
+        profiling_1.profile
+    ], ActivityCallbacksImplementation.prototype, "onCreate", null);
+    __decorate([
+        profiling_1.profile
+    ], ActivityCallbacksImplementation.prototype, "onSaveInstanceState", null);
+    __decorate([
+        profiling_1.profile
+    ], ActivityCallbacksImplementation.prototype, "onStart", null);
+    __decorate([
+        profiling_1.profile
+    ], ActivityCallbacksImplementation.prototype, "onStop", null);
+    __decorate([
+        profiling_1.profile
+    ], ActivityCallbacksImplementation.prototype, "onDestroy", null);
+    __decorate([
+        profiling_1.profile
+    ], ActivityCallbacksImplementation.prototype, "onBackPressed", null);
+    __decorate([
+        profiling_1.profile
+    ], ActivityCallbacksImplementation.prototype, "onRequestPermissionsResult", null);
+    __decorate([
+        profiling_1.profile
+    ], ActivityCallbacksImplementation.prototype, "onActivityResult", null);
     return ActivityCallbacksImplementation;
 }());
-__decorate([
-    profiling_1.profile
-], ActivityCallbacksImplementation.prototype, "onCreate", null);
-__decorate([
-    profiling_1.profile
-], ActivityCallbacksImplementation.prototype, "onSaveInstanceState", null);
-__decorate([
-    profiling_1.profile
-], ActivityCallbacksImplementation.prototype, "onStart", null);
-__decorate([
-    profiling_1.profile
-], ActivityCallbacksImplementation.prototype, "onStop", null);
-__decorate([
-    profiling_1.profile
-], ActivityCallbacksImplementation.prototype, "onDestroy", null);
-__decorate([
-    profiling_1.profile
-], ActivityCallbacksImplementation.prototype, "onBackPressed", null);
-__decorate([
-    profiling_1.profile
-], ActivityCallbacksImplementation.prototype, "onRequestPermissionsResult", null);
-__decorate([
-    profiling_1.profile
-], ActivityCallbacksImplementation.prototype, "onActivityResult", null);
 function setActivityCallbacks(activity) {
     activity[CALLBACKS] = new ActivityCallbacksImplementation();
 }

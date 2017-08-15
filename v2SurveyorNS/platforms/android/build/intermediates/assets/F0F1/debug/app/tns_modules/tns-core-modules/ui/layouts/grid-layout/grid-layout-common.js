@@ -286,6 +286,7 @@ var GridLayoutBase = (function (_super) {
     return GridLayoutBase;
 }(layout_base_1.LayoutBase));
 exports.GridLayoutBase = GridLayoutBase;
+GridLayoutBase.prototype.recycleNativeView = true;
 exports.columnProperty = new layout_base_1.Property({
     name: "col", defaultValue: 0,
     valueChanged: function (target, oldValue, newValue) {

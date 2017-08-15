@@ -3,13 +3,13 @@ var easysax = require("../js-libs/easysax");
 var ParserEventType = (function () {
     function ParserEventType() {
     }
+    ParserEventType.StartElement = "StartElement";
+    ParserEventType.EndElement = "EndElement";
+    ParserEventType.Text = "Text";
+    ParserEventType.CDATA = "CDATA";
+    ParserEventType.Comment = "Comment";
     return ParserEventType;
 }());
-ParserEventType.StartElement = "StartElement";
-ParserEventType.EndElement = "EndElement";
-ParserEventType.Text = "Text";
-ParserEventType.CDATA = "CDATA";
-ParserEventType.Comment = "Comment";
 exports.ParserEventType = ParserEventType;
 var ParserEvent = (function () {
     function ParserEvent(eventType, position, prefix, namespace, elementName, attributes, data) {

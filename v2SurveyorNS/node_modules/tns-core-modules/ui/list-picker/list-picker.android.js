@@ -20,11 +20,11 @@ function initializeNativeClasses() {
         FormatterImpl.prototype.format = function (index) {
             return this.owner._getItemAsString(index);
         };
+        FormatterImpl = __decorate([
+            Interfaces([android.widget.NumberPicker.Formatter])
+        ], FormatterImpl);
         return FormatterImpl;
     }(java.lang.Object));
-    FormatterImpl = __decorate([
-        Interfaces([android.widget.NumberPicker.Formatter])
-    ], FormatterImpl);
     var ValueChangeListenerImpl = (function (_super) {
         __extends(ValueChangeListenerImpl, _super);
         function ValueChangeListenerImpl(owner) {
@@ -35,11 +35,11 @@ function initializeNativeClasses() {
         ValueChangeListenerImpl.prototype.onValueChange = function (picker, oldValue, newValue) {
             list_picker_common_1.selectedIndexProperty.nativeValueChange(this.owner, newValue);
         };
+        ValueChangeListenerImpl = __decorate([
+            Interfaces([android.widget.NumberPicker.OnValueChangeListener])
+        ], ValueChangeListenerImpl);
         return ValueChangeListenerImpl;
     }(java.lang.Object));
-    ValueChangeListenerImpl = __decorate([
-        Interfaces([android.widget.NumberPicker.OnValueChangeListener])
-    ], ValueChangeListenerImpl);
     Formatter = FormatterImpl;
     ValueChangeListener = ValueChangeListenerImpl;
 }

@@ -31,11 +31,11 @@ var SelectorCore = (function () {
     function SelectorCore() {
     }
     SelectorCore.prototype.lookupSort = function (sorter, base) { sorter.sortAsUniversal(base || this); };
+    SelectorCore = __decorate([
+        SelectorProperties(0, 0, Match.Static)
+    ], SelectorCore);
     return SelectorCore;
 }());
-SelectorCore = __decorate([
-    SelectorProperties(0, 0, Match.Static)
-], SelectorCore);
 exports.SelectorCore = SelectorCore;
 var SimpleSelector = (function (_super) {
     __extends(SimpleSelector, _super);
@@ -72,11 +72,11 @@ var InvalidSelector = (function (_super) {
     InvalidSelector.prototype.match = function (node) { return false; };
     InvalidSelector.prototype.lookupSort = function (sorter, base) {
     };
+    InvalidSelector = __decorate([
+        SelectorProperties(0, 4, Match.Static)
+    ], InvalidSelector);
     return InvalidSelector;
 }(SimpleSelector));
-InvalidSelector = __decorate([
-    SelectorProperties(0, 4, Match.Static)
-], InvalidSelector);
 exports.InvalidSelector = InvalidSelector;
 var UniversalSelector = (function (_super) {
     __extends(UniversalSelector, _super);
@@ -85,11 +85,11 @@ var UniversalSelector = (function (_super) {
     }
     UniversalSelector.prototype.toString = function () { return "*" + wrap(this.combinator); };
     UniversalSelector.prototype.match = function (node) { return true; };
+    UniversalSelector = __decorate([
+        SelectorProperties(0, 0, Match.Static)
+    ], UniversalSelector);
     return UniversalSelector;
 }(SimpleSelector));
-UniversalSelector = __decorate([
-    SelectorProperties(0, 0, Match.Static)
-], UniversalSelector);
 exports.UniversalSelector = UniversalSelector;
 var IdSelector = (function (_super) {
     __extends(IdSelector, _super);
@@ -101,11 +101,11 @@ var IdSelector = (function (_super) {
     IdSelector.prototype.toString = function () { return "#" + this.id + wrap(this.combinator); };
     IdSelector.prototype.match = function (node) { return node.id === this.id; };
     IdSelector.prototype.lookupSort = function (sorter, base) { sorter.sortById(this.id, base || this); };
+    IdSelector = __decorate([
+        SelectorProperties(65536, 3, Match.Static)
+    ], IdSelector);
     return IdSelector;
 }(SimpleSelector));
-IdSelector = __decorate([
-    SelectorProperties(65536, 3, Match.Static)
-], IdSelector);
 exports.IdSelector = IdSelector;
 var TypeSelector = (function (_super) {
     __extends(TypeSelector, _super);
@@ -117,11 +117,11 @@ var TypeSelector = (function (_super) {
     TypeSelector.prototype.toString = function () { return "" + this.cssType + wrap(this.combinator); };
     TypeSelector.prototype.match = function (node) { return node.cssType === this.cssType; };
     TypeSelector.prototype.lookupSort = function (sorter, base) { sorter.sortByType(this.cssType, base || this); };
+    TypeSelector = __decorate([
+        SelectorProperties(1, 1, Match.Static)
+    ], TypeSelector);
     return TypeSelector;
 }(SimpleSelector));
-TypeSelector = __decorate([
-    SelectorProperties(1, 1, Match.Static)
-], TypeSelector);
 exports.TypeSelector = TypeSelector;
 var ClassSelector = (function (_super) {
     __extends(ClassSelector, _super);
@@ -133,11 +133,11 @@ var ClassSelector = (function (_super) {
     ClassSelector.prototype.toString = function () { return "." + this.cssClass + wrap(this.combinator); };
     ClassSelector.prototype.match = function (node) { return node.cssClasses && node.cssClasses.has(this.cssClass); };
     ClassSelector.prototype.lookupSort = function (sorter, base) { sorter.sortByClass(this.cssClass, base || this); };
+    ClassSelector = __decorate([
+        SelectorProperties(256, 2, Match.Static)
+    ], ClassSelector);
     return ClassSelector;
 }(SimpleSelector));
-ClassSelector = __decorate([
-    SelectorProperties(256, 2, Match.Static)
-], ClassSelector);
 exports.ClassSelector = ClassSelector;
 var AttributeSelector = (function (_super) {
     __extends(AttributeSelector, _super);
@@ -192,11 +192,11 @@ var AttributeSelector = (function (_super) {
     AttributeSelector.prototype.match = function (node) { return false; };
     AttributeSelector.prototype.mayMatch = function (node) { return true; };
     AttributeSelector.prototype.trackChanges = function (node, map) { map.addAttribute(node, this.attribute); };
+    AttributeSelector = __decorate([
+        SelectorProperties(256, 0, Match.Dynamic)
+    ], AttributeSelector);
     return AttributeSelector;
 }(SimpleSelector));
-AttributeSelector = __decorate([
-    SelectorProperties(256, 0, Match.Dynamic)
-], AttributeSelector);
 exports.AttributeSelector = AttributeSelector;
 var PseudoClassSelector = (function (_super) {
     __extends(PseudoClassSelector, _super);
@@ -209,11 +209,11 @@ var PseudoClassSelector = (function (_super) {
     PseudoClassSelector.prototype.match = function (node) { return node.cssPseudoClasses && node.cssPseudoClasses.has(this.cssPseudoClass); };
     PseudoClassSelector.prototype.mayMatch = function (node) { return true; };
     PseudoClassSelector.prototype.trackChanges = function (node, map) { map.addPseudoClass(node, this.cssPseudoClass); };
+    PseudoClassSelector = __decorate([
+        SelectorProperties(256, 0, Match.Dynamic)
+    ], PseudoClassSelector);
     return PseudoClassSelector;
 }(SimpleSelector));
-PseudoClassSelector = __decorate([
-    SelectorProperties(256, 0, Match.Dynamic)
-], PseudoClassSelector);
 exports.PseudoClassSelector = PseudoClassSelector;
 var SimpleSelectorSequence = (function (_super) {
     __extends(SimpleSelectorSequence, _super);
@@ -436,6 +436,7 @@ function createSelector(sel) {
         return new InvalidSelector(e);
     }
 }
+exports.createSelector = createSelector;
 function createSimpleSelector(sel) {
     if (selectorParser.isUniversal(sel)) {
         return new UniversalSelector();

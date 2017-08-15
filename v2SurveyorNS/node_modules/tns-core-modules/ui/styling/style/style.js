@@ -7,6 +7,9 @@ var Style = (function (_super) {
         _this.view = view;
         return _this;
     }
+    Style.prototype.toString = function () {
+        return this.view + ".style";
+    };
     return Style;
 }(observable_1.Observable));
 exports.Style = Style;

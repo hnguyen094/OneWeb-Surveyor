@@ -59,6 +59,9 @@ var WebViewBase = (function (_super) {
         else if (src.indexOf("/") === 0) {
             src = "file://" + src;
         }
+        if (src.toLowerCase().indexOf("file:///") === 0) {
+            src = encodeURI(src);
+        }
         if (src.toLowerCase().indexOf("http://") === 0 ||
             src.toLowerCase().indexOf("https://") === 0 ||
             src.toLowerCase().indexOf("file:///") === 0) {
@@ -78,10 +81,10 @@ var WebViewBase = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    WebViewBase.loadStartedEvent = "loadStarted";
+    WebViewBase.loadFinishedEvent = "loadFinished";
     return WebViewBase;
 }(view_1.View));
-WebViewBase.loadStartedEvent = "loadStarted";
-WebViewBase.loadFinishedEvent = "loadFinished";
 exports.WebViewBase = WebViewBase;
 exports.srcProperty.register(WebViewBase);
 //# sourceMappingURL=web-view-common.js.map

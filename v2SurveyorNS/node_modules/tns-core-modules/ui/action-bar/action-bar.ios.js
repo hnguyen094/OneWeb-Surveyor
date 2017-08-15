@@ -21,11 +21,11 @@ var TapBarItemHandlerImpl = (function (_super) {
             owner._raiseTap();
         }
     };
+    TapBarItemHandlerImpl.ObjCExposedMethods = {
+        "tap": { returns: interop.types.void, params: [interop.types.id] }
+    };
     return TapBarItemHandlerImpl;
 }(NSObject));
-TapBarItemHandlerImpl.ObjCExposedMethods = {
-    "tap": { returns: interop.types.void, params: [interop.types.id] }
-};
 var ActionItem = (function (_super) {
     __extends(ActionItem, _super);
     function ActionItem() {
@@ -142,6 +142,7 @@ var ActionBar = (function (_super) {
         }
         this.populateMenuItems(navigationItem);
         this.updateColors(navigationBar);
+        this.updateFlatness(navigationBar);
     };
     ActionBar.prototype.populateMenuItems = function (navigationItem) {
         var items = this.actionItems.getVisibleItems();
@@ -221,6 +222,18 @@ var ActionBar = (function (_super) {
         }
         var navigationItem = page.ios.navigationItem;
         navigationItem.title = this.title;
+    };
+    ActionBar.prototype.updateFlatness = function (navBar) {
+        if (this.flat) {
+            navBar.setBackgroundImageForBarMetrics(UIImage.new(), 0);
+            navBar.shadowImage = UIImage.new();
+            navBar.translucent = false;
+        }
+        else {
+            navBar.setBackgroundImageForBarMetrics(null, null);
+            navBar.shadowImage = null;
+            navBar.translucent = true;
+        }
     };
     ActionBar.prototype.onMeasure = function (widthMeasureSpec, heightMeasureSpec) {
         var _this = this;
@@ -309,6 +322,12 @@ var ActionBar = (function (_super) {
         return null;
     };
     ActionBar.prototype[action_bar_common_1.backgroundInternalProperty.setNative] = function (value) {
+    };
+    ActionBar.prototype[action_bar_common_1.flatProperty.setNative] = function (value) {
+        var navBar = this.navBar;
+        if (navBar) {
+            this.updateFlatness(navBar);
+        }
     };
     return ActionBar;
 }(action_bar_common_1.ActionBarBase));

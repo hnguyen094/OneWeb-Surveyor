@@ -90,10 +90,11 @@ var SegmentedBarBase = (function (_super) {
             });
         }
     };
+    SegmentedBarBase.selectedIndexChangedEvent = "selectedIndexChanged";
     return SegmentedBarBase;
 }(view_1.View));
-SegmentedBarBase.selectedIndexChangedEvent = "selectedIndexChanged";
 exports.SegmentedBarBase = SegmentedBarBase;
+SegmentedBarBase.prototype.recycleNativeView = true;
 exports.selectedIndexProperty = new view_1.CoercibleProperty({
     name: "selectedIndex", defaultValue: -1,
     valueChanged: function (target, oldValue, newValue) {

@@ -44,8 +44,8 @@ var Source = (function () {
     Source.set = function (object, src) {
         object[Source._source] = src;
     };
+    Source._source = Symbol("source");
     return Source;
 }());
-Source._source = Symbol("source");
 exports.Source = Source;
 //# sourceMappingURL=debug-common.js.map

@@ -726,8 +726,31 @@ var ViewCommon = (function (_super) {
     };
     ViewCommon.prototype.createAnimation = function (animation) {
         ensureAnimationModule();
+        if (!this._localAnimations) {
+            this._localAnimations = new Set();
+        }
         animation.target = this;
-        return new animationModule.Animation([animation]);
+        var anim = new animationModule.Animation([animation]);
+        this._localAnimations.add(anim);
+        return anim;
+    };
+    ViewCommon.prototype._removeAnimation = function (animation) {
+        var localAnimations = this._localAnimations;
+        if (localAnimations && localAnimations.has(animation)) {
+            localAnimations.delete(animation);
+            if (animation.isPlaying) {
+                animation.cancel();
+            }
+            return true;
+        }
+        return false;
+    };
+    ViewCommon.prototype.resetNativeView = function () {
+        var _this = this;
+        if (this._localAnimations) {
+            this._localAnimations.forEach(function (a) { return _this._removeAnimation(a); });
+        }
+        _super.prototype.resetNativeView.call(this);
     };
     ViewCommon.prototype.toString = function () {
         var str = this.typeName;
@@ -746,7 +769,7 @@ var ViewCommon = (function (_super) {
     ViewCommon.prototype._setNativeViewFrame = function (nativeView, frame) {
     };
     ViewCommon.prototype._getValue = function () {
-        throw new Error("The View._setValue is obsolete. There is a new property system.");
+        throw new Error("The View._getValue is obsolete. There is a new property system.");
     };
     ViewCommon.prototype._setValue = function () {
         throw new Error("The View._setValue is obsolete. There is a new property system.");

@@ -74,6 +74,7 @@ var TimePickerBase = (function (_super) {
     return TimePickerBase;
 }(view_1.View));
 exports.TimePickerBase = TimePickerBase;
+TimePickerBase.prototype.recycleNativeView = true;
 exports.minHourProperty = new view_1.Property({
     name: "minHour", defaultValue: 0, valueChanged: function (picker, oldValue, newValue) {
         if (!isHourValid(newValue) || !isValidTime(picker)) {

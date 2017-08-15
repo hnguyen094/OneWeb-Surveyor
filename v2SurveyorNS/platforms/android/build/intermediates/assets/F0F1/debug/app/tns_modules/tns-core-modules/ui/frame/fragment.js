@@ -36,10 +36,10 @@ var FragmentClass = (function (_super) {
     FragmentClass.prototype.toString = function () {
         return this._callbacks.toStringOverride(this, _super.prototype.toString);
     };
+    FragmentClass = __decorate([
+        JavaProxy("com.tns.FragmentClass")
+    ], FragmentClass);
     return FragmentClass;
 }(android.app.Fragment));
-FragmentClass = __decorate([
-    JavaProxy("com.tns.FragmentClass")
-], FragmentClass);
 frame_1.setFragmentClass(FragmentClass);
 //# sourceMappingURL=fragment.js.map

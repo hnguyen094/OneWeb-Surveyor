@@ -420,10 +420,10 @@ var FrameBase = (function (_super) {
         }
         return result;
     };
+    FrameBase.androidOptionSelectedEvent = "optionSelected";
+    FrameBase.defaultAnimatedNavigation = true;
     return FrameBase;
 }(view_1.CustomLayoutView));
-FrameBase.androidOptionSelectedEvent = "optionSelected";
-FrameBase.defaultAnimatedNavigation = true;
 exports.FrameBase = FrameBase;
 function topmost() {
     if (frameStack.length > 0) {
