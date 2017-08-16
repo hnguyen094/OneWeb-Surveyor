@@ -1,0 +1,23 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded"
+  backgroundSpanUnderStatusBar="true" navigatingTo="navigatingTo" class="page"
+  actionBarHidden="true" xmlns:LineChart="nativescript-charts/line-chart">
+  <!-- <ActionBar title="{N} Surveyor">
+    <android>
+      <NavigationButton icon="res://ic_menu" tap="showSlideout" />
+    </android>
+    <ios>
+      <ActionItem icon="res://ic_menu" ios.position="left" tap="showSideDrawer" />
+    </ios>
+  </ActionBar> -->
+<!-- NativeScript layouts: https://docs.nativescript.org/ui/layout-containers
+    Full list of class names available for styles:https://docs.nativescript.org/ui/theme -->
+    <GridLayout>
+      <Placeholder id="placeholder-view" creatingView="onCreatingView" stretch="aspectFill" horizontalAlignment="center" verticalAlignment="center"/>
+      <!-- <Image id="graph" stretch="aspectFit" verticalAlignment="top"/> -->
+      <Button id="capturebtn" text="No Op" tap="onTakeShot" class="btn btn-primary" horizontalAlignment="center" verticalAlignment="bottom"/>
+      <Image id="doubleline" src="res://newdoubleline" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
+      <Label id="upperText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
+      <Label id="lowerText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
+      <Image id="crosshair" src="res://newcirclethin" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
+    </GridLayout>
+</Page>

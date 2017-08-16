@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xhdpi\\doubleline.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xhdpi\\doubleline.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xhdpi\\logo.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xhdpi\\logo.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xhdpi\\newdoubleline.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xhdpi\\newdoubleline.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xhdpi\\circlearrowthin.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xhdpi\\circlearrowthin.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xhdpi\\background.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xhdpi\\background.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xhdpi\\circlearrow.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xhdpi\\circlearrow.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xhdpi\\icon.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xhdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xhdpi\\newcirclethin.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-xhdpi\\newcirclethin.png"
+    }
+]
