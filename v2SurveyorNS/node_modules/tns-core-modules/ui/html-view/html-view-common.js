@@ -12,7 +12,7 @@ var HtmlViewBase = (function (_super) {
     return HtmlViewBase;
 }(view_1.View));
 exports.HtmlViewBase = HtmlViewBase;
-HtmlViewBase.prototype.recycleNativeView = true;
+HtmlViewBase.prototype.recycleNativeView = "auto";
 exports.htmlProperty = new view_1.Property({ name: "html", defaultValue: "", affectsLayout: true });
 exports.htmlProperty.register(HtmlViewBase);
 //# sourceMappingURL=html-view-common.js.map

@@ -41,5 +41,5 @@ var Border = (function (_super) {
     return Border;
 }(content_view_1.ContentView));
 exports.Border = Border;
-Border.prototype.recycleNativeView = true;
+Border.prototype.recycleNativeView = "auto";
 //# sourceMappingURL=border.js.map

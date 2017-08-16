@@ -8,7 +8,7 @@ var Progress = (function (_super) {
     __extends(Progress, _super);
     function Progress() {
         var _this = _super.call(this) || this;
-        _this.nativeView = _this._ios = UIProgressView.new();
+        _this.nativeViewProtected = _this._ios = UIProgressView.new();
         return _this;
     }
     Object.defineProperty(Progress.prototype, "ios", {

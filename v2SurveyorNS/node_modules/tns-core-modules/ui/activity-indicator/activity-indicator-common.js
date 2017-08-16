@@ -12,7 +12,7 @@ var ActivityIndicatorBase = (function (_super) {
     return ActivityIndicatorBase;
 }(view_1.View));
 exports.ActivityIndicatorBase = ActivityIndicatorBase;
-ActivityIndicatorBase.prototype.recycleNativeView = true;
+ActivityIndicatorBase.prototype.recycleNativeView = "auto";
 exports.busyProperty = new view_1.Property({ name: "busy", defaultValue: false, valueConverter: view_1.booleanConverter });
 exports.busyProperty.register(ActivityIndicatorBase);
 //# sourceMappingURL=activity-indicator-common.js.map

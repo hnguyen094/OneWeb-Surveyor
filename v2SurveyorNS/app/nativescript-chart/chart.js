@@ -1,39 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var platform = require("platform");
 var page;
@@ -43,6 +8,7 @@ var minEle;
 var width = platform.screen.mainScreen.widthPixels / 360;
 var maxHeight = platform.screen.mainScreen.heightPixels / 4;
 function initGraph(myPage) {
+    console.log("Entering initGraph");
     page = myPage;
     maxEle = 60;
     minEle = 0;
@@ -53,15 +19,11 @@ function initGraph(myPage) {
 }
 exports.initGraph = initGraph;
 function updateGraph(azimuth, elevation) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            ele[Math.floor(azimuth) + 180] = -elevation < minEle ? minEle : -elevation > maxEle ? maxEle : -elevation;
-            return [2 /*return*/];
-        });
-    });
+    ele[Math.floor(azimuth) + 180] = -elevation < minEle ? minEle : -elevation > maxEle ? maxEle : -elevation;
 }
 exports.updateGraph = updateGraph;
 function onExit() {
     // bmp.dispose();
 }
 exports.onExit = onExit;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hhcnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjaGFydC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLG1DQUFxQztBQUlyQyxJQUFJLElBQUksQ0FBQztBQUNULElBQU0sR0FBRyxHQUFhLEVBQUUsQ0FBQztBQUV6QixJQUFJLE1BQWUsQ0FBQztBQUNwQixJQUFJLE1BQWUsQ0FBQztBQUVwQixJQUFNLEtBQUssR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxXQUFXLEdBQUcsR0FBRyxDQUFDO0FBQzNELElBQU0sU0FBUyxHQUFHLFFBQVEsQ0FBQyxNQUFNLENBQUMsVUFBVSxDQUFDLFlBQVksR0FBRyxDQUFDLENBQUM7QUFFOUQsbUJBQTBCLE1BQU07SUFDOUIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDO0lBQ2xDLElBQUksR0FBRyxNQUFNLENBQUM7SUFDZCxNQUFNLEdBQUcsRUFBRSxDQUFDO0lBQ1osTUFBTSxHQUFHLENBQUMsQ0FBQztJQUNYLEdBQUcsQ0FBQSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsR0FBRyxFQUFFLENBQUMsRUFBRSxFQUFFLENBQUM7UUFDNUIsR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFDLE1BQU0sR0FBRSxNQUFNLENBQUMsR0FBQyxDQUFDLENBQUMsQ0FBQztRQUM3QixJQUFNLGFBQWEsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsR0FBRyxNQUFNLENBQUMsR0FBQyxDQUFDLE1BQU0sR0FBRyxNQUFNLENBQUMsQ0FBQztJQUM1RCxDQUFDO0FBQ0gsQ0FBQztBQVRELDhCQVNDO0FBRUQscUJBQTRCLE9BQU8sRUFBRSxTQUFTO0lBQzVDLEdBQUcsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxHQUFHLEdBQUcsQ0FBQyxHQUFHLENBQUMsU0FBUyxHQUFDLE1BQU0sR0FBRSxNQUFNLEdBQUUsQ0FBQyxTQUFTLEdBQUMsTUFBTSxHQUFFLE1BQU0sR0FBRSxDQUFDLFNBQVMsQ0FBQztBQUNwRyxDQUFDO0FBRkQsa0NBRUM7QUFDRDtJQUNFLGlCQUFpQjtBQUNuQixDQUFDO0FBRkQsd0JBRUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBwbGF0Zm9ybSBmcm9tIFwicGxhdGZvcm1cIjtcclxuaW1wb3J0ICogYXMga25vd25Db2xvcnMgZnJvbSBcImNvbG9yL2tub3duLWNvbG9yc1wiO1xyXG5pbXBvcnQgKiBhcyBJbWFnZU1vZHVsZSBmcm9tIFwidG5zLWNvcmUtbW9kdWxlcy91aS9pbWFnZVwiO1xyXG5cclxubGV0IHBhZ2U7XHJcbmNvbnN0IGVsZTogbnVtYmVyW10gPSBbXTtcclxuXHJcbmxldCBtYXhFbGUgOiBudW1iZXI7XHJcbmxldCBtaW5FbGUgOiBudW1iZXI7XHJcblxyXG5jb25zdCB3aWR0aCA9IHBsYXRmb3JtLnNjcmVlbi5tYWluU2NyZWVuLndpZHRoUGl4ZWxzIC8gMzYwO1xyXG5jb25zdCBtYXhIZWlnaHQgPSBwbGF0Zm9ybS5zY3JlZW4ubWFpblNjcmVlbi5oZWlnaHRQaXhlbHMgLyA0O1xyXG5cclxuZXhwb3J0IGZ1bmN0aW9uIGluaXRHcmFwaChteVBhZ2UpIHtcclxuICBjb25zb2xlLmxvZyhcIkVudGVyaW5nIGluaXRHcmFwaFwiKTsgXHJcbiAgcGFnZSA9IG15UGFnZTtcclxuICBtYXhFbGUgPSA2MDtcclxuICBtaW5FbGUgPSAwO1xyXG4gIGZvcihsZXQgaSA9IDA7IGkgPCAzNjA7IGkrKykge1xyXG4gICAgZWxlLnB1c2goKG1heEVsZSsgbWluRWxlKS8yKTtcclxuICAgIGNvbnN0IGhlaWdodFBlcmNlbnQgPSAoZWxlW2ldIC0gbWluRWxlKS8obWF4RWxlIC0gbWluRWxlKTtcclxuICB9XHJcbn1cclxuXHJcbmV4cG9ydCBmdW5jdGlvbiB1cGRhdGVHcmFwaChhemltdXRoLCBlbGV2YXRpb24pIHtcclxuICBlbGVbTWF0aC5mbG9vcihhemltdXRoKSArIDE4MF0gPSAtZWxldmF0aW9uPG1pbkVsZT8gbWluRWxlOiAtZWxldmF0aW9uPm1heEVsZT8gbWF4RWxlOiAtZWxldmF0aW9uO1xyXG59XHJcbmV4cG9ydCBmdW5jdGlvbiBvbkV4aXQoKSB7XHJcbiAgLy8gYm1wLmRpc3Bvc2UoKTtcclxufVxyXG4iXX0=

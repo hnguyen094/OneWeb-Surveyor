@@ -6,7 +6,7 @@ var grid_layout_common_1 = require("./grid-layout-common");
 __export(require("./grid-layout-common"));
 function makeNativeSetter(setter) {
     return function (value) {
-        var nativeView = this.nativeView;
+        var nativeView = this.nativeViewProtected;
         var lp = nativeView.getLayoutParams() || new org.nativescript.widgets.CommonLayoutParams();
         if (lp instanceof org.nativescript.widgets.CommonLayoutParams) {
             setter(lp, value);
@@ -74,29 +74,29 @@ var GridLayout = (function (_super) {
         _super.prototype.resetNativeView.call(this);
     };
     GridLayout.prototype._onRowAdded = function (itemSpec) {
-        if (this.nativeView) {
+        if (this.nativeViewProtected) {
             var nativeSpec = createNativeSpec(itemSpec);
             itemSpec.nativeSpec = nativeSpec;
-            this.nativeView.addRow(nativeSpec);
+            this.nativeViewProtected.addRow(nativeSpec);
         }
     };
     GridLayout.prototype._onColumnAdded = function (itemSpec) {
-        if (this.nativeView) {
+        if (this.nativeViewProtected) {
             var nativeSpec = createNativeSpec(itemSpec);
             itemSpec.nativeSpec = nativeSpec;
-            this.nativeView.addColumn(nativeSpec);
+            this.nativeViewProtected.addColumn(nativeSpec);
         }
     };
     GridLayout.prototype._onRowRemoved = function (itemSpec, index) {
         itemSpec.nativeSpec = null;
-        if (this.nativeView) {
-            this.nativeView.removeRowAt(index);
+        if (this.nativeViewProtected) {
+            this.nativeViewProtected.removeRowAt(index);
         }
     };
     GridLayout.prototype._onColumnRemoved = function (itemSpec, index) {
         itemSpec.nativeSpec = null;
-        if (this.nativeView) {
-            this.nativeView.removeColumnAt(index);
+        if (this.nativeViewProtected) {
+            this.nativeViewProtected.removeColumnAt(index);
         }
     };
     GridLayout.prototype.invalidate = function () {

@@ -26,7 +26,7 @@ var DockLayoutBase = (function (_super) {
     return DockLayoutBase;
 }(layout_base_1.LayoutBase));
 exports.DockLayoutBase = DockLayoutBase;
-DockLayoutBase.prototype.recycleNativeView = true;
+DockLayoutBase.prototype.recycleNativeView = "auto";
 var dockConverter = layout_base_1.makeParser(layout_base_1.makeValidator("left", "top", "right", "bottom"));
 exports.dockProperty = new layout_base_1.Property({
     name: "dock", defaultValue: "left", valueChanged: function (target, oldValue, newValue) {

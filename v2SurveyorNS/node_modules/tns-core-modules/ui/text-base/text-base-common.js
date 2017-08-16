@@ -166,7 +166,7 @@ var TextBaseCommon = (function (_super) {
         configurable: true
     });
     TextBaseCommon.prototype._onFormattedTextContentsChanged = function (data) {
-        if (this.nativeView) {
+        if (this.nativeViewProtected) {
             this[exports.formattedTextProperty.setNative](data.value);
         }
     };

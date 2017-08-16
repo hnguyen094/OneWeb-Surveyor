@@ -12,7 +12,7 @@ var StackLayoutBase = (function (_super) {
     return StackLayoutBase;
 }(layout_base_1.LayoutBase));
 exports.StackLayoutBase = StackLayoutBase;
-StackLayoutBase.prototype.recycleNativeView = true;
+StackLayoutBase.prototype.recycleNativeView = "auto";
 var converter = layout_base_1.makeParser(layout_base_1.makeValidator("horizontal", "vertical"));
 exports.orientationProperty = new layout_base_1.Property({ name: "orientation", defaultValue: "vertical", affectsLayout: layout_base_1.isIOS, valueConverter: converter });
 exports.orientationProperty.register(StackLayoutBase);

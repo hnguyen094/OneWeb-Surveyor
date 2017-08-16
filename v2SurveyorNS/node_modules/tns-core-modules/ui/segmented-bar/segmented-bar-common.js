@@ -65,7 +65,7 @@ var SegmentedBarBase = (function (_super) {
                 items.push(item);
                 this._addView(item);
             }
-            if (this.nativeView) {
+            if (this.nativeViewProtected) {
                 this[exports.itemsProperty.setNative](items);
             }
         }
@@ -94,7 +94,7 @@ var SegmentedBarBase = (function (_super) {
     return SegmentedBarBase;
 }(view_1.View));
 exports.SegmentedBarBase = SegmentedBarBase;
-SegmentedBarBase.prototype.recycleNativeView = true;
+SegmentedBarBase.prototype.recycleNativeView = "auto";
 exports.selectedIndexProperty = new view_1.CoercibleProperty({
     name: "selectedIndex", defaultValue: -1,
     valueChanged: function (target, oldValue, newValue) {

@@ -27,7 +27,7 @@ var ios;
         var size = parentBounds.size;
         var width = utils.layout.toDevicePixels(size.width);
         var height = utils.layout.toDevicePixels(size.height);
-        var superview = rootView.nativeView.superview;
+        var superview = rootView.nativeViewProtected.superview;
         var superViewRotationRadians;
         if (superview) {
             superViewRotationRadians = atan2f(superview.transform.b, superview.transform.a);

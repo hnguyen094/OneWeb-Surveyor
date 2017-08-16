@@ -14,7 +14,7 @@ var SearchBarBase = (function (_super) {
     return SearchBarBase;
 }(view_1.View));
 exports.SearchBarBase = SearchBarBase;
-SearchBarBase.prototype.recycleNativeView = true;
+SearchBarBase.prototype.recycleNativeView = "auto";
 exports.textProperty = new view_1.Property({ name: "text", defaultValue: "", affectsLayout: view_1.isIOS });
 exports.textProperty.register(SearchBarBase);
 exports.hintProperty = new view_1.Property({ name: "hint", defaultValue: "" });

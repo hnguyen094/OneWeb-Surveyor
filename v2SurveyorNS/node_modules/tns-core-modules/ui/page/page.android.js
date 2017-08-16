@@ -33,13 +33,13 @@ function initializeDialogFragment() {
             this._owner.horizontalAlignment = this._fullscreen ? "stretch" : "center";
             this._owner.verticalAlignment = this._fullscreen ? "stretch" : "middle";
             this._owner.actionBarHidden = true;
-            var nativeView = this._owner.nativeView;
+            var nativeView = this._owner.nativeViewProtected;
             var layoutParams = nativeView.getLayoutParams();
             if (!layoutParams) {
                 layoutParams = new org.nativescript.widgets.CommonLayoutParams();
                 nativeView.setLayoutParams(layoutParams);
             }
-            dialog.setContentView(this._owner.nativeView, layoutParams);
+            dialog.setContentView(this._owner.nativeViewProtected, layoutParams);
             var window = dialog.getWindow();
             window.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
             if (this._fullscreen) {
@@ -86,10 +86,10 @@ var Page = (function (_super) {
     };
     Page.prototype.initNativeView = function () {
         _super.prototype.initNativeView.call(this);
-        this.nativeView.setBackgroundColor(-1);
+        this.nativeViewProtected.setBackgroundColor(-1);
     };
     Page.prototype._addViewToNativeVisualTree = function (child, atIndex) {
-        if (this.nativeView && child.nativeView) {
+        if (this.nativeViewProtected && child.nativeViewProtected) {
             if (child instanceof action_bar_1.ActionBar) {
                 grid_layout_1.GridLayout.setRow(child, 0);
                 child.horizontalAlignment = "stretch";
@@ -106,17 +106,6 @@ var Page = (function (_super) {
         if (this.actionBarHidden !== undefined) {
             this.updateActionBar();
         }
-    };
-    Page.prototype._tearDownUI = function (force) {
-        var skipDetached = !force && this.frame && this.frame.android.cachePagesOnNavigate && !this._isBackNavigation;
-        if (!skipDetached) {
-            _super.prototype._tearDownUI.call(this);
-            this._isAddedToNativeVisualTree = false;
-        }
-    };
-    Page.prototype.onNavigatedFrom = function (isBackNavigation) {
-        this._isBackNavigation = isBackNavigation;
-        _super.prototype.onNavigatedFrom.call(this, isBackNavigation);
     };
     Page.prototype._showNativeModalView = function (parent, context, closeCallback, fullscreen) {
         var _this = this;

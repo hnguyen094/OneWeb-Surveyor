@@ -42,7 +42,8 @@ var TextBase = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TextBase.prototype.initNativeView = function () {
-        var nativeView = this.nativeView;
+        initializeTextTransformation();
+        var nativeView = this.nativeViewProtected;
         this._defaultTransformationMethod = nativeView.getTransformationMethod();
         this._minHeight = nativeView.getMinHeight();
         this._maxHeight = nativeView.getMaxHeight();
@@ -52,7 +53,7 @@ var TextBase = (function (_super) {
     };
     TextBase.prototype.resetNativeView = function () {
         _super.prototype.resetNativeView.call(this);
-        var nativeView = this.nativeView;
+        var nativeView = this.nativeViewProtected;
         nativeView.setSingleLine(this._isSingleLine);
         nativeView.setTransformationMethod(this._defaultTransformationMethod);
         this._defaultTransformationMethod = null;
@@ -86,7 +87,7 @@ var TextBase = (function (_super) {
         this._setNativeText(reset);
     };
     TextBase.prototype[text_base_common_1.formattedTextProperty.setNative] = function (value) {
-        var nativeView = this.nativeView;
+        var nativeView = this.nativeViewProtected;
         if (!value) {
             if (nativeView instanceof android.widget.Button &&
                 nativeView.getTransformationMethod() instanceof TextTransformation) {
@@ -96,7 +97,6 @@ var TextBase = (function (_super) {
         if (this.secure) {
             return;
         }
-        initializeTextTransformation();
         var spannableStringBuilder = createSpannableStringBuilder(value);
         nativeView.setText(spannableStringBuilder);
         text_base_common_1.textProperty.nativeValueChange(this, (value === null || value === undefined) ? '' : value.toString());
@@ -107,35 +107,34 @@ var TextBase = (function (_super) {
     };
     TextBase.prototype[text_base_common_1.textTransformProperty.setNative] = function (value) {
         if (value === "initial") {
-            this.nativeView.setTransformationMethod(this._defaultTransformationMethod);
+            this.nativeViewProtected.setTransformationMethod(this._defaultTransformationMethod);
             return;
         }
         if (this.secure) {
             return;
         }
-        initializeTextTransformation();
-        this.nativeView.setTransformationMethod(new TextTransformation(this));
+        this.nativeViewProtected.setTransformationMethod(new TextTransformation(this));
     };
     TextBase.prototype[text_base_common_1.textAlignmentProperty.getDefault] = function () {
         return "initial";
     };
     TextBase.prototype[text_base_common_1.textAlignmentProperty.setNative] = function (value) {
-        var verticalGravity = this.nativeView.getGravity() & android.view.Gravity.VERTICAL_GRAVITY_MASK;
+        var verticalGravity = this.nativeViewProtected.getGravity() & android.view.Gravity.VERTICAL_GRAVITY_MASK;
         switch (value) {
             case "initial":
             case "left":
-                this.nativeView.setGravity(android.view.Gravity.START | verticalGravity);
+                this.nativeViewProtected.setGravity(android.view.Gravity.START | verticalGravity);
                 break;
             case "center":
-                this.nativeView.setGravity(android.view.Gravity.CENTER_HORIZONTAL | verticalGravity);
+                this.nativeViewProtected.setGravity(android.view.Gravity.CENTER_HORIZONTAL | verticalGravity);
                 break;
             case "right":
-                this.nativeView.setGravity(android.view.Gravity.END | verticalGravity);
+                this.nativeViewProtected.setGravity(android.view.Gravity.END | verticalGravity);
                 break;
         }
     };
     TextBase.prototype[text_base_common_1.whiteSpaceProperty.setNative] = function (value) {
-        var nativeView = this.nativeView;
+        var nativeView = this.nativeViewProtected;
         switch (value) {
             case "initial":
             case "normal":
@@ -149,101 +148,101 @@ var TextBase = (function (_super) {
         }
     };
     TextBase.prototype[text_base_common_1.colorProperty.getDefault] = function () {
-        return this.nativeView.getTextColors();
+        return this.nativeViewProtected.getTextColors();
     };
     TextBase.prototype[text_base_common_1.colorProperty.setNative] = function (value) {
         if (!this.formattedText || !(value instanceof text_base_common_1.Color)) {
             if (value instanceof text_base_common_1.Color) {
-                this.nativeView.setTextColor(value.android);
+                this.nativeViewProtected.setTextColor(value.android);
             }
             else {
-                this.nativeView.setTextColor(value);
+                this.nativeViewProtected.setTextColor(value);
             }
         }
     };
     TextBase.prototype[text_base_common_1.fontSizeProperty.getDefault] = function () {
-        return { nativeSize: this.nativeView.getTextSize() };
+        return { nativeSize: this.nativeViewProtected.getTextSize() };
     };
     TextBase.prototype[text_base_common_1.fontSizeProperty.setNative] = function (value) {
         if (!this.formattedText || (typeof value !== "number")) {
             if (typeof value === "number") {
-                this.nativeView.setTextSize(value);
+                this.nativeViewProtected.setTextSize(value);
             }
             else {
-                this.nativeView.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX, value.nativeSize);
+                this.nativeViewProtected.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX, value.nativeSize);
             }
         }
     };
     TextBase.prototype[text_base_common_1.lineHeightProperty.getDefault] = function () {
-        return this.nativeView.getLineSpacingExtra() / text_base_common_1.layout.getDisplayDensity();
+        return this.nativeViewProtected.getLineSpacingExtra() / text_base_common_1.layout.getDisplayDensity();
     };
     TextBase.prototype[text_base_common_1.lineHeightProperty.setNative] = function (value) {
-        this.nativeView.setLineSpacing(value * text_base_common_1.layout.getDisplayDensity(), 1);
+        this.nativeViewProtected.setLineSpacing(value * text_base_common_1.layout.getDisplayDensity(), 1);
     };
     TextBase.prototype[text_base_common_1.fontInternalProperty.getDefault] = function () {
-        return this.nativeView.getTypeface();
+        return this.nativeViewProtected.getTypeface();
     };
     TextBase.prototype[text_base_common_1.fontInternalProperty.setNative] = function (value) {
         if (!this.formattedText || !(value instanceof font_1.Font)) {
-            this.nativeView.setTypeface(value instanceof font_1.Font ? value.getAndroidTypeface() : value);
+            this.nativeViewProtected.setTypeface(value instanceof font_1.Font ? value.getAndroidTypeface() : value);
         }
     };
     TextBase.prototype[text_base_common_1.textDecorationProperty.getDefault] = function (value) {
-        return this._paintFlags = this.nativeView.getPaintFlags();
+        return this._paintFlags = this.nativeViewProtected.getPaintFlags();
     };
     TextBase.prototype[text_base_common_1.textDecorationProperty.setNative] = function (value) {
         switch (value) {
             case "none":
-                this.nativeView.setPaintFlags(0);
+                this.nativeViewProtected.setPaintFlags(0);
                 break;
             case "underline":
-                this.nativeView.setPaintFlags(android.graphics.Paint.UNDERLINE_TEXT_FLAG);
+                this.nativeViewProtected.setPaintFlags(android.graphics.Paint.UNDERLINE_TEXT_FLAG);
                 break;
             case "line-through":
-                this.nativeView.setPaintFlags(android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
+                this.nativeViewProtected.setPaintFlags(android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
                 break;
             case "underline line-through":
-                this.nativeView.setPaintFlags(android.graphics.Paint.UNDERLINE_TEXT_FLAG | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
+                this.nativeViewProtected.setPaintFlags(android.graphics.Paint.UNDERLINE_TEXT_FLAG | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
                 break;
             default:
-                this.nativeView.setPaintFlags(value);
+                this.nativeViewProtected.setPaintFlags(value);
                 break;
         }
     };
     TextBase.prototype[text_base_common_1.letterSpacingProperty.getDefault] = function () {
-        return org.nativescript.widgets.ViewHelper.getLetterspacing(this.nativeView);
+        return org.nativescript.widgets.ViewHelper.getLetterspacing(this.nativeViewProtected);
     };
     TextBase.prototype[text_base_common_1.letterSpacingProperty.setNative] = function (value) {
-        org.nativescript.widgets.ViewHelper.setLetterspacing(this.nativeView, value);
+        org.nativescript.widgets.ViewHelper.setLetterspacing(this.nativeViewProtected, value);
     };
     TextBase.prototype[text_base_common_1.paddingTopProperty.getDefault] = function () {
         return { value: this._defaultPaddingTop, unit: "px" };
     };
     TextBase.prototype[text_base_common_1.paddingTopProperty.setNative] = function (value) {
-        org.nativescript.widgets.ViewHelper.setPaddingTop(this.nativeView, text_base_common_1.Length.toDevicePixels(value, 0) + text_base_common_1.Length.toDevicePixels(this.style.borderTopWidth, 0));
+        org.nativescript.widgets.ViewHelper.setPaddingTop(this.nativeViewProtected, text_base_common_1.Length.toDevicePixels(value, 0) + text_base_common_1.Length.toDevicePixels(this.style.borderTopWidth, 0));
     };
     TextBase.prototype[text_base_common_1.paddingRightProperty.getDefault] = function () {
         return { value: this._defaultPaddingRight, unit: "px" };
     };
     TextBase.prototype[text_base_common_1.paddingRightProperty.setNative] = function (value) {
-        org.nativescript.widgets.ViewHelper.setPaddingRight(this.nativeView, text_base_common_1.Length.toDevicePixels(value, 0) + text_base_common_1.Length.toDevicePixels(this.style.borderRightWidth, 0));
+        org.nativescript.widgets.ViewHelper.setPaddingRight(this.nativeViewProtected, text_base_common_1.Length.toDevicePixels(value, 0) + text_base_common_1.Length.toDevicePixels(this.style.borderRightWidth, 0));
     };
     TextBase.prototype[text_base_common_1.paddingBottomProperty.getDefault] = function () {
         return { value: this._defaultPaddingBottom, unit: "px" };
     };
     TextBase.prototype[text_base_common_1.paddingBottomProperty.setNative] = function (value) {
-        org.nativescript.widgets.ViewHelper.setPaddingBottom(this.nativeView, text_base_common_1.Length.toDevicePixels(value, 0) + text_base_common_1.Length.toDevicePixels(this.style.borderBottomWidth, 0));
+        org.nativescript.widgets.ViewHelper.setPaddingBottom(this.nativeViewProtected, text_base_common_1.Length.toDevicePixels(value, 0) + text_base_common_1.Length.toDevicePixels(this.style.borderBottomWidth, 0));
     };
     TextBase.prototype[text_base_common_1.paddingLeftProperty.getDefault] = function () {
         return { value: this._defaultPaddingLeft, unit: "px" };
     };
     TextBase.prototype[text_base_common_1.paddingLeftProperty.setNative] = function (value) {
-        org.nativescript.widgets.ViewHelper.setPaddingLeft(this.nativeView, text_base_common_1.Length.toDevicePixels(value, 0) + text_base_common_1.Length.toDevicePixels(this.style.borderLeftWidth, 0));
+        org.nativescript.widgets.ViewHelper.setPaddingLeft(this.nativeViewProtected, text_base_common_1.Length.toDevicePixels(value, 0) + text_base_common_1.Length.toDevicePixels(this.style.borderLeftWidth, 0));
     };
     TextBase.prototype._setNativeText = function (reset) {
         if (reset === void 0) { reset = false; }
         if (reset) {
-            this.nativeView.setText(null);
+            this.nativeViewProtected.setText(null);
             return;
         }
         var transformedText;
@@ -255,7 +254,7 @@ var TextBase = (function (_super) {
             var stringValue = (text === null || text === undefined) ? '' : text.toString();
             transformedText = getTransformedText(stringValue, this.textTransform);
         }
-        this.nativeView.setText(transformedText);
+        this.nativeViewProtected.setText(transformedText);
     };
     return TextBase;
 }(text_base_common_1.TextBaseCommon));

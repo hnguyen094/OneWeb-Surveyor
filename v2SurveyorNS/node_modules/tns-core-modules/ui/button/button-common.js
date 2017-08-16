@@ -26,5 +26,5 @@ var ButtonBase = (function (_super) {
     return ButtonBase;
 }(text_base_1.TextBase));
 exports.ButtonBase = ButtonBase;
-ButtonBase.prototype.recycleNativeView = true;
+ButtonBase.prototype.recycleNativeView = "auto";
 //# sourceMappingURL=button-common.js.map

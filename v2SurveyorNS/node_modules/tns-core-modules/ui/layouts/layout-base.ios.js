@@ -17,7 +17,7 @@ var LayoutBase = (function (_super) {
     };
     LayoutBase.prototype._setNativeClipToBounds = function () {
         if (this.clipToBounds) {
-            this.nativeView.clipsToBounds = true;
+            this.nativeViewProtected.clipsToBounds = true;
         }
         else {
             _super.prototype._setNativeClipToBounds.call(this);

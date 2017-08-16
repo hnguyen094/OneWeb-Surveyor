@@ -13,7 +13,7 @@ var TextFieldBase = (function (_super) {
     return TextFieldBase;
 }(editable_text_base_1.EditableTextBase));
 exports.TextFieldBase = TextFieldBase;
-TextFieldBase.prototype.recycleNativeView = true;
+TextFieldBase.prototype.recycleNativeView = "auto";
 exports.secureProperty = new editable_text_base_1.Property({ name: "secure", defaultValue: false, valueConverter: editable_text_base_1.booleanConverter });
 exports.secureProperty.register(TextFieldBase);
 //# sourceMappingURL=text-field-common.js.map

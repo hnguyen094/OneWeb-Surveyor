@@ -14,18 +14,18 @@ var HtmlView = (function (_super) {
         nativeView.selectable = true;
         nativeView.userInteractionEnabled = true;
         nativeView.dataDetectorTypes = 4294967295;
-        _this.nativeView = nativeView;
+        _this.nativeViewProtected = nativeView;
         return _this;
     }
     Object.defineProperty(HtmlView.prototype, "ios", {
         get: function () {
-            return this.nativeView;
+            return this.nativeViewProtected;
         },
         enumerable: true,
         configurable: true
     });
     HtmlView.prototype.onMeasure = function (widthMeasureSpec, heightMeasureSpec) {
-        var nativeView = this.nativeView;
+        var nativeView = this.nativeViewProtected;
         if (nativeView) {
             var width = html_view_common_1.layout.getMeasureSpecSize(widthMeasureSpec);
             var widthMode = html_view_common_1.layout.getMeasureSpecMode(widthMeasureSpec);
@@ -46,7 +46,7 @@ var HtmlView = (function (_super) {
     HtmlView.prototype[html_view_common_1.htmlProperty.setNative] = function (value) {
         var htmlString = NSString.stringWithString(value + "");
         var nsData = htmlString.dataUsingEncoding(NSUnicodeStringEncoding);
-        this.nativeView.attributedText = NSAttributedString.alloc().initWithDataOptionsDocumentAttributesError(nsData, (_a = {}, _a[NSDocumentTypeDocumentAttribute] = NSHTMLTextDocumentType, _a), null);
+        this.nativeViewProtected.attributedText = NSAttributedString.alloc().initWithDataOptionsDocumentAttributesError(nsData, (_a = {}, _a[NSDocumentTypeDocumentAttribute] = NSHTMLTextDocumentType, _a), null);
         var _a;
     };
     return HtmlView;

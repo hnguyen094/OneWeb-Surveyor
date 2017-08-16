@@ -119,7 +119,7 @@ var ImageSource = (function () {
         }
         var data = getImageData(this.ios, format, quality);
         if (data) {
-            return data.writeToFileAtomically(path, true);
+            return NSFileManager.defaultManager.createFileAtPathContentsAttributes(path, data, null);
         }
         return false;
     };

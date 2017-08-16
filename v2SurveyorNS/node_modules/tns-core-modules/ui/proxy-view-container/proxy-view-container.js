@@ -4,7 +4,7 @@ var ProxyViewContainer = (function (_super) {
     __extends(ProxyViewContainer, _super);
     function ProxyViewContainer() {
         var _this = _super.call(this) || this;
-        _this.nativeView = undefined;
+        _this.nativeViewProtected = undefined;
         return _this;
     }
     Object.defineProperty(ProxyViewContainer.prototype, "ios", {

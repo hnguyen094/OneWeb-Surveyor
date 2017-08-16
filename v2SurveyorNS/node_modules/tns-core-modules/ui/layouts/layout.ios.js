@@ -8,12 +8,12 @@ var Layout = (function (_super) {
     __extends(Layout, _super);
     function Layout() {
         var _this = _super.call(this) || this;
-        _this.nativeView = UIView.new();
+        _this.nativeViewProtected = UIView.new();
         return _this;
     }
     Object.defineProperty(Layout.prototype, "ios", {
         get: function () {
-            return this.nativeView;
+            return this.nativeViewProtected;
         },
         enumerable: true,
         configurable: true

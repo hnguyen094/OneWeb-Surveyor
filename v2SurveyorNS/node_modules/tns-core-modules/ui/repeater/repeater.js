@@ -100,7 +100,7 @@ var Repeater = (function (_super) {
     return Repeater;
 }(layout_base_1.CustomLayoutView));
 exports.Repeater = Repeater;
-Repeater.prototype.recycleNativeView = true;
+Repeater.prototype.recycleNativeView = "auto";
 exports.itemTemplateProperty = new layout_base_1.Property({
     name: "itemTemplate", affectsLayout: true, valueChanged: function (target) {
         target._requestRefresh();

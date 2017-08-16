@@ -55,18 +55,18 @@ var Image = (function (_super) {
     };
     Image.prototype.initNativeView = function () {
         _super.prototype.initNativeView.call(this);
-        this.nativeView.listener.owner = this;
+        this.nativeViewProtected.listener.owner = this;
     };
     Image.prototype.disposeNativeView = function () {
-        this.nativeView.listener.owner = null;
+        this.nativeViewProtected.listener.owner = null;
         _super.prototype.disposeNativeView.call(this);
     };
     Image.prototype.resetNativeView = function () {
         _super.prototype.resetNativeView.call(this);
-        this.nativeView.setImageMatrix(new android.graphics.Matrix());
+        this.nativeViewProtected.setImageMatrix(new android.graphics.Matrix());
     };
     Image.prototype._createImageSourceFromSrc = function (value) {
-        var imageView = this.nativeView;
+        var imageView = this.nativeViewProtected;
         if (!imageView) {
             return;
         }
@@ -107,17 +107,17 @@ var Image = (function (_super) {
     Image.prototype[image_common_1.stretchProperty.setNative] = function (value) {
         switch (value) {
             case "aspectFit":
-                this.nativeView.setScaleType(android.widget.ImageView.ScaleType.FIT_CENTER);
+                this.nativeViewProtected.setScaleType(android.widget.ImageView.ScaleType.FIT_CENTER);
                 break;
             case "aspectFill":
-                this.nativeView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+                this.nativeViewProtected.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
                 break;
             case "fill":
-                this.nativeView.setScaleType(android.widget.ImageView.ScaleType.FIT_XY);
+                this.nativeViewProtected.setScaleType(android.widget.ImageView.ScaleType.FIT_XY);
                 break;
             case "none":
             default:
-                this.nativeView.setScaleType(android.widget.ImageView.ScaleType.MATRIX);
+                this.nativeViewProtected.setScaleType(android.widget.ImageView.ScaleType.MATRIX);
                 break;
         }
     };
@@ -126,17 +126,17 @@ var Image = (function (_super) {
     };
     Image.prototype[image_common_1.tintColorProperty.setNative] = function (value) {
         if (value === undefined) {
-            this.nativeView.clearColorFilter();
+            this.nativeViewProtected.clearColorFilter();
         }
         else {
-            this.nativeView.setColorFilter(value.android);
+            this.nativeViewProtected.setColorFilter(value.android);
         }
     };
     Image.prototype[image_common_1.imageSourceProperty.getDefault] = function () {
         return undefined;
     };
     Image.prototype[image_common_1.imageSourceProperty.setNative] = function (value) {
-        var nativeView = this.nativeView;
+        var nativeView = this.nativeViewProtected;
         if (value && value.android) {
             var rotation = value.rotationAngle ? value.rotationAngle : 0;
             nativeView.setRotationAngle(rotation);

@@ -15,3 +15,8 @@
   opacity: 0.5;
   filter: alpha(opacity=50);
 }
+
+#rectangle {
+  width: 10px;
+  height: 100px;
+}

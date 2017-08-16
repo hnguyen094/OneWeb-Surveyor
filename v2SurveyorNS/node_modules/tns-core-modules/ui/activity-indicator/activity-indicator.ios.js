@@ -8,27 +8,27 @@ var ActivityIndicator = (function (_super) {
     __extends(ActivityIndicator, _super);
     function ActivityIndicator() {
         var _this = _super.call(this) || this;
-        _this.nativeView = UIActivityIndicatorView.alloc().initWithActivityIndicatorStyle(2);
-        _this.nativeView.hidesWhenStopped = true;
+        _this.nativeViewProtected = UIActivityIndicatorView.alloc().initWithActivityIndicatorStyle(2);
+        _this.nativeViewProtected.hidesWhenStopped = true;
         return _this;
     }
     Object.defineProperty(ActivityIndicator.prototype, "ios", {
         get: function () {
-            return this.nativeView;
+            return this.nativeViewProtected;
         },
         enumerable: true,
         configurable: true
     });
     ActivityIndicator.prototype[activity_indicator_common_1.busyProperty.getDefault] = function () {
-        if (this.nativeView.isAnimating) {
-            return this.nativeView.isAnimating();
+        if (this.nativeViewProtected.isAnimating) {
+            return this.nativeViewProtected.isAnimating();
         }
         else {
-            return this.nativeView.animating;
+            return this.nativeViewProtected.animating;
         }
     };
     ActivityIndicator.prototype[activity_indicator_common_1.busyProperty.setNative] = function (value) {
-        var nativeView = this.nativeView;
+        var nativeView = this.nativeViewProtected;
         if (value) {
             nativeView.startAnimating();
         }
@@ -40,10 +40,10 @@ var ActivityIndicator = (function (_super) {
         }
     };
     ActivityIndicator.prototype[activity_indicator_common_1.colorProperty.getDefault] = function () {
-        return this.nativeView.color;
+        return this.nativeViewProtected.color;
     };
     ActivityIndicator.prototype[activity_indicator_common_1.colorProperty.setNative] = function (value) {
-        this.nativeView.color = value instanceof activity_indicator_common_1.Color ? value.ios : value;
+        this.nativeViewProtected.color = value instanceof activity_indicator_common_1.Color ? value.ios : value;
     };
     return ActivityIndicator;
 }(activity_indicator_common_1.ActivityIndicatorBase));

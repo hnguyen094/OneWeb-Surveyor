@@ -8,7 +8,7 @@ var widgetFlexboxLayout;
 var widgetLayoutParams;
 function makeNativeSetter(setter) {
     return function (value) {
-        var nativeView = this.nativeView;
+        var nativeView = this.nativeViewProtected;
         var lp = nativeView.getLayoutParams() || new widgetLayoutParams();
         if (lp instanceof widgetLayoutParams) {
             setter(lp, value);
@@ -77,52 +77,52 @@ var FlexboxLayout = (function (_super) {
     };
     FlexboxLayout.prototype.resetNativeView = function () {
         _super.prototype.resetNativeView.call(this);
-        this.nativeView.invalidateOrdersCache();
+        this.nativeViewProtected.invalidateOrdersCache();
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.flexDirectionProperty.getDefault] = function () {
         return flexbox_layout_common_1.flexDirectionProperty.defaultValue;
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.flexDirectionProperty.setNative] = function (flexDirection) {
-        this.nativeView.setFlexDirection(flexDirectionMap[flexDirection]);
+        this.nativeViewProtected.setFlexDirection(flexDirectionMap[flexDirection]);
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.flexWrapProperty.getDefault] = function () {
         return flexbox_layout_common_1.flexWrapProperty.defaultValue;
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.flexWrapProperty.setNative] = function (flexWrap) {
-        this.nativeView.setFlexWrap(flexWrapMap[flexWrap]);
+        this.nativeViewProtected.setFlexWrap(flexWrapMap[flexWrap]);
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.justifyContentProperty.getDefault] = function () {
         return flexbox_layout_common_1.justifyContentProperty.defaultValue;
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.justifyContentProperty.setNative] = function (justifyContent) {
-        this.nativeView.setJustifyContent(justifyContentMap[justifyContent]);
+        this.nativeViewProtected.setJustifyContent(justifyContentMap[justifyContent]);
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.alignItemsProperty.getDefault] = function () {
         return flexbox_layout_common_1.alignItemsProperty.defaultValue;
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.alignItemsProperty.setNative] = function (alignItems) {
-        this.nativeView.setAlignItems(alignItemsMap[alignItems]);
+        this.nativeViewProtected.setAlignItems(alignItemsMap[alignItems]);
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.alignContentProperty.getDefault] = function () {
         return flexbox_layout_common_1.alignContentProperty.defaultValue;
     };
     FlexboxLayout.prototype[flexbox_layout_common_1.alignContentProperty.setNative] = function (alignContent) {
-        this.nativeView.setAlignContent(alignContentMap[alignContent]);
+        this.nativeViewProtected.setAlignContent(alignContentMap[alignContent]);
     };
     FlexboxLayout.prototype._updateNativeLayoutParams = function (child) {
         _super.prototype._updateNativeLayoutParams.call(this, child);
-        var lp = child.nativeView.getLayoutParams();
+        var lp = child.nativeViewProtected.getLayoutParams();
         var style = child.style;
         lp.order = style.order;
         lp.flexGrow = style.flexGrow;
         lp.flexShrink = style.flexShrink;
         lp.wrapBefore = style.flexWrapBefore;
         lp.alignSelf = alignSelfMap[style.alignSelf];
-        child.nativeView.setLayoutParams(lp);
+        child.nativeViewProtected.setLayoutParams(lp);
     };
     FlexboxLayout.prototype._setChildMinWidthNative = function (child) {
         child._setMinWidthNative(0);
-        var nativeView = child.nativeView;
+        var nativeView = child.nativeViewProtected;
         var lp = nativeView.getLayoutParams();
         if (lp instanceof widgetLayoutParams) {
             lp.minWidth = flexbox_layout_common_1.Length.toDevicePixels(child.style.minWidth, 0);
@@ -131,7 +131,7 @@ var FlexboxLayout = (function (_super) {
     };
     FlexboxLayout.prototype._setChildMinHeightNative = function (child) {
         child._setMinHeightNative(0);
-        var nativeView = child.nativeView;
+        var nativeView = child.nativeViewProtected;
         var lp = nativeView.getLayoutParams();
         if (lp instanceof widgetLayoutParams) {
             lp.minHeight = flexbox_layout_common_1.Length.toDevicePixels(child.style.minHeight, 0);

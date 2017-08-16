@@ -68,12 +68,12 @@ var SearchBar = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     SearchBar.prototype.dismissSoftInput = function () {
-        utils_1.ad.dismissSoftInput(this.nativeView);
+        utils_1.ad.dismissSoftInput(this.nativeViewProtected);
     };
     SearchBar.prototype.focus = function () {
         var result = _super.prototype.focus.call(this);
         if (result) {
-            utils_1.ad.showSoftInput(this.nativeView);
+            utils_1.ad.showSoftInput(this.nativeViewProtected);
         }
         return result;
     };
@@ -91,12 +91,12 @@ var SearchBar = (function (_super) {
     };
     SearchBar.prototype.initNativeView = function () {
         _super.prototype.initNativeView.call(this);
-        var nativeView = this.nativeView;
+        var nativeView = this.nativeViewProtected;
         nativeView.closeListener.owner = this;
         nativeView.queryTextListener.owner = this;
     };
     SearchBar.prototype.disposeNativeView = function () {
-        var nativeView = this.nativeView;
+        var nativeView = this.nativeViewProtected;
         nativeView.closeListener.owner = null;
         nativeView.queryTextListener.owner = null;
         this._searchPlate = null;
@@ -104,7 +104,7 @@ var SearchBar = (function (_super) {
         _super.prototype.disposeNativeView.call(this);
     };
     SearchBar.prototype[search_bar_common_1.backgroundColorProperty.getDefault] = function () {
-        var result = this.nativeView.getDrawingCacheBackgroundColor();
+        var result = this.nativeViewProtected.getDrawingCacheBackgroundColor();
         return result;
     };
     SearchBar.prototype[search_bar_common_1.backgroundColorProperty.setNative] = function (value) {
@@ -115,7 +115,7 @@ var SearchBar = (function (_super) {
         else {
             color = value.android;
         }
-        this.nativeView.setBackgroundColor(color);
+        this.nativeViewProtected.setBackgroundColor(color);
         var searchPlate = this._getSearchPlate();
         searchPlate.setBackgroundColor(color);
     };
@@ -155,17 +155,17 @@ var SearchBar = (function (_super) {
     };
     SearchBar.prototype[search_bar_common_1.textProperty.setNative] = function (value) {
         var text = (value === null || value === undefined) ? '' : value.toString();
-        this.nativeView.setQuery(text, false);
+        this.nativeViewProtected.setQuery(text, false);
     };
     SearchBar.prototype[search_bar_common_1.hintProperty.getDefault] = function () {
         return null;
     };
     SearchBar.prototype[search_bar_common_1.hintProperty.setNative] = function (value) {
         if (value === null || value === undefined) {
-            this.nativeView.setQueryHint(null);
+            this.nativeViewProtected.setQueryHint(null);
         }
         else {
-            this.nativeView.setQueryHint(value.toString());
+            this.nativeViewProtected.setQueryHint(value.toString());
         }
     };
     SearchBar.prototype[search_bar_common_1.textFieldBackgroundColorProperty.getDefault] = function () {
@@ -192,17 +192,17 @@ var SearchBar = (function (_super) {
     };
     SearchBar.prototype._getTextView = function () {
         if (!this._searchTextView) {
-            var pkgName = this.nativeView.getContext().getPackageName();
-            var id = this.nativeView.getContext().getResources().getIdentifier("search_src_text", "id", pkgName);
-            this._searchTextView = this.nativeView.findViewById(id);
+            var pkgName = this.nativeViewProtected.getContext().getPackageName();
+            var id = this.nativeViewProtected.getContext().getResources().getIdentifier("search_src_text", "id", pkgName);
+            this._searchTextView = this.nativeViewProtected.findViewById(id);
         }
         return this._searchTextView;
     };
     SearchBar.prototype._getSearchPlate = function () {
         if (!this._searchPlate) {
-            var pkgName = this.nativeView.getContext().getPackageName();
-            var id = this.nativeView.getContext().getResources().getIdentifier("search_plate", "id", pkgName);
-            this._searchPlate = this.nativeView.findViewById(id);
+            var pkgName = this.nativeViewProtected.getContext().getPackageName();
+            var id = this.nativeViewProtected.getContext().getResources().getIdentifier("search_plate", "id", pkgName);
+            this._searchPlate = this.nativeViewProtected.findViewById(id);
         }
         return this._searchPlate;
     };

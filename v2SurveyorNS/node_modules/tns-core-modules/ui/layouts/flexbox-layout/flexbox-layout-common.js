@@ -208,7 +208,7 @@ var FlexboxLayoutBase = (function (_super) {
     return FlexboxLayoutBase;
 }(layout_base_1.LayoutBase));
 exports.FlexboxLayoutBase = FlexboxLayoutBase;
-FlexboxLayoutBase.prototype.recycleNativeView = true;
+FlexboxLayoutBase.prototype.recycleNativeView = "auto";
 exports.flexDirectionProperty = new layout_base_1.CssProperty({ name: "flexDirection", cssName: "flex-direction", defaultValue: FlexDirection.ROW, affectsLayout: layout_base_1.isIOS, valueConverter: FlexDirection.parse });
 exports.flexDirectionProperty.register(layout_base_1.Style);
 exports.flexWrapProperty = new layout_base_1.CssProperty({ name: "flexWrap", cssName: "flex-wrap", defaultValue: "nowrap", affectsLayout: layout_base_1.isIOS, valueConverter: FlexWrap.parse });
