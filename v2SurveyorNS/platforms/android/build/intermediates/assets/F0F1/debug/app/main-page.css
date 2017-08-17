@@ -12,6 +12,8 @@
 }
 
 #graph {
+  font-size: 100;
+  height: 0;
   opacity: 0.5;
   filter: alpha(opacity=50);
 }

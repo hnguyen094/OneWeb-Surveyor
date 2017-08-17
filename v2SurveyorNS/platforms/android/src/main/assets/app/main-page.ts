@@ -17,13 +17,14 @@ import * as params from "./nativescript-fov/nativescript-fov";
 import * as permissions from "nativescript-permissions";
 import * as charts from "./nativescript-chart/chart";
 
-let crosshair :any;
-let doubleline :any;
-let upperText :any;
-let lowerText :any;
+let crosshair: any;
+let doubleline: any;
+let upperText: any;
+let lowerText: any;
 let x, y, z;
 let measuredWidth;
 let page;
+let isOn: boolean = false;
 
 const OUTER_CIRCLE_DIAMETER = 2;
 const ANGLE_BETWEEN_LINES = 10;
@@ -31,7 +32,9 @@ const ANGLE_BETWEEN_LINES = 10;
 const updateCallback = function() {
   // console.log("Entered updateCallback");
 
-  charts.updateGraph(x,y);
+  if(isOn){
+    charts.updateGraph(x,y);
+  }
 
   const yTranslate = app.ios? -20 : 0;
   const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
@@ -154,6 +157,7 @@ export function onCreatingView(args: EventData) {
 
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
+  isOn = !isOn;
   console.log("el: " + y);
 }
 

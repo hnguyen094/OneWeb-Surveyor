@@ -168,12 +168,12 @@
         "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },
     {
-        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
-        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
-    },
-    {
         "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xxhdpi-v4\\design_ic_visibility.png",
         "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.3.1\\res\\drawable-xxhdpi-v4\\design_ic_visibility.png"
+    },
+    {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",

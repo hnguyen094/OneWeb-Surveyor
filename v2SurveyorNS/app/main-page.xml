@@ -1,4 +1,5 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded"
+  xmlns:lgraph="nativescript-chart"
   backgroundSpanUnderStatusBar="true" navigatingTo="navigatingTo" class="page"
   actionBarHidden="true" xmlns:LineChart="nativescript-charts/line-chart">
   <!-- <ActionBar title="{N} Surveyor">
@@ -14,6 +15,7 @@
     <GridLayout>
       <Placeholder id="placeholder-view" creatingView="onCreatingView" stretch="aspectFill" horizontalAlignment="center" verticalAlignment="center"/>
       <!-- <Image id="graph" stretch="aspectFit" verticalAlignment="top"/> -->
+      <lgraph:chart/>
       <Button id="capturebtn" text="No Op" tap="onTakeShot" class="btn btn-primary" horizontalAlignment="center" verticalAlignment="bottom"/>
       <Image id="doubleline" src="res://newdoubleline" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
       <Label id="upperText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
