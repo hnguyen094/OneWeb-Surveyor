@@ -5,7 +5,7 @@ num_of_bars = 360
 id_prefix = "l"
 id_suffix = ""
 output_name = 'chart.xml'
-color = "green"
+color = "#1b5675"
 
 ## You probably won't need to touch the rest
 
@@ -20,7 +20,7 @@ str_mid = id_suffix + "\" row=\"0\" col=\""
 str_end = "\"/>\n"
 
 f  = open(output_name, 'w')
-f.write("<GridLayout id=\"graph\" rows=\"auto\" columns=\"" + col_settings + "\">\n")
+f.write("<GridLayout id=\"graph\" columns=\"" + col_settings + "\">\n")
 for i in range(num_of_bars):
     f.write(str_beg + `i` + str_mid + `i` + str_end)
 f.write("</GridLayout>")
