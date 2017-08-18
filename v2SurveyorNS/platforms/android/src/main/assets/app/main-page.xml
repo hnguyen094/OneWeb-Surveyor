@@ -16,7 +16,7 @@
       <Placeholder id="placeholder-view" creatingView="onCreatingView" stretch="aspectFill" horizontalAlignment="center" verticalAlignment="center"/>
       <!-- <Image id="graph" stretch="aspectFit" verticalAlignment="top"/> -->
       <lgraph:chart/>
-      <Button id="capturebtn" text="No Op" tap="onTakeShot" class="btn btn-primary" horizontalAlignment="center" verticalAlignment="bottom"/>
+      <Button id="capturebtn" text="Record" tap="onTakeShot" class="btn btn-primary" horizontalAlignment="center" verticalAlignment="bottom"/>
       <Image id="doubleline" src="res://newdoubleline" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
       <Label id="upperText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
       <Label id="lowerText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>

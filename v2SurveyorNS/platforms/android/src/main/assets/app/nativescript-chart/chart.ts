@@ -16,7 +16,6 @@ const maxHeight = platform.screen.mainScreen.heightPixels / 8 /platform.screen.m
 export function initGraph(myPage) {
   console.log("Entering initGraph");
   page = myPage;
-  console.log("l0 is " + page.getViewById("l0"));
   maxEle = 60;
   minEle = 0;
   timer = 10;
@@ -63,5 +62,4 @@ function ele2Percent(elevation) {
 }
 
 export function onExit() {
-  // bmp.dispose();
 }
