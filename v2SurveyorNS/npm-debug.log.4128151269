@@ -1,0 +1,213 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'uninstall',
+1 verbose cli   'nativescript-charts',
+1 verbose cli   '--save' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.1
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly install normalizeTree
+8 silly loadCurrentTree Finishing
+9 silly loadIdealTree Starting
+10 silly install loadIdealTree
+11 silly cloneCurrentTree Starting
+12 silly install cloneCurrentTreeToIdealTree
+13 silly cloneCurrentTree Finishing
+14 silly loadShrinkwrap Starting
+15 silly install loadShrinkwrap
+16 silly loadShrinkwrap Finishing
+17 silly loadAllDepsIntoIdealTree Starting
+18 silly uninstall loadAllDepsIntoIdealtree
+19 silly loadAllDepsIntoIdealTree Finishing
+20 silly loadIdealTree Finishing
+21 silly currentTree v2SurveyorNS
+21 silly currentTree ├── ansi-regex@2.1.1
+21 silly currentTree ├── ansi-styles@2.2.1
+21 silly currentTree ├── async@0.1.22
+21 silly currentTree ├── babel-code-frame@6.22.0
+21 silly currentTree ├─┬ babel-messages@6.23.0
+21 silly currentTree │ └── babel-runtime@6.23.0
+21 silly currentTree ├─┬ babel-runtime@5.8.38
+21 silly currentTree │ └── core-js@1.2.7
+21 silly currentTree ├── babel-traverse@6.4.5
+21 silly currentTree ├── babel-types@6.4.5
+21 silly currentTree ├── babylon@6.4.5
+21 silly currentTree ├── balanced-match@1.0.0
+21 silly currentTree ├── brace-expansion@1.1.8
+21 silly currentTree ├── chalk@1.1.3
+21 silly currentTree ├── concat-map@0.0.1
+21 silly currentTree ├── core-js@2.4.1
+21 silly currentTree ├── debug@2.6.8
+21 silly currentTree ├── dref@0.0.6
+21 silly currentTree ├── escape-string-regexp@1.0.5
+21 silly currentTree ├── esutils@2.0.2
+21 silly currentTree ├── glob@6.0.4
+21 silly currentTree ├── globals@8.18.0
+21 silly currentTree ├── has-ansi@2.0.0
+21 silly currentTree ├── inflight@1.0.6
+21 silly currentTree ├── inherits@2.0.3
+21 silly currentTree ├── invariant@2.2.2
+21 silly currentTree ├── is-finite@1.0.2
+21 silly currentTree ├── js-tokens@3.0.2
+21 silly currentTree ├── lazy@1.0.11
+21 silly currentTree ├── lodash@3.10.1
+21 silly currentTree ├── loose-envify@1.3.1
+21 silly currentTree ├── minimatch@3.0.4
+21 silly currentTree ├── minimist@0.0.8
+21 silly currentTree ├── mkdirp@0.5.1
+21 silly currentTree ├── ms@2.0.0
+21 silly currentTree ├── nativescript-charts@0.0.7
+21 silly currentTree ├── nativescript-dev-typescript@0.5.0
+21 silly currentTree ├── nativescript-hook@0.2.1
+21 silly currentTree ├── nativescript-permissions@1.2.3
+21 silly currentTree ├── nativescript-screen-orientation@2.0.0
+21 silly currentTree ├── nativescript-theme-core@1.0.4
+21 silly currentTree ├── number-is-nan@1.0.1
+21 silly currentTree ├── once@1.4.0
+21 silly currentTree ├── outcome@0.0.18
+21 silly currentTree ├── path-is-absolute@1.0.1
+21 silly currentTree ├── plugin@0.3.3
+21 silly currentTree ├── regenerator-runtime@0.10.5
+21 silly currentTree ├── repeating@1.1.3
+21 silly currentTree ├── resolve@0.2.8
+21 silly currentTree ├── sift@0.0.18
+21 silly currentTree ├── step@0.0.6
+21 silly currentTree ├── strip-ansi@3.0.1
+21 silly currentTree ├── structr@0.2.4
+21 silly currentTree ├── supports-color@2.0.0
+21 silly currentTree ├── tns-core-modules-widgets@3.2.0-2017-8-9-1
+21 silly currentTree ├── tns-core-modules@3.2.0-2017-8-16-1
+21 silly currentTree ├── tns-platform-declarations@3.1.1
+21 silly currentTree ├── to-fast-properties@1.0.3
+21 silly currentTree ├── toarray@0.0.1
+21 silly currentTree ├── type-component@0.0.1
+21 silly currentTree ├── typescript@2.5.0-dev.20170808
+21 silly currentTree ├── underscore@1.4.4
+21 silly currentTree └── wrappy@1.0.2
+22 silly idealTree v2SurveyorNS
+22 silly idealTree ├── ansi-regex@2.1.1
+22 silly idealTree ├── ansi-styles@2.2.1
+22 silly idealTree ├── async@0.1.22
+22 silly idealTree ├── babel-code-frame@6.22.0
+22 silly idealTree ├─┬ babel-messages@6.23.0
+22 silly idealTree │ └── babel-runtime@6.23.0
+22 silly idealTree ├─┬ babel-runtime@5.8.38
+22 silly idealTree │ └── core-js@1.2.7
+22 silly idealTree ├── babel-traverse@6.4.5
+22 silly idealTree ├── babel-types@6.4.5
+22 silly idealTree ├── babylon@6.4.5
+22 silly idealTree ├── balanced-match@1.0.0
+22 silly idealTree ├── brace-expansion@1.1.8
+22 silly idealTree ├── chalk@1.1.3
+22 silly idealTree ├── concat-map@0.0.1
+22 silly idealTree ├── core-js@2.4.1
+22 silly idealTree ├── debug@2.6.8
+22 silly idealTree ├── dref@0.0.6
+22 silly idealTree ├── escape-string-regexp@1.0.5
+22 silly idealTree ├── esutils@2.0.2
+22 silly idealTree ├── glob@6.0.4
+22 silly idealTree ├── globals@8.18.0
+22 silly idealTree ├── has-ansi@2.0.0
+22 silly idealTree ├── inflight@1.0.6
+22 silly idealTree ├── inherits@2.0.3
+22 silly idealTree ├── invariant@2.2.2
+22 silly idealTree ├── is-finite@1.0.2
+22 silly idealTree ├── js-tokens@3.0.2
+22 silly idealTree ├── lazy@1.0.11
+22 silly idealTree ├── lodash@3.10.1
+22 silly idealTree ├── loose-envify@1.3.1
+22 silly idealTree ├── minimatch@3.0.4
+22 silly idealTree ├── minimist@0.0.8
+22 silly idealTree ├── mkdirp@0.5.1
+22 silly idealTree ├── ms@2.0.0
+22 silly idealTree ├── nativescript-dev-typescript@0.5.0
+22 silly idealTree ├── nativescript-hook@0.2.1
+22 silly idealTree ├── nativescript-permissions@1.2.3
+22 silly idealTree ├── nativescript-screen-orientation@2.0.0
+22 silly idealTree ├── nativescript-theme-core@1.0.4
+22 silly idealTree ├── number-is-nan@1.0.1
+22 silly idealTree ├── once@1.4.0
+22 silly idealTree ├── outcome@0.0.18
+22 silly idealTree ├── path-is-absolute@1.0.1
+22 silly idealTree ├── plugin@0.3.3
+22 silly idealTree ├── regenerator-runtime@0.10.5
+22 silly idealTree ├── repeating@1.1.3
+22 silly idealTree ├── resolve@0.2.8
+22 silly idealTree ├── sift@0.0.18
+22 silly idealTree ├── step@0.0.6
+22 silly idealTree ├── strip-ansi@3.0.1
+22 silly idealTree ├── structr@0.2.4
+22 silly idealTree ├── supports-color@2.0.0
+22 silly idealTree ├── tns-core-modules-widgets@3.2.0-2017-8-9-1
+22 silly idealTree ├── tns-core-modules@3.2.0-2017-8-16-1
+22 silly idealTree ├── tns-platform-declarations@3.1.1
+22 silly idealTree ├── to-fast-properties@1.0.3
+22 silly idealTree ├── toarray@0.0.1
+22 silly idealTree ├── type-component@0.0.1
+22 silly idealTree ├── typescript@2.5.0-dev.20170808
+22 silly idealTree ├── underscore@1.4.4
+22 silly idealTree └── wrappy@1.0.2
+23 silly generateActionsToTake Starting
+24 silly install generateActionsToTake
+25 silly generateActionsToTake Finishing
+26 silly diffTrees action count 1
+27 silly diffTrees remove nativescript-charts@0.0.7
+28 silly decomposeActions action count 1
+29 silly decomposeActions remove nativescript-charts@0.0.7
+30 silly runTopLevelLifecycles Starting
+31 silly executeActions Starting
+32 silly install executeActions
+33 silly doSerial global-install 0
+34 silly doParallel fetch 0
+35 verbose correctMkdir /Users/admin/.npm/_locks correctMkdir not in flight; initializing
+36 verbose lock using /Users/admin/.npm/_locks/staging-dc451eeba1325a7a.lock for /Users/admin/ut-site-surveyor/v2SurveyorNS/node_modules/.staging
+37 silly doParallel extract 0
+38 silly doParallel preinstall 0
+39 silly doReverseSerial remove 1
+40 silly remove /Users/admin/ut-site-surveyor/v2SurveyorNS/node_modules/nativescript-charts
+41 verbose unbuild node_modules/nativescript-charts
+42 info lifecycle nativescript-charts@0.0.7~preuninstall: nativescript-charts@0.0.7
+43 silly lifecycle nativescript-charts@0.0.7~preuninstall: no script for preuninstall, continuing
+44 info lifecycle nativescript-charts@0.0.7~uninstall: nativescript-charts@0.0.7
+45 silly lifecycle nativescript-charts@0.0.7~uninstall: no script for uninstall, continuing
+46 verbose unbuild rmStuff nativescript-charts@0.0.7 from /Users/admin/ut-site-surveyor/v2SurveyorNS/node_modules
+47 info lifecycle nativescript-charts@0.0.7~postuninstall: nativescript-charts@0.0.7
+48 silly lifecycle nativescript-charts@0.0.7~postuninstall: no script for postuninstall, continuing
+49 silly gentlyRm /Users/admin/ut-site-surveyor/v2SurveyorNS/node_modules/nativescript-charts is being purged from base /Users/admin/ut-site-surveyor/v2SurveyorNS
+50 verbose gentlyRm don't care about contents; nuking /Users/admin/ut-site-surveyor/v2SurveyorNS/node_modules/nativescript-charts
+51 silly vacuum-fs purging /Users/admin/ut-site-surveyor/v2SurveyorNS/node_modules/nativescript-charts
+52 silly vacuum-fs quitting because other entries in /Users/admin/ut-site-surveyor/v2SurveyorNS/node_modules
+53 silly doSerial move 0
+54 silly doSerial finalize 0
+55 silly doSerial build 0
+56 silly doSerial global-link 0
+57 silly doParallel update-linked 0
+58 silly doSerial install 0
+59 silly doSerial postinstall 0
+60 verbose unlock done using /Users/admin/.npm/_locks/staging-dc451eeba1325a7a.lock for /Users/admin/ut-site-surveyor/v2SurveyorNS/node_modules/.staging
+61 silly executeActions Finishing
+62 silly rollbackFailedOptional Starting
+63 silly rollbackFailedOptional Finishing
+64 silly runTopLevelLifecycles Finishing
+65 silly install saveToDependencies
+66 verbose saving []
+67 silly install printInstalled
+68 verbose exit [ 0, true ]
+69 verbose stack Error: write EPIPE
+69 verbose stack     at exports._errnoException (util.js:1018:11)
+69 verbose stack     at WriteWrap.afterWrite (net.js:800:14)
+70 verbose cwd /Users/admin/ut-site-surveyor/v2SurveyorNS
+71 error Darwin 16.7.0
+72 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "uninstall" "nativescript-charts" "--save"
+73 error node v6.11.1
+74 error npm  v3.10.10
+75 error code EPIPE
+76 error errno EPIPE
+77 error syscall write
+78 error write EPIPE
+79 error If you need help, you may report this error at:
+79 error     <https://github.com/npm/npm/issues>
+80 verbose exit [ 1, true ]

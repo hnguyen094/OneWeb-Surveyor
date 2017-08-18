@@ -5,15 +5,14 @@
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "net.oneweb.v2SurveyorNS",
-    "tns-ios": {
-      "version": "3.2.0-2017-7-5-5"
-    },
     "tns-android": {
       "version": "3.1.1"
+    },
+    "tns-ios": {
+      "version": "3.1.0"
     }
   },
   "dependencies": {
-    "nativescript-charts": "0.0.7",
     "nativescript-permissions": "^1.2.3",
     "nativescript-screen-orientation": "^2.0.0",
     "nativescript-theme-core": "~1.0.2",
