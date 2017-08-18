@@ -22,6 +22,9 @@ export function initGraph(myPage) {
   timer = 10;
   smoothingRange = 20;
   page.getViewById("graph").height = maxHeight;
+  // const targetline = page.getViewById("ltarget");
+  // targetline.height = width;
+
   for(let i = 0; i < 360; i++) {
     console.log("dealing with: "+ i);
     ele.push((maxEle+ minEle)/2);

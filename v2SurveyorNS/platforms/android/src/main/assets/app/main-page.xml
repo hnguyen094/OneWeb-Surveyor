@@ -1,7 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded"
   xmlns:lgraph="nativescript-chart"
   backgroundSpanUnderStatusBar="true" navigatingTo="navigatingTo" class="page"
-  actionBarHidden="true" xmlns:LineChart="nativescript-charts/line-chart">
+  actionBarHidden="true">
   <!-- <ActionBar title="{N} Surveyor">
     <android>
       <NavigationButton icon="res://ic_menu" tap="showSlideout" />
