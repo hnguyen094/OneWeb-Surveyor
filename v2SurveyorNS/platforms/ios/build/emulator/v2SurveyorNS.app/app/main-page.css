@@ -1,0 +1,22 @@
+.page {
+  background-color: #216a91;
+}
+
+#capturebtn {
+  background-color: #1b5675;
+}
+
+.levelLine {
+  font-size: 20;
+  color: #1b5675;
+}
+
+#graph {
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+}
+
+#rectangle {
+  width: 10px;
+  height: 100px;
+}
