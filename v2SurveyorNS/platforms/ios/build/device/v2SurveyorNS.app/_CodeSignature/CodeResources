@@ -106,7 +106,7 @@
 		</data>
 		<key>Frameworks/NativeScript.framework/NativeScript</key>
 		<data>
-		mXcwgQbBrabJt5dK4Wk/EQIwlk8=
+		Q9H9aGcPtwpf/AmqugOqubwRjso=
 		</data>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -194,7 +194,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		MCa7BJ9ne1izoSnVzfDOw6G8rFo=
+		xzVQ0kLch9ya0Wgc9yfIBSf12Vo=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -202,7 +202,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		XO3XekW+SaL/NVpuTm444LBYeKE=
+		2Zbf2ZBLn+IhGbTnfY/BI57NB5I=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -234,15 +234,15 @@
 		</data>
 		<key>app/main-page.css</key>
 		<data>
-		eR7bq1+FpW/sziA31E9V0jSyaa8=
+		VHkYSg4gJ7lhytuQn4kfJ5u3tiU=
 		</data>
 		<key>app/main-page.js</key>
 		<data>
-		Z1h5hmZaCkjeBtn4rtXoRV3gyRQ=
+		WjiX3DnVIvvYxjRlm/FqfYKyeGk=
 		</data>
 		<key>app/main-page.ts</key>
 		<data>
-		BJTYRb1DcOKoRdYubi6owPI1sAs=
+		PbdfhNUVvTA17PO7NOu+YDC7GpY=
 		</data>
 		<key>app/main-page.xml</key>
 		<data>
@@ -278,15 +278,15 @@
 		</data>
 		<key>app/nativescript-chart/chart.js</key>
 		<data>
-		xClvExKFSSCtJy4gRVFeWD62yO4=
+		4uRoXGn4vhYFYV20Akj23RinTXY=
 		</data>
 		<key>app/nativescript-chart/chart.ts</key>
 		<data>
-		GJWAY9Ndrb+E/9dLpW3uAjmfOeY=
+		8GSifgxCH+iQ9ZgMJlWkLb0mTto=
 		</data>
 		<key>app/nativescript-chart/chart.xml</key>
 		<data>
-		LSz39YimgT2vgvj3PhXv4ceUfe4=
+		mjNPItby06ZuFLaG/ahC37S8Yck=
 		</data>
 		<key>app/nativescript-chart/img_gen.py</key>
 		<data>
@@ -1851,27 +1851,27 @@
 		</dict>
 		<key>newcirclethin.png</key>
 		<data>
-		B/AWsAPZWeI555XzvqTazOaqf6c=
+		4IpVAN70UI8QoihchwCnNMC51ao=
 		</data>
 		<key>newcirclethin@2x.png</key>
 		<data>
-		6qSHtIr8BNq1HW/21Je2oq5UT14=
+		a6Ln+D6CyLV+SQ14PDzGf5lQx94=
 		</data>
 		<key>newcirclethin@3x.png</key>
 		<data>
-		ZM4wS3NJnAJKrFRQ8c1o4nqrzcM=
+		gDiLBNUkMYA4/jVgLcuvkFclCeI=
 		</data>
 		<key>newdoubleline.png</key>
 		<data>
-		pCFFJDoAXE68Oz4X205Ogt2CVyc=
+		MWZnJJpMMe50NbfgRXck6YEa3yU=
 		</data>
 		<key>newdoubleline@2x.png</key>
 		<data>
-		UY8/EyFvKCC4/VLtja/12dIs0VQ=
+		+8dDDRJe5fuVlh2lJYAPaeKDNZ8=
 		</data>
 		<key>newdoubleline@3x.png</key>
 		<data>
-		fBK2Q52VDtFMfeYz8qwUdjIN++w=
+		BdmzivCRJBO4Vsh05L4q2o2Vo1g=
 		</data>
 		<key>square.png</key>
 		<data>
@@ -2167,11 +2167,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			mXcwgQbBrabJt5dK4Wk/EQIwlk8=
+			Q9H9aGcPtwpf/AmqugOqubwRjso=
 			</data>
 			<key>hash2</key>
 			<data>
-			zs7p3aIAY9eUgvhNz+yZ/vsg1DK/Nev2gg/gMIvP4vo=
+			dgu7xrtOA2qFV/xEKvu2akzOIQ9eE7PMBcFLt2v6gAM=
 			</data>
 		</dict>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
@@ -2398,11 +2398,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			MCa7BJ9ne1izoSnVzfDOw6G8rFo=
+			xzVQ0kLch9ya0Wgc9yfIBSf12Vo=
 			</data>
 			<key>hash2</key>
 			<data>
-			2F99PNIouvqauXIOMl4G+zV6YQfcN0YofGVmZXtkPXU=
+			ITeU3XKlDErQnXAr3hI3q9fDrIesvOVMmr74TrFs3y4=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -2420,11 +2420,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			XO3XekW+SaL/NVpuTm444LBYeKE=
+			2Zbf2ZBLn+IhGbTnfY/BI57NB5I=
 			</data>
 			<key>hash2</key>
 			<data>
-			dqto8E6uAiPGD5IdwnTpq5AVtP/tBo6okPSaUmgVBbE=
+			l2ikp+BZmchWtLD0gxfhQeu0p0mmZZFpE+NRZabr5k4=
 			</data>
 		</dict>
 		<key>app/README.md</key>
@@ -2497,33 +2497,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			eR7bq1+FpW/sziA31E9V0jSyaa8=
+			VHkYSg4gJ7lhytuQn4kfJ5u3tiU=
 			</data>
 			<key>hash2</key>
 			<data>
-			qi4KWagmPY80che5jRBhCJbafPz6QLPpUFIWIBc2TxE=
+			3NglpuUB+KccQq0I9eYJkl4015PTK1/+20slqts69Gs=
 			</data>
 		</dict>
 		<key>app/main-page.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Z1h5hmZaCkjeBtn4rtXoRV3gyRQ=
+			WjiX3DnVIvvYxjRlm/FqfYKyeGk=
 			</data>
 			<key>hash2</key>
 			<data>
-			GVCzkr0kgGs9ZPr2f2F8/yUKcoeQ0ww8KJp5cK0uWSg=
+			9Tr9+6QBoopcz0QMqtWf6nMaJOG30N4xoB/Var0Z7xY=
 			</data>
 		</dict>
 		<key>app/main-page.ts</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BJTYRb1DcOKoRdYubi6owPI1sAs=
+			PbdfhNUVvTA17PO7NOu+YDC7GpY=
 			</data>
 			<key>hash2</key>
 			<data>
-			tgBtNbWhYnKTEha2gbpYS9umbwBAQyehGTGKpkcrRm8=
+			vaQN8JruyZd6pX8nxq+o7zfQ+2ohUGFYr2o3l3O2QhA=
 			</data>
 		</dict>
 		<key>app/main-page.xml</key>
@@ -2618,33 +2618,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xClvExKFSSCtJy4gRVFeWD62yO4=
+			4uRoXGn4vhYFYV20Akj23RinTXY=
 			</data>
 			<key>hash2</key>
 			<data>
-			S6pG7uFW6UXMInGN7IdYsAy2bI7H7mF+F8ZsJeq+xPg=
+			bFMag6nUrB8PjypfpBBR4Z5B09/aN9Njw5htFVANOxE=
 			</data>
 		</dict>
 		<key>app/nativescript-chart/chart.ts</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GJWAY9Ndrb+E/9dLpW3uAjmfOeY=
+			8GSifgxCH+iQ9ZgMJlWkLb0mTto=
 			</data>
 			<key>hash2</key>
 			<data>
-			YzUr4sjkY41M+Haxt+xcYxBrcmA2EDhKDfqzNi50oJ0=
+			ahoHyqmE8ElDhUG7n5+18F03IfQ5D4+0MHmY/vSClWE=
 			</data>
 		</dict>
 		<key>app/nativescript-chart/chart.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LSz39YimgT2vgvj3PhXv4ceUfe4=
+			mjNPItby06ZuFLaG/ahC37S8Yck=
 			</data>
 			<key>hash2</key>
 			<data>
-			qF8Be8Y9E+AmNvuHaC9vwJws/Pz4KTUq06qQo9N+mfY=
+			6KuOswwiCyLP/xxyVN6nFNP+VsvfIWq8IDGoI1KcJ2M=
 			</data>
 		</dict>
 		<key>app/nativescript-chart/img_gen.py</key>
@@ -6932,66 +6932,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			B/AWsAPZWeI555XzvqTazOaqf6c=
+			4IpVAN70UI8QoihchwCnNMC51ao=
 			</data>
 			<key>hash2</key>
 			<data>
-			RU8e3XWnReID/S8eteTie/TSPiItWXyGYOokbfv5e+4=
+			pFNEn8/3rA5LxlC+zr3JgQlSztbbEKuW/IApHv3t/n4=
 			</data>
 		</dict>
 		<key>newcirclethin@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6qSHtIr8BNq1HW/21Je2oq5UT14=
+			a6Ln+D6CyLV+SQ14PDzGf5lQx94=
 			</data>
 			<key>hash2</key>
 			<data>
-			ObLJBhEpjlch7q9bLQCd3+MeZMpP+SYPTWXqwt1qeDk=
+			xQ8LYonWUER5TL5Qcw4NhydBmydQhkCk8k2F1HkchsY=
 			</data>
 		</dict>
 		<key>newcirclethin@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZM4wS3NJnAJKrFRQ8c1o4nqrzcM=
+			gDiLBNUkMYA4/jVgLcuvkFclCeI=
 			</data>
 			<key>hash2</key>
 			<data>
-			2ota5+AYlVoGWjG+4IxcXc0Iz1mt3MMDHHLLthwxQ/U=
+			PxesWXWaf5icAjMp46xFyDWrWFsfr0FkhDDRgB9IzhQ=
 			</data>
 		</dict>
 		<key>newdoubleline.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pCFFJDoAXE68Oz4X205Ogt2CVyc=
+			MWZnJJpMMe50NbfgRXck6YEa3yU=
 			</data>
 			<key>hash2</key>
 			<data>
-			dyYHwtjmSYrA46cXvfQq1NXKxsJCgPiXyTz9kjEirRI=
+			ttp+ma9IL23T1o0UPN4f7ECsKluPvALwBZcxaCje+M8=
 			</data>
 		</dict>
 		<key>newdoubleline@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UY8/EyFvKCC4/VLtja/12dIs0VQ=
+			+8dDDRJe5fuVlh2lJYAPaeKDNZ8=
 			</data>
 			<key>hash2</key>
 			<data>
-			NHP0DP3tpLuO3DYWorEXbO+P8u22wIUfwrh/cfuFQFo=
+			2DvOMP9CgC0q7Tp/2fgVXq+YDePBt7zKQRTtK/Hu7dE=
 			</data>
 		</dict>
 		<key>newdoubleline@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fBK2Q52VDtFMfeYz8qwUdjIN++w=
+			BdmzivCRJBO4Vsh05L4q2o2Vo1g=
 			</data>
 			<key>hash2</key>
 			<data>
-			6o5iiUKbTsT60H0njP71OVSVdqPXBN3rk2Bx9W7dX/I=
+			FUjUvZtDjDpOHFy4W0rT4HroX8Q5A+lOBgzD9JL9oJ0=
 			</data>
 		</dict>
 		<key>square.png</key>

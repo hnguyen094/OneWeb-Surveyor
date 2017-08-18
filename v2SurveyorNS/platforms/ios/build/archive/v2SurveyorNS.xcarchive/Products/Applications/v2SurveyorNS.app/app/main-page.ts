@@ -135,11 +135,11 @@ export function onLoaded(args: EventData) {
 }
 
 export function onCreatingView(args: EventData) {
+  charts.initGraph(page);
   if(app.android) {
     permissions.requestPermission(android["Manifest"].permission.CAMERA, "I need these permissions for the viewfinder")
     .then(function() {
        console.log("Woo Hoo, I have the power!");
-       charts.initGraph(page);
     })
     .catch(function() {
        console.log("Uh oh, no permissions - plan B time!");
