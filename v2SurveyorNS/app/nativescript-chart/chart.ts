@@ -62,5 +62,4 @@ function ele2Percent(elevation) {
 }
 
 export function onExit() {
-  // bmp.dispose();
 }
