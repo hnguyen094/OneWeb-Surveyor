@@ -28,7 +28,7 @@ ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\
 uses-sdk
 ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\AndroidManifest.xml:13:2-15:34
 MERGED from [v2SurveyorNS:runtime:unspecified] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\v2SurveyorNS\runtime\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [com.github.PhilJay:MPAndroidChart:v3.0.0] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.github.PhilJay\MPAndroidChart\v3.0.0\AndroidManifest.xml:17:5-19:41
+MERGED from [com.mukesh:photofilter:1.0.0] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.mukesh\photofilter\1.0.0\AndroidManifest.xml:7:5-9:41
 MERGED from [:widgets-release:] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\widgets-release\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:design:25.3.1] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.android.support\design\25.3.1\AndroidManifest.xml:21:5-23:62
 MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.3.1\AndroidManifest.xml:21:5-23:78
@@ -104,6 +104,7 @@ ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\
 		ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\AndroidManifest.xml:33:4-42
 application
 ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\AndroidManifest.xml:36:2-57:16
+MERGED from [com.mukesh:photofilter:1.0.0] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.mukesh\photofilter\1.0.0\AndroidManifest.xml:11:5-15:19
 MERGED from [:widgets-release:] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\widgets-release\AndroidManifest.xml:11:5-12:19
 MERGED from [com.android.support:design:25.3.1] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.android.support\design\25.3.1\AndroidManifest.xml:29:5-20
 MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.3.1\AndroidManifest.xml:29:5-20
@@ -118,6 +119,8 @@ MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hnguyen\ut-
 MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.android.support\support-compat\25.3.1\AndroidManifest.xml:29:5-20
 	android:label
 		ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\AndroidManifest.xml:40:3-35
+	android:supportsRtl
+		ADDED from [com.mukesh:photofilter:1.0.0] C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.mukesh\photofilter\1.0.0\AndroidManifest.xml:14:9-35
 	android:allowBackup
 		ADDED from C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\AndroidManifest.xml:38:3-29
 	android:icon

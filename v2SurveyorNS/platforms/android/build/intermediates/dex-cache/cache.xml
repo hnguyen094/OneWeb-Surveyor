@@ -75,6 +75,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.mukesh\photofilter\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="63efa4c690cc8b19f2624b0e111d1520e80c0f7c">
+        <dex dex="C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\pre-dexed\F0F1\debug\com.mukesh-photofilter-1.0.0_78b446af21372842de5c839ecb81d2f7b596d37b.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.3.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -102,15 +111,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\hnguyen\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
-        <dex dex="C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\pre-dexed\F0F1\debug\support-annotations-25.3.1_68900e7c2208c75a460573a0ad3c2a553054e07d.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.3.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -120,21 +120,21 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\hnguyen\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\pre-dexed\F0F1\debug\support-annotations-25.3.1_68900e7c2208c75a460573a0ad3c2a553054e07d.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\v2SurveyorNS\runtime\unspecified\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
         sha1="30b97ea5d6274e02330dcc69943087778363c172">
         <dex dex="C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\pre-dexed\F0F1\debug\v2SurveyorNS-runtime-unspecified_6d950b4d4c686cf5d876cf91bd2471d9bc589a4d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\exploded-aar\com.github.PhilJay\MPAndroidChart\v3.0.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="2023702c5be417f27e5a61ccd0442bdc717483a8">
-        <dex dex="C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\build\intermediates\pre-dexed\F0F1\debug\com.github.PhilJay-MPAndroidChart-v3.0.0_9c515f093ce2520c75c748a8e9af599baf6493dd.jar" />
     </item>
     <item
         is-multidex="false"

@@ -1,5 +1,4 @@
 <GridLayout id="graph" verticalAlignment="top" columns="*, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *">
-	<Label verticalAlignment="center" background-color="black" id="ltarget" row="0" col="0" colSpan="360"/>
 	<Label verticalAlignment="bottom" backgroundColor="#1b5675" id="l0" row="0" col="0"/>
 	<Label verticalAlignment="bottom" backgroundColor="#1b5675" id="l1" row="0" col="1"/>
 	<Label verticalAlignment="bottom" backgroundColor="#1b5675" id="l2" row="0" col="2"/>
@@ -360,4 +359,5 @@
 	<Label verticalAlignment="bottom" backgroundColor="#1b5675" id="l357" row="0" col="357"/>
 	<Label verticalAlignment="bottom" backgroundColor="#1b5675" id="l358" row="0" col="358"/>
 	<Label verticalAlignment="bottom" backgroundColor="#1b5675" id="l359" row="0" col="359"/>
+	<Label verticalAlignment="center" background-color="black" id="ltarget" row="0" col="0" colSpan="360"/>
 </GridLayout>

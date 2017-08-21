@@ -21,10 +21,12 @@ let crosshair: any;
 let doubleline: any;
 let upperText: any;
 let lowerText: any;
+let capturebtn: any;
 let x, y, z;
 let measuredWidth;
 let page;
 let isOn: boolean = false;
+// let filters;
 
 const OUTER_CIRCLE_DIAMETER = 2;
 const ANGLE_BETWEEN_LINES = 10;
@@ -149,6 +151,10 @@ export function onCreatingView(args: EventData) {
   cameraPreview.onCreatingView(updateCallback, args);
   if (app.ios !== undefined) params.initialize();
   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
+  // filters = new ImageFilters();
+  // filters.colorFilter(doubleline, 0, 0, 0).then((result) => {
+  //   doubleline.imageSource = result;
+  // });
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
   measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
@@ -158,6 +164,7 @@ export function onCreatingView(args: EventData) {
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
   isOn = !isOn;
+  capturebtn.text = isOn? "Stop" : "Record";
   console.log("el: " + y);
 }
 
@@ -167,6 +174,7 @@ export function navigatingTo(args: EventData) {
     doubleline = page.getViewById("doubleline");
     upperText = page.getViewById("upperText");
     lowerText = page.getViewById("lowerText");
+    capturebtn = page.getViewById("capturebtn");
 }
 
 app.on(app.resumeEvent, function(args) {
