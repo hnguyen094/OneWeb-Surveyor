@@ -21,14 +21,15 @@ export function initGraph(myPage) {
   minEle = 0;
   smoothingRange = 20;
   page.getViewById("graph").height = maxHeight;
-  // const targetline = page.getViewById("ltarget");
-  // targetline.height = width;
+  const ltarget = page.getViewById("ltarget");
+  ltarget.height = width;
+  console.log("ltarget: " + ltarget);
+  //console.dir(ltarget);
+  ltarget.translateY = ele2Percent(targetEle);
 
   for(let i = 0; i < 360; i++) {
-    console.log("dealing with: "+ i);
     ele.push((maxEle+ minEle)/2);
-    const heightPercent = (ele[i] - minEle)/(maxEle - minEle);
-    page.getViewById("l"+i).height = maxHeight;
+    page.getViewById("l"+i).height = maxHeight * ele2Percent(ele[i]);
   }
 }
 

@@ -165,7 +165,6 @@ export function onCreatingView(args: EventData) {
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
   isOn = !isOn;
-  capturebtn.text = isOn? "Stop" : "Record";
   if(isOn) {
     capturebtn.text = "Stop";
     capturebtn.animate({
