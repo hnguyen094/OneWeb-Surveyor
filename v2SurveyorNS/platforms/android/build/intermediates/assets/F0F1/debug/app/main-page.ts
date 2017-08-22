@@ -16,6 +16,7 @@ import * as orientation from "nativescript-screen-orientation";
 import * as params from "./nativescript-fov/nativescript-fov";
 import * as permissions from "nativescript-permissions";
 import * as charts from "./nativescript-chart/chart";
+import * as colorModule from "tns-core-modules/color";
 
 let crosshair: any;
 let doubleline: any;
@@ -164,7 +165,19 @@ export function onCreatingView(args: EventData) {
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
   isOn = !isOn;
-  capturebtn.text = isOn? "Stop" : "Record";
+  if(isOn) {
+    capturebtn.text = "Stop";
+    capturebtn.animate({
+      backgroundColor: new colorModule.Color("red"),
+      duration: 500
+    });
+  } else {
+    capturebtn.text = "Record";
+    capturebtn.animate({
+      backgroundColor: "#1b5675",
+      duration: 500
+    });
+  }
   console.log("el: " + y);
 }
 

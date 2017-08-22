@@ -23,7 +23,7 @@ export function initGraph(myPage) {
   page.getViewById("graph").height = maxHeight;
   const ltarget = page.getViewById("ltarget");
   ltarget.height = width;
-  console.log("ltarget: " + ltarget);
+  //console.log("ltarget: " + ltarget);
   //console.dir(ltarget);
   ltarget.translateY = ele2Percent(targetEle);
 
