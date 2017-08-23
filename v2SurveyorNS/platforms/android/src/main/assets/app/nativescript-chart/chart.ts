@@ -19,13 +19,12 @@ export function initGraph(myPage) {
   page = myPage;
   maxEle = 60;
   minEle = 0;
+  targetEle = 40;
   smoothingRange = 20;
   page.getViewById("graph").height = maxHeight;
   const ltarget = page.getViewById("ltarget");
   ltarget.height = width;
-  //console.log("ltarget: " + ltarget);
-  //console.dir(ltarget);
-  ltarget.translateY = ele2Percent(targetEle);
+  ltarget.translateY = -maxHeight * ele2Percent(targetEle);
 
   for(let i = 0; i < 360; i++) {
     ele.push((maxEle+ minEle)/2);
