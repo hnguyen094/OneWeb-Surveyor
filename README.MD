@@ -4,7 +4,7 @@ Contains multiple projects (approaches to the problem).
 
 ## **graphics**
 
-This folder contains all my created graphics with .pdn extentions (paint.NET) as well as the outputs in .png extensions. 
+This folder contains all my created graphics with .pdn extentions (paint.NET) as well as the outputs in .png extensions.
 Often, the one without dates are the latest ones.
 
 To edit, download [paint.NET](http://www.getpaint.net "paint.NET download page") here
@@ -41,14 +41,14 @@ Therefore, this version is a cleaner & working version of its predecessor.
 
 Features | Android | iOS
 --- | --- | ---
-**UX** (aesthetics) | Yes? | Yes?
+**UX** (aesthetics) | Yes | Yes
 **UI:** Crosshair to elevation | Yes | Yes
 **UI:** Levels of elevation | Yes | Yes
 Live Camera | Yes | Yes
-**Accuracy:** Camera | Yes(?) | Yes?
+**Accuracy:** Camera | Yes(?) | Yes
 Rotation Sensor | Yes | Yes
-Data | No | No
-**Accuracy:** Data | N/A | N/A
+Data | Yes | Yes
+**Accuracy:** Data | No | Yes
 
 #### Notes:
 
