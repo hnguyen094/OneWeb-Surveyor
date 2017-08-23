@@ -1,1 +1,0 @@
-https://bitbucket.org/apacha/sensor-fusion-demo/src/4fa786a4e11b9af2361a2eb39a6119ceec61dd34/app/src/main/java/org/hitlabnz/sensor_fusion_demo/orientationProvider/ImprovedOrientationSensor2Provider.java?at=master&fileviewer=file-view-default
