@@ -60,7 +60,7 @@ const resize = function() {
     });
   }
 };
-const updateCallback2 = function() {
+const updateCallback = function() {
   charts.updateGraph(x,y, isOn);
   // timer--;
   // if(timer < 0) {
@@ -97,7 +97,7 @@ const rotationCallback = function(data) {
     x = data.x;
     y = data.y;
     z = data.z;
-    if(app.ios) updateCallback2(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
+    if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
 };
 
 // export function showSideDrawer(args: EventData) {
@@ -136,7 +136,7 @@ export function onCreatingView(args: EventData) {
     });
   }
   if(app.android) params.initialize();
-  cameraPreview.onCreatingView(updateCallback2, args);
+  cameraPreview.onCreatingView(updateCallback, args);
   if (app.ios !== undefined) params.initialize();
   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   const maxSize = cameraPreview.getMaxSize();
