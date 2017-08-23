@@ -56,7 +56,7 @@ const resize = function() {
         x: 0,
         y: app.ios? -10 : 0
       },
-      duration: 2000
+      duration: 200
     });
   }
 };

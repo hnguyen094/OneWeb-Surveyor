@@ -56,11 +56,11 @@ const resize = function() {
         x: 0,
         y: app.ios? -10 : 0
       },
-      duration: 2000
+      duration: 200
     });
   }
 };
-const updateCallback2 = function() {
+const updateCallback = function() {
   charts.updateGraph(x,y, isOn);
   // timer--;
   // if(timer < 0) {
@@ -82,13 +82,13 @@ const updateCallback2 = function() {
   const dist = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight())*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2);
 
   lowerText.text = 10* Math.floor(-y/10);
-  lowerText.translateX = Math.sin(z * Math.PI/180)* (distanceFromCenter + dist);
-  lowerText.translateY = Math.cos(z * Math.PI/180)* (distanceFromCenter + dist) + yTranslate;
+  lowerText.translateX = Math.sin(z * Math.PI/180)* ((app.ios? 20: 0) + distanceFromCenter + dist);
+  lowerText.translateY = Math.cos(z * Math.PI/180)* ((app.ios? 20: 0) + distanceFromCenter + dist) + yTranslate;
   lowerText.rotate = -z;
 
   upperText.text = 10* Math.floor((-y + 10)/10);
-  upperText.translateX = Math.sin(z * Math.PI/180)* (distanceFromCenter - dist);
-  upperText.translateY = Math.cos(z * Math.PI/180)* (distanceFromCenter - dist) + yTranslate;
+  upperText.translateX = Math.sin(z * Math.PI/180)* ((app.ios? -20: 0) + distanceFromCenter - dist);
+  upperText.translateY = Math.cos(z * Math.PI/180)* ((app.ios? -20: 0) + distanceFromCenter - dist) + yTranslate;
   upperText.rotate = -z;
 };
 
@@ -97,7 +97,7 @@ const rotationCallback = function(data) {
     x = data.x;
     y = data.y;
     z = data.z;
-    if(app.ios) updateCallback2(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
+    if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
 };
 
 // export function showSideDrawer(args: EventData) {
@@ -136,7 +136,7 @@ export function onCreatingView(args: EventData) {
     });
   }
   if(app.android) params.initialize();
-  cameraPreview.onCreatingView(updateCallback2, args);
+  cameraPreview.onCreatingView(updateCallback, args);
   if (app.ios !== undefined) params.initialize();
   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   const maxSize = cameraPreview.getMaxSize();
