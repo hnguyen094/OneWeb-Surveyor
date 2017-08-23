@@ -82,13 +82,13 @@ const updateCallback2 = function() {
   const dist = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight())*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2);
 
   lowerText.text = 10* Math.floor(-y/10);
-  lowerText.translateX = Math.sin(z * Math.PI/180)* (distanceFromCenter + dist);
-  lowerText.translateY = Math.cos(z * Math.PI/180)* (distanceFromCenter + dist) + yTranslate;
+  lowerText.translateX = Math.sin(z * Math.PI/180)* ((app.ios? 20: 0) + distanceFromCenter + dist);
+  lowerText.translateY = Math.cos(z * Math.PI/180)* ((app.ios? 20: 0) + distanceFromCenter + dist) + yTranslate;
   lowerText.rotate = -z;
 
   upperText.text = 10* Math.floor((-y + 10)/10);
-  upperText.translateX = Math.sin(z * Math.PI/180)* (distanceFromCenter - dist);
-  upperText.translateY = Math.cos(z * Math.PI/180)* (distanceFromCenter - dist) + yTranslate;
+  upperText.translateX = Math.sin(z * Math.PI/180)* ((app.ios? -20: 0) + distanceFromCenter - dist);
+  upperText.translateY = Math.cos(z * Math.PI/180)* ((app.ios? -20: 0) + distanceFromCenter - dist) + yTranslate;
   upperText.rotate = -z;
 };
 

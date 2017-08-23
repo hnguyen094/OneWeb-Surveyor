@@ -359,5 +359,6 @@
 	<Label verticalAlignment="bottom" backgroundColor="#1b5675" id="l357" row="0" col="357"/>
 	<Label verticalAlignment="bottom" backgroundColor="#1b5675" id="l358" row="0" col="358"/>
 	<Label verticalAlignment="bottom" backgroundColor="#1b5675" id="l359" row="0" col="359"/>
+	<Label backgroundColor="gray" id="lcursor" row="0" col="0"/>
 	<Label verticalAlignment="bottom" backgroundColor="black" id="ltarget" row="0" col="0" colSpan="360"/>
 </GridLayout>

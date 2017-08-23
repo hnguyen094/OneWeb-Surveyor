@@ -28,6 +28,7 @@ let x, y, z;
 let page;
 let isOn: boolean = false;
 let isFirst = true;
+let timer: number = 100;
 // let filters;
 
 const OUTER_CIRCLE_DIAMETER = 2;
@@ -60,7 +61,13 @@ const resize = function() {
   }
 };
 const updateCallback2 = function() {
-  if(isOn) charts.updateGraph(x,y);
+  charts.updateGraph(x,y, isOn);
+  // timer--;
+  // if(timer < 0) {
+  //   timer = 100;
+  //   rotVector.stopRotUpdates();
+  //   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
+  // }
   if(isFirst) {
     resize();
     isFirst = false;
