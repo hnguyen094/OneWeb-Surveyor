@@ -23,6 +23,8 @@ f  = open(output_name, 'w')
 f.write("<GridLayout id=\"graph\" backgroundColor=\"white\" opacity=\"0.5\" verticalAlignment=\"top\" columns=\"" + col_settings + "\">\n")
 for i in range(num_of_bars):
     f.write(str_beg + `i` + str_mid + `i` + str_end)
+f.write("\t	<Label backgroundColor=\"gray\" id=\"lcursor\" row=\"0\" col=\"0\"/>")
 f.write("\t<Label verticalAlignment=\"bottom\" backgroundColor=\"black\" id=\"ltarget\" row=\"0\" col=\"0\" colSpan=\"360" + str_end)
+
 f.write("</GridLayout>")
 f.close()
