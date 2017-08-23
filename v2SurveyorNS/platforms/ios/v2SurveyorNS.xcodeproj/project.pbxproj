@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		089ABF7E0925413A9B8C33FF /* TNSWidgets.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 94D19EB87ABC4508BEF9A04C /* TNSWidgets.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		29023688D1E041B895F7ECC1 /* newcirclethin.png in Resources */ = {isa = PBXBuildFile; fileRef = 682EB2BEF3B746AC942970D7 /* newcirclethin.png */; };
@@ -33,6 +32,15 @@
 		E8966534AB75424DA72DFA43 /* square@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 319A78CD9BCB454598138CE0 /* square@2x.png */; };
 		F39466570F184110B8975BE5 /* newcirclethin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F1B82111FFC64B43A24B2F19 /* newcirclethin@3x.png */; };
 		FDBA15A75DDE4706AAF1E5E0 /* circlearrowthin.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA6C88C515445A6A3B87AF2 /* circlearrowthin.png */; };
+		0AE348BB4BD04B6E9FA6A52F /* capturebtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A496C74B884ABA8B18408C /* capturebtn.png */; };
+		554A88ADE74042DAA8DD1FF1 /* capturebtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4DAB00A2BA4D05BE0ABCCA /* capturebtn@2x.png */; };
+		DB43987C1F3643C59569DAE8 /* capturebtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03221718EB6C44BE86102AD6 /* capturebtn@3x.png */; };
+		FA5E2266A78040D89744E8EB /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C4E50F63E6D484AAF874999 /* record.png */; };
+		30B85020FBB14C5F96A8E5A3 /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A54CE3408047DC913037B7 /* record@2x.png */; };
+		06AA37E3AA844129AF2C6312 /* record@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 35BE801104AD4BAE9032F658 /* record@3x.png */; };
+		F9E5A60ADDCD46D6B615319E /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D54478B31C456088481595 /* stop.png */; };
+		5C925E9D2CA94817A7B3A78D /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DDD9016EEC4CE1910F6E32 /* stop@2x.png */; };
+		83535990F1414868AC976B20 /* stop@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0235A5799E3E4ACC866586C2 /* stop@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,6 +90,15 @@
 		EBA838ED09DD4AD5A4CC9A78 /* circlearrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circlearrow.png; path = v2SurveyorNS/Resources/circlearrow.png; sourceTree = "<group>"; };
 		ECE2C5242C6941FCBFFDCF3E /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = square.png; path = v2SurveyorNS/Resources/square.png; sourceTree = "<group>"; };
 		F1B82111FFC64B43A24B2F19 /* newcirclethin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newcirclethin@3x.png"; path = "v2SurveyorNS/Resources/newcirclethin@3x.png"; sourceTree = "<group>"; };
+		60A496C74B884ABA8B18408C /* capturebtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = capturebtn.png; path = "v2SurveyorNS/Resources/capturebtn.png"; sourceTree = "<group>"; };
+		AA4DAB00A2BA4D05BE0ABCCA /* capturebtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "capturebtn@2x.png"; path = "v2SurveyorNS/Resources/capturebtn@2x.png"; sourceTree = "<group>"; };
+		03221718EB6C44BE86102AD6 /* capturebtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "capturebtn@3x.png"; path = "v2SurveyorNS/Resources/capturebtn@3x.png"; sourceTree = "<group>"; };
+		0C4E50F63E6D484AAF874999 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = record.png; path = "v2SurveyorNS/Resources/record.png"; sourceTree = "<group>"; };
+		76A54CE3408047DC913037B7 /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "record@2x.png"; path = "v2SurveyorNS/Resources/record@2x.png"; sourceTree = "<group>"; };
+		35BE801104AD4BAE9032F658 /* record@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "record@3x.png"; path = "v2SurveyorNS/Resources/record@3x.png"; sourceTree = "<group>"; };
+		44D54478B31C456088481595 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stop.png; path = "v2SurveyorNS/Resources/stop.png"; sourceTree = "<group>"; };
+		05DDD9016EEC4CE1910F6E32 /* stop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stop@2x.png"; path = "v2SurveyorNS/Resources/stop@2x.png"; sourceTree = "<group>"; };
+		0235A5799E3E4ACC866586C2 /* stop@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stop@3x.png"; path = "v2SurveyorNS/Resources/stop@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +187,15 @@
 				ECE2C5242C6941FCBFFDCF3E /* square.png */,
 				319A78CD9BCB454598138CE0 /* square@2x.png */,
 				B9720108B5F64D359C28B2A7 /* square@3x.png */,
+				60A496C74B884ABA8B18408C /* capturebtn.png */,
+				AA4DAB00A2BA4D05BE0ABCCA /* capturebtn@2x.png */,
+				03221718EB6C44BE86102AD6 /* capturebtn@3x.png */,
+				0C4E50F63E6D484AAF874999 /* record.png */,
+				76A54CE3408047DC913037B7 /* record@2x.png */,
+				35BE801104AD4BAE9032F658 /* record@3x.png */,
+				44D54478B31C456088481595 /* stop.png */,
+				05DDD9016EEC4CE1910F6E32 /* stop@2x.png */,
+				0235A5799E3E4ACC866586C2 /* stop@3x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -259,6 +285,15 @@
 				BDE718BF3E924A7D94B0DA90 /* square.png in Resources */,
 				E8966534AB75424DA72DFA43 /* square@2x.png in Resources */,
 				C46E47C688F548069FB79B55 /* square@3x.png in Resources */,
+				0AE348BB4BD04B6E9FA6A52F /* capturebtn.png in Resources */,
+				554A88ADE74042DAA8DD1FF1 /* capturebtn@2x.png in Resources */,
+				DB43987C1F3643C59569DAE8 /* capturebtn@3x.png in Resources */,
+				FA5E2266A78040D89744E8EB /* record.png in Resources */,
+				30B85020FBB14C5F96A8E5A3 /* record@2x.png in Resources */,
+				06AA37E3AA844129AF2C6312 /* record@3x.png in Resources */,
+				F9E5A60ADDCD46D6B615319E /* stop.png in Resources */,
+				5C925E9D2CA94817A7B3A78D /* stop@2x.png in Resources */,
+				83535990F1414868AC976B20 /* stop@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

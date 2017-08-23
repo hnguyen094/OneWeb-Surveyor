@@ -1,0 +1,135 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "nativescript-image-filters",
+        "scope": null,
+        "escapedName": "nativescript-image-filters",
+        "name": "nativescript-image-filters",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS"
+    ]
+  ],
+  "_from": "nativescript-image-filters@latest",
+  "_id": "nativescript-image-filters@2.0.0",
+  "_inCache": true,
+  "_location": "/nativescript-image-filters",
+  "_nodeVersion": "6.11.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/nativescript-image-filters-2.0.0.tgz_1498951042668_0.4470174782909453"
+  },
+  "_npmUser": {
+    "name": "bradmartin",
+    "email": "bradmartin0905@gmail.com"
+  },
+  "_npmVersion": "4.6.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "nativescript-image-filters",
+    "scope": null,
+    "escapedName": "nativescript-image-filters",
+    "name": "nativescript-image-filters",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nativescript-image-filters/-/nativescript-image-filters-2.0.0.tgz",
+  "_shasum": "e68ce14cf545604d213e3180c7ca51e250b34894",
+  "_shrinkwrap": null,
+  "_spec": "nativescript-image-filters",
+  "_where": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS",
+  "author": {
+    "name": "Brad Martin",
+    "email": "bradwaynemartin@gmail.com",
+    "url": "https://github.com/bradmartin"
+  },
+  "bugs": {
+    "url": "https://github.com/bradmartin/nativescript-image-filters/issues"
+  },
+  "dependencies": {},
+  "description": "NativeScript plugin to apply filters to your images.",
+  "devDependencies": {
+    "husky": "^0.13.4",
+    "lint-staged": "^3.6.1",
+    "prettier": "^1.4.4",
+    "tns-core-modules": "^3.0.0",
+    "tns-platform-declarations": "^3.0.0",
+    "typescript": "^2.2.2"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "e68ce14cf545604d213e3180c7ca51e250b34894",
+    "tarball": "https://registry.npmjs.org/nativescript-image-filters/-/nativescript-image-filters-2.0.0.tgz"
+  },
+  "gitHead": "5067575f406d62ac0c564869dcf1923e2e8f21a8",
+  "homepage": "https://github.com/bradmartin/nativescript-image-filters",
+  "keywords": [
+    "NativeScript",
+    "JavaScript",
+    "Android",
+    "iOS",
+    "TypeScript",
+    "bradmartin",
+    "nStudio",
+    "Image Filter",
+    "Image Editing"
+  ],
+  "license": "MIT",
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "main": "imagefilters",
+  "maintainers": [
+    {
+      "name": "bradmartin",
+      "email": "bradmartin0905@gmail.com"
+    }
+  ],
+  "name": "nativescript-image-filters",
+  "nativescript": {
+    "platforms": {
+      "android": "3.0.0",
+      "ios": "3.0.0"
+    },
+    "plugin": {
+      "nan": "true",
+      "pan": "true",
+      "core3": "true",
+      "category": "Interface"
+    },
+    "tns-ios": {
+      "version": "3.1.0"
+    }
+  },
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "tns-core-modules": "^3.0.0"
+  },
+  "readme": "[![npm](https://img.shields.io/npm/v/nativescript-image-filters.svg)](https://www.npmjs.com/package/nativescript-image-filters)\n[![npm](https://img.shields.io/npm/dt/nativescript-image-filters.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-image-filters)\n\n\n# NativeScript-Image-Filters\nNativescript plugin for native image filters.\n\n## Sample\n\n![Demo](./screens/demo.gif)\n\n### Installation\nFrom your command prompt/termial go to your app's root folder and execute:\n\n`tns plugin add nativescript-image-filters`\n \n## Usage\n#### JS:\n```JS\nimport { topmost } from 'ui/frame';\nimport { ImageFilters } from 'nativescript-image-filters';\n\nlet filters = new ImageFilters();\n\npublic effectOne() {\n  let pic = topmost().currentPage.getViewById('myPicture');\n\n      filters.invert(pic).then((result) => {\n\n      // set the pic imageSource equal to the new imageSource\n      pic.imageSource = result;\n\n    }).catch((err) => {\n      console.log('applyFilter ERROR: ' + err);\n    });\n}\n\n```\n\n\n## IMPORTANT NOTE\nNot all methods have been tested. The code needs to be cleaned up to reduce duplication in methods. The methods also need to be 1:1 for common methods. Right now not all iOS & Android methods are named correctly for the image filter. Pull requests are very welcome to improve the API for this plugin.\n\n\n## API\n\n- **highlightImage(img: Image, color: string, radius?: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **invert(img: Image):  Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **greyScale(img: Image):  Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **gamma(img: Image, red: number, green: number, blue: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **colorFilter(img: Image, red: number, green: number, blue: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **sepiaEffect(img: Image, depth: number, red: number, green: number, blue: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **decreaseColorDepth(img: Image, bitOffset: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **contrast(img: Image, value: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **rotate(img: Image, degree: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **brightness(img: Image, value: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **gaussianBlur(img: Image): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **createShadow(img: Image): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **sharpen(img: Image, weight: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **meanRemoval(img: Image): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **smooth(img: Image, value: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **emboss(img: Image): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **engrave(img: Image): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **boost(img: Image, type: number, percent: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **roundCorner(img: Image, round: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **waterMark(img: Image, watermark: string, location: android.graphic.Point, color: string, alpha: number, size: number, underline: boolean): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **flip(img: Image, type: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **tintImage(img: Image, degree: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **fleaEffect(img: Image): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **blackFilter(img: Image): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **snowEffect(img: Image): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **shadingFilter(img: Image, shadingColor: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **saturationFilter(img: Image, level: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **hueFilter(img: Image, level: number): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **reflection(img: Image): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n- **replaceColor(img: Image, fromColor: string, toColor: string): Promise<[ImageSource](http://docs.nativescript.org/api-reference/classes/_image_source_.imagesource.html)>**\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradmartin/nativescript-image-filters.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "demo.android": "npm run preparedemo && cd demo && tns run android",
+    "demo.ios": "npm run preparedemo && cd demo && tns emulate ios",
+    "precommit": "lint-staged",
+    "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-image-filters && tns plugin add .. && tns install",
+    "setup": "cd demo && npm install && cd .. && npm run build && cd demo && tns plugin add .. && cd .."
+  },
+  "typings": "index.d.ts",
+  "version": "2.0.0"
+}

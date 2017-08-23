@@ -1,4 +1,5 @@
 {
+    "nativescript-image-filters": true,
     "nativescript-permissions": true,
     "nativescript-screen-orientation": true,
     "nativescript-theme-core": true,

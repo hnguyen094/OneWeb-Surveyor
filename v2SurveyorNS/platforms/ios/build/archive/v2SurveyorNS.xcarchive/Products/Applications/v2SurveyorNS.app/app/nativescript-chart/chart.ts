@@ -7,9 +7,9 @@ const ele: number[] = [];
 
 let maxEle: number;
 let minEle: number;
-let timer: number;
+let targetEle: number;
 let prevIndex: number;
-let smoothingRange: number;
+let smoothingRange: number; // when there is a data skip in the azimuth, we want to smooth it out linearly. This is the max range of the smoothing. Any jumps more than 20 will not be smoothed
 
 const width = platform.screen.mainScreen.widthPixels / 360 /platform.screen.mainScreen.scale; // in dp
 const maxHeight = platform.screen.mainScreen.heightPixels / 8 /platform.screen.mainScreen.scale; // in dp
@@ -19,17 +19,16 @@ export function initGraph(myPage) {
   page = myPage;
   maxEle = 60;
   minEle = 0;
-  timer = 10;
+  targetEle = 40;
   smoothingRange = 20;
   page.getViewById("graph").height = maxHeight;
-  // const targetline = page.getViewById("ltarget");
-  // targetline.height = width;
+  const ltarget = page.getViewById("ltarget");
+  ltarget.height = width;
+  ltarget.translateY = -maxHeight * ele2Percent(targetEle);
 
   for(let i = 0; i < 360; i++) {
-    console.log("dealing with: "+ i);
     ele.push((maxEle+ minEle)/2);
-    const heightPercent = (ele[i] - minEle)/(maxEle - minEle);
-    page.getViewById("l"+i).height = maxHeight;
+    page.getViewById("l"+i).height = maxHeight * ele2Percent(ele[i]);
   }
 }
 

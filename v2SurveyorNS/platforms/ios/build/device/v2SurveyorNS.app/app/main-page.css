@@ -3,7 +3,14 @@
 }
 
 #capturebtn {
-  background-color: #1b5675;
+  /*background-color: #1b5675;*/
+  height: 75;
+  margin: 10;
+}
+
+#recordstop {
+  height: 75;
+  margin: 10;
 }
 
 .levelLine {

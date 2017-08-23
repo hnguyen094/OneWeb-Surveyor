@@ -1,0 +1,14 @@
+.vs
+.vs/
+.vscode/
+*.sln
+demo/
+demo
+screens/
+*.gif
+screens
+*.gitattributes
+*.ts
+!*.d.ts
+tsconfig.json
+*.map

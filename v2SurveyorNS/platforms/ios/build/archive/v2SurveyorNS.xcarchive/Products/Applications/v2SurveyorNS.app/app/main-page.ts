@@ -16,75 +16,34 @@ import * as orientation from "nativescript-screen-orientation";
 import * as params from "./nativescript-fov/nativescript-fov";
 import * as permissions from "nativescript-permissions";
 import * as charts from "./nativescript-chart/chart";
+import {AnimationCurve} from "ui/enums";
 
 let crosshair: any;
 let doubleline: any;
 let upperText: any;
 let lowerText: any;
+let capturebtn: any;
+let recordstop: any;
 let x, y, z;
-let measuredWidth;
 let page;
 let isOn: boolean = false;
+let isFirst = true;
+// let filters;
 
 const OUTER_CIRCLE_DIAMETER = 2;
 const ANGLE_BETWEEN_LINES = 10;
+const yTranslate = app.ios? -20 : 0;
 
-const updateCallback = function() {
-  // console.log("Entered updateCallback");
-
-  if(isOn){
-    charts.updateGraph(x,y);
-  }
-
-  const yTranslate = app.ios? -20 : 0;
+const resize = function() {
   const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
-  crosshair.animate({
-    scale: {
-      x: scaleCrosshair,
-      y: scaleCrosshair
-    },
-    translate: {
-      x: 0,
-      y: yTranslate
-    },
-    rotate: -z,
-    duration: 0
-  });
+  crosshair.scaleX = scaleCrosshair;
+  crosshair.scaleY = scaleCrosshair;
+  crosshair.translateY = yTranslate;
 
   const scaleDoubleLine = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight());
-  const distanceFromCenter = params.pixels2Dp((params.degrees2Pixels((-y % ANGLE_BETWEEN_LINES)
-                            - ANGLE_BETWEEN_LINES/2 * (y>0? -1: 1))));
-  lowerText.text = 10* Math.floor(-y/10);
-  upperText.text = 10* Math.floor((-y+10)/10);
-  doubleline.animate({
-    scale: {
-      x: scaleDoubleLine,
-      y: scaleDoubleLine
-    },
-    translate: {
-      x : Math.sin(z*Math.PI/180)*distanceFromCenter,
-      y: Math.cos(z*Math.PI/180)*distanceFromCenter + yTranslate
-    },
+  doubleline.scaleX = scaleDoubleLine;
+  doubleline.scaleY = scaleDoubleLine;
 
-    rotate: -z,
-    duration: 0
-  });
-  lowerText.animate({
-    translate: {
-      x : Math.sin(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-      y : Math.cos(z*Math.PI/180)* (distanceFromCenter+scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + yTranslate
-    },
-    rotate: -z,
-    duration: 0
-  });
-  upperText.animate({
-    translate: {
-      x :  Math.sin(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)),
-      y :  Math.cos(z*Math.PI/180)* (distanceFromCenter-scaleDoubleLine*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2)) + yTranslate
-    },
-    rotate: -z,
-    duration: 0
-  });
   if (app.ios) {
     let cameraView = page.getViewById("placeholder-view");
     cameraView.animate({
@@ -99,7 +58,31 @@ const updateCallback = function() {
       duration: 2000
     });
   }
+};
+const updateCallback2 = function() {
+  if(isOn) charts.updateGraph(x,y);
+  if(isFirst) {
+    resize();
+    isFirst = false;
+  }
+  crosshair.rotate = -z;
+  const distanceFromCenter = params.pixels2Dp((params.degrees2Pixels((-y % ANGLE_BETWEEN_LINES)
+                            - ANGLE_BETWEEN_LINES/2 * (y>0? -1: 1))));
+  doubleline.translateX = Math.sin(z*Math.PI/180)*distanceFromCenter;
+  doubleline.translateY =  Math.cos(z*Math.PI/180)*distanceFromCenter + yTranslate;
+  doubleline.rotate = -z;
 
+  const dist = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight())*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2);
+
+  lowerText.text = 10* Math.floor(-y/10);
+  lowerText.translateX = Math.sin(z * Math.PI/180)* (distanceFromCenter + dist);
+  lowerText.translateY = Math.cos(z * Math.PI/180)* (distanceFromCenter + dist) + yTranslate;
+  lowerText.rotate = -z;
+
+  upperText.text = 10* Math.floor((-y + 10)/10);
+  upperText.translateX = Math.sin(z * Math.PI/180)* (distanceFromCenter - dist);
+  upperText.translateY = Math.cos(z * Math.PI/180)* (distanceFromCenter - dist) + yTranslate;
+  upperText.rotate = -z;
 };
 
 const rotationCallback = function(data) {
@@ -107,7 +90,7 @@ const rotationCallback = function(data) {
     x = data.x;
     y = data.y;
     z = data.z;
-    if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
+    if(app.ios) updateCallback2(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
 };
 
 // export function showSideDrawer(args: EventData) {
@@ -146,18 +129,31 @@ export function onCreatingView(args: EventData) {
     });
   }
   if(app.android) params.initialize();
-  cameraPreview.onCreatingView(updateCallback, args);
+  cameraPreview.onCreatingView(updateCallback2, args);
   if (app.ios !== undefined) params.initialize();
   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
-  measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
   // console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
 
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
   isOn = !isOn;
+
+  capturebtn.animate({
+    scale: { x: 1.2, y: 1.2 },
+    duration: 100
+  }).then(()=> {
+    capturebtn.animate(
+      {
+        scale: { x: 1, y: 1},
+        duration: 300,
+        curve: AnimationCurve.spring
+      }
+    );
+    recordstop.src = isOn? "res://stop" : "res://record";
+  });
   console.log("el: " + y);
 }
 
@@ -167,12 +163,13 @@ export function navigatingTo(args: EventData) {
     doubleline = page.getViewById("doubleline");
     upperText = page.getViewById("upperText");
     lowerText = page.getViewById("lowerText");
+    capturebtn = page.getViewById("capturebtn");
+    recordstop = page.getViewById("recordstop");
 }
 
 app.on(app.resumeEvent, function(args) {
   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   cameraPreview.onResume();
-
 });
 app.on(app.suspendEvent, function(args) {
   cameraPreview.onPause();
