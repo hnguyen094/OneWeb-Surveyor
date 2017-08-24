@@ -1,3 +1,5 @@
+import * as platform from "platform";
+
 let isStart: boolean = false;
 let isEleAbove0: boolean = false;
 let isPressed: boolean = false;
@@ -6,6 +8,7 @@ let oldAz: number = 0;
 
 let page;
 let pt1, pt2, pt3, pt4;
+const translateY = platform.screen.mainScreen.heightPixels / 8 /platform.screen.mainScreen.scale;
 
 export function trigger1(mPage) {
   if(!isStart) {
@@ -14,10 +17,10 @@ export function trigger1(mPage) {
     pt2 = page.getViewById("pt2");
     pt3 = page.getViewById("pt3");
     pt4 = page.getViewById("pt4");
-    pt1.translateY = 250;
-    pt2.translateY = 250;
-    pt3.translateY = 250;
-    pt4.translateY = 250;
+    pt1.translateY = translateY;
+    pt2.translateY = translateY;
+    pt3.translateY = translateY;
+    pt4.translateY = translateY;
   }
 }
 
