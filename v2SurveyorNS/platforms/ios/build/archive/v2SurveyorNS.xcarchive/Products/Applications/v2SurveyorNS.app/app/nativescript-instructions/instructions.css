@@ -1,10 +1,10 @@
 .instructions {
   font-size: 20;
+  color: white;
   opacity: 0;
   margin: 20;
-  background-color: green;
+  background-color: #1b5675;
   border: 3;
-  border-color: blue;
   border-radius: 4;
 }
 

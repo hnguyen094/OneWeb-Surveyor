@@ -3,4 +3,5 @@
   <Label id="pt2" text="Press record (below) to start recording the elevation/roll" class="instructions" verticalAlignment="top" horizontalAlignment="center" textWrap="true"></Label>
   <Label id="pt3" text="Trace the terrain and see it saves (above)" class="instructions" verticalAlignment="top" horizontalAlignment="center" textWrap="true"></Label>
   <Label id="pt4" text="Press stop (below) when done" class="instructions" verticalAlignment="top" horizontalAlignment="center" textWrap="true"></Label>
+  <Label id="pt5" text="Going above the black line (above) means that this isn't an allowable location for your UT" class="instructions" verticalAlignment="top" horiztonalAlignment="center" textWrap="true"></Label>
 </GridLayout>
