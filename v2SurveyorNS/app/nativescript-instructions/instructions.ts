@@ -1,3 +1,4 @@
+// A quick implementation of instructions
 import * as platform from "platform";
 
 let isStart: boolean = false;
@@ -11,6 +12,7 @@ let pt1, pt2, pt3, pt4, pt5;
 let currentView;
 const translateY = platform.screen.mainScreen.heightPixels / 8 /platform.screen.mainScreen.scale;
 
+// Function: triggers at the start of the application
 export function trigger1(mPage) {
   if(!isStart) {
     page = mPage;
@@ -28,6 +30,7 @@ export function trigger1(mPage) {
   }
 }
 
+// Function: triggers every update; dependent on elevation
 export function trigger2(ele) {
   if(!isEleAbove0) {
     isEleAbove0 = -ele > 0;
@@ -41,6 +44,7 @@ export function trigger2(ele) {
   }
 }
 
+// Function: triggers at the first click; dependent on button press
 export function trigger3(az) {
   if(!isPressed) {
     fadeaway(pt3);
@@ -50,6 +54,7 @@ export function trigger3(az) {
   isPressed = true;
 }
 
+// Function: triggers every update; dependent on large delta azimuth
 export function trigger4(az) {
   if(!largeDeltaAz && isPressed){
     largeDeltaAz = Math.abs(oldAz-az) > 20;
@@ -59,6 +64,8 @@ export function trigger4(az) {
   }
 }
 
+// Function: animates the currentView away and animate the newView in
+// Also sets the newView to the currentView
 function fadeaway(newView) {
   return currentView.animate({
     opacity: 0,
@@ -72,6 +79,8 @@ function fadeaway(newView) {
   });
 }
 
+// Function: used exclusively as a timed animation to hide, show, then hide again
+// Also sets the newView to the currentView
 function end(oldView, newView) {
   oldView.animate({
     opacity: 0,
@@ -89,6 +98,9 @@ function end(oldView, newView) {
     });
   });
 }
+
+// Function: hides a view
+// Does not set/reset the currentView
 function hide(view) {
   view.animate({
     opacity: 0,

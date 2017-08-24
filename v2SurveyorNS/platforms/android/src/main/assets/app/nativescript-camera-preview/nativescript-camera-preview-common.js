@@ -1,9 +1,13 @@
+// common function called onLoaded for the camerapreview
+
 "use strict";
 Object.defineProperty(exports, "__esModule", {value : true});
 
-exports.page;
-
-const app = require('application');
+/**
+  Function: gets the current page and the Placeholder view id of the camerapreview
+  @param args the argument containing the page
+  @param idName the id of the camera preview placeholder
+*/
 function onLoaded(args, idName) {
   exports.page = args.object;
   exports.cameraView = exports.page.getViewById(idName);

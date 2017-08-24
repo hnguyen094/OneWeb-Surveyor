@@ -8,7 +8,6 @@ output_name = 'chart.xml'
 color = "#1b5675"
 
 ## You probably won't need to touch the rest
-
 # Make the columns; * makes the column occupy all available horizontal space
 col_settings = ""
 for i in range(num_of_bars-1):

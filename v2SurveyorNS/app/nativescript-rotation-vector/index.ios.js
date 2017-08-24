@@ -3,6 +3,8 @@ var app = require("application");
 var accManager;
 var isListening = false;
 var main_queue = dispatch_get_current_queue();
+
+// Function: converts the delay type to iOS type
 function getNativeDelay(options) {
     if (!options || !options.sensorDelay) {
         return 0.2;
@@ -19,6 +21,7 @@ function getNativeDelay(options) {
     }
 }
 // From: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/hardware/SensorManager.java#1277
+// Function: Using the rotation matrix and getting the azimuth, roll, and pitch
 function remapRotationMatrix(rotationMatrix) {
   const r = rotationMatrix;
   const matrixArray = [-r.m11, -r.m21, -r.m31, -r.m12, -r.m22, -r.m32, -r.m13, -r.m23, -r.m33];
@@ -54,6 +57,9 @@ function remapRotationMatrix(rotationMatrix) {
   return resultMatrixArray;
 }
 
+/** Function: getting the orientation. Implemented from android's library
+ * @param matrixArray a 1d array of the rotation matrix
+ *
 function getOrientation(matrixArray) { //converted from Android's version
   const resultOrientation = [0,0,0];
   resultOrientation[0] = Math.atan2(matrixArray[1], matrixArray[4]);
@@ -62,6 +68,10 @@ function getOrientation(matrixArray) { //converted from Android's version
   return resultOrientation;
 }
 
+/** Function: starts the rotation updates
+ * @param callback  function called every updates
+ * @param options the delay of the sensor updates
+ */
 function startRotUpdates(callback, options) {
     if (isListening) {
         console.log("Already listening for motion updates.");
@@ -95,6 +105,8 @@ function startRotUpdates(callback, options) {
     }
 }
 exports.startRotUpdates = startRotUpdates;
+
+// Function: stops the rotation updates
 function stopRotUpdates() {
     if (!isListening) {
         console.log("Currently not listening for Device Motion events.");

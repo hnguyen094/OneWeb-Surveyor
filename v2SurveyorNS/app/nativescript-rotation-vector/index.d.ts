@@ -1,3 +1,5 @@
+// Header/Declarations
+
 export interface RotData {
     x: number;
     y: number;
