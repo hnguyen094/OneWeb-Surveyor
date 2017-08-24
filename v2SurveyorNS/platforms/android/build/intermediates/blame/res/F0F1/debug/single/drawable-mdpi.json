@@ -44,6 +44,10 @@
         "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-mdpi\\newcirclethin.png"
     },
     {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-mdpi\\clearbtn.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-mdpi\\clearbtn.png"
+    },
+    {
         "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-mdpi\\square.png",
         "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-mdpi\\square.png"
     }

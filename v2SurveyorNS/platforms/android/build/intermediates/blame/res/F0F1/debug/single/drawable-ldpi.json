@@ -4,6 +4,10 @@
         "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-ldpi\\background.png"
     },
     {
+        "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-ldpi\\clearbtn.png",
+        "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-ldpi\\clearbtn.png"
+    },
+    {
         "merged": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-ldpi\\capturebtn.png",
         "source": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\src\\main\\res\\drawable-ldpi\\capturebtn.png"
     },

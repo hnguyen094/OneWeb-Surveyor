@@ -1,0 +1,13 @@
+.instructions {
+  font-size: 20;
+  opacity: 0;
+  margin: 20;
+  background-color: green;
+  border: 3;
+  border-color: blue;
+  border-radius: 4;
+}
+
+#pt1 {
+  opacity: 1;
+}

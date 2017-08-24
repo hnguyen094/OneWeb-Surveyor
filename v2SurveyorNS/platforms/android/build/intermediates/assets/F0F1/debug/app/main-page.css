@@ -13,6 +13,11 @@
   margin: 10;
 }
 
+#clearbtn {
+  height: 50;
+  margin:10;
+}
+
 .levelLine {
   font-size: 20;
   color: #404040;

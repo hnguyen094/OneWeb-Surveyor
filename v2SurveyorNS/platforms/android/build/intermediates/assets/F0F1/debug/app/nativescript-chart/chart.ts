@@ -61,6 +61,13 @@ export function updateGraph(azimuth, elevation, isOn) {
   }
 }
 
+export function clear() {
+  for(let i = 0; i < 360; i++) {
+    ele[i] = (maxEle+ minEle)/2;
+    page.getViewById("l"+i).height = maxHeight * ele2Percent(ele[i]);
+  }
+}
+
 function ele2Percent(elevation) {
   return (elevation - minEle)/(maxEle-minEle);
 }

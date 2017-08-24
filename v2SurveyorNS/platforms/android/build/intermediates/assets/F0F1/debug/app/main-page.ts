@@ -164,6 +164,10 @@ export function onTakeShot(args: EventData) {
   console.log("el: " + y);
 }
 
+export function onClear(args: EventData) {
+  charts.clear();
+}
+
 export function navigatingTo(args: EventData) {
     page = <Page>args.object;
     crosshair = page.getViewById("crosshair");
