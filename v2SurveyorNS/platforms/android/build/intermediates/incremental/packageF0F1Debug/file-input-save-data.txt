@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Aug 23 21:59:38 PDT 2017
+#Thu Aug 24 00:07:52 PDT 2017
 835.base=C\:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\resources-F0-F1-debug.ap_
 100.set=ASSET
 57.file=C\:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\platforms\\android\\build\\intermediates\\res\\resources-F0-F1-debug.ap_\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_48dp.png

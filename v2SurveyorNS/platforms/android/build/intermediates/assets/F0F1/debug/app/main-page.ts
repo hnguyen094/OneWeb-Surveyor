@@ -16,6 +16,7 @@ import * as orientation from "nativescript-screen-orientation";
 import * as params from "./nativescript-fov/nativescript-fov";
 import * as permissions from "nativescript-permissions";
 import * as charts from "./nativescript-chart/chart";
+import * as instructions from "./nativescript-instructions/instructions";
 import {AnimationCurve} from "ui/enums";
 
 let crosshair: any;
@@ -23,6 +24,7 @@ let doubleline: any;
 let upperText: any;
 let lowerText: any;
 let capturebtn: any;
+let clearbtn: any;
 let recordstop: any;
 let x, y, z;
 let page;
@@ -62,6 +64,8 @@ const resize = function() {
 };
 const updateCallback = function() {
   charts.updateGraph(x,y, isOn);
+  instructions.trigger2(y);
+  instructions.trigger4(x);
   // timer--;
   // if(timer < 0) {
   //   timer = 100;
@@ -126,6 +130,7 @@ export function onLoaded(args: EventData) {
 
 export function onCreatingView(args: EventData) {
   charts.initGraph(page);
+  instructions.trigger1(page);
   if(app.android) {
     permissions.requestPermission(android["Manifest"].permission.CAMERA, "I need these permissions for the viewfinder")
     .then(function() {
@@ -146,6 +151,7 @@ export function onCreatingView(args: EventData) {
 
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
+  instructions.trigger3(x);
   isOn = !isOn;
 
   capturebtn.animate({
@@ -166,6 +172,16 @@ export function onTakeShot(args: EventData) {
 
 export function onClear(args: EventData) {
   charts.clear();
+  clearbtn.animate({
+    scale: { x: 1.2, y: 1.2 },
+    duration: 100
+  }).then(()=> {
+    clearbtn.animate({
+        scale: { x: 1, y: 1},
+        duration: 300,
+        curve: AnimationCurve.spring
+    });
+  });
 }
 
 export function navigatingTo(args: EventData) {
@@ -175,6 +191,7 @@ export function navigatingTo(args: EventData) {
     upperText = page.getViewById("upperText");
     lowerText = page.getViewById("lowerText");
     capturebtn = page.getViewById("capturebtn");
+    clearbtn = page.getViewById("clearbtn");
     recordstop = page.getViewById("recordstop");
 }
 
