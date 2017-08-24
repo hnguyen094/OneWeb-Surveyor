@@ -41,18 +41,19 @@ Therefore, this version is a cleaner & working version of its predecessor.
 
 Features | Android | iOS
 --- | --- | ---
-**UX** (aesthetics) | Yes | Yes
-**UI:** Crosshair to elevation | Yes | Yes
-**UI:** Levels of elevation | Yes | Yes
-Live Camera | Yes | Yes
+**UX:** (aesthetics) | Yes | Yes
+**UI:** Crosshair | Yes | Yes
+**UI:** Attitude Indicator | Yes | Yes
+Camera Preview | Yes | Yes
 **Accuracy:** Camera | Yes(?) | Yes
 Rotation Sensor | Yes | Yes
-Data | Yes | Yes
+**Accuracy:** Field-of-View | Yes | No
+Terrain Bar | Yes | Yes
 **Accuracy:** Data | No | Yes
 
 #### Notes:
 
-Endings are CRLF because the project was developed in Windows. If you're working on Mac or Linux, and is encountering line ending issues, use:
+Endings are mainly in CRLF because the project was developed in Windows. If you're working on Mac or Linux, and is encountering line ending issues, use:
 $ git config --global core.autocrlf input
 and checkout again. I think this could be an issue because I kept getting this when committing to git:
 https://stackoverflow.com/questions/5834014/lf-will-be-replaced-by-crlf-in-git-what-is-that-and-is-it-important
