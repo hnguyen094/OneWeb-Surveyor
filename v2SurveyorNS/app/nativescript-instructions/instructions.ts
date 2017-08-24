@@ -2,7 +2,6 @@ import * as platform from "platform";
 
 let isStart: boolean = false;
 let isEleAbove0: boolean = false;
-let isElePast40: boolean = false;
 let isPressed: boolean = false;
 let largeDeltaAz: boolean = false;
 let oldAz: number = 0;
@@ -45,6 +44,7 @@ export function trigger2(ele) {
 export function trigger3(az) {
   if(!isPressed) {
     fadeaway(pt3);
+    isEleAbove0 = true;
   }
   oldAz = az;
   isPressed = true;
