@@ -1,3 +1,5 @@
+// Declarations/ Headers
+
 export function degrees2Pixels(angle);
 export function degrees2Scale(angle, length);
 export function dp2Pixels(dp);

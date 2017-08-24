@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", {value : true});
   @param idName the id of the camera preview placeholder
 */
 function onLoaded(args, idName) {
-  exports.page = args.object;
-  exports.cameraView = exports.page.getViewById(idName);
+  exports.cameraView = args.object.getViewById(idName);
 }
 exports.onLoaded = onLoaded;

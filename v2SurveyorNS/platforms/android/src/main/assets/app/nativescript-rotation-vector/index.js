@@ -5,6 +5,8 @@ var application = require("application");
 var sensorListener;
 var sensorManager;
 var rotSensor;
+
+// Function: privately gets the delay based on the argument and convert to android
 function getNativeDelay(options) {
     if (!options || !options.sensorDelay) {
         return android.hardware.SensorManager.SENSOR_DELAY_NORMAL;
@@ -20,6 +22,11 @@ function getNativeDelay(options) {
             return android.hardware.SensorManager.SENSOR_DELAY_FASTEST;
     }
 }
+
+/** Function: starts the rotation update and allow a callback to be called whenever new data is obtained
+ * @param callback  the callback function ran at every update
+ * @param options the delay for the update
+ */
 function startRotUpdates(callback, options) {
     if (sensorListener) {
         console.log("Already listening for rotational vector sensor updates.");
@@ -89,6 +96,8 @@ function startRotUpdates(callback, options) {
     sensorManager.registerListener(sensorListener, rotSensor, nativeDelay);
 }
 exports.startRotUpdates = startRotUpdates;
+
+// Function: stops the rotation vector updates by unregistering it
 function stopRotUpdates() {
     if (!sensorListener) {
         console.log("Currently not listening for rotational vector events.");

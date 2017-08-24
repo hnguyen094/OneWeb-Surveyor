@@ -9,8 +9,6 @@ import { Page } from 'ui/page';
 import * as cameraPreview from './nativescript-camera-preview/nativescript-camera-preview';
 import * as rotVector from "./nativescript-rotation-vector/index";
 import * as app from "application";
-import * as frameModule from "tns-core-modules/ui/frame";
-import * as animation from "tns-core-modules/ui/animation";
 import * as platform from "platform";
 import * as orientation from "nativescript-screen-orientation";
 import * as params from "./nativescript-fov/nativescript-fov";
@@ -37,6 +35,7 @@ const OUTER_CIRCLE_DIAMETER = 2;
 const ANGLE_BETWEEN_LINES = 10;
 const yTranslate = app.ios? -20 : 0;
 
+// Function: resizes the necessary graphics at startup
 const resize = function() {
   const scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
   crosshair.scaleX = scaleCrosshair;
@@ -47,31 +46,26 @@ const resize = function() {
   doubleline.scaleX = scaleDoubleLine;
   doubleline.scaleY = scaleDoubleLine;
 
-  if (app.ios) {
-    let cameraView = page.getViewById("placeholder-view");
-    cameraView.animate({
-      scale: {
-        x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
-        y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
-      },
-      translate: {
-        x: 0,
-        y: app.ios? -10 : 0
-      },
-      duration: 200
-    });
-  }
+  let cameraView = page.getViewById("placeholder-view");
+  cameraView.animate({
+    scale: {
+      x: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight(),
+      y: platform.screen.mainScreen.heightPixels/cameraView.getMeasuredHeight()
+    },
+    translate: {
+      x: 0,
+      y: app.ios? -10 : 0
+    },
+    duration: 200
+  });
+
 };
+
+// Function: the update that animates all the graphics
 const updateCallback = function() {
   charts.updateGraph(x,y, isOn);
   instructions.trigger2(y);
   instructions.trigger4(x);
-  // timer--;
-  // if(timer < 0) {
-  //   timer = 100;
-  //   rotVector.stopRotUpdates();
-  //   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
-  // }
   if(isFirst) {
     resize();
     isFirst = false;
@@ -96,19 +90,15 @@ const updateCallback = function() {
   upperText.rotate = -z;
 };
 
+// Function: updates the x/y/z values from the rotation callback
 const rotationCallback = function(data) {
-    //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
     x = data.x;
     y = data.y;
     z = data.z;
     if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
 };
 
-// export function showSideDrawer(args: EventData) {
-//     console.log("Show SideDrawer tapped.");
-// }
-
-//TODO: split up the code
+// Function: sets the pap to be fullscreen and orientation to be always portrait
 export function onLoaded(args: EventData) {
   orientation.setCurrentOrientation("portrait", () => {});
   if (app.android && platform.device.sdkVersion >= '21') {
@@ -128,6 +118,7 @@ export function onLoaded(args: EventData) {
   cameraPreview.onLoaded(args, "placeholder-view");
 }
 
+// Function: creates the graph, instructions, view, permissions, FOV when initializing placeholder
 export function onCreatingView(args: EventData) {
   charts.initGraph(page);
   instructions.trigger1(page);
@@ -146,9 +137,9 @@ export function onCreatingView(args: EventData) {
   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   const maxSize = cameraPreview.getMaxSize();
   params.setVars(maxSize[0], maxSize[1]);
-  // console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
 
+// Function: When the record button is pressed
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
   instructions.trigger3(x);
@@ -170,6 +161,7 @@ export function onTakeShot(args: EventData) {
   console.log("el: " + y);
 }
 
+// Function: when the clear button is pressed (for charts)
 export function onClear(args: EventData) {
   charts.clear();
   clearbtn.animate({
@@ -184,6 +176,7 @@ export function onClear(args: EventData) {
   });
 }
 
+// Function: sets the view variables from the page
 export function navigatingTo(args: EventData) {
     page = <Page>args.object;
     crosshair = page.getViewById("crosshair");
@@ -195,15 +188,21 @@ export function navigatingTo(args: EventData) {
     recordstop = page.getViewById("recordstop");
 }
 
+// Function: Resumes the app
 app.on(app.resumeEvent, function(args) {
   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   cameraPreview.onResume();
 });
+
+// Function: Pauses the app
 app.on(app.suspendEvent, function(args) {
   cameraPreview.onPause();
   rotVector.stopRotUpdates();
   charts.onExit();
 });
+
+// Function: when the app exits
+// UNUSED
 app.on(app.exitEvent, function(args) {
   console.log("On Exitting");
   rotVector.stopRotUpdates();

@@ -606,8 +606,8 @@ const chooseOptimalSize = function (choices, textureViewWidth, textureViewHeight
     const ratio = textureViewHeight / textureViewWidth;
     let bigEnough = new java.util.ArrayList();
     let notBigEnough = new java.util.ArrayList();
-=    for(let i = 0; i < choices.length; i++) {
-=      if(choices[i].getHeight() <= maxWidth && choices[i].getWidth() <=maxHeight && choices[i].getWidth() == choices[i].getHeight() * ratio) {
+     for(let i = 0; i < choices.length; i++) {
+       if(choices[i].getHeight() <= maxWidth && choices[i].getWidth() <=maxHeight && choices[i].getWidth() == choices[i].getHeight() * ratio) {
         if (choices[i].getHeight() >= textureViewWidth && choices[i].getWidth() >= textureViewHeight) {
           bigEnough.add(choices[i]);
         } else {

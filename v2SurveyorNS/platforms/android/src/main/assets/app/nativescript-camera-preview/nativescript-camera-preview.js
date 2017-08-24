@@ -1,6 +1,4 @@
-// TODO: Figure out if things commented with UNSURE are necessary
- /*
-  * Function: implements the android version of the camera2 API for Android.
+ /* Function: implements the android version of the camera2 API for Android.
   * Author: Hung Nguyen
   * Many/all of the code comes from the two linked github repositories, with added features for Nativescript
   * Works Cited:
@@ -447,6 +445,11 @@ const setUpCameraOutputs = function() {
       return;
   }
 }
+
+/**
+Function: Unlocks the focus.
+UNUSED
+*/
 const unlockFocus = function () {
   try {
     mPreviewRequestBuilder.set(android.hardware.camera2.CaptureRequest.CONTROL_AF_TRIGGER,
@@ -481,7 +484,7 @@ exports.requestPermissions = function () {
 };
 
 /**
-Function: Takes a picture.
+Function: Locks the focus for when taking a picture.
 */
 const lockFocus = function() { //TODO: could be error with private/scope
   try {
@@ -603,10 +606,8 @@ const chooseOptimalSize = function (choices, textureViewWidth, textureViewHeight
     const ratio = textureViewHeight / textureViewWidth;
     let bigEnough = new java.util.ArrayList();
     let notBigEnough = new java.util.ArrayList();
-    //console.log("Ratio is " + ratio + " and texture sizes are: " + textureViewWidth + " " + textureViewHeight);
-    for(let i = 0; i < choices.length; i++) {
-      //console.log(choices[i]);
-      if(choices[i].getHeight() <= maxWidth && choices[i].getWidth() <=maxHeight && choices[i].getWidth() == choices[i].getHeight() * ratio) {
+     for(let i = 0; i < choices.length; i++) {
+       if(choices[i].getHeight() <= maxWidth && choices[i].getWidth() <=maxHeight && choices[i].getWidth() == choices[i].getHeight() * ratio) {
         if (choices[i].getHeight() >= textureViewWidth && choices[i].getWidth() >= textureViewHeight) {
           bigEnough.add(choices[i]);
         } else {
@@ -614,7 +615,6 @@ const chooseOptimalSize = function (choices, textureViewWidth, textureViewHeight
         }
       }
     }
-    // return choices[0];
     if (bigEnough.size() > 0) {
       return java.util.Collections.max(bigEnough, new CompareSizesByArea());
     } else if (notBigEnough.size() > 0) {
