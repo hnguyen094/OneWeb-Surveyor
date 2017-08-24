@@ -13,68 +13,32 @@ var orientation = require("nativescript-screen-orientation");
 var params = require("./nativescript-fov/nativescript-fov");
 var permissions = require("nativescript-permissions");
 var charts = require("./nativescript-chart/chart");
+var instructions = require("./nativescript-instructions/instructions");
+var enums_1 = require("ui/enums");
 var crosshair;
 var doubleline;
 var upperText;
 var lowerText;
+var capturebtn;
+var clearbtn;
+var recordstop;
 var x, y, z;
-var measuredWidth;
 var page;
 var isOn = false;
+var isFirst = true;
+var timer = 100;
+// let filters;
 var OUTER_CIRCLE_DIAMETER = 2;
 var ANGLE_BETWEEN_LINES = 10;
-var updateCallback = function () {
-    // console.log("Entered updateCallback");
-    if (isOn) {
-        charts.updateGraph(x, y);
-    }
-    var yTranslate = app.ios ? -20 : 0;
+var yTranslate = app.ios ? -20 : 0;
+var resize = function () {
     var scaleCrosshair = params.degrees2Scale(OUTER_CIRCLE_DIAMETER, crosshair.getMeasuredHeight());
-    crosshair.animate({
-        scale: {
-            x: scaleCrosshair,
-            y: scaleCrosshair
-        },
-        translate: {
-            x: 0,
-            y: yTranslate
-        },
-        rotate: -z,
-        duration: 0
-    });
+    crosshair.scaleX = scaleCrosshair;
+    crosshair.scaleY = scaleCrosshair;
+    crosshair.translateY = yTranslate;
     var scaleDoubleLine = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight());
-    var distanceFromCenter = params.pixels2Dp((params.degrees2Pixels((-y % ANGLE_BETWEEN_LINES)
-        - ANGLE_BETWEEN_LINES / 2 * (y > 0 ? -1 : 1))));
-    lowerText.text = 10 * Math.floor(-y / 10);
-    upperText.text = 10 * Math.floor((-y + 10) / 10);
-    doubleline.animate({
-        scale: {
-            x: scaleDoubleLine,
-            y: scaleDoubleLine
-        },
-        translate: {
-            x: Math.sin(z * Math.PI / 180) * distanceFromCenter,
-            y: Math.cos(z * Math.PI / 180) * distanceFromCenter + yTranslate
-        },
-        rotate: -z,
-        duration: 0
-    });
-    lowerText.animate({
-        translate: {
-            x: Math.sin(z * Math.PI / 180) * (distanceFromCenter + scaleDoubleLine * params.degrees2Pixels(ANGLE_BETWEEN_LINES / 2)),
-            y: Math.cos(z * Math.PI / 180) * (distanceFromCenter + scaleDoubleLine * params.degrees2Pixels(ANGLE_BETWEEN_LINES / 2)) + yTranslate
-        },
-        rotate: -z,
-        duration: 0
-    });
-    upperText.animate({
-        translate: {
-            x: Math.sin(z * Math.PI / 180) * (distanceFromCenter - scaleDoubleLine * params.degrees2Pixels(ANGLE_BETWEEN_LINES / 2)),
-            y: Math.cos(z * Math.PI / 180) * (distanceFromCenter - scaleDoubleLine * params.degrees2Pixels(ANGLE_BETWEEN_LINES / 2)) + yTranslate
-        },
-        rotate: -z,
-        duration: 0
-    });
+    doubleline.scaleX = scaleDoubleLine;
+    doubleline.scaleY = scaleDoubleLine;
     if (app.ios) {
         var cameraView = page.getViewById("placeholder-view");
         cameraView.animate({
@@ -86,9 +50,39 @@ var updateCallback = function () {
                 x: 0,
                 y: app.ios ? -10 : 0
             },
-            duration: 2000
+            duration: 200
         });
     }
+};
+var updateCallback = function () {
+    charts.updateGraph(x, y, isOn);
+    instructions.trigger2(y);
+    instructions.trigger4(x);
+    // timer--;
+    // if(timer < 0) {
+    //   timer = 100;
+    //   rotVector.stopRotUpdates();
+    //   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
+    // }
+    if (isFirst) {
+        resize();
+        isFirst = false;
+    }
+    crosshair.rotate = -z;
+    var distanceFromCenter = params.pixels2Dp((params.degrees2Pixels((-y % ANGLE_BETWEEN_LINES)
+        - ANGLE_BETWEEN_LINES / 2 * (y > 0 ? -1 : 1))));
+    doubleline.translateX = Math.sin(z * Math.PI / 180) * distanceFromCenter;
+    doubleline.translateY = Math.cos(z * Math.PI / 180) * distanceFromCenter + yTranslate;
+    doubleline.rotate = -z;
+    var dist = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight()) * params.degrees2Pixels(ANGLE_BETWEEN_LINES / 2);
+    lowerText.text = 10 * Math.floor(-y / 10);
+    lowerText.translateX = Math.sin(z * Math.PI / 180) * ((app.ios ? 20 : 0) + distanceFromCenter + dist);
+    lowerText.translateY = Math.cos(z * Math.PI / 180) * ((app.ios ? 20 : 0) + distanceFromCenter + dist) + yTranslate;
+    lowerText.rotate = -z;
+    upperText.text = 10 * Math.floor((-y + 10) / 10);
+    upperText.translateX = Math.sin(z * Math.PI / 180) * ((app.ios ? -20 : 0) + distanceFromCenter - dist);
+    upperText.translateY = Math.cos(z * Math.PI / 180) * ((app.ios ? -20 : 0) + distanceFromCenter - dist) + yTranslate;
+    upperText.rotate = -z;
 };
 var rotationCallback = function (data) {
     //console.log("x: " + data.x + " y: " + data.y + " z: " + data.z);
@@ -122,6 +116,7 @@ function onLoaded(args) {
 exports.onLoaded = onLoaded;
 function onCreatingView(args) {
     charts.initGraph(page);
+    instructions.trigger1(page);
     if (app.android) {
         permissions.requestPermission(android["Manifest"].permission.CAMERA, "I need these permissions for the viewfinder")
             .then(function () {
@@ -139,22 +134,50 @@ function onCreatingView(args) {
     rotVector.startRotUpdates(rotationCallback, { sensorDelay: "game" });
     var maxSize = cameraPreview.getMaxSize();
     params.setVars(maxSize[0], maxSize[1]);
-    measuredWidth = params.degrees2Pixels(OUTER_CIRCLE_DIAMETER);
     // console.log(params.getVerticalFOV() + " " + params.getHorizontalFOV());
 }
 exports.onCreatingView = onCreatingView;
 function onTakeShot(args) {
     cameraPreview.onTakeShot(args);
+    instructions.trigger3(x);
     isOn = !isOn;
+    capturebtn.animate({
+        scale: { x: 1.2, y: 1.2 },
+        duration: 100
+    }).then(function () {
+        capturebtn.animate({
+            scale: { x: 1, y: 1 },
+            duration: 300,
+            curve: enums_1.AnimationCurve.spring
+        });
+        recordstop.src = isOn ? "res://stop" : "res://record";
+    });
     console.log("el: " + y);
 }
 exports.onTakeShot = onTakeShot;
+function onClear(args) {
+    charts.clear();
+    clearbtn.animate({
+        scale: { x: 1.2, y: 1.2 },
+        duration: 100
+    }).then(function () {
+        clearbtn.animate({
+            scale: { x: 1, y: 1 },
+            duration: 300,
+            curve: enums_1.AnimationCurve.spring
+        });
+    });
+}
+exports.onClear = onClear;
 function navigatingTo(args) {
     page = args.object;
     crosshair = page.getViewById("crosshair");
     doubleline = page.getViewById("doubleline");
     upperText = page.getViewById("upperText");
     lowerText = page.getViewById("lowerText");
+    capturebtn = page.getViewById("capturebtn");
+    clearbtn = page.getViewById("clearbtn");
+    recordstop = page.getViewById("recordstop");
 }
 exports.navigatingTo = navigatingTo;
 app.on(app.resumeEvent, function (args) {

@@ -16,6 +16,7 @@ import * as orientation from "nativescript-screen-orientation";
 import * as params from "./nativescript-fov/nativescript-fov";
 import * as permissions from "nativescript-permissions";
 import * as charts from "./nativescript-chart/chart";
+import * as instructions from "./nativescript-instructions/instructions";
 import {AnimationCurve} from "ui/enums";
 
 let crosshair: any;
@@ -23,6 +24,7 @@ let doubleline: any;
 let upperText: any;
 let lowerText: any;
 let capturebtn: any;
+let clearbtn: any;
 let recordstop: any;
 let x, y, z;
 let page;
@@ -56,12 +58,14 @@ const resize = function() {
         x: 0,
         y: app.ios? -10 : 0
       },
-      duration: 2000
+      duration: 200
     });
   }
 };
-const updateCallback2 = function() {
+const updateCallback = function() {
   charts.updateGraph(x,y, isOn);
+  instructions.trigger2(y);
+  instructions.trigger4(x);
   // timer--;
   // if(timer < 0) {
   //   timer = 100;
@@ -82,13 +86,13 @@ const updateCallback2 = function() {
   const dist = params.degrees2Scale(ANGLE_BETWEEN_LINES, doubleline.getMeasuredHeight())*params.degrees2Pixels(ANGLE_BETWEEN_LINES/2);
 
   lowerText.text = 10* Math.floor(-y/10);
-  lowerText.translateX = Math.sin(z * Math.PI/180)* (distanceFromCenter + dist);
-  lowerText.translateY = Math.cos(z * Math.PI/180)* (distanceFromCenter + dist) + yTranslate;
+  lowerText.translateX = Math.sin(z * Math.PI/180)* ((app.ios? 20: 0) + distanceFromCenter + dist);
+  lowerText.translateY = Math.cos(z * Math.PI/180)* ((app.ios? 20: 0) + distanceFromCenter + dist) + yTranslate;
   lowerText.rotate = -z;
 
   upperText.text = 10* Math.floor((-y + 10)/10);
-  upperText.translateX = Math.sin(z * Math.PI/180)* (distanceFromCenter - dist);
-  upperText.translateY = Math.cos(z * Math.PI/180)* (distanceFromCenter - dist) + yTranslate;
+  upperText.translateX = Math.sin(z * Math.PI/180)* ((app.ios? -20: 0) + distanceFromCenter - dist);
+  upperText.translateY = Math.cos(z * Math.PI/180)* ((app.ios? -20: 0) + distanceFromCenter - dist) + yTranslate;
   upperText.rotate = -z;
 };
 
@@ -97,7 +101,7 @@ const rotationCallback = function(data) {
     x = data.x;
     y = data.y;
     z = data.z;
-    if(app.ios) updateCallback2(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
+    if(app.ios) updateCallback(); // ios doesn't seem to expose a callback for every frame update in the camera preview; therefore, we'll hop on the rotation callback
 };
 
 // export function showSideDrawer(args: EventData) {
@@ -126,6 +130,7 @@ export function onLoaded(args: EventData) {
 
 export function onCreatingView(args: EventData) {
   charts.initGraph(page);
+  instructions.trigger1(page);
   if(app.android) {
     permissions.requestPermission(android["Manifest"].permission.CAMERA, "I need these permissions for the viewfinder")
     .then(function() {
@@ -136,7 +141,7 @@ export function onCreatingView(args: EventData) {
     });
   }
   if(app.android) params.initialize();
-  cameraPreview.onCreatingView(updateCallback2, args);
+  cameraPreview.onCreatingView(updateCallback, args);
   if (app.ios !== undefined) params.initialize();
   rotVector.startRotUpdates(rotationCallback,  { sensorDelay: "game" });
   const maxSize = cameraPreview.getMaxSize();
@@ -146,6 +151,7 @@ export function onCreatingView(args: EventData) {
 
 export function onTakeShot(args: EventData) {
   cameraPreview.onTakeShot(args);
+  instructions.trigger3(x);
   isOn = !isOn;
 
   capturebtn.animate({
@@ -164,6 +170,20 @@ export function onTakeShot(args: EventData) {
   console.log("el: " + y);
 }
 
+export function onClear(args: EventData) {
+  charts.clear();
+  clearbtn.animate({
+    scale: { x: 1.2, y: 1.2 },
+    duration: 100
+  }).then(()=> {
+    clearbtn.animate({
+        scale: { x: 1, y: 1},
+        duration: 300,
+        curve: AnimationCurve.spring
+    });
+  });
+}
+
 export function navigatingTo(args: EventData) {
     page = <Page>args.object;
     crosshair = page.getViewById("crosshair");
@@ -171,6 +191,7 @@ export function navigatingTo(args: EventData) {
     upperText = page.getViewById("upperText");
     lowerText = page.getViewById("lowerText");
     capturebtn = page.getViewById("capturebtn");
+    clearbtn = page.getViewById("clearbtn");
     recordstop = page.getViewById("recordstop");
 }
 

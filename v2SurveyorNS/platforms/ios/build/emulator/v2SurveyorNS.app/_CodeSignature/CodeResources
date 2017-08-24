@@ -126,7 +126,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		zp71aukD5iqOyyz7lrUMAZR0l1M=
+		1m1MHRvqPr48KjAcx/Ijj8b5lXs=
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
@@ -194,7 +194,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		OPYi/9wn3FePCioouAOj2Azj50Y=
+		Iypm9NSRovLqVXALGyXhTuPybF8=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -202,7 +202,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		M2Oho/3ha/e+ilJMuTNp5zkw1qQ=
+		8SzKnswIDGzACBxSi90JNeZTdYs=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -226,15 +226,15 @@
 		</data>
 		<key>app/main-page.css</key>
 		<data>
-		VHkYSg4gJ7lhytuQn4kfJ5u3tiU=
+		lNkmrh7+fhhHgL9gZpbtpGT9bxI=
 		</data>
 		<key>app/main-page.js</key>
 		<data>
-		r2wXV0aRYnIx82i2yso5Kqe26sU=
+		OuvDl2dh7cazy0CVTzSsE+Zbbi0=
 		</data>
 		<key>app/main-page.xml</key>
 		<data>
-		Bn9V7GdkgqjEOcPqH0y26DCdXyw=
+		ws2TwYHQh+rwBiPrAPnJuu0hggM=
 		</data>
 		<key>app/nativescript-camera-preview/README.md</key>
 		<data>
@@ -258,11 +258,11 @@
 		</data>
 		<key>app/nativescript-chart/chart.js</key>
 		<data>
-		aDnH+ElnDPVSyE9pXU6m/7L9pAk=
+		hL5twM/8/Ird/W5bztKFt/osZog=
 		</data>
 		<key>app/nativescript-chart/chart.xml</key>
 		<data>
-		kxh8K6m8T2vNARv+qAIlSqab9PM=
+		sQXwC8JuK/WsSZaUlSmIWMJqPxM=
 		</data>
 		<key>app/nativescript-chart/img_gen.py</key>
 		<data>
@@ -270,7 +270,7 @@
 		</data>
 		<key>app/nativescript-chart/xml_gen.py</key>
 		<data>
-		V5bKIjzG+uGxpChAUjur2PBgo7Y=
+		afNz73mHi3X5Ouuzw2UkH42l1bM=
 		</data>
 		<key>app/nativescript-fov/nativescript-fov-common.js</key>
 		<data>
@@ -279,6 +279,18 @@
 		<key>app/nativescript-fov/nativescript-fov.js</key>
 		<data>
 		4+Km35rr2c/6gT4v68RfPJvd5tg=
+		</data>
+		<key>app/nativescript-instructions/instructions.css</key>
+		<data>
+		mRkMhZH6xzu6u8FfbjFARapMqBc=
+		</data>
+		<key>app/nativescript-instructions/instructions.js</key>
+		<data>
+		mQKCdoxR1TVVfyZvhqhAeOpak8Q=
+		</data>
+		<key>app/nativescript-instructions/instructions.xml</key>
+		<data>
+		kZB2b0/j8RhoceP6LO7qHUr4krg=
 		</data>
 		<key>app/nativescript-rotation-vector/.npmignore</key>
 		<data>
@@ -307,6 +319,38 @@
 		<key>app/package.json</key>
 		<data>
 		PIVCI63gqobTOKyXa8MvICPCRE0=
+		</data>
+		<key>app/tns_modules/nativescript-image-filters/.npmignore</key>
+		<data>
+		Qftgup6YVS3CzTXWOBT2+RHX8V4=
+		</data>
+		<key>app/tns_modules/nativescript-image-filters/LICENSE</key>
+		<data>
+		MOudgmq52U/aPOyilBfipxKM6Lk=
+		</data>
+		<key>app/tns_modules/nativescript-image-filters/README.md</key>
+		<data>
+		Pksy5Oyjwo0iG5HhLpFN45XPKaY=
+		</data>
+		<key>app/tns_modules/nativescript-image-filters/imagefilters.d.ts</key>
+		<data>
+		kkcUlXXT40Qt4UfBQiglGs5Chr8=
+		</data>
+		<key>app/tns_modules/nativescript-image-filters/imagefilters.js</key>
+		<data>
+		tw9gPzEwne7gNK0E25IiVXsPLM0=
+		</data>
+		<key>app/tns_modules/nativescript-image-filters/index.d.ts</key>
+		<data>
+		5ryq8WzLzgQD7D9Zn6i9VE8Q9Hc=
+		</data>
+		<key>app/tns_modules/nativescript-image-filters/package.json</key>
+		<data>
+		mMOGC669m6EXVQnqlVozP0zw5YE=
+		</data>
+		<key>app/tns_modules/nativescript-image-filters/references.d.ts</key>
+		<data>
+		rUWmTmBI40Fm3x/DK7bdRxhb8CY=
 		</data>
 		<key>app/tns_modules/nativescript-permissions/LICENSE</key>
 		<data>
@@ -1768,6 +1812,18 @@
 		<data>
 		JWO3NQlntze55FFPjdsav+EU/L8=
 		</data>
+		<key>capturebtn.png</key>
+		<data>
+		k+rzek88jOhODcXxcmveQfD+Bxw=
+		</data>
+		<key>capturebtn@2x.png</key>
+		<data>
+		H6Mr0whw3hTJlE04BeX1MV4/WB8=
+		</data>
+		<key>capturebtn@3x.png</key>
+		<data>
+		tbrKL8MlRG5lSzZoVWsMQbCYgYc=
+		</data>
 		<key>circlearrow.png</key>
 		<data>
 		A/eDaHQfoZJkGBs5w34xx7GdTfU=
@@ -1791,6 +1847,18 @@
 		<key>circlearrowthin@3x.png</key>
 		<data>
 		1psrTD8rhgVXWhVSIbnFpXX2hpg=
+		</data>
+		<key>clearbtn.png</key>
+		<data>
+		oL2lTYp2cZxBEbl2a4RizE5Ymag=
+		</data>
+		<key>clearbtn@2x.png</key>
+		<data>
+		fQtkiqI8yVtLRex0ThZJ0aHF21c=
+		</data>
+		<key>clearbtn@3x.png</key>
+		<data>
+		r/DUArwU1g6ZBoo8XdBRxjHTuVQ=
 		</data>
 		<key>doubleline.png</key>
 		<data>
@@ -1827,15 +1895,27 @@
 		</data>
 		<key>newdoubleline.png</key>
 		<data>
-		MWZnJJpMMe50NbfgRXck6YEa3yU=
+		4SzxlBJ40l26PXOHFl2Rs7KN6dQ=
 		</data>
 		<key>newdoubleline@2x.png</key>
 		<data>
-		+8dDDRJe5fuVlh2lJYAPaeKDNZ8=
+		BYDvQ5pIfqkVY2S6VwsckYOhqkY=
 		</data>
 		<key>newdoubleline@3x.png</key>
 		<data>
-		BdmzivCRJBO4Vsh05L4q2o2Vo1g=
+		trg/AgqCsSC13Yh4ipVCoiIR7eg=
+		</data>
+		<key>record.png</key>
+		<data>
+		hZQJUaF+QZBHmcsAWNKTCIdlTls=
+		</data>
+		<key>record@2x.png</key>
+		<data>
+		RMzxQeo1UvBBhE3Pihx7aiM7jwA=
+		</data>
+		<key>record@3x.png</key>
+		<data>
+		+kCwjUgA96GTdMbuZ9LJqsPbhwo=
 		</data>
 		<key>square.png</key>
 		<data>
@@ -1848,6 +1928,18 @@
 		<key>square@3x.png</key>
 		<data>
 		RDM79YDl2CYt4lGBheqRYa0IPmI=
+		</data>
+		<key>stop.png</key>
+		<data>
+		2iOYl8t+Q/sDWHCfmoDXPfGIWXI=
+		</data>
+		<key>stop@2x.png</key>
+		<data>
+		8EN0fo7VJV7IoffBWxevBNQFLTE=
+		</data>
+		<key>stop@3x.png</key>
+		<data>
+		OzRWa4Tfpxwna8q4yocYitxpjWA=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -2362,11 +2454,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OPYi/9wn3FePCioouAOj2Azj50Y=
+			Iypm9NSRovLqVXALGyXhTuPybF8=
 			</data>
 			<key>hash2</key>
 			<data>
-			RR8vuPGrrwQ3ckwZwHQ9/eMY367ZP57AQZMC7smlOh0=
+			8CrqJYgOcYUPbP80dsgZ9Cxeui6QYjkI7oHlj8Pd3hw=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -2384,11 +2476,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			M2Oho/3ha/e+ilJMuTNp5zkw1qQ=
+			8SzKnswIDGzACBxSi90JNeZTdYs=
 			</data>
 			<key>hash2</key>
 			<data>
-			ymQXA3nGRf+6mFd43qiGu5K6Nwqs+wdfB9uRxjrvlWI=
+			7EynrDyKaBjZPv6alO3A/2oq1r0uT07kIllDWCWAvR4=
 			</data>
 		</dict>
 		<key>app/README.md</key>
@@ -2439,33 +2531,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VHkYSg4gJ7lhytuQn4kfJ5u3tiU=
+			lNkmrh7+fhhHgL9gZpbtpGT9bxI=
 			</data>
 			<key>hash2</key>
 			<data>
-			3NglpuUB+KccQq0I9eYJkl4015PTK1/+20slqts69Gs=
+			JaIpD12+mMU3qpW5Jka6GdzgCa5kyc988Bm3rduqwrk=
 			</data>
 		</dict>
 		<key>app/main-page.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			r2wXV0aRYnIx82i2yso5Kqe26sU=
+			OuvDl2dh7cazy0CVTzSsE+Zbbi0=
 			</data>
 			<key>hash2</key>
 			<data>
-			0hS+RMQ/drUwiV5oAPJol89myS9jvKcK3KD1MpwurPg=
+			Jg6ZWLi3JcdSxOEph1ilcB0U3eitIRedEqnzoMYuqMk=
 			</data>
 		</dict>
 		<key>app/main-page.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Bn9V7GdkgqjEOcPqH0y26DCdXyw=
+			ws2TwYHQh+rwBiPrAPnJuu0hggM=
 			</data>
 			<key>hash2</key>
 			<data>
-			FX/HolBwNKFc+d+UdySGQ0UWhZJZGRRnn/WKynLyC7I=
+			jtOpiM4YqnYXKRGQnNscQM3mCuJY4eb9fGR7r4046u0=
 			</data>
 		</dict>
 		<key>app/nativescript-camera-preview/README.md</key>
@@ -2527,22 +2619,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aDnH+ElnDPVSyE9pXU6m/7L9pAk=
+			hL5twM/8/Ird/W5bztKFt/osZog=
 			</data>
 			<key>hash2</key>
 			<data>
-			LMDLHAp4rS4hEIiY2I/Hoj0G18gWuQyGkHzdlmbLyyQ=
+			Xs55eg95vko72nFxd4FRIq4GvB0ezl3w3XPy6NvjXzc=
 			</data>
 		</dict>
 		<key>app/nativescript-chart/chart.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kxh8K6m8T2vNARv+qAIlSqab9PM=
+			sQXwC8JuK/WsSZaUlSmIWMJqPxM=
 			</data>
 			<key>hash2</key>
 			<data>
-			hgSxeMvWBOGYU53ZAvUAsTbhjM1pO/uqvc6hSYvLxZA=
+			vKRY0IiOc55JXWIyFu5F2aXtqo6vCLJmrBkwXW3uvPs=
 			</data>
 		</dict>
 		<key>app/nativescript-chart/img_gen.py</key>
@@ -2560,11 +2652,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			V5bKIjzG+uGxpChAUjur2PBgo7Y=
+			afNz73mHi3X5Ouuzw2UkH42l1bM=
 			</data>
 			<key>hash2</key>
 			<data>
-			/i43ixveJZqtiF6AOJCAAghy5IAkV3qVmeDp23w0qPo=
+			d5FYFnBM5h8Dh4LW5u/+QWrPU1oSxJebrzi4be4fRxQ=
 			</data>
 		</dict>
 		<key>app/nativescript-fov/nativescript-fov-common.js</key>
@@ -2587,6 +2679,39 @@
 			<key>hash2</key>
 			<data>
 			coFQcJKYnvV1D+mxMYRkvVJZ0PyItasB8s1rpAVdkbw=
+			</data>
+		</dict>
+		<key>app/nativescript-instructions/instructions.css</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			mRkMhZH6xzu6u8FfbjFARapMqBc=
+			</data>
+			<key>hash2</key>
+			<data>
+			pGiIwECN1mYxsryCpWyotiT7qxGUgs/LAnWaUnYV59A=
+			</data>
+		</dict>
+		<key>app/nativescript-instructions/instructions.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			mQKCdoxR1TVVfyZvhqhAeOpak8Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			PWzzt+O6nOw+1RJEqwREmEh7gtCd66JIqMn+/zn4Rrk=
+			</data>
+		</dict>
+		<key>app/nativescript-instructions/instructions.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			kZB2b0/j8RhoceP6LO7qHUr4krg=
+			</data>
+			<key>hash2</key>
+			<data>
+			ogOpmTFIL2KHAwtrNVYmSob0saP/s6NOzbmMPW8wqQg=
 			</data>
 		</dict>
 		<key>app/nativescript-rotation-vector/.npmignore</key>
@@ -2664,6 +2789,94 @@
 			<key>hash2</key>
 			<data>
 			lqOIfuxj5pU/blBeYSpT7U8xpYaG7mg4zmnaqBpFI3I=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-image-filters/.npmignore</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Qftgup6YVS3CzTXWOBT2+RHX8V4=
+			</data>
+			<key>hash2</key>
+			<data>
+			rjPImymDLMvalysHbeO1PfaBsmN4/g0Fy5UKc4FKif4=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-image-filters/LICENSE</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			MOudgmq52U/aPOyilBfipxKM6Lk=
+			</data>
+			<key>hash2</key>
+			<data>
+			bD+SKuXj0xCfAMniEGjgqnZazt47Z0frfINniPnYvkE=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-image-filters/README.md</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Pksy5Oyjwo0iG5HhLpFN45XPKaY=
+			</data>
+			<key>hash2</key>
+			<data>
+			/3KtqiS/PTKSsmiw+x6shyWl+Yg/V+vOcB5oooAsu3o=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-image-filters/imagefilters.d.ts</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			kkcUlXXT40Qt4UfBQiglGs5Chr8=
+			</data>
+			<key>hash2</key>
+			<data>
+			GWda1sV6cypGBfZ6apzOP+4Kz7RJi64XNGD7N7kKpxw=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-image-filters/imagefilters.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			tw9gPzEwne7gNK0E25IiVXsPLM0=
+			</data>
+			<key>hash2</key>
+			<data>
+			fVLARpxYJv045+yacC2TyX8v0nf+WJvqjo7bQ0Q2lAE=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-image-filters/index.d.ts</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5ryq8WzLzgQD7D9Zn6i9VE8Q9Hc=
+			</data>
+			<key>hash2</key>
+			<data>
+			vpZ0SttjVKudzKUBI1wi+N+nkNive81IMI4lbjHDGCk=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-image-filters/package.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			mMOGC669m6EXVQnqlVozP0zw5YE=
+			</data>
+			<key>hash2</key>
+			<data>
+			eZX5QikNBf9p1GaixS43GEn4EpsgMEToC5A/uvnq0S4=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-image-filters/references.d.ts</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rUWmTmBI40Fm3x/DK7bdRxhb8CY=
+			</data>
+			<key>hash2</key>
+			<data>
+			eUn5BLRzFZw8Iv4JhRoddE0O+NVJtufbx/dWF5ygqx8=
 			</data>
 		</dict>
 		<key>app/tns_modules/nativescript-permissions/LICENSE</key>
@@ -6681,6 +6894,39 @@
 			Pxgmdv5DJuwJlpw5c93j08hL+lxBNjyuuZrwWK2mpNU=
 			</data>
 		</dict>
+		<key>capturebtn.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			k+rzek88jOhODcXxcmveQfD+Bxw=
+			</data>
+			<key>hash2</key>
+			<data>
+			K5K4iqccD1GP9JgoSkjqaEpFh5kxxH7JvlFqDsQ0r1Y=
+			</data>
+		</dict>
+		<key>capturebtn@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			H6Mr0whw3hTJlE04BeX1MV4/WB8=
+			</data>
+			<key>hash2</key>
+			<data>
+			lP6mxpRjQphQHenS9yJnUC3byL/FOTa6wMSI4P99mwA=
+			</data>
+		</dict>
+		<key>capturebtn@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			tbrKL8MlRG5lSzZoVWsMQbCYgYc=
+			</data>
+			<key>hash2</key>
+			<data>
+			02YTTyosn4TNeKoKW60/RzSi1A9yP/J8RvrbzEwo2zs=
+			</data>
+		</dict>
 		<key>circlearrow.png</key>
 		<dict>
 			<key>hash</key>
@@ -6745,6 +6991,39 @@
 			<key>hash2</key>
 			<data>
 			Fy81q3XVr1xMLoNoJ5zLlu/D4rfgTlwZLWPstwLEe6M=
+			</data>
+		</dict>
+		<key>clearbtn.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			oL2lTYp2cZxBEbl2a4RizE5Ymag=
+			</data>
+			<key>hash2</key>
+			<data>
+			w4LfFOf57FVEZ+C0k4A3AKhruTcGaciXCsyfRaNgQtA=
+			</data>
+		</dict>
+		<key>clearbtn@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fQtkiqI8yVtLRex0ThZJ0aHF21c=
+			</data>
+			<key>hash2</key>
+			<data>
+			qMU6W0qfezStyeFUCv1AwCsNfWEGBcm7RP/WfIFy3Gg=
+			</data>
+		</dict>
+		<key>clearbtn@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			r/DUArwU1g6ZBoo8XdBRxjHTuVQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			5O12uW+UTjO18mmp2S4HxWkZcORgCcXqlVieamV7GtY=
 			</data>
 		</dict>
 		<key>doubleline.png</key>
@@ -6830,33 +7109,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			MWZnJJpMMe50NbfgRXck6YEa3yU=
+			4SzxlBJ40l26PXOHFl2Rs7KN6dQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			ttp+ma9IL23T1o0UPN4f7ECsKluPvALwBZcxaCje+M8=
+			tjoALdB4+z2xEv12P4pzfkroKXgfPAYQYcxxyAuXSlo=
 			</data>
 		</dict>
 		<key>newdoubleline@2x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+8dDDRJe5fuVlh2lJYAPaeKDNZ8=
+			BYDvQ5pIfqkVY2S6VwsckYOhqkY=
 			</data>
 			<key>hash2</key>
 			<data>
-			2DvOMP9CgC0q7Tp/2fgVXq+YDePBt7zKQRTtK/Hu7dE=
+			Gnnm6nXi7IkygKZurjioFNn8WWNGipVeufxRppDJJHk=
 			</data>
 		</dict>
 		<key>newdoubleline@3x.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BdmzivCRJBO4Vsh05L4q2o2Vo1g=
+			trg/AgqCsSC13Yh4ipVCoiIR7eg=
 			</data>
 			<key>hash2</key>
 			<data>
-			FUjUvZtDjDpOHFy4W0rT4HroX8Q5A+lOBgzD9JL9oJ0=
+			/7ofUh1QQdr4AVHubVj8Xgvzl5T0HKIbhOQikmV3++s=
+			</data>
+		</dict>
+		<key>record.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			hZQJUaF+QZBHmcsAWNKTCIdlTls=
+			</data>
+			<key>hash2</key>
+			<data>
+			gYonNa311J0sbMmIe7EehVHqe3Jv2/sFhZViWDydD+w=
+			</data>
+		</dict>
+		<key>record@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RMzxQeo1UvBBhE3Pihx7aiM7jwA=
+			</data>
+			<key>hash2</key>
+			<data>
+			kOTYPQMb9SUnVmIhx+loEzwBFDkxEZepLNEKr+sJLo0=
+			</data>
+		</dict>
+		<key>record@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+kCwjUgA96GTdMbuZ9LJqsPbhwo=
+			</data>
+			<key>hash2</key>
+			<data>
+			JnWIIO3zaRycrYWZZDiJoSaYIze4A8EcdeofnIyM1Ss=
 			</data>
 		</dict>
 		<key>square.png</key>
@@ -6890,6 +7202,39 @@
 			<key>hash2</key>
 			<data>
 			gOT0JhWnp7typlolSBCvPolF8ucbS4bSkT9Gig0m24A=
+			</data>
+		</dict>
+		<key>stop.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2iOYl8t+Q/sDWHCfmoDXPfGIWXI=
+			</data>
+			<key>hash2</key>
+			<data>
+			45C0Fm7KcmZYa3JkSugeagH7UkWY8V51ehiC3EdDqzM=
+			</data>
+		</dict>
+		<key>stop@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8EN0fo7VJV7IoffBWxevBNQFLTE=
+			</data>
+			<key>hash2</key>
+			<data>
+			dko6DwwpqguCibGc8yyzmDFfHBQXqd0JmvZisZW3NWQ=
+			</data>
+		</dict>
+		<key>stop@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			OzRWa4Tfpxwna8q4yocYitxpjWA=
+			</data>
+			<key>hash2</key>
+			<data>
+			UdByxq1tyPfHd47HIEjL+feogXk0uMUN6SjWKi+BpSI=
 			</data>
 		</dict>
 	</dict>

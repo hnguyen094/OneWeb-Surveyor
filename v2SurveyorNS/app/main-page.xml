@@ -6,6 +6,7 @@
     <GridLayout>
       <Placeholder id="placeholder-view" creatingView="onCreatingView" stretch="aspectFill" horizontalAlignment="center" verticalAlignment="center"/>
       <lgraph:chart/>
+      <instr:instructions/>
       <Image id="capturebtn" src="res://capturebtn" tap="onTakeShot" class="mButton btn7" horizontalAlignment="center" verticalAlignment="bottom"></Image>
       <Image id="clearbtn" src="res://clearbtn" tap="onClear" class="mButton btn7" horizontalAlignment="right" verticalAlignment="bottom"></Image>
       <Image id="recordstop" src="res://record" tap="onTakeShot" class="mButton" horizontalAlignment="center" verticalAlignment="bottom"></Image>
@@ -13,6 +14,5 @@
       <Label id="upperText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
       <Label id="lowerText" class="levelLine" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
       <Image id="crosshair" src="res://newcirclethin" stretch="aspectFit" horizontalAlignment="center" verticalAlignment="center"/>
-      <instr:instructions/>
     </GridLayout>
 </Page>

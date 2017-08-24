@@ -3,20 +3,31 @@
 }
 
 #capturebtn {
-  background-color: #1b5675;
+  /*background-color: #1b5675;*/
+  height: 65;
+  margin: 10;
+}
+
+#recordstop {
+  height: 65;
+  margin: 10;
+}
+
+#clearbtn {
+  height: 40;
+  margin: 15;
 }
 
 .levelLine {
   font-size: 20;
-  color: #1b5675;
+  color: #404040;
+}
+
+#doubleline{
+  opacity: 0.75;
 }
 
 #graph {
   opacity: 0.75;
   filter: alpha(opacity=75);
-}
-
-#rectangle {
-  width: 10px;
-  height: 100px;
 }
