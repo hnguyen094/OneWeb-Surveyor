@@ -13,6 +13,7 @@
     }
   },
   "dependencies": {
+    "nativescript-geolocation": "^3.0.1",
     "nativescript-image-filters": "^2.0.0",
     "nativescript-permissions": "^1.2.3",
     "nativescript-screen-orientation": "^2.0.0",

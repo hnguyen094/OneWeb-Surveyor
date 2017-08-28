@@ -1,7 +1,6 @@
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\app.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\bundle-config.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\main-page.js
-C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-camera-preview\activity.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-camera-preview\nativescript-camera-preview-common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-camera-preview\nativescript-camera-preview.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-chart\chart.js
