@@ -1,0 +1,115 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "satellite.js",
+        "scope": null,
+        "escapedName": "satellite.js",
+        "name": "satellite.js",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS"
+    ]
+  ],
+  "_from": "satellite.js@latest",
+  "_id": "satellite.js@1.3.0",
+  "_inCache": true,
+  "_location": "/satellite.js",
+  "_nodeVersion": "6.2.2",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/satellite.js-1.3.0.tgz_1476123158604_0.38481455366127193"
+  },
+  "_npmUser": {
+    "name": "shashwatak",
+    "email": "shashwatak@gmail.com"
+  },
+  "_npmVersion": "3.9.5",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "satellite.js",
+    "scope": null,
+    "escapedName": "satellite.js",
+    "name": "satellite.js",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/satellite.js/-/satellite.js-1.3.0.tgz",
+  "_shasum": "030d03fd4dd52472eb7ea7a328c693bd0e83d9e5",
+  "_shrinkwrap": null,
+  "_spec": "satellite.js",
+  "_where": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS",
+  "author": {
+    "name": "Shashwat Kandadai",
+    "email": "shashwatak@gmail.com",
+    "url": "https://github.com/shashwatak"
+  },
+  "bugs": {
+    "url": "https://github.com/shashwatak/satellite-js/issues"
+  },
+  "contributors": [
+    {
+      "name": "Dmitriy Pushkov",
+      "email": "ezze@ezze.org",
+      "url": "http://www.ezze.org"
+    }
+  ],
+  "dependencies": {},
+  "description": "SGP4/SDP4 calculation library",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-copy": "~0.8.0",
+    "grunt-contrib-jshint": "~0.11.2",
+    "grunt-karma": "~0.11.0",
+    "grunt-requirejs": "~0.4.2",
+    "jasmine-core": "~2.3.4",
+    "karma": "~0.12.36",
+    "karma-jasmine": "~0.3.5",
+    "karma-phantomjs-launcher": "~0.2.0",
+    "karma-requirejs": "~0.2.2",
+    "load-grunt-config": "~0.17.1",
+    "phantomjs": "~1.9.17",
+    "requirejs": "~2.1.18"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dist": {
+    "shasum": "030d03fd4dd52472eb7ea7a328c693bd0e83d9e5",
+    "tarball": "https://registry.npmjs.org/satellite.js/-/satellite.js-1.3.0.tgz"
+  },
+  "gitHead": "f5257ad9368b8434e10265af777cda88e202a28e",
+  "homepage": "https://github.com/shashwatak/satellite-js",
+  "keywords": [
+    "sgp4",
+    "satellite"
+  ],
+  "license": "MIT",
+  "main": "dist/satellite.js",
+  "maintainers": [
+    {
+      "name": "shashwatak",
+      "email": "shashwatak@gmail.com"
+    }
+  ],
+  "name": "satellite.js",
+  "optionalDependencies": {},
+  "readme": "# satellite.js v1.2.0\n\n## Introduction\n\nA library to make satellite propagation via TLEs possible in the web.\nProvides the functions necessary for SGP4/SDP4 calculations, as callable javascript. Also provides\nfunctions for coordinate transforms.\n\nThe internals of this library are nearly identical to\n[Brandon Rhode's sgp4 python library](https://pypi.python.org/pypi/sgp4/). However, it is encapsulated in a\nstandard JS library (self executing function), and exposes only the functionality needed to track satellites and\npropagate paths. The only changes I made to Brandon Rhode's code was to change the positional parameters of\nfunctions to key:value objects. This reduces the complexity of functions that require 50+ parameters,\nand doesn't require the parameters to be placed in the exact order.\n\nSpecial thanks to [ezze](https://github.com/ezze), for modernizing the code and greatly improving usability =)\n\n**Start Here:**\n\n- [TS Kelso's Columns for Satellite Times](http://celestrak.com/columns/), Orbital Propagation Parts I and II a must!\n- [Wikipedia: Simplified Perturbations Model](http://en.wikipedia.org/wiki/Simplified_perturbations_models)\n- [SpaceTrack Report #3, by Hoots and Roehrich](http://celestrak.com/NORAD/documentation/spacetrk.pdf).\n\nThe javascript in this library is heavily based (straight copied) from:\n\n- The python [sgp4 1.1 by Brandon Rhodes](https://pypi.python.org/pypi/sgp4/)\n- The C++ code by [David Vallado, et al](http://www.celestrak.com/publications/AIAA/2006-6753/)\n\nI've included the original PKG-INFO file from the python library.\n\nThe coordinate transforms are based off T.S. Kelso's columns:\n\n- [Part I](http://celestrak.com/columns/v02n01/)\n- [Part II](http://celestrak.com/columns/v02n02/)\n- [Part III](http://celestrak.com/columns/v02n03/)\n\nAnd the coursework for UC Boulder's ASEN students\n- [Coodinate Transforms @ UC Boulder](http://ccar.colorado.edu/ASEN5070/handouts/coordsys.doc)\n\nI would recommend anybody interested in satellite tracking or orbital propagation to read\n[all of TS Kelso's columns](http://celestrak.com/columns/). Without his work, this project would not be possible.\n\nGet a free [Space Track account](https://www.space-track.org/auth/login) and download your own up to date TLEs\nfor use with this library.\n\n## Installation (Bower or NPM)\n\nInstall the library with [Bower](http://bower.io/):\n\n    bower install satellite.js\n\nInstall the library with [NPM](https://www.npmjs.com/):\n\n    npm install satellite.js\n\n## Usage\n\nInclude `dist/satellite.min.js` as a script in your html or use as [Require.js](http://requirejs.org/) module.\n\nWhen you include `satellite.min.js` as a script, the object `satellite` is defined in global scope.\nYou use this object to access all the functions in the satellite library:\n\n```js\nvar positionAndVelocity = satellite.sgp4(satrec, time);\n```\n\nWhen you use it as Require.js module `satellite` object is not defined in global scope, you should use it as\na dependency of your module:\n\n```js\ndefine(['path/to/satellite'], function(satellite) {\n    ...\n    var positionAndVelocity = satellite.sgp4(satrec, time);\n});\n```\n\n## Sample Usage\n    \n```js\n// Sample TLE\nvar tleLine1 = '1 25544U 98067A   13149.87225694  .00009369  00000-0  16828-3 0  9031',\n    tleLine2 = '2 25544 051.6485 199.1576 0010128 012.7275 352.5669 15.50581403831869';\n\n// Initialize a satellite record\nvar satrec = satellite.twoline2satrec(tleLine1, tleLine2);\n\n//  Propagate satellite using time since epoch (in minutes).\nvar positionAndVelocity = satellite.sgp4(satrec, timeSinceTleEpochMinutes);\n\n//  Or you can use a JavaScript Date\nvar positionAndVelocity = satellite.propagate(satrec, new Date());\n\n// The position_velocity result is a key-value pair of ECI coordinates.\n// These are the base results from which all other coordinates are derived.\nvar positionEci = positionAndVelocity.position,\n    velocityEci = positionAndVelocity.velocity;\n\n// Set the Observer at 122.03 West by 36.96 North, in RADIANS\nvar observerGd = {\n    longitude: -122.0308 * deg2rad,\n    latitude: 36.9613422 * deg2rad,\n    height: 0.370\n};\n\n// You will need GMST for some of the coordinate transforms.\n// http://en.wikipedia.org/wiki/Sidereal_time#Definition\nvar gmst = satellite.gstimeFromDate(new Date()));\n\n// You can get ECF, Geodetic, Look Angles, and Doppler Factor.\nvar positionEcf   = satellite.eciToEcf(positionEci, gmst),\n    observerEcf   = satellite.geodeticToEcf(observerGd),\n    positionGd    = satellite.eciToGeodetic(positionEci, gmst),\n    lookAngles    = satellite.ecfToLookAngles(observerGd, positionEcf),\n    dopplerFactor = satellite.dopplerFactor(observerCoordsEcf, positionEcf, velocityEcf);\n\n// The coordinates are all stored in key-value pairs.\n// ECI and ECF are accessed by `x`, `y`, `z` properties.\nvar satelliteX = positionEci.x,\n    satelliteY = positionEci.y,\n    satelliteZ = positionEci.z;\n\n// Look Angles may be accessed by `azimuth`, `elevation`, `range_sat` properties.\nvar azimuth   = lookAngles.azimuth,\n    elevation = lookAngles.elevation,\n    rangeSat  = lookAngles.rangeSat;\n\n// Geodetic coords are accessed via `longitude`, `latitude`, `height`.\nvar longitude = positionGd.longitude,\n    latitude  = positionGd.latitude,\n    height    = positionGd.height;\n\n//  Convert the RADIANS to DEGREES for pretty printing (appends \"N\", \"S\", \"E\", \"W\", etc).\nvar longitudeStr = satellite.degreesLong(longitude),\n    latitudeStr  = satellite.degreesLat(latitude);\n```\n    \n## Building\n\nThe code is organized as [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) modules but it can be built into\na single file to use in production.\n\nThe library uses [Grunt task runner](http://gruntjs.com/) for building and testing. It also relies on [Bower](http://bower.io)\npackage of Require.js plugins needed for test scripts. In order to run Grunt tasks follow these steps:\n\n- install [Node.js](https://nodejs.org/) and [Node Package Manager](https://www.npmjs.com/);\n\n- install Grunt command line interface globally:\n\n        npm install -g grunt-cli\n\n- install Bower globally:\n\n        npm install -g bower\n\n- install all required packages with NPM and Bower by running the following commands from repository's root directory:\n\n        npm install\n        bower install\n\n- run default Grunt task to build the library:\n\n        grunt\n\n- run the following Grunt task to run [Jasmine](http://jasmine.github.io/) specs located in `test/*.spec.js`\nfiles with [Karma](http://karma-runner.github.io/):\n\n        grunt test\n\nAll configuration files for Grunt tasks are located in `grunt` directory.\n\nThese are main available Grunt tasks:\n\n- `build`       (default) validates, optimizies and minifies source code to `dist` directory;\n- `clean`       removes all built files;\n- `test`        tests the library by running Jasmine specs.\n\n## TODO\n\nOptional functions that utilize Worker Threads\n\n## Exposed Objects\n\n### satrec\n\nThe `satrec` object comes from the original code by Rhodes as well as Vallado. It is immense and complex, but the\nmost important values it contains are the Keplerian Elements and the other values pulled from the TLEs. I do not\nsuggest that anybody try to simplify it unless they have absolute understanding of Orbital Mechanics.\n\n- `satnum`      Unique satellite number given in the TLE file.\n- `epochyr`     Full four-digit year of this element set's epoch moment.\n- `epochdays`   Fractional days into the year of the epoch moment.\n- `jdsatepoch`  Julian date of the epoch (computed from `epochyr` and `epochdays`).\n- `ndot`        First time derivative of the mean motion (ignored by SGP4).\n- `nddot`       Second time derivative of the mean motion (ignored by SGP4).\n- `bstar`       Ballistic drag coefficient B* in inverse earth radii.\n- `inclo`       Inclination in radians.\n- `nodeo`       Right ascension of ascending node in radians.\n- `ecco`        Eccentricity.\n- `argpo`       Argument of perigee in radians.\n- `mo`          Mean anomaly in radians.\n- `no`          Mean motion in radians per minute.\n\n## Exposed Functions\n\n### Initialization\n\n```js\nvar satrec = satellite.twoline2satrec(longstr1, longstr2);\n```\n\nreturns satrec object, created from the TLEs passed in. The satrec object is vastly complicated, but you don't have\nto do anything with it, except pass it around.\n\nNOTE! You are responsible for providing TLEs. [Get your free Space Track account here.](https://www.space-track.org/auth/login)\nlongstr1 and longstr2 are the two lines of the TLE, properly formatted by NASA and NORAD standards. if you use\nSpace Track, there should be no problem.\n\n### Propagation\n\nBoth `propagate()` and `sgp4()` functions return position and velocity as a dictionary of the form:\n\n```js\n{\n  \"position\" : { \"x\" : 1, \"y\" : 1, \"z\" : 1 },\n  \"velocity\" : { \"x\" : 1, \"y\" : 1, \"z\" : 1 }\n}\n```\n\nposition is in km, velocity is in km/s, both the ECI coordinate frame.\n\n```js\nvar positionAndVelocity = satellite.propagate(satrec, new Date());\n```\n\nReturns position and velocity, given a satrec and the calendar date. Is merely a wrapper for `sgp4()`, converts the\ncalendar day to Julian time since satellite epoch. Sometimes it's better to ask for position and velocity given\na specific date.\n\n```js\nvar positionAndVelocity = satellite.sgp4(satrec, timeSinceTleEpochMinutes);\n```\n\nReturns position and velocity, given a satrec and the time in minutes since epoch. Sometimes it's better to ask for\nposition and velocity given the time elapsed since epoch.\n\n### Doppler\n\nYou can get the satellites current Doppler factor, relative to your position, using the `dopplerFactor()` function.\nUse either ECI or ECF coordinates, but don't mix them.\n\n```js\nvar dopplerFactor = satellite.dopplerFactor(observer, position, velocity);\n```\n\nSee the section on Coordinate Transforms to see how to get ECF/ECI/Geodetic coordinates.\n\n### Coordinate Transforms\n\n#### Greenwich Mean Sidereal Time\n\nYou'll need to provide some of the coordinate transform functions with your current GMST aka GSTIME. You can use\nJulian Day:\n\n```js\nvar gmst = satellite.gstimeFromJday(julianDay);\n```\n\nor a JavaScript Date:\n\n```js\nvar gmst = satellite.gstimeFromDate(new Date());\n```\n\n#### Transforms\n\nMost of these are self explanatory from their names. Coords are arrays of three floats EX: [1.1, 1.2, 1.3] in\nkilometers. Once again, read the following first.\n\nThe coordinate transforms are based off T.S. Kelso's columns:\n* [Part I](http://celestrak.com/columns/v02n01/)\n* [Part II](http://celestrak.com/columns/v02n02/)\n* [Part III](http://celestrak.com/columns/v02n03/)\n\nAnd the coursework for UC Boulder's ASEN students\n* [Coodinate Transforms @ UC Boulder](http://ccar.colorado.edu/ASEN5070/handouts/coordsys.doc)\n\nThese four are used to convert between ECI, ECF, and Geodetic, as you need them. ECI and ECF coordinates are in\nkm or km/s. Geodetic coords are in radians.\n\n```js\nvar ecfCoords = satellite.eciToEcf(eciCoords, gmst);\n```\n\n```js\nvar eciCoords = satellite.ecfToEci(ecfCoords, gmst);\n```\n\n```js\nvar geodeticCoords = satellite.eciToGeodetic(eciCoords, gmst);\n```\n\n```js\nvar ecfCoords = satellite.geodeticToEcf(geodeticCoords);\n```\n\nThese function is used to compute the look angle, from your geodetic position to a satellite in ECF coordinates.\nMake sure you convert the ECI output from sgp4() and propagate() to ECF first.\n\n```js\nvar lookAngles = satellite.ecfToLookAngles(observerGeodetic, satelliteEcf);\n```\n\n#### Latitude and Longitude\n\nThese two functions will return human readable Latitude or Longitude strings (Ex: \"125.35W\" or \"45.565N\")\nfrom `geodeticCoords`:\n\n```js\nvar latitudeStr = satellite.degreesLat(geodeticRadians),\n    longitudeStr = satellite.degreesLong(geodeticRadians);\n```\n\n## Note about Code Conventions\n\nLike Brandon Rhodes before me, I chose to maintain as little difference between this implementation and the prior\nworks. This is to make adapting future changes suggested by Vallado much simpler. Thus, some of the conventions\nused in this library are very weird.\n\n## How this was written\n\nI took advantage of the fact that Python and JavaScript are nearly semantically identical. Most of the code is\njust copied straight from Python. Brandon Rhodes did me the favor of including semi-colons on most of the lines of\ncode. JavaScript doesn't support multiple values returned per statement, so I had to rewrite the function calls.\nAbsolutely none of the mathematical logic had to be rewritten.\n\n## Benchmarking\n\nI've included a small testing app, that provides some benchmarking tools and verifies SGP4 and SDP4 using the\nTest Criteria provided by SpaceTrack Report #3, and is based off\n[System Benchmarking](http://celestrak.com/columns/v02n04/) by TS Kelso.\n\nThe testing app is a Chrome Packaged App that uses the `angular.js` framework.\n\nTo run the test, open up Chrome, go to the extensions page, and check \"Developer Mode\". Then, click \"Load Unpacked App\",\nand select the `sgp4_verification` folder. Then run the app from within Chrome. The test file is located within\nthe `sgp4_verification` directory, as a JSON file called `spacetrack-report-3.json`.\n\n## Acknowledgments\n\nMajor thanks go to Brandon Rhodes, TS Kelso, and David Vallado's team. Also, I'd like to thank Professor Steve\nPetersen (AC6P) of UCSC for pointing me in the correct directions.\n\n## License\n\nAll files marked with the License header at the top are Licensed. Any files unmarked by me or others are\nunlicensed, and are kept only as a resource for [Shashwat Kandadai and other developers] for testing.\n\nI chose the MIT License because this library is a derivative work off\n[Brandon Rhodes sgp4](https://pypi.python.org/pypi/sgp4/), and that is licensed with MIT. It just seemed simpler\nthis way, sub-licensing freedoms notwithstanding.\n\nI worked in the Dining Hall at UCSC for a month, which means I signed a form that gives UCSC partial ownership of\nanything I make while under their aegis, so I included them as owners of the copyright.\n\nPlease email all complaints to help@ucsc.edu\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shashwatak/satellite-js.git"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "version": "1.3.0"
+}

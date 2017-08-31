@@ -1,0 +1,97 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "nativescript-randombytes@1.0.0",
+        "scope": null,
+        "escapedName": "nativescript-randombytes",
+        "name": "nativescript-randombytes",
+        "rawSpec": "1.0.0",
+        "spec": "1.0.0",
+        "type": "version"
+      },
+      "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\node_modules\\nativescript-nodeify"
+    ]
+  ],
+  "_from": "nativescript-randombytes@1.0.0",
+  "_id": "nativescript-randombytes@1.0.0",
+  "_inCache": true,
+  "_location": "/nativescript-randombytes",
+  "_nodeVersion": "4.2.2",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/nativescript-randombytes-1.0.0.tgz_1482856850691_0.9394755342509598"
+  },
+  "_npmUser": {
+    "name": "eddyverbruggen",
+    "email": "eddyverbruggen@gmail.com"
+  },
+  "_npmVersion": "2.14.7",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "nativescript-randombytes@1.0.0",
+    "scope": null,
+    "escapedName": "nativescript-randombytes",
+    "name": "nativescript-randombytes",
+    "rawSpec": "1.0.0",
+    "spec": "1.0.0",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/nativescript-nodeify"
+  ],
+  "_resolved": "https://registry.npmjs.org/nativescript-randombytes/-/nativescript-randombytes-1.0.0.tgz",
+  "_shasum": "e88554b41cc5e654d61e9e69a534199c4acc6d8f",
+  "_shrinkwrap": null,
+  "_spec": "nativescript-randombytes@1.0.0",
+  "_where": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\node_modules\\nativescript-nodeify",
+  "author": {
+    "name": "Eddy Verbruggen",
+    "email": "eddyverbruggen@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/EddyVerbruggen/nativescript-randombytes/issues"
+  },
+  "dependencies": {},
+  "description": "NativeScript polyfill for Node randombytes",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "e88554b41cc5e654d61e9e69a534199c4acc6d8f",
+    "tarball": "https://registry.npmjs.org/nativescript-randombytes/-/nativescript-randombytes-1.0.0.tgz"
+  },
+  "gitHead": "ad05e3a1eeb134e6ba4327cd8d4be70c891c29ca",
+  "homepage": "https://github.com/EddyVerbruggen/nativescript-randombytes#readme",
+  "keywords": [
+    "ecosystem:nativescript",
+    "NativeScript",
+    "Node",
+    "Android",
+    "iOS",
+    "randombytes"
+  ],
+  "license": "MIT",
+  "main": "randombytes-native",
+  "maintainers": [
+    {
+      "name": "eddyverbruggen",
+      "email": "eddyverbruggen@gmail.com"
+    }
+  ],
+  "name": "nativescript-randombytes",
+  "nativescript": {
+    "platforms": {
+      "android": "2.3.0",
+      "ios": "2.3.0"
+    }
+  },
+  "optionalDependencies": {},
+  "readme": "# NativeScript randombytes shim\nThe [randombytes package](https://www.npmjs.com/package/randombytes) doesn't work in the {N} runtime, so replace it by this package if you need to.\n\n## Installation\n```sh\ntns plugin add nativescript-randombytes\n```\n\n## Usage\n\n```js\nvar randomBytes = require('nativescript-randombytes');\n\n// sync usage\nconsole.log(\"randomBytes: \" + randomBytes(16));\n\n// async usage\nrandomBytes(16, function (ignore, result) {\n  console.log(\"randomBytes async: \" + result);\n})\n```",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EddyVerbruggen/nativescript-randombytes.git"
+  },
+  "scripts": {},
+  "version": "1.0.0"
+}

@@ -347,7 +347,7 @@ const closeCamera = function() {
       mCameraDevice = null;
     }
     if (mImageReader != null) {
-      mImageReader.close();
+      // mImageReader.close();
       mImageReader = null;
     }
   } catch(e) {

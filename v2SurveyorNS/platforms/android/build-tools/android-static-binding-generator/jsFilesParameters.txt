@@ -8,6 +8,8 @@ C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-fov\nativescript-fov.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-instructions\instructions.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-rotation-vector\index.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-satellites\sat.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\nativescript-satellites\tle.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-charts\nativescript-charts.common.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-charts\nativescript-charts.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-charts\components\axes\index.js
@@ -16,8 +18,17 @@ C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-charts\components\legend\index.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-charts\helper\index.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-charts\scripts\postclone.js
-C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-image-filters\imagefilters.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-geolocation\geolocation.common.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-geolocation\geolocation.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-node\fs-native.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-node\fs.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-nodeify\empty.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-nodeify\nodeify.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-nodeify\patch-npm-packages.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-nodeify\postinstall.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-nodeify\preuninstall.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-permissions\permissions.js
+C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-randombytes\randombytes-native.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\nativescript-screen-orientation\screen-orientation.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\bundle-entry-points.js
 C:\Users\hnguyen\ut-site-surveyor\v2SurveyorNS\platforms\android\src\main\assets\app\tns_modules\tns-core-modules\application\application-common.js

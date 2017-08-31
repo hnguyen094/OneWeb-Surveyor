@@ -1,0 +1,118 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "nativescript-geolocation",
+        "scope": null,
+        "escapedName": "nativescript-geolocation",
+        "name": "nativescript-geolocation",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS"
+    ]
+  ],
+  "_from": "nativescript-geolocation@latest",
+  "_id": "nativescript-geolocation@3.0.1",
+  "_inCache": true,
+  "_location": "/nativescript-geolocation",
+  "_nodeVersion": "6.11.2",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/nativescript-geolocation-3.0.1.tgz_1502451196182_0.993599129607901"
+  },
+  "_npmUser": {
+    "name": "tns-bot",
+    "email": "nativescript@telerik.com"
+  },
+  "_npmVersion": "4.6.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "nativescript-geolocation",
+    "scope": null,
+    "escapedName": "nativescript-geolocation",
+    "name": "nativescript-geolocation",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nativescript-geolocation/-/nativescript-geolocation-3.0.1.tgz",
+  "_shasum": "774d6ab5552b686b1ccf53bb540aaeb4cbb4ee28",
+  "_shrinkwrap": null,
+  "_spec": "nativescript-geolocation",
+  "_where": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS",
+  "author": {
+    "name": "NativeScript Team"
+  },
+  "bootstrapper": "nativescript-plugin-seed",
+  "bugs": {
+    "url": "https://github.com/NativeScript/nativescript-geolocation/issues"
+  },
+  "dependencies": {},
+  "description": "Provides API for getting and monitoring location for NativeScript app.",
+  "devDependencies": {
+    "prompt": "^1.0.0",
+    "rimraf": "^2.5.0",
+    "tns-core-modules": "^3.0.0",
+    "tns-platform-declarations": "^3.0.0",
+    "tslint": "~5.4.3",
+    "typescript": "2.3.4"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "774d6ab5552b686b1ccf53bb540aaeb4cbb4ee28",
+    "tarball": "https://registry.npmjs.org/nativescript-geolocation/-/nativescript-geolocation-3.0.1.tgz"
+  },
+  "homepage": "https://github.com/NativeScript/nativescript-geolocation",
+  "keywords": [
+    "NativeScript",
+    "JavaScript",
+    "Android",
+    "iOS"
+  ],
+  "license": "Apache-2.0",
+  "main": "geolocation",
+  "maintainers": [
+    {
+      "name": "hdeshev",
+      "email": "hristo@deshev.com"
+    },
+    {
+      "name": "tns-bot",
+      "email": "nativescript@telerik.com"
+    }
+  ],
+  "name": "nativescript-geolocation",
+  "nativescript": {
+    "platforms": {
+      "android": "3.0.0",
+      "ios": "3.0.0"
+    }
+  },
+  "optionalDependencies": {},
+  "readme": "# NativeScript Geolocation ![apple](https://cdn3.iconfinder.com/data/icons/picons-social/57/16-apple-32.png) ![android](https://cdn4.iconfinder.com/data/icons/logos-3/228/android-32.png) \n\n\n[![npm](https://img.shields.io/npm/v/nativescript-geolocation.svg)](https://www.npmjs.com/package/nativescript-geolocation)\n[![npm](https://img.shields.io/npm/dm/nativescript-geolocation.svg)](https://www.npmjs.com/package/nativescript-geolocation)\n[![Build Status](https://travis-ci.org/NativeScript/nativescript-geolocation.svg?branch=master)](https://travis-ci.org/NativeScript/nativescript-geolocation)\n\nGeolocation plugin to use for getting current location, monitor movement, etc.\n\n## Installation\n\nIn Command prompt / Terminal navigate to your application root folder and run:\n\n```\ntns plugin add nativescript-geolocation\n```\n\n## Usage \n\nThe best way to explore the usage of the plugin is to inspect the demo app in the plugin's root folder. \nIn `demo` folder you can find the usage of the plugin for TypeScript non-Angular application. Refer to `demo/app/main-page.ts`.\n\nIn short here are the steps:\n\n### Import the plugin\n\n*TypeScript*\n``` \nimport * as geolocation from \"nativescript-geolocation\";\nimport { Accuracy } from \"ui/enums\"; // used to describe at what accuracy the location should be get\n```\n\n*Javascript*\n``` \nvar geolocation = require(\"nativescript-geolocation\");\n```\n\n### Request permissions\n\n``` \ngeolocation.enableLocationRequest();\n```\n\n### Call plugin methods\n\n````\n// Get current location with high accuracy\ngeolocation.getCurrentLocation({ desiredAccuracy: Accuracy.high, updateDistance: 0.1, maximumAge: 5000, timeout: 20000 })\n````\n\n## API\n\n### Properties\n\n#### Location\n\n| Property | Default | Description |\n| --- | --- | --- |\n| latitude | - | The latitude of the geolocation, in degrees. |\n| longitude | - | The longitude of the geolocation, in degrees. |\n| altitude | - | The altitude (if available), in meters above sea level. |\n| horizontalAccuracy | - | The horizontal accuracy, in meters. |\n| verticalAccuracy | - | The vertical accuracy, in meters. |\n| speed | - | The speed, in meters/second over ground. |\n| timestamp | - | The time at which this location was determined. |\n\n#### Options\n\n| Property | Default | Description |\n| --- | --- | --- |\n| desiredAccuracy? | Accuracy.high | Specifies desired accuracy in meters. |\n| updateDistance | iOS - no filter, Android - 0 meters | Update distance filter in meters. Specifies how often to update the location. |\n| minimumUpdateTime | - | Minimum time interval between location updates, in milliseconds (ignored on iOS). |\n| maximumAge | - | How old locations to receive in ms.  |\n| timeout | - | How long to wait for a location in ms.  |\n\n### Methods\n\n| Method | Returns | Description |\n| --- | --- | --- |\n| getCurrentLocation(options: Options) | Promise<Location> | Get current location applying the specified options (if any). |\n| watchLocation(successCallback: successCallbackType, errorCallback: errorCallbackType, options: Options) | number | Monitor for location change. |\n| clearWatch(watchId: number) | void | Stop monitoring for location change. Parameter expected is the watchId returned from `watchLocation`. |\n| enableLocationRequest(always?: boolean) | Promise<void> | Ask for permissions to use location services. The option `always` is application for iOS only. [Read more about its usage](https://developer.apple.com/documentation/corelocation/cllocationmanager/1620551-requestalwaysauthorization) . |\n| isEnabled | boolean| Returns `true` if location services are enabled.  |\n| distance(loc1: Location, loc2: Location) | number | Calculate the distance between two locations. Returns the distance in meters. |\n\n## License\n\nApache License Version 2.0, January 2004",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NativeScript/nativescript-geolocation.git"
+  },
+  "scripts": {
+    "build": "npm i && tsc",
+    "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**'",
+    "demo.android": "npm i && npm run tsc && cd ../demo && tns run android --syncAllFiles",
+    "demo.ios": "npm i && npm run tsc && cd ../demo && tns run ios --syncAllFiles",
+    "plugin.link": "npm link && cd ../demo && npm link nativescript-geolocation && cd ../src",
+    "plugin.tscwatch": "npm run tsc -- -w",
+    "postclone": "npm i && node scripts/postclone.js && cd ../demo && npm i && cd ../src && npm run plugin.link",
+    "test.android": "npm i && npm run tsc && npm run tslint && cd ../demo && tns build android && tns test android --justlaunch",
+    "test.ios": "npm i && npm run tsc && npm run tslint && cd ../demo && tns build ios && tns test ios --justlaunch",
+    "tsc": "tsc -skipLibCheck",
+    "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\""
+  },
+  "version": "3.0.1"
+}

@@ -1,0 +1,136 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "replace-in-file@^2.3.2",
+        "scope": null,
+        "escapedName": "replace-in-file",
+        "name": "replace-in-file",
+        "rawSpec": "^2.3.2",
+        "spec": ">=2.3.2 <3.0.0",
+        "type": "range"
+      },
+      "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\node_modules\\nativescript-nodeify"
+    ]
+  ],
+  "_from": "replace-in-file@>=2.3.2 <3.0.0",
+  "_id": "replace-in-file@2.6.3",
+  "_inCache": true,
+  "_location": "/replace-in-file",
+  "_nodeVersion": "8.4.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/replace-in-file-2.6.3.tgz_1503692406307_0.4732567381579429"
+  },
+  "_npmUser": {
+    "name": "adamreisnz",
+    "email": "adam@reis.nz"
+  },
+  "_npmVersion": "5.3.0",
+  "_phantomChildren": {
+    "color-convert": "1.9.0",
+    "escape-string-regexp": "1.0.5",
+    "fs.realpath": "1.0.0",
+    "has-flag": "2.0.0",
+    "inflight": "1.0.6",
+    "inherits": "2.0.3",
+    "minimatch": "3.0.4",
+    "once": "1.4.0",
+    "path-is-absolute": "1.0.1"
+  },
+  "_requested": {
+    "raw": "replace-in-file@^2.3.2",
+    "scope": null,
+    "escapedName": "replace-in-file",
+    "name": "replace-in-file",
+    "rawSpec": "^2.3.2",
+    "spec": ">=2.3.2 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/nativescript-nodeify"
+  ],
+  "_resolved": "https://registry.npmjs.org/replace-in-file/-/replace-in-file-2.6.3.tgz",
+  "_shasum": "1b970abd6026be89be6aeb95658ab92f83c39438",
+  "_shrinkwrap": null,
+  "_spec": "replace-in-file@^2.3.2",
+  "_where": "C:\\Users\\hnguyen\\ut-site-surveyor\\v2SurveyorNS\\node_modules\\nativescript-nodeify",
+  "author": {
+    "name": "Adam Reis",
+    "email": "adam@reis.nz",
+    "url": "https://adam.reiz.nz/"
+  },
+  "bin": {
+    "replace-in-file": "./bin/cli.js"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/adamreisnz/replace-in-file/issues"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "glob": "^7.1.2",
+    "yargs": "^8.0.2"
+  },
+  "description": "A simple utility to quickly replace text in one or more files.",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "bluebird": "^3.5.0",
+    "chai": "^4.1.1",
+    "chai-as-promised": "^7.1.1",
+    "dirty-chai": "^2.0.1",
+    "eslint": "^4.5.0",
+    "istanbul": "^1.0.0-alpha.2",
+    "mocha": "^3.5.0"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-ya9zb4l2eztqykp+peex/UXQttRZ170r/tLRxT4ysbzqIMgLlRhER1ZUhUKs4Ghx2qecyLe2zUcn1QdXEVOezQ==",
+    "shasum": "1b970abd6026be89be6aeb95658ab92f83c39438",
+    "tarball": "https://registry.npmjs.org/replace-in-file/-/replace-in-file-2.6.3.tgz"
+  },
+  "gitHead": "372ab9c656c328fc850ed504c80e47f6d96166e6",
+  "homepage": "https://github.com/adamreisnz/replace-in-file#readme",
+  "keywords": [
+    "replace",
+    "text",
+    "contents",
+    "file"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "adamreisnz",
+      "email": "adam@reis.nz"
+    }
+  ],
+  "name": "replace-in-file",
+  "optionalDependencies": {},
+  "readme": "# Replace in file\n\n[![npm version](https://img.shields.io/npm/v/replace-in-file.svg)](https://www.npmjs.com/package/replace-in-file)\n[![node dependencies](https://david-dm.org/adamreisnz/replace-in-file.svg)](https://david-dm.org/adamreisnz/replace-in-file)\n[![build status](https://travis-ci.org/adamreisnz/replace-in-file.svg?branch=master)](https://travis-ci.org/adamreisnz/replace-in-file)\n[![coverage status](https://coveralls.io/repos/github/adamreisnz/replace-in-file/badge.svg?branch=master)](https://coveralls.io/github/adamreisnz/replace-in-file?branch=master)\n[![github issues](https://img.shields.io/github/issues/adamreisnz/replace-in-file.svg)](https://github.com/adamreisnz/replace-in-file/issues)\n\nA simple utility to quickly replace text in one or more files or globs. Works synchronously or asynchronously with either promises or callbacks. Make a single replacement or multiple replacements at once.\n\n## Installation\n```shell\n# Using npm\nnpm install replace-in-file\n\n# Using yarn\nyarn add replace-in-file\n```\n\n## Usage\n\n### Specify options\n\n```js\nconst replace = require('replace-in-file');\nconst options = {\n\n  //Single file or glob\n  files: 'path/to/file',\n\n  //Multiple files or globs\n  files: [\n    'path/to/file',\n    'path/to/other/file',\n    'path/to/files/*.html',\n    'another/**/*.path',\n  ],\n\n  //Replacement to make (string or regex)\n  from: /foo/g,\n  to: 'bar',\n\n  //Multiple replacements with the same string (replaced sequentially)\n  from: [/foo/g, /baz/g],\n  to: 'bar',\n\n  //Multiple replacements with different strings (replaced sequentially)\n  from: [/foo/g, /baz/g],\n  to: ['bar', 'bax'],\n\n  //Specify if empty/invalid file paths are allowed (defaults to false)\n  //If set to true these paths will fail silently and no error will be thrown.\n  allowEmptyPaths: false,\n\n  //Character encoding for reading/writing files (defaults to utf-8)\n  encoding: 'utf8',\n\n  //Single file or glob to ignore\n  ignore: 'path/to/ignored/file',\n\n  //Multiple files or globs to ignore\n  ignore: [\n    'path/to/ignored/file',\n    'path/to/other/ignored_file',\n    'path/to/ignored_files/*.html',\n    'another/**/*.ignore',\n  ]\n};\n```\n\n### Replacing multiple occurrences\nPlease note that the value specified in the `from` parameter is passed straight to the native [String replace method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace). As such, if you pass a string as the `from` parameter, it will _only replace the first occurrence_.\n\nTo replace multiple occurrences at once, you must use a regular expression for the `from` parameter with the global flag enabled, e.g. `/foo/g`.\n\n### Asynchronous replacement with promises\n\n```js\nreplace(options)\n  .then(changedFiles => {\n    console.log('Modified files:', changedFiles.join(', '));\n  })\n  .catch(error => {\n    console.error('Error occurred:', error);\n  });\n```\n\n### Asynchronous replacement with callback\n\n```js\nreplace(options, (error, changedFiles) => {\n  if (error) {\n    return console.error('Error occurred:', error);\n  }\n  console.log('Modified files:', changedFiles.join(', '));\n});\n```\n\n### Synchronous replacement\n\n```js\ntry {\n  const changedFiles = replace.sync(options);\n  console.log('Modified files:', changedFiles.join(', '));\n}\ncatch (error) {\n  console.error('Error occurred:', error);\n}\n```\n\n### Return value\n\nThe return value of the library is an array of file names of files that were modified (e.g.\nhad some of the contents replaced). If no replacements were made, the return array will be empty.\n\nFor example:\n\n```js\nconst changedFiles = replace.sync({\n  files: 'path/to/files/*.html',\n  from: 'a',\n  to: 'b',\n});\n\n// changedFiles could be an array like:\n[\n  'path/to/files/file1.html',\n  'path/to/files/file3.html',\n  'path/to/files/file5.html',\n]\n```\n\n### CLI usage\n\n```sh\nreplace-in-file from to some/file.js,some/**/glob.js\n  [--ignore=ignore/files.js,ignore/**/glob.js]\n  [--encoding=utf-8]\n  [--allowEmptyPaths]\n  [--isRegex]\n  [--verbose]\n```\n\nThe flags `allowEmptyPaths`, `ignore` and `encoding` are supported in the CLI.\nIn addition, the CLI supports the `verbose` flag to list the changed files.\n\nMultiple files or globs can be replaced by providing a comma separated list.\n\nA regular expression may be used for the `from` parameter by specifying the `--isRegex` flag.\n\n## License\n(MIT License)\n\nCopyright 2015-2017, [Adam Reis](https://adam.reis.nz)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamreisnz/replace-in-file.git"
+  },
+  "scripts": {
+    "coverage": "open -a \"Google Chrome\" ./coverage/lcov-report/index.html",
+    "istanbul": "babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha lib/**/*.spec.js",
+    "lint": "eslint . --fix",
+    "postversion": "git push && git push --tags && npm publish",
+    "test": "npm run istanbul -s"
+  },
+  "version": "2.6.3"
+}
